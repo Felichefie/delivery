@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Prueba class ubicacion");
@@ -22,5 +24,10 @@ public class Main {
 
         juan.imprimir_Direccion();
         juan.imprimir_ubicacion();
+
+        JFrame cuadro = new JFrame();
+        cuadro.setSize(400, 200);
+        cuadro.setLayout(null);
+        cuadro.setVisible(true);
     }
 }
