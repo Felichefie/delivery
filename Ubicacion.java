@@ -14,4 +14,10 @@ public class Ubicacion {
         d = (Math.sqrt(d));
         return d;
     }
+
+    void imprimir() {
+        System.out.println("Latitud: " + lat);
+        System.out.println("Longitud: " + lon);
+    }
+
 }
