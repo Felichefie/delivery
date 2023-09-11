@@ -1,15 +1,23 @@
-package delivery;
-
 public class Usuario {
-    String nombre;
-    String apellidos;
-    int numeroTel;
-    String Email;
+    private Ubicacion ubicacion;
+    private Direccion direccion;
 
-    Usuario(String nombre, String apellidos, int numeroTel, String Email){
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.numeroTel = numeroTel;
-        this.Email = Email;
+    Usuario(Ubicacion ubicacion, Direccion direccion){
+
+        this.ubicacion = ubicacion;
+        this.direccion = direccion;
+
+    }
+
+    void imprimir_Direccion(){
+        
+        direccion.imprimir();
+
+    }
+
+    void imprimir_ubicacion(){
+
+        ubicacion.imprimir();
+
     }
 }

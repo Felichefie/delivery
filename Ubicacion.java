@@ -1,5 +1,3 @@
-package delivery;
-
 public class Ubicacion {
     double lon;
     double lat;
@@ -13,5 +11,10 @@ public class Ubicacion {
         double d = (a.lon - lon) * (a.lon - lon) + (a.lat - lat) * (a.lat - lat); 
         d = Math.sqrt(d);
         return d;
+    }
+
+    void imprimir(){
+        System.out.println(this.lat);
+        System.out.println(this.lon);
     }
 }
