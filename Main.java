@@ -1,3 +1,5 @@
+import javax.swing.JFrame;
+
 public class Main{
    
 
@@ -34,6 +36,9 @@ public class Main{
         juan.imprimir_ubicacion();
 
 
-
-    }
+        JFrame cuadro = new JFrame();
+        cuadro.setSize(400,200);
+        cuadro.setLayout(null);
+        cuadro.setVisible(true);
+}
 }
