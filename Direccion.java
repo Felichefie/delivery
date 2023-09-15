@@ -1,44 +1,45 @@
 public class Direccion {
-    //Propiedades de la dirección
-    //requiere un objeto, el constructor debe tener el mismo nombre que la clase
-     String calle_numero;
-   String colonia;
-    String ciudad;
-     String pais;
-     String referencia;
-   int codigo_postal;
+    private String calle_numero;
+    private String colonia;
+    private String ciudad;
+    private String pais;
+    private String referencia;
+    private int codigo_postal;
 
-    Direccion(String calle_numero, String colonia, String ciudad, int codigo_postal){
-
+    Direccion(String calle_numero, String colonia, String ciudad, int codigo_postal) {
         this.calle_numero = calle_numero;
-        this.colonia= colonia;
+        this.colonia = colonia;
         this.ciudad = ciudad;
         this.pais = "México";
         this.referencia = "";
         this.codigo_postal = codigo_postal;
-    }// es una funcion, en este caso son metodos 
+    }
 
-     Direccion(String calle_numero, String colonia, String ciudad, int codigo_postal, String pais, String referencia){
-
+    Direccion(String calle_numero, String colonia, String ciudad, String pais, String referencia, int codigo_postal) {
         this.calle_numero = calle_numero;
-        this.colonia= colonia;
+        this.colonia = colonia;
         this.ciudad = ciudad;
         this.pais = pais;
         this.referencia = referencia;
         this.codigo_postal = codigo_postal;
-    }// es una funcion, en este caso son metodos 
+    }
 
-    Direccion(){//No va a recibir nada 
-
+    Direccion() {
         this.calle_numero = "";
-        this.colonia= "";
+        this.colonia = "";
         this.ciudad = "";
         this.pais = "";
         this.referencia = "";
         this.codigo_postal = 0;
     }
 
-   void imprimir();//no recibe nada porque ya conoce todo, estanos dentro de la fabrica
+    void imprimir() {
+        System.out.println(this.calle_numero);
+        System.out.println(this.colonia);
+        System.out.println(this.ciudad);
+        System.out.println(this.pais);
+        System.out.println(this.referencia);
+        System.out.println(this.codigo_postal);
 
-
+    }
 }
