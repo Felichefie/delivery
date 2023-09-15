@@ -1,19 +1,25 @@
 import javax.swing.*;
 
 public class User {
-    private JLabel label;
-    private JButton button;
-    private JFrame frame;
+    private JLabel lbl_name, lbl_first, lbl_last, e_mail;
+    private JButton btn_cancel, btn_register;
+    private JFrame frm_user;
 
     User() {
-        frame = new JFrame();
-        button = new JButton("Test");
-        button.setBounds(10, 50, 150, 100);
-        label = new JLabel("test");
-        label.setBounds(10,20,300,30);
+        frm_user = new JFrame();
 
-        frame.add(label);
-        frame.add(button);
+        btn_cancel = new JButton("Cancelar");
+        btn_cancel.setBounds(10, 50, 150, 100);
+
+        btn_register = new JButton("Registrar")
+        btn_register.setBounds(0, 0, 0, 0);
+        
+        lbl_name = new JLabel("Nombre");
+        lbl_name.setBounds(10,20,300,30);
+
+        frm_user.add(lbl_name);
+        frm_user.add(btn_cancel);
+        
         frame.setSize(400, 500);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,10 +28,6 @@ public class User {
     void show() {
         frame.setVisible(true);
     }
-
-
-    public static void main(String[] args) {
-        User user = new User();
-        user.show();
-    }
 }
+
+ 
