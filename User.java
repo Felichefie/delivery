@@ -1,31 +1,44 @@
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class User {
-    private JLabel label;
-    private JButton button;
-    private JFrame frame;
+    private JLabel lbl_name, lbl_firts, lbl_last, lbl_emai;
+    private JButton btn_cancel, btn_register;
+    private JFrame frm_user;
 
     User() {
-        frame = new JFrame();
-        button = new JButton("Test");
-        button.setBounds(10, 50, 150, 100);
-        label = new JLabel("test");
-        label.setBounds(10,20,300,30);
+        frm_user = new JFrame();
+        btn_cancel = new JButton("Cancel");
+        btn_cancel.setBounds(10, 50, 150, 100);
 
-        frame.add(label);
-        frame.add(button);
-        frame.setSize(400, 500);
-        frame.setLayout(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    } 
+        btn_register = new JButton("Register");
+        btn_register.setBounds(10, 50, 150, 100);
 
-    void show() {
-        frame.setVisible(true);
+        lbl_name = new JLabel("Nombre");
+        lbl_name.setBounds(10, 20, 300, 30);
+        lbl_firts = new JLabel("Primer Apellido");
+        lbl_firts.setBounds(10, 20, 300, 30);
+        lbl_last = new JLabel("Segundo Apellido");
+        lbl_last.setBounds(10, 20, 300, 30);
+        lbl_emai = new JLabel("Correo electronico");
+        lbl_emai.setBounds(10, 20, 300, 30);
+
+        frm_user.add(btn_cancel);
+        frm_user.add(btn_register);
+
+        frm_user.add(lbl_name);
+        frm_user.add(lbl_firts);
+        frm_user.add(lbl_last);
+        frm_user.add(lbl_emai);
+
+        frm_user.setSize(400, 500);
+        frm_user.setLayout(null);
+        frm_user.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-
-    public static void main(String[] args) {
-        User user = new User();
-        user.show();
+    // Metodo show que sirve para msotrar el frame
+    void show() {
+        frm_user.setVisible(true);
     }
 }
