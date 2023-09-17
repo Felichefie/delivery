@@ -1,8 +1,22 @@
 import javax.swing.*;
 
 public class Userjc {
+
+//codigo para las etiquetas que se necesitan
     private JLabel labelu;
+    private JLabel labeld;
+    private JLabel labelt;
+    private JLabel labelc;
+    private JLabel labelci;
+    private JLabel labels;
+    private JLabel labelsi;
+    private JLabel labelo;
+    private JLabel labeln;
+
+//codigo para los dos botones que necesitamos
     private JButton button;
+    private JButton buttonu;
+
     private JFrame frame;
 
     Userjc() {
