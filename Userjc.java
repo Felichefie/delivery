@@ -90,10 +90,17 @@ public class Userjc {
         texts.setBounds(5, 400, 320, 15);
         frame.add(texts);
 
-        button = new JButton("Test");
-        button.setBounds(500, 1000, 150, 100);
 
+//configuramos los botones que necesitamos
+        button = new JButton("ACEPTAR");
+        button.setBounds(30, 450, 100, 20);
         frame.add(button);
+
+        buttonu = new JButton("BORRAR");
+        buttonu.setBounds(210, 450, 100, 20);
+        frame.add(buttonu);
+
+
         frame.setSize(400, 500);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
