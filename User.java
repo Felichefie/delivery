@@ -7,7 +7,7 @@ public class User {
 
     User() {
         frame = new JFrame();
-        button = new JButton("Test");
+        button = new JButton("HOLA ES UNA PRUEBA");
         button.setBounds(10, 50, 150, 100);
         label = new JLabel("test");
         label.setBounds(10,20,300,30);
