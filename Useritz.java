@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Dialog;
+
 import javax.swing.*;
 
 public class Useritz {
@@ -27,10 +30,13 @@ public class Useritz {
 
         label1 = new JLabel("INTERFAZ DE USUARIO");
         label1.setBounds(150,30,200,20);
+        label1.setForeground(Color.blue);
 
         //ETIQUETA PARA EL NOMBRE.
         label2 = new JLabel("HERNÁNDEZ MARÍN MARÍA ITZEL");
         label2.setBounds(200,5,200,20);
+        label2.setForeground(Color.pink);
+        //label2.setFont(Font.arial);
 
         //ETIQUETA PARA EL NOMBRE DE USUARIO.
         label = new JLabel("NOMBRE:");
