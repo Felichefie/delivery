@@ -20,11 +20,7 @@ public class Useritz {
     private JTextField texto3;
     private JTextField texto4;
     private JTextField texto5;
-    private JTextField texto6;
-    private JTextField texto7;
-    private JTextField texto8;    
-
-    
+    private JTextField texto6; 
 
     private JButton button;
     private JButton button1;
@@ -36,7 +32,7 @@ public class Useritz {
         button = new JButton("ACEPTAR");
         button.setBounds(5, 400, 100, 15);
 
-        button1 = new JButton("BORRAR");
+        button1 = new JButton("REGRESAR");
         button1.setBounds(250, 400, 100, 15);
         frame.add(button1);
 
@@ -80,20 +76,37 @@ public class Useritz {
         label5.setBounds(10, 140, 300, 30);
         frame.add(label5);
 
+        texto3 = new JTextField(10);
+        texto3.setBounds(80, 147, 200, 15);
+        frame.add(texto3);
+
+
         //ETIQUETA PARA EL EMAIL DEL USUARIO.
         label6 = new JLabel("CORREO ELÉCTRONICO:");
         label6.setBounds(10, 170, 300, 30);
         frame.add(label6);
+
+        texto4 = new JTextField(60);
+        texto4.setBounds(150, 177, 200, 15);
+        frame.add(texto4);
 
         //ETIQUETA PARA LA DIRECCION DEL USUARIO.
         label7 = new JLabel("DIRECCIÓN:");
         label7.setBounds(10, 200, 300, 30);
         frame.add(label7);
 
+        texto5 = new JTextField(40);
+        texto5.setBounds(85, 207, 200, 15);
+        frame.add(texto5);
+
         //ETIQUETA PARA LA UBICACIÓN DEL USUARIO.
         label8 = new JLabel("UBICACIÓN:");
         label8.setBounds(10, 230, 300, 30);
         frame.add(label8);
+
+        texto6 = new JTextField(200);
+        texto6.setBounds(85, 237, 200, 15);
+        frame.add(texto6);
 
         frame.add(label);
         frame.add(label1);
