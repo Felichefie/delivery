@@ -14,6 +14,18 @@ public class Useritz {
     private JLabel label7;
     private JLabel label8;
 
+    private JTextField texto;
+    private JTextField texto1;
+    private JTextField texto2;
+    private JTextField texto3;
+    private JTextField texto4;
+    private JTextField texto5;
+    private JTextField texto6;
+    private JTextField texto7;
+    private JTextField texto8;    
+
+    
+
     private JButton button;
     private JButton button1;
     private JFrame frame;
@@ -36,17 +48,30 @@ public class Useritz {
         label2 = new JLabel("HERNÁNDEZ MARÍN MARÍA ITZEL");
         label2.setBounds(200,5,200,20);
         label2.setForeground(Color.pink);
+
         //label2.setFont(Font.arial);
 
         //ETIQUETA PARA EL NOMBRE DE USUARIO.
         label = new JLabel("NOMBRE:");
         label.setBounds(10,50,300,30);
 
+        texto = new JTextField(40);
+        texto.setBounds(70, 57, 200, 15);
+        frame.add(texto);
+
         //ETIQUETA PARA LOS APELLIDOS DEL USUARIO.
         label3 = new JLabel("APELLIDO PATERNO:");
         label3.setBounds(10, 80, 300, 30);
+
+        texto1 = new JTextField(40);
+        texto1.setBounds(135, 87, 200, 15);
+        frame.add(texto1);
         label4 = new JLabel("APELLIDO MATERNO:");
         label4.setBounds(10, 110, 300, 30);
+
+        texto2 = new JTextField(40);
+        texto2.setBounds(135, 117, 200, 15);
+        frame.add(texto2);
         frame.add(label3);
         frame.add(label4);
 
