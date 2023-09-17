@@ -1,5 +1,5 @@
 import java.awt.Color;
-import java.awt.Dialog;
+//import java.awt.Dialog;
 
 import javax.swing.*;
 
@@ -31,10 +31,12 @@ public class Useritz {
         frame = new JFrame();
         button = new JButton("ACEPTAR");
         button.setBounds(5, 400, 100, 15);
+        button.setForeground(Color.GREEN);
 
         button1 = new JButton("REGRESAR");
         button1.setBounds(250, 400, 100, 15);
         frame.add(button1);
+        button1.setForeground(Color.RED);
 
         label1 = new JLabel("INTERFAZ DE USUARIO");
         label1.setBounds(150,30,200,20);
