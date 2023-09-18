@@ -42,7 +42,7 @@ public class MiMain {
         frm_user.setSize(400, 500);
         frm_user.setLayout(null);
         frm_user.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
 
     } 
 
@@ -51,3 +51,4 @@ public class MiMain {
     }
 
 }
+
