@@ -3,20 +3,20 @@ import javax.swing.*;
 public class Elena_user {
     private JLabel lbl_nombre;
     private JLabel lbl_minombre;
-    private JLabel label3;
-    private JLabel label4;
-    private JLabel label5;
-    private JLabel label6;
-    private JLabel label7;
-    private JLabel label8;
+    private JLabel lbl_paterno;
+    private JLabel lbl_materno;
+    private JLabel lbl_telefono;
+    private JLabel lbl_mail;
+    private JLabel lbl_direccion;
+    private JLabel lbl_ubicacion;
 
-    private JTextField texto;
-    private JTextField texto1;
-    private JTextField texto2;
-    private JTextField texto3;
-    private JTextField texto4;
-    private JTextField texto5;
-    private JTextField texto6; 
+    private JTextField tf_name;
+    private JTextField tf_pat;
+    private JTextField tf_mat;
+    private JTextField tf_tel;
+    private JTextField tf_mail;
+    private JTextField tf_dir;
+    private JTextField tf_ubicaciob; 
 
     private JButton button;
     private JButton button1;
@@ -39,56 +39,56 @@ public class Elena_user {
         lbl_minombre = new JLabel("María Elena gabriel Nicolás");
         lbl_minombre.setBounds(200,10,200,30);
 
-        texto = new JTextField(40);
-        texto.setBounds(140, 60, 200, 20);
-        frame.add(texto);
+        tf_name = new JTextField(40);
+        tf_name.setBounds(140, 60, 200, 20);
+        frame.add(tf_name);
 
-        label3 = new JLabel("Apellido paterno:");
-        label3.setBounds(10, 80, 300, 30);
+        lbl_paterno = new JLabel("Apellido paterno:");
+        lbl_paterno.setBounds(10, 80, 300, 30);
 
-        texto1 = new JTextField(40);
-        texto1.setBounds(140, 90, 200, 20);
-        frame.add(texto1);
-        label4 = new JLabel("Apellido materno:");
-        label4.setBounds(10, 110, 300, 30);
+        tf_pat = new JTextField(40);
+        tf_pat.setBounds(140, 90, 200, 20);
+        frame.add(tf_pat);
+        lbl_materno = new JLabel("Apellido materno:");
+        lbl_materno.setBounds(10, 110, 300, 30);
 
-        texto2 = new JTextField(40);
-        texto2.setBounds(140, 120, 200, 20);
-        frame.add(texto2);
-        frame.add(label3);
-        frame.add(label4);
+        tf_mat = new JTextField(40);
+        tf_mat.setBounds(140, 120, 200, 20);
+        frame.add(tf_mat);
+        frame.add(lbl_paterno);
+        frame.add(lbl_materno);
 
-        label5 = new JLabel("Teléfono:");
-        label5.setBounds(10, 140, 300, 30);
-        frame.add(label5);
+        lbl_telefono = new JLabel("Teléfono:");
+        lbl_telefono.setBounds(10, 140, 300, 30);
+        frame.add(lbl_telefono);
 
-        texto3 = new JTextField(10);
-        texto3.setBounds(140, 150, 200, 20);
-        frame.add(texto3);
+        tf_tel = new JTextField(10);
+        tf_tel.setBounds(140, 150, 200, 20);
+        frame.add(tf_tel);
 
-        label6 = new JLabel("E-mail:");
-        label6.setBounds(10, 170, 300, 30);
-        frame.add(label6);
+        lbl_mail = new JLabel("E-mail:");
+        lbl_mail.setBounds(10, 170, 300, 30);
+        frame.add(lbl_mail);
 
-        texto4 = new JTextField(60);
-        texto4.setBounds(140, 180, 200, 20);
-        frame.add(texto4);
+        tf_mail = new JTextField(60);
+        tf_mail.setBounds(140, 180, 200, 20);
+        frame.add(tf_mail);
 
-        label7 = new JLabel("Dirección:");
-        label7.setBounds(10, 200, 300, 30);
-        frame.add(label7);
+        lbl_direccion = new JLabel("Dirección:");
+        lbl_direccion.setBounds(10, 200, 300, 30);
+        frame.add(lbl_direccion);
 
-        texto5 = new JTextField(40);
-        texto5.setBounds(140, 210, 200, 20);
-        frame.add(texto5);
+        tf_dir = new JTextField(40);
+        tf_dir.setBounds(140, 210, 200, 20);
+        frame.add(tf_dir);
 
-        label8 = new JLabel("Ubicación:");
-        label8.setBounds(10, 230, 300, 30);
-        frame.add(label8);
+        lbl_ubicacion = new JLabel("Ubicación:");
+        lbl_ubicacion.setBounds(10, 230, 300, 30);
+        frame.add(lbl_ubicacion);
 
-        texto6 = new JTextField(200);
-        texto6.setBounds(140, 240, 200, 20);
-        frame.add(texto6);
+        tf_ubicaciob = new JTextField(200);
+        tf_ubicaciob.setBounds(140, 240, 200, 20);
+        frame.add(tf_ubicaciob);
 
         frame.add(lbl_nombre);
         frame.add(button);
