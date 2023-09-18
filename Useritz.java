@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.*;
 
 public class Useritz {
+//Declaracion de etiquetas.
     private JLabel label;
     private JLabel label1;
     private JLabel label2;
