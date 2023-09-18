@@ -1,7 +1,7 @@
 public class Mimain{
-public static void main(String[] args) { // aqui tenemos el main, factible para hacer pruebas 
+public static void main(String[] args) {
 
-        User user = new User();
-        user.show();
+        Elena_user elena_user = new Elena_user();
+        elena_user.show();
     }
 }
