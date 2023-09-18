@@ -1,4 +1,4 @@
-import javax.swing.*;
+/*import javax.swing.*;
 
 public class User {
     private JLabel label;
@@ -21,11 +21,14 @@ public class User {
 
     void show() {
         frame.setVisible(true);
+        
     }
 
 
     public static void main(String[] args) {
         User user = new User();
         user.show();
+        
     }
 }
+*/
