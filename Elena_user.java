@@ -7,7 +7,6 @@ public class Elena_user {
     private JLabel lbl_materno;
     private JLabel lbl_telefono;
     private JLabel lbl_mail;
-    private JLabel lbl_direccion;
     private JLabel lbl_ubicacion;
 
     private JTextField tf_name;
@@ -15,7 +14,6 @@ public class Elena_user {
     private JTextField tf_mat;
     private JTextField tf_tel;
     private JTextField tf_mail;
-    private JTextField tf_dir;
     private JTextField tf_ubicaciob; 
 
     private JButton button;
@@ -26,10 +24,10 @@ public class Elena_user {
 
         frame = new JFrame();
         button = new JButton("Aceptar");
-        button.setBounds(5, 300, 100, 20);
+        button.setBounds(5, 300, 100, 30);
 
         button1 = new JButton("Cancelar");
-        button1.setBounds(250, 300, 100, 20);
+        button1.setBounds(250, 300, 100, 30);
         frame.add(button1);
 
         lbl_nombre = new JLabel("Nombre:");
@@ -74,20 +72,12 @@ public class Elena_user {
         tf_mail.setBounds(140, 180, 200, 20);
         frame.add(tf_mail);
 
-        lbl_direccion = new JLabel("Dirección:");
-        lbl_direccion.setBounds(10, 200, 300, 30);
-        frame.add(lbl_direccion);
-
-        tf_dir = new JTextField(40);
-        tf_dir.setBounds(140, 210, 200, 20);
-        frame.add(tf_dir);
-
         lbl_ubicacion = new JLabel("Ubicación:");
-        lbl_ubicacion.setBounds(10, 230, 300, 30);
+        lbl_ubicacion.setBounds(10, 200, 300, 30);
         frame.add(lbl_ubicacion);
 
         tf_ubicaciob = new JTextField(200);
-        tf_ubicaciob.setBounds(140, 240, 200, 20);
+        tf_ubicaciob.setBounds(140, 210, 200, 20);
         frame.add(tf_ubicaciob);
 
         frame.add(lbl_nombre);
