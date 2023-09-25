@@ -7,6 +7,19 @@ public class Usuario {
     private String segundo_apellido;
     private String telefono;
 
+    Usuario(Ubicacion ubicacion, Direccion direccion,
+            String nombre, String primer_apellido,
+            String segundo_apellido, String telefono,
+            String email){
+        this.ubicacion = ubicacion;
+        this.direccion = direccion;
+        this.email = email;
+        this.nombre = nombre;
+        this.primer_apellido = primer_apellido;
+        this.segundo_apellido = segundo_apellido;
+        this.telefono = telefono;
+    }
+
     Usuario(Ubicacion ubicacion, Direccion direccion){
         this.ubicacion = ubicacion;
         this.direccion = direccion;
