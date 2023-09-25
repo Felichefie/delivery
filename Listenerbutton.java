@@ -8,42 +8,57 @@ import javax.swing.JTextField;
 
 public class Listenerbutton {
     JFrame f;
-    JTextField tf,tf2;
-    JButton btn,btnborrar;
-    
+    JTextField tf_nombre, tf_primer_apellido, 
+                tf_segundo_apellido, tf_telefono, tf_gmail;
+    JButton btn_aceptar, btn_cancelar;
+
     Listenerbutton (){
-        btn = new JButton ("press");
-        tf = new JTextField("plis press me");
-        btnborrar = new JButton("borrara");
-        tf2 = new JTextField("otro text field");
+        btn_aceptar = new JButton ("aceptar");
+        tf_nombre = new JTextField("Felix");
+        btn_cancelar = new JButton("cancelar");
+        tf_primer_apellido = new JTextField("Jimenez");
+        tf_segundo_apellido=new JTextField("Perez");
+        tf_telefono=new JTextField("4431234567");
+        tf_gmail=new JTextField("felix.jimenez@gmail.com");
         f = new JFrame ("buttontest");
         f.setSize(600,300);
-        tf.setBounds(20, 20, 180, 20);
-        tf2.setBounds(20, 40, 180, 20);
-        btn.setBounds(160, 160, 80, 20);
-        btnborrar.setBounds(180, 180, 80, 20);
-        f.add(btnborrar);
-        f.add(tf2);
-        f.add(btn);
-        f.add(tf);
+
+        tf_nombre.setBounds(20, 20, 180, 20);
+        tf_primer_apellido.setBounds(20, 50, 180, 20);
+        tf_segundo_apellido.setBounds(20, 80, 180, 20);
+        tf_telefono.setBounds(20, 110, 180, 20);
+        tf_gmail.setBounds(40, 140, 240, 20);
+
+        btn_aceptar.setBounds(160, 170, 120, 20);
+        btn_cancelar.setBounds(180, 200, 120, 20);
+        f.add(tf_gmail);
+        f.add(btn_cancelar);
+        f.add(tf_primer_apellido);
+        f.add(btn_aceptar);
+        f.add(tf_nombre);
+        f.add(tf_segundo_apellido);
+        f.add(tf_telefono);
+       
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        btn.addActionListener(new ActionListener(){
+        btn_aceptar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(tf2.getText());
-                System.out.println(tf.getText());
-
+                Usuario usuario=new Usuario(tf_nombre.getText(),
+                                tf_primer_apellido.getText(), tf_segundo_apellido.getText(), 
+                                tf_telefono.getText(), tf_gmail.getText());
+                usuario.imprimir_datos_personales();
             }
         });
-        btnborrar.addActionListener(new ActionListener(){
+        btn_cancelar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent q){
-                tf.setText("");
-                tf2.setText("");
+                tf_nombre.setText("");
+                tf_primer_apellido.setText("");
             }
         });
     }
-    public void mostrar(){
+
+    public void mostrar() {
         f.setVisible(true);
     }
 
@@ -51,7 +66,6 @@ public class Listenerbutton {
         Listenerbutton lb;
         lb = new Listenerbutton();
         lb.mostrar();
-        System.out.println(lb.tf.getText());
         
 
     }

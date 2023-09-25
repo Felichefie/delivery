@@ -1,4 +1,5 @@
 public class Usuario {
+
     private Ubicacion ubicacion;
     private Direccion direccion;
     private String email;
@@ -19,6 +20,16 @@ public class Usuario {
         this.segundo_apellido = segundo_apellido;
         this.telefono = telefono;
     }
+    Usuario(
+    String nombre, String primer_apellido,
+    String segundo_apellido, String telefono,
+    String email){
+        this.email = email;
+        this.nombre = nombre;
+        this.primer_apellido = primer_apellido;
+        this.segundo_apellido = segundo_apellido;
+        this.telefono = telefono;
+    }
 
     Usuario(Ubicacion ubicacion, Direccion direccion){
         this.ubicacion = ubicacion;
@@ -31,9 +42,15 @@ public class Usuario {
     }
     void imprimir_ubicacion(){
         ubicacion.imprimir();
-
     }
-    
 
-    
+    void imprimir_datos_personales() {
+        System.out.println(this.nombre);
+        System.out.println(primer_apellido);
+        System.out.println(segundo_apellido);
+        System.out.println(email);
+        System.out.println(telefono);
+        
+    }
+
 }
