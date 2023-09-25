@@ -19,6 +19,15 @@ public class Usuario {
 
     }
 
+    Usuario (String email, String nombre, String primer_apellido, String segundo_apellido, String telefono){
+        this.email = email;
+        this.nombre = nombre;
+        this.primer_apellido = primer_apellido;
+        this.segundo_apellido = segundo_apellido;
+        this.telefono = telefono;
+
+    }
+
     Usuario (Ubicacion ubicacion, Direccion direccion){
         this.ubicacion = ubicacion;
         this.direccion = direccion;
