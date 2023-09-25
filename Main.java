@@ -12,13 +12,8 @@ public class Main {
 
         Direccion direccion_daniel = new Direccion("Virrey de Mendoza 1517", "Felix Ireta", "Morelia",58070 );
         direccion_daniel.imprimir();
-
-        Ubicacion ubicacion = new Ubicacion(19.70078, -101.18443);
-        Usuario daniel = new Usuario(ubicacion, direccion_daniel);
-        daniel.imprimir_dirrecion();
-
-
-
+        
+        
     }
     
 }
