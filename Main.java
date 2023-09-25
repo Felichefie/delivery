@@ -22,8 +22,11 @@ public class Main {
 
         juan.imprimir_Direccion();
         juan.imprimir_ubicacion();
-
+        //esto es un usuario
         Usuario arturo = new Usuario("2001293d@umich.mx", "Arturo", "Ruiz", "Garcia", "9999999999");
         arturo.imprimir_datos_personales();
+       
+        User user = new User();
+        user.show();
     }
 }

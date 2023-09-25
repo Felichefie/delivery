@@ -38,10 +38,10 @@ public class Usuario {
 
     void imprimir_datos_personales(){
 
-        System.out.println(email);
         System.out.println(nombre);
         System.out.println(primer_apellido);
         System.out.println(segundo_apellido);
+        System.out.println(email);
         System.out.println(telefono);
 
 
