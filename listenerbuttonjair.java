@@ -58,6 +58,14 @@ public class listenerbuttonjair {
 
     }
 
-    
+    public static void main(String[] args){
+        listenerbuttonjair lb;
+        lb = new listenerbuttonjair();
+        lb.show();
+
+        System.out.println(lb.tf.getText());
+
+        System.out.println(lb.tf2.getText());
+    }
 
 }    
