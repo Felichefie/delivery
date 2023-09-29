@@ -19,9 +19,10 @@ public class Direccion {
     private JTextField tfPais;
 
     private JButton btnImprimir;
+    private JButton btnCancelar; 
 
     Direccion() {
-        frame = new JFrame("Datos de Dirección");
+        frame = new JFrame("Dirección");
         frame.setLayout(null);
         frame.setSize(600, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,10 +60,21 @@ public class Direccion {
         btnImprimir = new JButton("Aceptar");
         btnImprimir.setBounds(10, 190, 150, 30);
 
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(170, 190, 150, 30); 
+
+
         btnImprimir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 imprimir();
+            }
+        });
+
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cancelar();
             }
         });
 
@@ -79,6 +91,8 @@ public class Direccion {
         frame.add(lbl_pais);
         frame.add(tfPais);
         frame.add(btnImprimir);
+        frame.add(btnCancelar); 
+        
     }
 
     public Direccion(String calleNumero, String colonia, String ciudad, String referencia, int codigoPostal,
@@ -99,6 +113,15 @@ public class Direccion {
 
         Direccion direccion = new Direccion(calleNumero, colonia, ciudad, referencia, codigoPostal, pais);
         direccion.imprimir();
+    }
+
+    void cancelar() {
+        tfCalleNumero.setText("");
+        tfColonia.setText("");
+        tfCiudad.setText("");
+        tfCodigoPostal.setText("");
+        tfReferencia.setText("");
+        tfPais.setText("");
     }
 
     public static void main(String[] args) {
