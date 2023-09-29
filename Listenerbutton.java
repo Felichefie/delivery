@@ -17,18 +17,17 @@ public class Listenerbutton {
         tf_segundo_apellido = new JTextField("Pérez");
         tf_telefono = new JTextField("4436714774");
         tf_email = new JTextField("1627908C@umich.mx");
-        f = new JFrame("Button Test");
+        f = new JFrame("GUI");
         f.setSize(600, 300);
 
         // Asignación de posiciones
         tf_nombre.setBounds(20, 20, 180, 20);
         tf_primer_apellido.setBounds(20, 50, 180, 20);
         tf_segundo_apellido.setBounds(20, 68, 180, 20);
-        tf_email.setBounds(40, 110, 240, 20);
+        tf_email.setBounds(20, 110, 180, 20);
         tf_telefono.setBounds(20, 140, 180, 20);
-        btn_aceptar.setBounds(160, 170, 120, 20);
-        btn_cancelar.setBounds(180, 200, 120, 20);
-
+        btn_aceptar.setBounds(160, 230, 120, 20);
+        btn_cancelar.setBounds(180, 260, 120, 20);
         f.add(tf_nombre);
         f.add(tf_primer_apellido);
         f.add(tf_segundo_apellido);
