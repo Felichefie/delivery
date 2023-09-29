@@ -1,20 +1,32 @@
 public class Ubicacion {
-    // Propiedades del objeto 
-    double lat;
-    double lon;
+    private String calleNumero;
+    private String colonia;
+    private String ciudad;
+    private String pais;
+    private String estado;
+    private String codigoPostal;
 
-    Ubicacion(double lat, double lon) { //Variables del constructor
-        this.lat = lat;
-        this.lon = lon;
-    }
-        double distancia (Ubicacion b){
-        double d = (lat - b.lat) * (lat - b.lat) + (lon - b.lon) * (lon - b.lon);
-        d = Math.sqrt(d);
-        return d;
-
+    Ubicacion (String calleNumero,
+                String colonia,
+                String ciudad,
+                String estado,
+                String pais,
+                String codigoPostal)
+    {
+    this.calleNumero = calleNumero;
+    this.colonia = colonia;
+    this.ciudad = ciudad;
+    this.pais = pais;
+    this.estado = estado;
+    this.codigoPostal = codigoPostal;
     }
     void imprimir(){
-        System.out.println(lat);
-        System.out.println(lon);
+        System.out.println(this.calleNumero);
+        System.out.println(this.colonia);
+        System.out.println(this.ciudad);
+        System.out.println(this.pais);
+        System.out.println(this.estado);
+        System.out.println(this.codigoPostal);
     }
+
 }
