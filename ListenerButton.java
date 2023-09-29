@@ -52,17 +52,31 @@ public class ListenerButton {
 
                 usuario.imprimir_datos_personales();
 
-                ubicacion = new JFrame();
+                ubicacion = new JFrame("GUI DE UBICACION");
                 //aqui
                 ubicacion.setLayout(null); //asigna manualmente ubicacion en X y en Y
                 ubicacion.setSize(600,400);
-                btnAceptar = new JButton("ACEPTAR");
-                btnBorrar = new JButton("BORRAR");
-                btnAceptar.setBounds(240, 160, 100, 20);
-                btnBorrar.setBounds(240, 180, 100, 20);
-                ubicacion.add(btnAceptar);
-                ubicacion.add(btnBorrar);
+
+                JButton btnsiguiente, btnborrar1;
+                JTextField tf_latitud, tf_longitud;
+
+                tf_latitud = new JTextField("345.360");
+                tf_longitud = new JTextField("-201.150");
+                tf_latitud.setBounds(20, 28, 180, 20);
+                tf_longitud.setBounds(20, 58, 180, 20);
+                btnsiguiente = new JButton("SIGUIENTE");
+                btnborrar1 = new JButton("BORRAR");
+                btnsiguiente.setBounds(240, 160, 100, 20);
+                btnborrar1.setBounds(240, 180, 100, 20);
+                ubicacion.add(btnsiguiente);
+                ubicacion.add(btnborrar1);
+                ubicacion.add(tf_latitud);
+                ubicacion.add(tf_longitud);
                 ubicacion.setVisible(true);
+
+                
+
+                
             }
 
         });
