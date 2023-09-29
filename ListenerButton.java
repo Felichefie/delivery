@@ -16,8 +16,8 @@ public class ListenerButton {
         f.setSize(600,400);
         btnAceptar = new JButton("ACEPTAR/SIGUIENTE");
         btnBorrar = new JButton("BORRAR");
-        btnAceptar.setBounds(240, 160, 100, 20);
-        btnBorrar.setBounds(240, 180, 100, 20);
+        btnAceptar.setBounds(240, 160, 180, 20);
+        btnBorrar.setBounds(240, 190, 100, 20);
 
                      //DATOS PERSONALES
         tf_nombre = new JTextField("ITZEL");
@@ -65,7 +65,7 @@ public class ListenerButton {
                 btnsig = new JButton("SIGUIENTE");
                 btnborrar1 = new JButton("BORRAR");
                 btnsig.setBounds(240, 160, 100, 20);
-                btnborrar1.setBounds(240, 180, 100, 20);
+                btnborrar1.setBounds(240, 190, 100, 20);
 
                 tf_latitud = new JTextField("123.843");
                 tf_longitud = new JTextField("987.6543");
