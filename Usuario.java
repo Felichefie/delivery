@@ -27,9 +27,7 @@ Usuario(Ubicacion ubicacion, Direccion direccion){
     void imprimir_direccion(){
         direccion.imprimir();
     }
-    void imprimir_ubicacion(){
-        ubicacion.imprimir();;
-    }
+    
     void imprimir_datos_personales(){
         System.out.println(nombre);
         System.out.println(primer_apeido);

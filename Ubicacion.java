@@ -1,21 +1,32 @@
 public class Ubicacion {
+    private String calleNumero;
+    private String colonia;
+    private String ciudad;
+    private String pais;
+    private String estado;
+    private String codigoPostal;
     //PROPIEDADES DEL OBJETO
-double lat;
-double lon;
+    
+     Ubicacion(String calleNumero, String colonia, String ciudad, String estado,String pais, String codigoPostal){
+        this.calleNumero = calleNumero;
+        this.colonia = colonia;
+        this.ciudad = ciudad;
+        this.pais = pais;
+        this.estado = estado;
+        this.codigoPostal = codigoPostal;
 
-Ubicacion ( double lat,  double lon){                               //VARIABLES DEL CONSTRUCTOR
-this.lat = lat;
-this.lon = lon;
-}
+    }
+    void imprimir(){
+        System.out.println(this.calleNumero);
+        System.out.println(this.colonia);
+        System.out.println(this.ciudad);
+        System.out.println(this.pais);
+        System.out.println(this.estado);
+        System.out.println(this.codigoPostal);
+        
+    }
 
-double distancia (Ubicacion a, Ubicacion b){                         //CALCULA UNA DISTANCIA
-double d = (a.lat - b.lat)*(a.lat - b.lat) + (a.lon - b.lon)*(a.lon - b.lon);
-d = Math.sqrt(d);
-return d;
-}
 
-void imprimir(){                                                    //IMPRIME LOS VALORES
-System.out.println(lat);
-System.out.println(lon);
-}
+
+
 }
