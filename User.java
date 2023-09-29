@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class User {
     private JLabel lbl_yo, lbl_name, lbl_first, lbl_last, lbl_email, lbl_telefono;
-    private JButton btn_cancel, btn_register;
+    private JButton btn_cancel, btn_register, btn_direccion;
     private JFrame frm_User;
     private JTextField txt_name, txt_first, txt_last, txt_email, txt_telefono;
 
@@ -17,6 +17,8 @@ public class User {
         btn_cancel.setBounds(10, 400, 100, 50);
         btn_register = new JButton("Aceptar");
         btn_register.setBounds(275, 400, 100, 50);
+        btn_direccion = new JButton("Direccion");
+        btn_direccion.setBounds(145, 400, 100, 50);
 
         lbl_yo = new JLabel("Arturo Ruiz Garcia");
         lbl_yo.setBounds(280,0,300,30);
@@ -60,6 +62,7 @@ public class User {
         frm_User.add(txt_name);
         frm_User.add(txt_telefono);
         frm_User.add(lbl_telefono);
+        frm_User.add(btn_direccion);
                 
         frm_User.setSize(400, 500);
         frm_User.setLayout(null);
@@ -70,7 +73,15 @@ public class User {
             public void actionPerformed(ActionEvent e){
                 Usuario usuar = new Usuario(txt_email.getText(), txt_name.getText(), txt_first.getText(), txt_last.getText(), txt_telefono.getText());
                 usuar.imprimir_datos_personales();
-                JOptionPane.showMessageDialog(btn_register,"");
+                JOptionPane.showMessageDialog(btn_register,"Datos Ingresados");
+            }
+        });
+
+        btn_direccion.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Dir dir = new Dir();
+                dir.show();
             }
         });
     } 

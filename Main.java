@@ -26,6 +26,8 @@ public class Main {
         Usuario arturo = new Usuario("2001293d@umich.mx", "Arturo", "Ruiz", "Garcia", "9999999999");
         arturo.imprimir_datos_personales();
        
+        System.out.println("");
+        System.out.println("");
         User user = new User();
         user.show();
     }
