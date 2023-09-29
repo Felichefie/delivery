@@ -19,4 +19,15 @@ public class Direccion {
         this.codigo_postal = codigo_postal;
 
     }
+    
+        }
+        //NUEVO USUARIO PARA OBJETO USUARIO EN ListenerButton
+        Usuario(String nombre,String primer_apellido, String segundo_apellido, String telefono,String email) {
+            this.nombre = nombre;
+            this.primer_apellido = primer_apellido;
+            this.segundo_apellido = segundo_apellido;
+            this.telefono = telefono;
+             this.email = email;
+          
+        }
 }

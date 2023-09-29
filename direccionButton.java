@@ -1,56 +1,55 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-//import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-public class ListenerButton {
-    JFrame f;
-    JFrame ubicacion, direccion;
-    JTextField tf_nombre, tf_primerApellido, tf_segundoApellido,tf_telefono, tf_email;
+public class direccionButton {
+    JFrame direccion;
+    JTextField tf_numcalle, tf_colonia, tf_ciudad, tf_pais, tf_codigopostal, tf_referencias;
     JButton btnAceptar, btnBorrar;
 
-    ListenerButton(){
-        f  = new JFrame("GUI USUARIO");
-        f.setLayout(null); //asigna manualmente ubicacion en X y en Y
-        f.setSize(600,400);
+    direccionButton(){
+        direccion  = new JFrame("GUI DIRECCIÓN");
+        direccion.setLayout(null); //asigna manualmente ubicacion en X y en Y
+        direccion.setSize(600,400);
         btnAceptar = new JButton("ACEPTAR/SIGUIENTE");
         btnBorrar = new JButton("BORRAR");
         btnAceptar.setBounds(240, 160, 100, 20);
         btnBorrar.setBounds(240, 180, 100, 20);
 
                      //DATOS PERSONALES
-        tf_nombre = new JTextField("ITZEL");
-        tf_primerApellido = new JTextField("HERNANDEZ");
-        tf_segundoApellido = new JTextField("MARIN");
-        tf_telefono = new JTextField("4471258490");
-        tf_email = new JTextField("2001302E@UMICH.MX");
+        tf_numcalle = new JTextField("23");
+        tf_colonia = new JTextField("HIDALGO");
+        tf_ciudad = new JTextField("MORELIA");
+        tf_pais = new JTextField("MEXICO");
+        tf_codigopostal = new JTextField("68066");
+        tf_referencias = new JTextField("COLOR VERDE");
+        
+        tf_numcalle.setBounds(20, 28, 180, 20);
+        tf_colonia.setBounds(20, 58, 180, 20);
+        tf_ciudad.setBounds(20, 90, 180, 20);
+        tf_pais.setBounds(20, 120, 180, 20);
+        tf_codigopostal.setBounds(20, 150, 180, 20);
+        tf_referencias.setBounds(20, 150, 180, 20);
 
         
-        tf_nombre.setBounds(20, 28, 180, 20);
-        tf_primerApellido.setBounds(20, 58, 180, 20);
-        tf_segundoApellido.setBounds(20, 90, 180, 20);
-        tf_telefono.setBounds(20, 120, 180, 20);
-        tf_email.setBounds(20, 150, 180, 20);
 
-        
+        direccion.add(btnAceptar);
+        direccion.add(btnBorrar);
+        direccion.add(tf_numcalle);
+        direccion.add(tf_colonia);
+        direccion.add(tf_ciudad);
+        direccion.add(tf_pais);
+        direccion.add(tf_codigopostal);
+        direccion.add(tf_referencias);
 
-        f.add(btnAceptar);
-        f.add(btnBorrar);
-        f.add(tf_nombre);
-        f.add(tf_primerApellido);
-        f.add(tf_segundoApellido);
-        f.add(tf_telefono);
-        f.add(tf_email);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        direccion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 
         //ESCUCHAR AL BOTON ACEPTAR
         btnAceptar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                Usuario usuario = new Usuario(tf_nombre.getText(), tf_primerApellido.getText(), 
-                tf_segundoApellido.getText(), tf_telefono.getText(), tf_email.getText());
+                Direccion direccion = new Direccion(tf_numcalle.getText(), tf_colonia.getText(), 
+                tf_ciudad.getText(), tf_pais.getText(), tf_codigopostal.getText(), tf_referencias.getText());
 
                 usuario.imprimir_datos_personales();
 
