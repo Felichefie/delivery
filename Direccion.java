@@ -8,23 +8,21 @@ public class Direccion {
     private JLabel lbl_colonia;
     private JLabel lbl_ciudad;
     private JLabel lbl_codigoPostal;
-    private JLabel lbl_referencia;
     private JLabel lbl_pais;
 
     private JTextField tfCalleNumero;
     private JTextField tfColonia;
     private JTextField tfCiudad;
     private JTextField tfCodigoPostal;
-    private JTextField tfReferencia;
     private JTextField tfPais;
 
     private JButton btnImprimir;
-    private JButton btnCancelar; 
+    private JButton btnCancelar;
 
     Direccion() {
         frame = new JFrame("Dirección");
         frame.setLayout(null);
-        frame.setSize(600, 300);
+        frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         lbl_calleNumero = new JLabel("Calle y Número:");
@@ -47,22 +45,16 @@ public class Direccion {
         tfCodigoPostal = new JTextField();
         tfCodigoPostal.setBounds(140, 100, 200, 20);
 
-        lbl_referencia = new JLabel("Referencia:");
-        lbl_referencia.setBounds(10, 130, 120, 20);
-        tfReferencia = new JTextField();
-        tfReferencia.setBounds(140, 130, 200, 20);
-
         lbl_pais = new JLabel("País:");
-        lbl_pais.setBounds(10, 160, 120, 20);
+        lbl_pais.setBounds(10, 130, 120, 20);
         tfPais = new JTextField();
-        tfPais.setBounds(140, 160, 200, 20);
+        tfPais.setBounds(140, 130, 200, 20);
 
         btnImprimir = new JButton("Aceptar");
-        btnImprimir.setBounds(10, 190, 150, 30);
+        btnImprimir.setBounds(10, 160, 150, 30);
 
         btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(170, 190, 150, 30); 
-
+        btnCancelar.setBounds(170, 160, 150, 30);
 
         btnImprimir.addActionListener(new ActionListener() {
             @Override
@@ -86,17 +78,16 @@ public class Direccion {
         frame.add(tfCiudad);
         frame.add(lbl_codigoPostal);
         frame.add(tfCodigoPostal);
-        frame.add(lbl_referencia);
-        frame.add(tfReferencia);
         frame.add(lbl_pais);
         frame.add(tfPais);
         frame.add(btnImprimir);
-        frame.add(btnCancelar); 
+        frame.add(btnCancelar);
         
+        // Centrar el frame en la pantalla
+        frame.setLocationRelativeTo(null);
     }
 
-    public Direccion(String calleNumero, String colonia, String ciudad, String referencia, int codigoPostal,
-            String pais) {
+    public Direccion(String calleNumero, String colonia, String ciudad, int codigoPostal, String pais) {
     }
 
     void show() {
@@ -108,10 +99,9 @@ public class Direccion {
         String colonia = tfColonia.getText();
         String ciudad = tfCiudad.getText();
         int codigoPostal = Integer.parseInt(tfCodigoPostal.getText());
-        String referencia = tfReferencia.getText();
         String pais = tfPais.getText();
 
-        Direccion direccion = new Direccion(calleNumero, colonia, ciudad, referencia, codigoPostal, pais);
+        Direccion direccion = new Direccion(calleNumero, colonia, ciudad, codigoPostal, pais);
         direccion.imprimir();
     }
 
@@ -120,7 +110,6 @@ public class Direccion {
         tfColonia.setText("");
         tfCiudad.setText("");
         tfCodigoPostal.setText("");
-        tfReferencia.setText("");
         tfPais.setText("");
     }
 
