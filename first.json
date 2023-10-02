@@ -1,0 +1,25 @@
+[
+{
+    "user":{
+        "nombre": "Alfredo",
+        "primerApellido": "Pineda",
+        "segundoApellido": "Prado"
+    }
+},
+
+{
+    "user":{
+        "nombre": "A",
+        "primerApellido": "P",
+        "segundoApellido": "P"
+    }
+},
+
+{
+    "user":{
+        "nombre": "Aa",
+        "primerApellido": "Pp",
+        "segundoApellido": "Pp"
+    }
+}
+]
