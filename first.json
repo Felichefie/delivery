@@ -1,0 +1,26 @@
+[
+    {
+        "user" : {
+            "nombre": "Feliche",
+            "primerApellido": "Jiménez",
+            "segundoApellido": "Pérez"
+        }
+    },
+
+    {
+        "user" : {
+            "nombre": "Juan",
+            "primerApellido": "Pérez",
+            "segundoApellido": "Al"
+        }
+    },
+    
+    {
+        "user" : {
+            "nombre": "Monica",
+            "primerApellido": "Payarez",
+            "segundoApellido": "Solis"
+        }
+    }
+
+]
