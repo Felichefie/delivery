@@ -1,0 +1,23 @@
+[
+    
+{"user" : {
+        "nombre": "Daniel",
+        "primer_apellido": "Villicaña",
+        "segundo_apellido": "Escamilla"
+         }
+        },
+
+{"user" : {
+        "nombre": "Emilio",
+        "primer_apellido": "Suarez",
+        "segundo_apellido": "Ayala"
+         }
+        },
+
+{"user" : {
+        "nombre": "Cesar",
+        "primer_apellido": "Rueda",
+        "segundo_apellido": "Melgoza"
+         }
+        }
+]
