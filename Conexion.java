@@ -33,19 +33,23 @@ public class Conexion {
     
 void sendGet() {
     int response;
+    String res = "";
     try {
         response = connection.getResponseCode();
 
-        System.out.println(response);
+
+        //System.out.println(response);
         BufferedReader br = new BufferedReader( new InputStreamReader(connection.getInputStream())); 
         String line;
 
         while(br.readLine() != null){
             line = br.readLine();
+            res += line;
             System.out.println(line);
         }
     }catch(IOException e){
         e.printStackTrace();
     }
+    return res;
 }
 }
