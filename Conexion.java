@@ -51,5 +51,6 @@ String sendGet(){
     }catch(IOException e){
         e.printStackTrace();
     }
+    return res;
 }
 }
