@@ -6,7 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Conexion {
-    private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts";
+    private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts/1";
     private static final String METHOD_HTTP_GET = "GET";
     HttpURLConnection conection;
 
@@ -24,9 +24,9 @@ public class Conexion {
         } 
     }
 
-    void sendGet(){
+    String sendGet(){
         int response;
-
+        String res = "";
         try {
             response = conection.getResponseCode();
             System.out.println(response);
@@ -34,14 +34,16 @@ public class Conexion {
             BufferedReader br = new BufferedReader(new InputStreamReader(conection.getInputStream()));
             String line;
 
-            while(br.readLine() != null){
-                line = br.readLine();
-                System.out.println(line);
-            }
-
+            do{
+                line = br.toString();
+                //res = res + line;
+                res += line;
+                //System.out.println(line);
+            }while(br.readLine() != null);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+        return res;
     }
 }
