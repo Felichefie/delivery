@@ -1,0 +1,23 @@
+[
+{
+    "user" : {
+        "nombre":"Itzel",
+        "primerApellido":"Hernandez",
+        "segundoApellido":"Marin"
+    }
+},
+{
+    "user" : {
+        "nombre":"Jair",
+        "primerApellido":"Raya",
+        "segundoApellido":"Castellon"
+    }
+},
+{
+    "user" : {
+        "nombre":"Monica",
+        "primerApellido": "Hernandez",
+        "segundoApellido":"Marin"
+    }
+}
+]
