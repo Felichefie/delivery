@@ -118,7 +118,7 @@ public class ListenerButton {
         f_registro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f_ubicacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f_prinsipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        //hola
         btn_aceptar_registro.addActionListener(new ActionListener(){//Registro
             @Override
             public void actionPerformed(ActionEvent e){
