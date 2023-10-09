@@ -9,5 +9,9 @@ public class ConectionMain {
         Gson gson = new Gson();
         List<UserExample> lista= gson.fromJson(txtJson, List.class);
         System.out.println("numero de registros: " + lista.size());
+
+        for(UserExample user: lista){
+            System.out.println(user.getUserId());
+        }
     }
 }
