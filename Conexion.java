@@ -20,8 +20,9 @@ public class Conexion {
             e.printStackTrace();
         }
     }
-    void sendGet(){
+    String sendGet(){
         int response;
+        String res = "";
         try {
             response = connection.getResponseCode();
             System.out.println(response);
@@ -29,13 +30,13 @@ public class Conexion {
             BufferedReader br = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
             String line;
-            while (br.readLine() != null) {
-                line = br.readLine();
-                System.out.println(line);
+            while((line = br.readLine()) != null){
+                res += line;
             }
-
+            System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return res;
     }
 }
