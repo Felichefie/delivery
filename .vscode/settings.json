@@ -1,10 +1,6 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-<<<<<<< HEAD
         "gson-2.10.jar"
-=======
-        "/Users/felix/Downloads/gson-2.10.1 (1).jar"
->>>>>>> c6f899807cde0ceac3c997c441df19ae2b10ad90
     ]
 }
