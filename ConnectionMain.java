@@ -1,5 +1,4 @@
 import java.util.List;
-
 import com.google.gson.Gson;
 
 public class ConnectionMain {
@@ -9,6 +8,9 @@ public class ConnectionMain {
         // System.out.println(txtJson);
         Gson gson = new Gson();
         List<UserExample> lista = gson.fromJson(txtJson, List.class);
-        System.out.println(lista.size());
+        System.out.println("Numero de registros: " + lista.size());
+        for (UserExample user : lista) {
+            System.out.println(user.getUserId());
+        }
     }
 }
