@@ -24,8 +24,8 @@ public class User_example {
         this.userId = userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        this.id = Id;
     }
 
     public void setTitle(String title) {
@@ -35,4 +35,5 @@ public class User_example {
     public void setBody(String body) {
         this.body = body;
     }
+
 }
