@@ -11,7 +11,7 @@ import javax.imageio.stream.ImageInputStream;
 
 public class Conexion {
 
-    private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts/1";
+    private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts";
     private static final String METHOD_HTTP_GET = "GET";
     HttpURLConnection connection;
 

@@ -13,7 +13,7 @@ public class ConnectionMain {
 
         List<Userexample> lista = gson.fromJson(txtJson, List.class);
 
-        System.out.println(lista.size());
+        System.out.println("NUMERO DE REGISTROS" + lista.size());
 
     }
     
