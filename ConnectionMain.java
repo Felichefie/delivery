@@ -10,7 +10,14 @@ public class ConnectionMain {
         //System.out.println(txtJson);
         Gson gson = new Gson();
         List<UserExample> lista = gson.fromJson(txtJson, List.class);
-        System.out.println("numero de registros = " +lista.size());
+        System.out.println("numero de registros = " + lista.size());
+
+        for(UserExample user: lista){
+            System.out.println(user.getId());
+        }
+
+
+        
     }
     
 }
