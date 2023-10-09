@@ -1,5 +1,7 @@
+import java.lang.reflect.Type;
 import java.util.List;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class ConnectionMain {
     public static void main(String[] args) {
@@ -7,15 +9,13 @@ public class ConnectionMain {
         String txtJson=con.sendGet();
         //System.out.println(txtJson);
         Gson gson = new Gson();
-        List<Userexample> lista = gson.fromJson(txtJson, List.class);
+        // List<Userexample> lista = gson.fromJson(txtJson, List.class);
+        Type type = new TypeToken<List<Userexample>>() {}.getType(); 
+        List<Userexample> lista = gson.fromJson(txtJson, type);
         System.out.println("numero de registros: " + lista.size());
 
-        int i;
-        for(i=0; i<lista.size(); i++){
-            // lista.get(i) regresa un objeto de tipo UserExample
-            Userexample objecto = lista.get(i);
-            System.out.println(objecto);
-        } 
-
+        for(Userexample user : lista){
+            System.out.println(user.getUserId());
+        }        
     }
 }
