@@ -15,7 +15,9 @@ public class ConnectionMain {
         System.out.println("numero de registros: " + lista.size());
 
         for(Userexample user : lista){
-            System.out.println(user.getUserId());
+            System.out.println("USER ID: " + user.getUserId());
+
+            System.out.println("ID: " + user.getId());
         }        
     }
 }
