@@ -13,9 +13,13 @@ public class ConnectionMain {
         Type type = new TypeToken<List<Userexample>>() {}.getType(); 
         List<Userexample> lista = gson.fromJson(txtJson, type);
         System.out.println("numero de registros: " + lista.size());
+            
 
-        for(Userexample user : lista){
-            System.out.println(user.getUserId());
+                        
+        
+
+            for(int userId >= 1; userId <= 10; userId++){
+                System.out.println("ID: " + id);
+            }
         }        
     }
-}
