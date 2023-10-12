@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+2import java.net.URL;
 
 public class Conexion {
     //private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts/1";
