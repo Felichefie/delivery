@@ -20,20 +20,36 @@ public class ConnectionMain {
         List<UserExample> lista = gson.fromJson(txtJson, type);
         System.out.println("numero de registros = " + lista.size());
 
-        System.out.println(txtJson);  //IMPRIME TODOS LOS DATOS DE LA LISTA
-        System.out.println("ID 1: " + lista.get(userId));
+        //System.out.println(txtJson);  //IMPRIME TODOS LOS DATOS DE LA LISTA
+       // System.out.println("ID 1: " + lista.get(userId));
         
-        for(int userId=0; userId <=9; userId++){
+        /*for(int userId = 1; userId <= 10; userId++){
             System.out.println("USER ID: " + userId);
         }
         Set<UserExample> conjunto = new HashSet<>(lista); //en conjunto para que no permita elementos duplicados
         for(UserExample user: lista){
             conjunto.add(user);                   
+        }*/
+        List<String> idsUnicos = new ArrayList<>();
+        for(UserExample user: lista){
+        if(!idsUnicos.contains(Integer.toString(user.getUserId()))){
+            idsUnicos.add(Integer.toString(user.getUserId()));
+
         }
+        System.out.println("USERID" + idsUnicos.toString());
+        }
+       
         
+         /*/
+        Integer todosIds [][];
+        todosIds = new Integer[[idsUnicos.size() + 1 ]][];
+        for(Userexample users: lista){
+            todosIds.getid();*/
+        }
+
 
         
     }
     
-}
+
 
