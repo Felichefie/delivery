@@ -10,15 +10,24 @@ public class Conexion {
 
     
     private static final String  URL_GET = " https://jsonplaceholder.typicode.com/posts";
+    private static final String  URL_PUT = " https://jsonplaceholder.typicode.com/posts/1";
     private static final String METHOD_HTTP_GET = "GET";
+    private static final String METHOD_HTTP_PUT = "PUT";
     HttpURLConnection connection;
 
     //CREA EL CONSTRUCTOR
-    Conexion(){
+    Conexion(String type){
         try{
+            if(type == METHOD_HTTP_GET){
             URL object_url = new URL(URL_GET);
             connection = (HttpURLConnection) object_url.openConnection();
             connection.setRequestMethod(METHOD_HTTP_GET);
+        }else{
+            URL object_url = new URL(URL_PUT);
+            connection = (HttpURLConnection) object_url.openConnection();
+            connection.setRequestMethod(METHOD_HTTP_PUT);
+
+        }
 
         }catch (MalformedURLException e) {
         // TODO Auto-generated catch block
@@ -48,4 +57,13 @@ String sendGet(){
     }
     return res;
 }
+
+
+String sendPut(){
+
+    String res = "";
+    
+}
+
+
 }
