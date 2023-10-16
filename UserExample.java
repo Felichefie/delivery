@@ -5,6 +5,20 @@ public class UserExample {
     private String title;
     private String body;
 
+    public UserExample(){
+        userId = 0;
+        id = 0;
+        title = "";
+        body = "";
+    }
+
+    public UserExample(int userId, int id, String title, String body){
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
     public int getUserId() {
         return userId;
     }

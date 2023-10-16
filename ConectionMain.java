@@ -9,6 +9,16 @@ public class ConectionMain {
         String txtJson = con.sendGet();
        // System.out.println(txtJson);
 
+        UserExample u = new UserExample(1, 0, "titulo", "Usuario 0");
+        Serializar serial = new Serializar();
+        String resJson = serial.serialUser(u);
+        System.out.println("Serializar: /////////////////////////////////");
+        System.out.println(resJson);
+        serial.userAdd(u);
+        resJson = serial.lista_json();
+        System.out.println("Serializar: //////////////////////////////");
+        System.out.println(resJson);
+
         Gson gson = new Gson();
         Type type = new TypeToken<List<UserExample>>() {}.getType();
         List<UserExample> objectsUserExample = gson.fromJson(txtJson, type);
