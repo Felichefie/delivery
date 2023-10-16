@@ -7,13 +7,24 @@ import java.net.URL;
 
 public class Conexion {
     private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts";
+    private static final String URL_PUT = "https://jsonplaceholder.typicode.com/posts/1";
     private  static final String METHOD_HTTP_GET = "GET";
+    private  static final String METHOD_HTTP_PUT = "PUT";
     HttpURLConnection connection;
-    Conexion(){
+    
+    Conexion(String type){
         try {
+            
+            if(type == METHOD_HTTP_GET){
             URL obj_url = new URL(URL_GET);
             connection = (HttpURLConnection) obj_url.openConnection();
             connection.setRequestMethod(METHOD_HTTP_GET);
+            }
+            else{URL obj_url = new URL(URL_PUT);
+            connection = (HttpURLConnection) obj_url.openConnection();
+            connection.setRequestMethod(METHOD_HTTP_PUT);
+            }
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -41,5 +52,11 @@ public class Conexion {
         }
         return res;
         
+    }
+
+        String sendPUT(){
+            String res="";
+            return res;
+
     }
 }

@@ -4,6 +4,14 @@ public class UserExample {
     private String title;
     private String body;
     
+    public UserExample(){
+            this.userId = 0;
+            this.id = 0;
+            this.title = "";
+            this.body = "";
+    }
+
+    
     public int getUserId(){
         return this.userId;
 
