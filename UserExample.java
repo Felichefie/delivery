@@ -6,6 +6,25 @@ public class UserExample {
     public int getUserId() {
         return userId;
     }
+    
+    public UserExample() {
+        super();
+        this.userId = 0;
+        this.id = 0;
+        this.title = "";
+        this.body = "";
+    }
+
+    public UserExample(int userId, int id, String title, String body) {
+        super();
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+    
+    
+    
     public void setUserId(int userId) {
         this.userId = userId;
     }
