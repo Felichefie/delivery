@@ -23,11 +23,11 @@ public class Conexion {
     }
 
     String sendGet() {
+        int response;
         String res = "";
         try {
-            int response = connection.getResponseCode();
-            System.out.println(response);
-
+            response = connection.getResponseCode();
+    
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
             String line;

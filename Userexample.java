@@ -4,36 +4,32 @@ public class Userexample {
     private String title;
     private String body;
 
-    public int getUserId() {
+    public Userexample(){
+    }
+
+    public int getUserId(){
         return this.userId;
     }
-
-    public int getId() {
+    public int getId(){
         return this.id;
     }
-
-    public String getTitle() {
+    public String getTitle(){
         return this.title;
     }
-
-    public String getBody() {
+    public String getBody(){
         return this.body;
     }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserId(int userId){
+        this.userId=userId;
     }
-
-    public void setId(int Id) {
-        this.id = Id;
+    public void setId(int Id){
+        this.id=Id;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String title){
+        this.title=title;
     }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setBody(String body ){
+        this.body=body;
     }
 
 }
