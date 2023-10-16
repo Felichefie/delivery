@@ -4,6 +4,13 @@ public class UserExample {
     private String title;
     private String body;
 
+    public UserExample(int userId, int id, String title, String body) {
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
     // Getters
     public int getUserId() {
         return this.userId;
