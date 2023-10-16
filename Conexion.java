@@ -11,7 +11,7 @@ public class Conexion {
     HttpURLConnection connection;
     Conexion(){
         try {
-            URL object_url = new URL(URL_GET);
+            URL object_url = new URL (URL_GET);
             connection = (HttpURLConnection) object_url.openConnection();
             connection.setRequestMethod(METHOD_HTTP_GET);
         } catch (MalformedURLException e) {
@@ -25,7 +25,7 @@ public class Conexion {
         String res = "";
         try {
             response = connection.getResponseCode();
-            System.out.println(response);
+            //System.out.println(response);
 
             BufferedReader br = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
@@ -33,7 +33,7 @@ public class Conexion {
             while((line = br.readLine()) != null){
                 res += line;
             }
-            System.out.println(res);
+            //System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }

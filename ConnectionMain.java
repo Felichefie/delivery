@@ -17,7 +17,7 @@ public class ConnectionMain {
 
         for(Userexample user : lista) {
             System.out.println ("USER ID: " + user.getUserId());
-            System.out.println ("ID: " + user.getUserId());
+            System.out.println ("ID: " + user.getId());
 
         }
     }
