@@ -11,6 +11,14 @@ public class User {
         this.body = "";
     }
 
+    //nuevo constructor.
+    public User(int userId, int id, String title, String body){
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
     public int getUserId() {
         return userId;
     }
