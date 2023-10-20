@@ -2,6 +2,8 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "/home/alumno/Descargas/gson-2.10.1.jar",
-        ".vscode/gson-2.10.1.jar"
+        ".vscode/gson-2.10.1.jar",
+        "mysql-connector-j-8.1.0.jar",
+        "/home/alumno/Descargas/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar"
     ]
 }
