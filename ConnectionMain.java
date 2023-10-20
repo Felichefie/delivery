@@ -8,7 +8,21 @@ public class ConnectionMain {
         Conexion con = new Conexion();
         String txtJson=con.sendGet();
         System.out.println(txtJson);
+
+        User u = new User(1, 0, "titulo texto", "txtJson");
+        String resJson;
+        Serializar serial = new Serializar();
+        res.Json = serial.user(u);
+        System.out.println (res.Json);
+        serial.userAdd(u);
+        res.Json=serial Lista_json();
+        System.out.println (res.Json);
+        
+
+
         Gson gson = new Gson();
+
+
         //List<Userexample> lista= gson.fromJson(txtJson, List.class);
         Type type =new TypeToken<List<Userexample>>() {}.getType();
         List<Userexample> lista = gson.fromJson(txtJson, type);
