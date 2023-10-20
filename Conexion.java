@@ -59,11 +59,6 @@ String sendGet(){
 }
 
 
-String sendPut(){
-
-    String res = "";
-    
-}
 
 
 }
