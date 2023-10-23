@@ -3,6 +3,8 @@ public class User {
     private int id;
     private String title;
     private String body;
+    private String userName;
+    private String name;
 
 
     public User(){
@@ -21,6 +23,13 @@ public class User {
 
     
 //METODOS GET
+
+    public String getUserName(){
+        return this.userName;
+    }
+    public String getname(){
+        return this.name;
+    }
     public int getUserId(){
         return this.userId;
     }
@@ -36,6 +45,12 @@ public class User {
 
 
     //METODOS SET
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
 
     public void setUserId(int userId){
         this.userId = userId;
