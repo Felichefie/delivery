@@ -23,7 +23,7 @@ public class ConectionMain {
             int userId = user.getUserId();
             int id = user.getId();
 
-            // Si el userId no está en la lista distinctUserIds, agregarlo y crear una nueva lista para ese userId
+            // Si el userId no está en la lista diferentesUserIds, agregarlo y crear una nueva lista para ese userId
             if (!diferentesUserIds.contains(userId)) {
                 diferentesUserIds.add(userId);
                 List<Integer> idsForUser = new ArrayList<>();
