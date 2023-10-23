@@ -1,22 +1,37 @@
-public class UserExample {
+public class User {
     private int userId;
     private int id;
     private String title;
     private String body;
+    private String userName;
+    private String name;
     public int getUserId() {
         return userId;
     }
     
-    public UserExample() {
-        super();
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    public User() {
         this.userId = 0;
         this.id = 0;
         this.title = "";
         this.body = "";
     }
 
-    public UserExample(int userId, int id, String title, String body) {
-        super();
+    public User(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
         this.title = title;

@@ -4,19 +4,19 @@ import com.google.gson.Gson;
 
 
 public class Serializar {
-    private List<UserExample> usersList; 
+    private List<User> usersList; 
     private Gson gson;
 
     Serializar(){
         gson = new Gson();
-        usersList = new ArrayList<UserExample>();
+        usersList = new ArrayList<User>();
     }
 
-void userAdd (UserExample newUser){
+void userAdd (User newUser){
     usersList.add(newUser);}
 
 
-   String user(UserExample u){
+   String user(User u){
         String res;
         res = gson.toJson(u);
         return res;

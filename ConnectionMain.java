@@ -4,7 +4,7 @@ public class ConnectionMain {
         String txtJson=con.sendGet();*/
         //System.out.println(txtJson);
         
-        UserExample u = new UserExample(1, 0,"titulo texto", "Usuario 0");
+        User u = new User(1, 0,"titulo texto", "Usuario 0");
         String resJson;
         Serializar serial = new Serializar();
         resJson= serial.user(u);
