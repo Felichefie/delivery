@@ -7,22 +7,71 @@ import java.sql.Statement;
 
 import com.mysql.cj.xdevapi.PreparableStatement;
 
-public class Dbconnection {
+public class Dbconnection{
+static Connection conn;
     public static void main(String[] args) {
-        Connection conn;
-        ResultSet rset;
 
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String pass = "alumnoPrueba1";
 
-        String query = "SELECT * FROM progra2.users";
-        String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
-                            + "VALUES('pepito', 'chabelo', 'monster', 'Jose', '2023-10-20', 'pepitoalcachofa@chabelo.com')";
+        Dbconnection dbConn = new Dbconnection(URL, user, pass);
+        User u = dbConn.getUser("felix.jimenez@umich.mx");
+        if(u.getId()==0){ 
+            System.out.println("No existe");
+            dbConn.insertnewUser(u);
+        }
+        else{ 
+            System.out.println(u.getId());
+            System.out.println(u.getUserName());
+        }
+        try{
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    
+    }
+
+    boolean insertnewUser(User user){
+
+    String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
+                        + "VALUES('"+ user.getUserName() 
+                        + "', 'Chabelo', 'Monster','" 
+                        + user.getName() 
+                        + "', '2023-10-20', 'pepitoalcachofa@chabelo.com')";
+        try{
+            PreparedStatement preState = conn.prepareStatement(queryInsert);
+        preState.execute();
+        return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
+
+    Dbconnection(String URL, String user, String pass){
 
         try {
             conn = DriverManager.getConnection(URL, user, pass);
-            Statement statement = conn.createStatement(); 
+         
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* Direccion direccion(int idUser){
+
+    } */
+
+    User getUser(String email){
+        User user = new User();
+        String query = "SELECT * FROM progra2.users u WHERE u.email ='" + email + "'";
+        ResultSet rset;
+        Statement statement;
+        try{
+            statement = conn.createStatement(); 
             rset = statement.executeQuery(query);
 
             while(rset.next()){
@@ -34,13 +83,16 @@ public class Dbconnection {
                 + " " + rset.getString(6)
                 + " " + rset.getString(7)
                 );
-            }
-            PreparedStatement preState = conn.prepareStatement(queryInsert);
-            preState.execute();
 
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+                user.setId(Integer.parseInt(rset.getString(1)));
+                user.setName(rset.getString(5));
+                user.setUserName(rset.getString(2));
+
+            }
+        }catch(SQLException e){
+            System.out.println("Error en la querry");
+            user.setId(1);
         }
+            return user;
     }
 }
