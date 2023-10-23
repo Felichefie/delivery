@@ -3,7 +3,24 @@ public class User {
     private int id;
     private String title;
     private String body;
+    private String username;
+    private String name;
+    
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public User (){
         this.userId = 0;
         this.id = 0;
