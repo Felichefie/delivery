@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class ConectionMain {
     public static void main(String[] args) {
-        Conexion con = new Conexion();
+        Conexion con = new Conexion("GET");
         String txtJson = con.sendGet();
        // System.out.println(txtJson);
 
@@ -15,6 +15,9 @@ public class ConectionMain {
         System.out.println("Serializar: /////////////////////////////////");
         System.out.println(resJson);
         serial.userAdd(u);
+        resJson = serial.lista_json();
+        UserExample u2 = new UserExample(1, 1, "titulo", "Usuario 1");
+        serial.userAdd(u2);
         resJson = serial.lista_json();
         System.out.println("Serializar: //////////////////////////////");
         System.out.println(resJson);

@@ -9,9 +9,9 @@ public class Serializar {
 
     Serializar(){
 
-        usersList = new ArrayList<UserExample>();
         gson = new Gson();
-
+        usersList = new ArrayList<UserExample>();
+        
     }
     
     void userAdd(UserExample newUser){
