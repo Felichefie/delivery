@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Dbconnection",
+            "request": "launch",
+            "mainClass": "Dbconnection",
+            "projectName": "delivery_24724b3c"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
