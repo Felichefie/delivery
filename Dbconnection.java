@@ -38,6 +38,7 @@ public class Dbconnection {
         if(a.getId() == 0){
 
             System.out.println("El usuario no tiene direcciones");
+            dbConn.InsertNewAddress(u);
 
         }else{
 
@@ -57,6 +58,29 @@ public class Dbconnection {
         }
     }
 
+    boolean InsertNewAddress(UserExample user){
+        
+        String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
+                + "VALUES(" + user.getId() + ", 'Calle' , 5000, '' , 'Colonia' , 'Morelia' , 'Michoacan' , 'Mexico' , '58000' , 19.7008 , 1.2)";
+        
+        System.out.println(queryInsert);
+        PreparedStatement preState;
+
+        try {
+                
+                preState = conn.prepareStatement(queryInsert);
+                preState.execute();
+                System.out.println("Direccion insertada");
+                return true;
+    
+            } catch (SQLException e) {
+    
+                e.printStackTrace();
+                System.out.println("Error al insertar direccion");
+                return false;
+            }
+    }
+
     boolean InsertNewUser(UserExample user){
 
         String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
@@ -65,9 +89,6 @@ public class Dbconnection {
                 + user.getName() 
                 + "', '2023-10-20', '"
                 + user.getEmail() + "')";
-
-        System.out.println(user.getUserName());
-        System.out.println(queryInsert);
 
         PreparedStatement preState;
 
