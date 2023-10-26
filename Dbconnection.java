@@ -125,7 +125,7 @@ public class Dbconnection {
     Address getAddress(int idUser){
         Address address = new Address();
 
-        String query = "SELECT * FROM progra2.address a WHERE a.id_User = " + idUser;
+        String query = "SELECT * FROM progra2.address a WHERE a.id_User = " + idUser + " AND a.street = 'Privada Jacarandas ' AND a.number = 109";
         System.out.println(query);
         ResultSet rset;
         Statement statement;
