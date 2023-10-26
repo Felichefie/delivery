@@ -15,8 +15,13 @@ static Connection conn;
         String user = "alumno";
         String pass = "alumnoPrueba1";
 
+        String email = "felix.jimenez@umich.mx";
+        String num = "4431234567";
+
+
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
         User u = dbConn.getUser("felix.jimenez@umich.mx");
+        
         if(u.getId()==0){ 
             System.out.println("No existe");
             dbConn.insertnewUser(u);
@@ -25,6 +30,14 @@ static Connection conn;
             System.out.println(u.getId());
             System.out.println(u.getUserName());
         }
+
+        if(dbConn.adressExists(u.getId(), "Privada Jacarandas", 109)){
+            System.out.println("La direccion ya existeen la base de datos");
+        }
+        else{
+            System.out.println("La nueva direccion se puede subir");
+        }
+
         try{
             conn.close();
         }catch(SQLException e){
@@ -94,5 +107,20 @@ static Connection conn;
             user.setId(1);
         }
             return user;
+    }
+
+    boolean adressExists(int idUser, String street, int number){
+        String query = "SELECT * FROM progra2.adress a WHERE a.id_user = ? AND a.street = ? AND a.number = ?";
+        try{
+            PreparedStatement preState = conn.prepareStatement(query);
+            preState.setInt(1, idUser);
+            preState.setString(2, street);
+            preState.setInt(3, number);
+            ResultSet resSet = preState.executeQuery();
+            return resSet.next();
+            } catch (SQLException e){
+                e.printStackTrace();
+                return false;
+            } 
     }
 }

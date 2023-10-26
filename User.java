@@ -1,10 +1,35 @@
 public class User {
     private int userId;
     private int id;
+    private int phone_number;
+    private int birthday;
+    private String userName;
+    private String first_lastname;
+    private String second_lastname;
+    private String email;
     private String title;
     private String body;
-    private String userName;
     private String name;
+
+    public void setFirst_lastname(String first_lastname) {
+        this.first_lastname = first_lastname;
+    }
+
+    public void setSecond_lastname(String second_lastname) {
+        this.second_lastname = second_lastname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
+    }
+    
+    public void setPhone_number(int phone_number) {
+    this.phone_number = phone_number;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -28,6 +53,26 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFirst_lastname() {
+        return first_lastname;
+    }
+
+    public String getSecond_lastname() {
+        return second_lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getBirthday() {
+        return birthday;
+    }
+
+    public int getPhone_number() {
+        return phone_number;
     }
 
     public int getId() {
