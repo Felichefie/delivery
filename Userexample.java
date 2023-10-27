@@ -1,61 +1,102 @@
 public class Userexample {
-    private int userId;
+
     private int id;
-    private String title;
-    private String body;
     private String userName;
+    private String first_lastname;
+    private String second_lastname;
     private String name;
+    private String birthday;
+    private String email;
+    private String gender;
+    private String phone_number;
 
+    public Userexample(int id, String userName, String first_lastname, String second_lastname, String name, String birthday, String email, String gender, String phone_number) {
+        this.id = id;
+        this.userName = userName;
+        this.first_lastname = first_lastname;
+        this.second_lastname = second_lastname;
+        this.name = name;
+        this.birthday = birthday;
+        this.email = email;
+        this.gender = gender;
+        this.phone_number = phone_number;
+    }
 
-    public void SetName(String name){
-        this.name=name;
+    public int getUserId() {
+        return id;
     }
-    public void SetUserName(String userName){
-        this.userName=userName;
+
+    public void setId(int id) {
+        this.id = id;
     }
-    public String getName(){
-        return name;
-    }
-    public String getUserName(){
+
+    public String getUserName() {
         return userName;
     }
 
-public Userexample(){
-    this.userId = 0;
-    this.id = 0;
-    this.title = "";
-    this.body = "";
-}
-public Userexample(int userId, int id, String title, String body){
-    this.userId = userId;
-    this.id = id;
-    this.title = title;
-    this.body = body;
-}
-
-    public int getUserId(){
-        return this.userId;
-    }
-     public int getId(){
-        return this.id;
-    }
-     public String getTitle(){
-        return this.title;
-    }
-     public String getBody(){
-        return this.body;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setUserId(int userId){
-        this.userId = userId;
+    public String getFirst_lastname() {
+        return first_lastname;
     }
-     public void setId(int id){
-        this.id = id;
+
+    public void setFirst_lastname(String first_lastname) {
+        this.first_lastname = first_lastname;
     }
-     public void setTitle(String title){
-        this.title = title;
+
+    public String getSecond_lastname() {
+        return second_lastname;
     }
-     public void setBody(String body){
-        this.body = body;
+
+    public void setSecond_lastname(String second_lastname) {
+        this.second_lastname = second_lastname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public void setDbConn(Dbconnection dbConn) {
+    }
+
+    public void show() {
     }
 }
