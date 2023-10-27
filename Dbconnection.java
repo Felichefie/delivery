@@ -9,43 +9,7 @@ public class Dbconnection {
 
     static Connection conn = null;
 
-    public static void main(String[] args) {
-
-        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
-        String user = "alumno";
-        String pass = "alumnoPrueba1";
-        String correo = "562561@umich.mx";
-        int phone = 1234567890;
-
-        Dbconnection dbConn = new Dbconnection(URL, user, pass);
-        UserExample u = dbConn.getUser(correo, phone);
-        Address a = dbConn.getAddress(u.getId());
-
-        if(u.getId() == 0){
-
-            System.out.println("NO EXISTE");
-            dbConn.InsertNewUser(u);
-
-        }else{
-
-            System.out.println(u.getUserName());
-            System.out.println(u.getId());
-            System.out.println(u.getEmail());
-            System.out.println(u.getPhoneNumber());
-
-        }
-
-        if(a.getId() == 0){
-
-            System.out.println("El usuario no tiene direcciones");
-            dbConn.InsertNewAddress(u);
-
-        }else{
-
-            System.out.println(a.getStreet());
-            System.out.println(a.getNumber());
-            
-        }
+    void closeConnection(){
 
         try {
 
@@ -56,9 +20,10 @@ public class Dbconnection {
             e.printStackTrace();
 
         }
+
     }
 
-    boolean InsertNewAddress(UserExample user){
+    boolean InsertNewAddress(Usuario user){
         
         String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
                 + "VALUES(" + user.getId() + ", 'Calle' , 5000, '' , 'Colonia' , 'Morelia' , 'Michoacan' , 'Mexico' , '58000' , 19.7008 , 1.2)";
@@ -81,7 +46,7 @@ public class Dbconnection {
             }
     }
 
-    boolean InsertNewUser(UserExample user){
+    boolean InsertNewUser(Usuario user){
 
         String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                 + "VALUES('" + user.getUserName()
@@ -173,8 +138,8 @@ public class Dbconnection {
         return address;
     }
 
-    UserExample getUser(String email, int phone){
-        UserExample user = new UserExample();
+    Usuario getUser(String email, String phone){
+        Usuario user = new Usuario();
         
         String query = "SELECT * FROM progra2.users u WHERE u.email ='" + email + "' OR u.phone_number = '" + phone + "'";
         System.out.println(query);
@@ -200,15 +165,20 @@ public class Dbconnection {
 
                 );
 
-                user.setId(Integer.parseInt(rset.getString(1)));  
-                user.setName(rset.getString(5));
+                user.setId(Integer.parseInt(rset.getString(1))); 
                 user.setUserName(rset.getString(2));
+                user.setFirst_lastname(rset.getString(3));
+                user.setSecond_lastname(rset.getString(4));
+                user.setName(rset.getString(5));
+                user.setBirthday(rset.getString(6));
                 user.setEmail(rset.getString(7));
-                user.setPhoneNumber(Integer.parseInt(rset.getString(9)));
+                user.setGender(rset.getString(8));
+                user.setPhone_number(rset.getString(9));
 
             }
         }catch(SQLException e){    
-            System.out.print("Error en la query");
+            System.out.println("Error en la query");
+            //e.printStackTrace();
             user.setId(1);
         }
         return user;
