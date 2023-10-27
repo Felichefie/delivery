@@ -1,0 +1,24 @@
+[
+    {
+    "user": {
+    "nombre":"Anibal", 
+    "primerApellido":"Zavala",
+    "segundo apellido":"Herrera"
+            }
+    },
+    {
+    "user": {
+        "nombre":"Andrea", 
+        "primerApellido":"Zavala",
+        "segundo apellido":"Herrera"
+            }
+        },
+    {
+    "user": {
+    "nombre":"Monica", 
+    "primerApellido":"Zavala",
+     "segundo apellido":"Herrera"
+           }
+    }
+        
+]
