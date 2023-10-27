@@ -1,34 +1,45 @@
+import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gson.Gson;
 
-
-public class Serializar{
-    //crear varios objetos del tipo user 
-    private List<User> usersList;
-   // private User user1, user2, user3; //son las propiedades
+public class Serializar {
+//LISTA QUE ALMACENA USUARIOS
+    private List<User> usersLists;
     private Gson gson;
-    //Constructor, metodo constructor
-    Serializar(){
-    gson = new Gson();
-    }
-    void UserAdd(User userNew){
-        usersList.add(userNew);
-    }
-    //metodo
-    String user(User u){
-        //crear un objeto de tipo string
-        String res;
-        res = gson.toJson(u);
-        return res;
-    }   
 
-    String lista_json(){
-        String res;
-        res = gson.toJson(usersList);
-        return res;
+//CONSTRUCTOR.
+    Serializar(){
+        gson = new Gson();
+        usersLists = new ArrayList<User>();
     }
-    
+
+
+//METODO QUE AGREGA UN USUARIO A LA LISTA
+
+    void UserAdd(User userNew){
+    usersLists.add(userNew);
+    }
+
+//METODO QUE REGRESA EL USUARIO SERIALIZADO.
+    String serialUser(User u){
+        String result;
+        //SERIALIZANDO ELEMENTO
+        result = gson.toJson(u);
+        return result;
+    }
+
+//METODO QUE SERIALIZA LA LISTA.
+    String listaJson(){
+        String result;
+        result = gson.toJson(usersLists);
+        return result;
+    }
+
+
+
 }
+
 
 
 

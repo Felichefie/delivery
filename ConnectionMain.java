@@ -1,16 +1,23 @@
 public class ConnectionMain {
     public static void main(String[] args) {
-        Conexion con = new Conexion();
-        String txtJson = con.sendGet();
+       // Conexion con = new Conexion();
+        //String txtJson = con.sendGet();
 
+//CREAR UN OBJETO SERIALIZADO
+    User u = new User(1, 0, "TituloTexto", "Cuerpo");
+    String resJson;
+    Serializar serial = new Serializar();
+    resJson = serial.serialUser(u);
+    System.out.print(resJson);
+    serial.UserAdd(u);
+    resJson = serial.listaJson();
+    System.out.print(resJson);
 
-        //crear un objeto serializaru
-        User u = new User(1, 1, "titulo", "Usuario uno");
-        String resJson;
+    User u1 = new User(1, 1, "OTRO USUSARIO", "CUAERPO 2");
+    resJson = serial.serialUser(u1);
+    serial.UserAdd(u1);
+    System.out.println(resJson);
 
-        Serializar serial = new Serializar();
-        resJson = serial.user(u);
-        System.out.println(resJson);
 
        /* Gson gson = new Gson();
         Type type = new TypeToken<List<Userexample>>() {}.getType();
