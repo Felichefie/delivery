@@ -131,4 +131,10 @@ public class User {
     public static void setStreet(String string) {
     }
 
+    public void show() {
+    }
+
+    public void setDbConn(Dbconnection dbConn) {
+    }
+
 }
