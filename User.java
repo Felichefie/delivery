@@ -8,10 +8,6 @@ public class User {
 
 
     public User(){
-        this.userId = 0;
-        this.id = 0;
-        this.title = "";
-        this.body = "";
     }
 
     public User(int userId, int id, String title, String body){
@@ -19,47 +15,56 @@ public class User {
         this.id = id;
         this.title = title;
         this.body = body;
+        //this.userName = userName;
+        //this.name = name;
     }
-    public void setName(String name){
-        this.name = name;
+
+    public int getUserId() {
+        return userId;
     }
-    public void setUserName(String userName){
-        this.userName = userName;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
-    public String getName(){
-        return name;
-    }
-    public String getUserName(){
-        return userName;
-    }
-//METODOS GET
-    public int getUserId(){
-        return this.userId;
-    }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    public String getTitle(){
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
         return title;
     }
-    public String getBody(){
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
         return body;
     }
 
-
-    //METODOS SET
-
-    public void setUserId(int userId){
-        this.userId = userId;
-    }
-    public void setId(int id){
-        this.id= id;
-    }
-    public void setTitle(String title){
-        this.title = title;
-    }
-    public void setBody(String body){
+    public void setBody(String body) {
         this.body = body;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }
