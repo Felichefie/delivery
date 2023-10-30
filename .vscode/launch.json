@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "evaluacion1",
+            "request": "launch",
+            "mainClass": "evaluacion1",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
             "name": "DBconnection",
             "request": "launch",
             "mainClass": "DBconnection",
