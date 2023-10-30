@@ -113,8 +113,4 @@ public User(int userId, int id, String title, String body){
     this.body = body;
     }
 
-public int getUserId(){
-
-}
-
 }
