@@ -6,6 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Struct;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Dbconnection {
 
@@ -13,8 +21,7 @@ public class Dbconnection {
     public static void main(String[] args) {
         //Connection conn;
        // ResultSet rset;
-
-        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+       String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String password = "alumnoPrueba1";
         String email = "felix.jimenez@umich.mx";
@@ -22,11 +29,119 @@ public class Dbconnection {
         int idUser = 1;
         String street = "Privada Jacarandas";
         int number = 109;
+        Dbconnection dbConn = new Dbconnection(URL, user, password);
+         
+    //CREA ITERFAZ
+    JFrame ventana = new JFrame("USUARIOS REGISTRADOS");
+    ventana.setLayout(null);
+    JLabel etiqueta = new JLabel(".....INGRESE SUS DATOS.....");
+    etiqueta.setBounds(180,10,300,20);
+    ventana.add(etiqueta);
+    
+    JButton buscarDatos = new JButton("Buscar Datos");
+    buscarDatos.setBounds(250, 250, 200,20);
+    ventana.add(buscarDatos);
+    JTextArea ResultArea = new JTextArea(10,20);
+    ResultArea.setEditable(false);
+    ventana.add(ResultArea);
+    JTextField inputText = new JTextField(20);
 
-       System.out.println("CONECTANDO A LA BASE DE DATOS...");
+    buscarDatos.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+       
+            String input = inputText.getText();
+            UserExample userResult = dbConn.getUser(input, input);
+            if(userResult != null){
+                System.out.println("USUARION NO HA SIDO ENCONTRADO.");
+                System.out.println("ID" + userResult.getId());
+                System.out.println("nombre del usuario" + userResult.getUserName());
+                Address userAddress = dbConn.getAddress(idUser, street, number);
+
+                if(userAddress != null){
+                System.out.println("DIRECCION NO HA SIDO ENCONTRADO.");
+                System.out.println("ID" + userAddress.setStreet());
+                }
+            }
+        }
+        
+    });
+
+
+    
+    //CREA CUADRO DE TEXTO ID
+    JLabel id = new JLabel("ID: ");
+    id.setBounds(10, 60, 100, 20);
+    JTextField idT = new JTextField("  ");
+    idT.setBounds(250,60,200,20);
+    ventana.add(id);
+    ventana.add(idT);
+
+    //CREA CUADRO DE TEXTO USER_NAME
+    JLabel user_names = new JLabel("USER NAME: ");
+    user_names.setBounds(10,85,200,20);
+    JTextField user_nameT = new JTextField(" ");
+    user_nameT.setBounds(250, 85, 200, 20);
+    ventana.add(user_names);
+    ventana.add(user_nameT);
+
+    //CREA CUADRO DE TEXTO FIRST_LASTNAME
+    JLabel first_lastName = new JLabel("FIRST LAST NAME: ");
+    first_lastName.setBounds(10,110,200,20);
+    JTextField first_lastNameT = new JTextField(" ");
+    first_lastNameT.setBounds(250,110,200,20);
+    ventana.add(first_lastName);
+    ventana.add(first_lastNameT);
+
+    //CREA CUADRO DE TEXTO SECOND_LASTNAME
+    JLabel second_lastName = new JLabel("SECOND LAST NAME: ");
+    second_lastName.setBounds(10,135,200,20);
+    JTextField second_lastNameT = new JTextField(" ");
+    second_lastNameT.setBounds(250,135,200,20);
+    ventana.add(second_lastName);
+    ventana.add(second_lastNameT);
+
+    //CREA CUADRO DE TEXTO BIRTHDAY
+    JLabel birthday = new JLabel("BIRTHDAY: ");
+    birthday.setBounds(10,160,200,20);
+    JTextField birthdayT = new JTextField(" ");
+    birthdayT.setBounds(250,160,200,20);
+    ventana.add(birthday);
+    ventana.add(birthdayT);
+
+    //CREA CUADRO DE TEXTO EMAIL
+    JLabel emails = new JLabel("EMAIL: ");
+    emails.setBounds(10,185,200,20);
+    JTextField emailT = new JTextField(" ");
+    emailT.setBounds(250,185,200,20);
+    ventana.add(emails);
+    ventana.add(emailT);
+
+    //CREA CUADRO DE TEXTO PHONE_NUMBER
+    JLabel phones = new JLabel("PHONE NUMBER: ");
+    phones.setBounds(10,210,200,20);
+    JTextField phoneT = new JTextField(" ");
+    phoneT.setBounds(250,210,200,20);
+    ventana.add(phones);
+    ventana.add(phoneT);
+    JLabel resultLabel = new JLabel("Resultado: ");
+    resultLabel.setBounds(10, 70, 200, 20);
+    ventana.add(resultLabel);
+    ventana.setSize(500,500);
+    ventana.setVisible(true);
+
+    
+
+
+
+        
+
+       //System.out.println("CONECTANDO A LA BASE DE DATOS...");
 
         String query = "SELECT * FROM progra2.users";
-        Dbconnection dbConn = new Dbconnection(URL, user, password);
+        //Dbconnection dbConn = new Dbconnection(URL, user, password);
         UserExample u = dbConn.getUser(email, phone);
         Address a = dbConn.getAddress(u.getId(), query, number);
 
@@ -76,6 +191,27 @@ public class Dbconnection {
     }
 
 
+    //INSERTA DIRECCION
+    boolean InsertNewAddress(UserExample user){
+        String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
+        + "VALUES(" + user.getId() + ", 'Aldasoro Suarez', 100, '', 'Jardines', 'moreliaa', 'michoacan', 'mexico', '58322', 1.2, 2.3)";
+        System.out.println(queryInsert);
+        PreparedStatement preState;
+        try {
+            
+            preState = conn.prepareStatement(queryInsert);
+            preState.execute();
+            System.out.println("LA DIRECCION HA SIDO INSERTADA CON EXITO!");
+            return true;
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR AL INSERTAR LA DIRECCION :()");
+        }
+
+        return false;
+    }
 
 
     Dbconnection(String URL, String user,String password){       
@@ -178,7 +314,15 @@ public class Dbconnection {
         }
 
         return address;
+
+
+
+
+        
     }
+    
+
+
     
    
 }

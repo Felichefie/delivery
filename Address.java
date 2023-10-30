@@ -135,5 +135,9 @@ public class Address {
     public void setGps_lon(String gps_lon) {
         this.gps_lon = gps_lon;
     }
+
+    public String setStreet() {
+        return null;
+    }
     
 }
