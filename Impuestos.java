@@ -26,6 +26,7 @@ public class Impuestos {
         this.IEPS = IEPS;
         this.costo = costo;
         this.cantidad = cantidad;
+        this.tipo = tipo;
     }
 
     Impuestos(double salario){
