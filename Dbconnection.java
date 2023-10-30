@@ -5,13 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JTextField;
 
 public class Dbconnection {
     static Connection conn;
     public static void main(String[] args) {
         
-      
+   
+    
 
+         
         /*String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String pass = "alumnoPrueba1";
@@ -105,9 +108,11 @@ public class Dbconnection {
         String user = "alumno";
         String pass = "alumnoPrueba1";
      
+        
         String correo = "1911690k@umich.mx";
         String numero = "4434842118";
         Dbconnection dbConn = new Dbconnection(URL,user,pass);
+      
         User u = dbConn.getUser(correo);//busca por medio del email(si esta o no), 
         //declara una variable u de la clase User
         if(u.getId()==0){ 
@@ -120,7 +125,7 @@ public class Dbconnection {
 
              System.out.println(u.getId());// en caso de que exista imprime el username-id
             //ahora debemos buscar si tengo direccion o no
-            String query = "SELECT * FROM progra2.address a WHERE a.id_user = " + uid;
+            String query = "SELECT * FROM progra2.address a WHERE a.id_user = " + 1 + " AND a.street =" + "'Privada Jacarandas '" + " AND a.number = 109";
             System.out.println(query);
             ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
             Statement statement;
@@ -129,6 +134,7 @@ public class Dbconnection {
              
             statement = conn.createStatement();
             rset = statement.executeQuery(query);
+            System.out.println(rset.getFetchSize());
 
             boolean existe_direccion = false;    
             while(rset.next()){
@@ -187,6 +193,9 @@ public class Dbconnection {
     }
     
 
+    
+
+
     boolean insertNewUser(User user){
        /*  String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                             + "VALUES('" + user.getUsername() 
@@ -221,10 +230,10 @@ public class Dbconnection {
    // Direccion direccion(int idUSer){}
 
     
-   User getUser(String email){
+   User getUser(String correo){
     User user = new User();
 
-      String query = "SELECT * FROM progra2.users u WHERE u.email='" + email + "'";
+      String query = "SELECT * FROM progra2.users u WHERE u.email='" + correo + "'";
       //user_name, first_lastname, second_lastname, name, birthday, email
       System.out.println(query);
               ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
@@ -257,5 +266,13 @@ public class Dbconnection {
     
     return user;
     }
+
+
+
+
+
+public User getUser(JTextField txt_email) {
+    return null;
+}
 }
 

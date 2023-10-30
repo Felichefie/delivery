@@ -10,7 +10,27 @@ public class address {
     private String state;
     private String country;
     private int postal_code;
-    private String GPS;
+    private String gps_lat;
+    private String gps_lon;
+
+
+
+
+
+    public address(String text1, int text2, int text3, String text4, String text5, String text6, String text7,
+            int text8, String text9, String text10) {
+                this.street = text1;
+                this.number = text2;
+                this.number_two = text3;
+                this.neighborhood = text4;
+                this.city = text5;
+                this.state = text6;
+                this.country= text7;
+                this.postal_code = text8;
+                this.gps_lat = text9;
+                this.gps_lon = text10;
+
+    }
 
     private void setId(int id){ 
         this.Id = id;
@@ -48,8 +68,11 @@ public class address {
     private void setpostal_code(int postal_code){
         this.postal_code = postal_code;
     }
-     private void setGPS(String GPS){ 
-        this.GPS = GPS;
+     private void setgps_lat(String gps_lat){ 
+        this.gps_lat = gps_lat;
+    }
+      private void setgps_lon(String gps_lon){ 
+        this.gps_lon = gps_lon;
     }
 
     public int getid(){
@@ -89,10 +112,16 @@ public class address {
         return this.postal_code;
     }
 
-    public String getGPS(){
-        return this.GPS;
+    public String getgps_lat(){
+        return this.gps_lat;
+    }
+     public String getgps_lon(){
+        return this.gps_lon;
     }
 
+    public void imprimir(){
+        System.out.println(this.street + " " + this.number + " " + this.number_two + " " + this.number + " " + this.neighborhood + " " + this.city + " " + this.state + " " + this.country + " " + this.postal_code + " " + this.gps_lat + " " + this.gps_lon + " " + this.number);//una funcion para imprimir toda la informacion del objeto
+    }
 }
 
     
