@@ -23,10 +23,11 @@ public class Conexion {
     }
 
     String sendGet() {
+        int response;
         String res = "";
         try {
-            int response = connection.getResponseCode();
-            System.out.println(response);
+            response = connection.getResponseCode();
+            // System.out.println(response);
 
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
@@ -34,6 +35,7 @@ public class Conexion {
             while ((line = br.readLine()) != null) {
                 res += line;
             }
+            // System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
