@@ -1,9 +1,8 @@
-/* 
- * El programa te pedira un email o un numero de telefono para buscar un usuario en la base de datos,
- *  una vez encontrado te mostrara los datos del usuario y su direccion si es que la tiene registrada.
- */
+import javax.swing.*;
 
-import java.util.Scanner;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ConnectionMain {
     public static void main(String[] args) {
@@ -13,30 +12,50 @@ public class ConnectionMain {
 
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Ingrese un email o numero de telefono:");
-            String input = scanner.nextLine();
+        JFrame frame = new JFrame("Consulta de Usuario");
+        JLabel label = new JLabel("Ingrese un email o número de teléfono:");
+        JTextField inputField = new JTextField(20);
+        JButton searchButton = new JButton("Buscar");
+        JTextArea resultArea = new JTextArea(10, 30);
+        resultArea.setEditable(false);
 
-            User userResult = dbConn.getUser(input, input);
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String input = inputField.getText();
+                User userResult = dbConn.getUser(input, input);
 
-            if (userResult != null) {
-                System.out.println("Usuario encontrado:");
-                System.out.println("ID: " + userResult.getId());
-                System.out.println("Nombre de usuario: " + userResult.getUserName());
-                Address userAddress = dbConn.getAddress(userResult.getId());
-                if (userAddress != null) {
-                    System.out.println("\nDireccion encontrada:");
-                    System.out.println("ID de usuario: " + userAddress.getId_user());
-                    System.out.println("Calle: " + userAddress.getStreet());
-                    System.out.println("Numero: " + userAddress.getNumber());
+                if (userResult != null) {
+                    resultArea.setText("Usuario encontrado:\n" +
+                            "ID: " + userResult.getId() + "\n" +
+                            "Nombre de usuario: " + userResult.getUserName());
+
+                    Address userAddress = dbConn.getAddress(userResult.getId());
+                    if (userAddress != null) {
+                        resultArea.append("\n\nDirección encontrada:\n" +
+                                "ID de usuario: " + userAddress.getId_user() + "\n" +
+                                "Calle: " + userAddress.getStreet() + "\n" +
+                                "Número: " + userAddress.getNumber());
+                    } else {
+                        resultArea.append("\n\nDirección no encontrada para este usuario.");
+                    }
                 } else {
-                    System.out.println("\nDireccion no encontrada para este usuario.");
+                    resultArea.setText("Usuario no encontrado.");
                 }
-            } else {
-                System.out.println("Usuario no encontrado.");
             }
-        }
+        });
 
-        dbConn.closeConnection();
+        JPanel panel = new JPanel();
+        panel.add(label);
+        panel.add(inputField);
+        panel.add(searchButton);
+
+        frame.setLayout(new GridLayout(2, 1));
+
+        frame.add(panel);
+        frame.add(resultArea);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }
