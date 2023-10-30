@@ -105,8 +105,10 @@ public class Dbconnection {
         String user = "alumno";
         String pass = "alumnoPrueba1";
      
+        String correo = "1911690k@umich.mx";
+        String numero = "4434842118";
         Dbconnection dbConn = new Dbconnection(URL,user,pass);
-        User u = dbConn.getUser("1911690k@umich.mx");//busca por medio del email(si esta o no), 
+        User u = dbConn.getUser(correo);//busca por medio del email(si esta o no), 
         //declara una variable u de la clase User
         if(u.getId()==0){ 
             System.out.println("No existe");//comprobar si existe el usario por medio del email o telefono
