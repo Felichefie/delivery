@@ -1,46 +1,42 @@
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+/* 
+ * El programa te pedira un email o un numero de telefono para buscar un usuario en la base de datos,
+ *  una vez encontrado te mostrara los datos del usuario y su direccion si es que la tiene registrada.
+ */
+
+import java.util.Scanner;
 
 public class ConnectionMain {
     public static void main(String[] args) {
-        Conexion con = new Conexion();
-        String txtJson=con.sendGet();
-        //System.out.println(txtJson);
-        Gson gson = new Gson();
-        // List<Userexample> lista = gson.fromJson(txtJson, List.class);
-        Type type = new TypeToken<List<Userexample>>() {}.getType(); 
-        List<Userexample> lista = gson.fromJson(txtJson, type);
-        //System.out.println("numero de registros: " + lista.size());
+        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+        String user = "alumno";
+        String pass = "alumnoPrueba1";
 
-        List<Integer> userIds = new ArrayList<>();
-        List<List<Integer>> idLists = new ArrayList<>();
-        
-        for(Userexample user : lista){
-            int userId = user.getUserId();
-            int id = user.getId();
-            // Revisa si el userId ya existe en la lista
-            int index = userIds.indexOf(userId);
-            // Si no existe, agrega el userId a la lista de userIds y crea una nueva lista de ids
-            if(index == -1){
-                userIds.add(userId);
-                idLists.add(new ArrayList<Integer>());
-                // Actualiza el index del ultimo elemento
-                index = idLists.size() - 1;
+        Dbconnection dbConn = new Dbconnection(URL, user, pass);
+
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Ingrese un email o numero de telefono:");
+            String input = scanner.nextLine();
+
+            User userResult = dbConn.getUser(input, input);
+
+            if (userResult != null) {
+                System.out.println("Usuario encontrado:");
+                System.out.println("ID: " + userResult.getId());
+                System.out.println("Nombre de usuario: " + userResult.getUserName());
+                Address userAddress = dbConn.getAddress(userResult.getId());
+                if (userAddress != null) {
+                    System.out.println("\nDireccion encontrada:");
+                    System.out.println("ID de usuario: " + userAddress.getId_user());
+                    System.out.println("Calle: " + userAddress.getStreet());
+                    System.out.println("Numero: " + userAddress.getNumber());
+                } else {
+                    System.out.println("\nDireccion no encontrada para este usuario.");
+                }
+            } else {
+                System.out.println("Usuario no encontrado.");
             }
-            // Si existe, obtiene la lista de userids y agrega el id
-            idLists.get(index).add(id);
         }
-        
-        System.out.println("userId" + userIds.toString());
-        
-        for(int i = 0; i < userIds.size(); i++){
-            int userId = userIds.get(i);
-            List<Integer> ids = idLists.get(i);
-            System.out.println("userId =" + userId + ", id" + ids.toString());
-        }
+
+        dbConn.closeConnection();
     }
 }
