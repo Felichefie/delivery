@@ -6,129 +6,186 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Dbconnection {
-   static Connection conn;
-    public static void main(String[] args) {
-       // Connection conn = null;
-      //  ResultSet rset = null;
 
-        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
-        String user = "alumno";
-        String pass = "alumnoPrueba1";
+    static Connection conn = null;
 
- //       String query = "SELECT * FROM progra2.users";
+    void closeConnection(){
 
-        //String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
-          //                  + "VALUES('Jairosr8', 'Raya', 'Castellon', 'Jair', '2023-10-20', 'jairosr8@gmail.com')";
-            
-        Dbconnection dbConn = new Dbconnection (URL, user, pass);
-        User u = dbConn.getUser("'felix.jimenez@umich.mx'");
-        if(u.getId()==0){
-        System.out.println("El usuario no existe!");
-        dbConn.insertNewUser(u);
-    }
-    else{
-        System.out.println(u.getId());
-        System.out.println(u.getUserName());
-    try{
-        conn.close();
-    }catch (SQLException e){
-        e.printStackTrace();
-    }
-}
-
-}
-
-boolean insertNewUser(User user){
-    
-    String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
-                        + "VALUES(" + user.getUserName() 
-                        + ", 'Jairosr8', 'Raya', 'Castellon',  "
-                        +  user.getUserName() 
-                        + ", '2023-10-20', 'jairosr8@gmail.com')";
-    try{
-    PreparedStatement preState = conn.prepareStatement(queryInsert);
-    preState.execute();
-    }catch (SQLException e) {
-        e.printStackTrace();
-    return false;
-    }
-    return false;
-    
-}
-Dbconnection(String URL, String user, String pass){
-
-        
         try {
-            conn = DriverManager.getConnection(URL, user, pass);
-            /* Statement statement = conn.createStatement();
-
-            rset = statement.executeQuery(query);
-
-            while(rset.next()){
-                System.out.println(rset.getString(1) 
-                + " " + rset.getString(2)
-                + " " + rset.getString(3)
-                + " " + rset.getString(4)
-                + " " + rset.getString(5)
-                + " " + rset.getString(6)
-                + " " + rset.getString(7)
-                );
-            }*/
-
-          //  PreparedStatement preState = conn.prepareStatement(queryInsert);
-          //  preState.execute();
 
             conn.close();
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
+
+        }
+
+    }
+
+    boolean InsertNewAddress(Usuario user){
+        
+        String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
+                + "VALUES(" + user.getId() + ", 'Calle' , 102, '' , 'Colonia' , 'Tlalpujahua' , 'Michoacan' , 'Mexico' , '53053' , 17.456 , 1.9)";
+        
+        System.out.println(queryInsert);
+        PreparedStatement preState;
+
+        try {
+                
+                preState = conn.prepareStatement(queryInsert);
+                preState.execute();
+                System.out.println("DATOS DE DIRECCIÓN AGREGADOS CORRECTAMENTE.");
+                return true;
+    
+            } catch (SQLException e) {
+    
+                e.printStackTrace();
+                System.out.println("UPS! HUBO UN ERROR AL QUERER AGREGAR LOS DATOS INGRESADOS.");
+                return false;
+            }
+    }
+
+    boolean InsertNewUser(Usuario user){
+
+        String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
+                + "VALUES('" + user.getUserName()
+                + "', 'Mar', 'Itzel', '" 
+                + user.getName() 
+                + "', '2002-07-08', '"
+                + user.getEmail() + "')";
+
+        PreparedStatement preState;
+
+        try {
+
+            preState = conn.prepareStatement(queryInsert);
+            preState.execute();
+            System.out.println("DATOS DE USUARIO AGREGADOS EXITOSAMENTE.");
+            return true;
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("UPS! HUBO UN ERROR AL QUERER AGREGAR LOS DATOS DE USUARIO INSERTADOS.");
+            return false;
+
+        }
+        
+    }
+
+    Dbconnection(String URL, String user, String pass){
+
+        try {
+
+            conn = DriverManager.getConnection(URL, user, pass);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
         }
     }
 
-   // Dbconnection(String URL, String user, String pass){
+    Address getAddress(int idUser){
+        Address address = new Address();
 
-    //}
-
-  //  Direccion direccion(int idUser){
-
-
-
-   // }
-
-    User getUser(String email){
-        User user = new User();
-        String query = "SELECT * FROM progra2.users u WHERE u.email=" + email;
+        String query = "SELECT * FROM progra2.address a WHERE a.id_User = " 
+                       + idUser + " AND a.street = 'Privada Jacarandas ' AND a.number = 109";
         System.out.println(query);
-            ResultSet rset;
-            try{
-            Statement statement = conn.createStatement();
+        ResultSet rset;
+        Statement statement;
+
+        try {
+            
+            statement = conn.createStatement();
             rset = statement.executeQuery(query);
 
             while(rset.next()){
-                System.out.println(rset.getString(1) 
+                System.out.println(rset.getString(1)
                 + " " + rset.getString(2)
                 + " " + rset.getString(3)
                 + " " + rset.getString(4)
                 + " " + rset.getString(5)
                 + " " + rset.getString(6)
                 + " " + rset.getString(7)
-                );
-                user.setId(Integer.parseInt (rset.getString(1)));
-                user.setName(rset.getString(5));
-                user.setUserName(rset.getString(2));
+                + " " + rset.getString(8)
+                + " " + rset.getString(9)
+                + " " + rset.getString(10)
+                + " " + rset.getString(11)
+                + " " + rset.getString(12)
+            );
+
+            address.setId(Integer.parseInt(rset.getString(1)));
+            address.setIdUser(Integer.parseInt(rset.getString(2)));
+            address.setStreet(rset.getString(3));
+            address.setNumber(Integer.parseInt(rset.getString(4)));
+            address.setNumber_two(rset.getString(5));
+            address.setNeighborhood(rset.getString(6));
+            address.setCity(rset.getString(7));
+            address.setState(rset.getString(8));
+            address.setCountry(rset.getString(9));
+            address.setPostal_code(rset.getString(10));
+            address.setGps_lat(rset.getString(11));
+            address.setGps_lon(rset.getString(12));
             }
-        }catch(SQLException e){
-            System.out.println("ERROR EN LA QUERY!!");
-            user.setId(1);
+            
+        } catch (Exception e) {
+
+            System.out.println("Error en la query");
+            address.setId(1);
 
         }
-            return user;
-          /* if(rset!=null){
-                return rset.next();
-            }else{
-                return null;
-            }*/
+        return address;
+    }
+
+    Usuario getUser(String email, String phone){
+        Usuario user = new Usuario();
+        
+        String query = "SELECT * FROM progra2.users u WHERE u.email ='" 
+                       + email + "' OR u.phone_number = '" + phone + "'";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+
+        try{
+
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+
+                    System.out.println(rset.getString(1)
+                    + " " + rset.getString(2)
+                    + " " + rset.getString(3)
+                    + " " + rset.getString(4)
+                    + " " + rset.getString(5)
+                    + " " + rset.getString(6)
+                    + " " + rset.getString(7)
+                    + " " + rset.getString(8)
+                    + " " + rset.getString(9)
+
+                );
+
+                user.setId(Integer.parseInt(rset.getString(1))); 
+                user.setUserName(rset.getString(2));
+                user.setFirst_lastname(rset.getString(3));
+                user.setSecond_lastname(rset.getString(4));
+                user.setName(rset.getString(5));
+                user.setBirthday(rset.getString(6));
+                user.setEmail(rset.getString(7));
+                user.setGender(rset.getString(8));
+                user.setPhone_number(rset.getString(9));
+
+            }
+        }catch(SQLException e){    
+            System.out.println("Error en la query");
+            //e.printStackTrace();
+            user.setId(1);
+        }
+        return user;
 
     }
+
+    
 }
