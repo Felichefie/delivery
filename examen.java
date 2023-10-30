@@ -14,6 +14,7 @@ public class examen {
          * 10 - Impuesto de gasolina Magna
          * 11 - Impuesto de gasolina Premium
          * 12 - Impuesto de gasolina Diesel
+         * 13 - Impuesto de avion
          */
 
          //Para calcular un impuesto se debe crear un objeto de la clase Impuestos
@@ -27,6 +28,8 @@ public class examen {
         Impuestos Refresco = new Impuestos(240, 9);
         Impuestos Cigarros = new Impuestos(50, 7);
         Impuestos Gasolina = new Impuestos(2000, 11);
+        Impuestos Avion = new Impuestos(3000,13);
+        Impuestos Hoteleria = new Impuestos(6000, 5);
         Impuestos IvaFronterizo = new Impuestos(1000, 3);
         Impuestos IvaEnergia = new Impuestos(250, 1);
         Impuestos IvaAgua = new Impuestos(150, 2);
@@ -46,6 +49,8 @@ public class examen {
         System.out.println("Refrescos - Impuesto: $" + Refresco.calcularImpuesto());
         System.out.println("Cigarros - Impuesto: $" + Cigarros.calcularImpuesto());
         System.out.println("Gasolina - Impuesto: $" + Gasolina.calcularImpuesto());
+        System.out.println("Avion - Impuesto: $" + Avion.calcularImpuesto());
+        System.out.println("Hoteleria - Impuesto: $" + Hoteleria.calcularImpuesto());
         System.out.println("Comida Fuera - Impuesto: $" + IvaFronterizo.calcularImpuesto());
         System.out.println("Energia electrica - Impuesto: $" + IvaEnergia.calcularImpuesto());
         System.out.println("Agua - Impuesto: $" + IvaAgua.calcularImpuesto());

@@ -34,8 +34,16 @@ public class Impuestos {
                 break;
             //Hoteleria
             case 5:
-                impuesto = monto * 0.04;
+            double H;
+            System.out.println("Ingrese el hospedaje: ");
+            Scanner scannerHospe = new Scanner(System.in);
+            H = scannerHospe.nextInt();  
+            if (H <= 0) {
+                System.out.println("El hospedaje debe ser mayor a 0");
                 break;
+            }
+            impuesto = (monto*0.08)+H;
+            break;
             //Renta
             case 6:
                 monto = monto / 2;
@@ -166,6 +174,10 @@ public class Impuestos {
                 break;
             }
             impuesto = (monto*0.16)+(L * 5.5);
+            break;
+            case 13:
+            double TUA = 1000;
+            impuesto = (monto*0.16)+TUA;
             break;
             default:
                 System.out.println("Tipo de impuesto no válido");
