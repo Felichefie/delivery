@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class Main {
     public static void main(String[] args) {
        //Tarea Databse -> GUI
@@ -9,7 +12,7 @@ public class Main {
 
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
 
-        Userexample interfaz = new Userexample(0, pass, pass, pass, pass, pass, pass, pass, pass);
+        User interfaz = new User();
         interfaz.setDbConn(dbConn);
         interfaz.show();
 

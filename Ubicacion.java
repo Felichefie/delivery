@@ -5,7 +5,7 @@ import java.awt.Font;
 import javax.swing.*;
 
 public class Ubicacion {
-    private JLabel lbl_yo, lbl_lat, lbl_lon;
+    private JLabel lbl_lat, lbl_lon;
     private JButton btn_cancel, btn_register;
     private JFrame frm_User;
     private JTextField txt_lat, txt_lon;
@@ -18,8 +18,6 @@ public class Ubicacion {
         btn_register = new JButton("Aceptar");
         btn_register.setBounds(275, 200, 100, 50);
 
-        lbl_yo = new JLabel("Arturo Ruiz Garcia");
-        lbl_yo.setBounds(280,0,300,30);
         lbl_lon = new JLabel("Longitud:");
         lbl_lon.setBounds(10,20,300,30);
         lbl_lon.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -33,7 +31,6 @@ public class Ubicacion {
         txt_lat.setBounds(10, 120, 250, 25);
 
         frm_User.add(lbl_lon);
-        frm_User.add(lbl_yo);
         frm_User.add(btn_register);
         frm_User.add(btn_cancel);
         frm_User.add(lbl_lat);

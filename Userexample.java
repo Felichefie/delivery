@@ -22,6 +22,9 @@ public class Userexample {
         this.phone_number = phone_number;
     }
 
+    public Userexample(int i, int j, String string, String string2) {
+    }
+
     public int getUserId() {
         return id;
     }

@@ -33,7 +33,7 @@ public class ConnectionMain {
 
         for (Userexample user : lista) {
             int userId = user.getUserId();
-            int id = user.getId();
+            int id = user.getUserId();
             int index = userIds.indexOf(userId);
 
             if (index == -1) {

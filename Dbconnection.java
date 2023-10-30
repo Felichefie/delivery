@@ -26,7 +26,7 @@ public class Dbconnection {
     boolean InsertNewAddress(Userexample user){
         
         String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
-                + "VALUES(" + user.getId() + ", 'Calle' , 5000, '' , 'Colonia' , 'Morelia' , 'Michoacan' , 'Mexico' , '58000' , 19.7008 , 1.2)";
+                + "VALUES(" + user.getUserId() + ", 'Calle' , 12345, '' , 'Colonia' , 'Morelia' , 'Michoacan' , 'Mexico' , '58147' , 00000000 , 00000)";
         
         System.out.println(queryInsert);
         PreparedStatement preState;
@@ -50,9 +50,9 @@ public class Dbconnection {
 
         String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                 + "VALUES('" + user.getUserName()
-                + "', 'Chabelo', 'Monster', '" 
+                + "', 'La', 'Leche', '" 
                 + user.getName() 
-                + "', '2023-10-20', '"
+                + "', '1900-10-1', '"
                 + user.getEmail() + "')";
 
         PreparedStatement preState;
@@ -139,7 +139,7 @@ public class Dbconnection {
     }
 
     Userexample getUser(String email, String phone){
-        Userexample user = new Userexample();
+        Userexample user = new Userexample(0, 0, email, phone);
         
         String query = "SELECT * FROM progra2.users u WHERE u.email ='" + email + "' OR u.phone_number = '" + phone + "'";
         System.out.println(query);
