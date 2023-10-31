@@ -226,6 +226,15 @@ public class Dbconnection {
             e.printStackTrace();
         }
     }
+
+    public void disconnection(){
+        try {
+        conn.close();
+    } catch (SQLException e) {
+       
+        e.printStackTrace();
+    }
+    }
     
    // Direccion direccion(int idUSer){}
 
@@ -238,12 +247,13 @@ public class Dbconnection {
         try{
              
             statement = conn.createStatement();
-            statement.executeQuery(q);
+            rset = statement.executeQuery(q);
             return rset;
         }
         catch (SQLException e) {
        
             e.printStackTrace();
+            return null;
          }
 
     }

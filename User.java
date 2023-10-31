@@ -1,7 +1,9 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class User {
     private int userId;
-    private int id;
+    private int id;//poner todos los valores de las columnas de la database
     private String title;
     private String body;
     private String userName;
@@ -80,41 +82,71 @@ public class User {
         this.body = body;
     }
 
-} 
+    public void cargar(String text, Dbconnection conn) {
+     String query = "SELECT * FROM progra2.users u WHERE u.email='" + text + "' OR u.phone_number = '" + text + "'";
+     ResultSet rset =  conn.select(query); 
+     System.out.println(query);
     
 
- User user = new User();
 
-      String query = "SELECT * FROM progra2.users u WHERE u.email='" + email + "'";
-      //user_name, first_lastname, second_lastname, name, birthday, email
-      System.out.println(query);
-              ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
-            Statement statement;
+     try {
+        while(rset.next()){
+         String s = rset.getString(1)
+            + " " + rset.getString(2)
+            + " " + rset.getString(3)
+            + " " + rset.getString(4)
+            + " " + rset.getString(5)
+            + " " + rset.getString(6)
+            + " " + rset.getString(7)
+            + " " + rset.getString(8)
+            + " " + rset.getString(9)
+            + " " + rset.getString(10)
+            + " " + rset.getString(11);
 
-              try{
-             
-            statement = conn.createStatement();
-            rset = statement.executeQuery(query);
+            System.out.println(s);
 
-            while(rset.next()){
-                System.out.println(rset.getString(1)//se muestra como la llave
-                + " " + rset.getString(2)
-                + " " + rset.getString(3)
-                + " " + rset.getString(4)
-                + " " + rset.getString(5)
-                + " " + rset.getString(6)//la tabla tiene 7 campos
-                + " " + rset.getString(7)
-                );
-                user.setId(Integer.parseInt(rset.getString(1)));
-                user.setName(rset.getString(5));
-                user.setUsername(rset.getString(2));
-            }
-          
-    }catch(SQLException e){
-        System.out.println("Error en la query");
-        user.setId(1);
+               
 
+            this.setId(Integer.parseInt(rset.getString(1)));
+            this.setName(rset.getString(5));
+            this.setUsername(rset.getString(2));
+        }
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
     }
-    
-    return user;
+
+     
+        
+
+        
+        
+        
+        
+        //hago un objeto en user, que recibe el texto del gui, y ademas la concexion de DBconnecntion 
+        //ademas creo un query que la uso para realizar la busqueda
+    }
+    public boolean buscar(String text, Dbconnection conn) {
+     String query = "SELECT COUNT(id) FROM progra2.users u WHERE u.email='" + text + "' OR u.phone_number = '" + text + "'";
+     ResultSet rset =  conn.select(query); 
+     System.out.println(query);
+     int n;
+
+     try {
+         rset.next();
+        n = Integer.parseInt(rset.getString(1));
+        System.out.println(n +" registros ");
+        
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        n=0;
+    }
+     return n>0;
 }
+}
+
+
+    
+
+ 
