@@ -83,3 +83,38 @@ public class User {
 } 
     
 
+ User user = new User();
+
+      String query = "SELECT * FROM progra2.users u WHERE u.email='" + email + "'";
+      //user_name, first_lastname, second_lastname, name, birthday, email
+      System.out.println(query);
+              ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
+            Statement statement;
+
+              try{
+             
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                System.out.println(rset.getString(1)//se muestra como la llave
+                + " " + rset.getString(2)
+                + " " + rset.getString(3)
+                + " " + rset.getString(4)
+                + " " + rset.getString(5)
+                + " " + rset.getString(6)//la tabla tiene 7 campos
+                + " " + rset.getString(7)
+                );
+                user.setId(Integer.parseInt(rset.getString(1)));
+                user.setName(rset.getString(5));
+                user.setUsername(rset.getString(2));
+            }
+          
+    }catch(SQLException e){
+        System.out.println("Error en la query");
+        user.setId(1);
+
+    }
+    
+    return user;
+}

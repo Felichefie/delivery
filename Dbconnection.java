@@ -8,7 +8,10 @@ import java.sql.Statement;
 
 public class Dbconnection {
     static Connection conn;
-    public static void main(String[] args) {
+    private String URL ;//"jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+    private String user ; //"alumno";
+    private String pass ; //"alumnoPrueba1";
+  //  public static void main(String[] args) {
         
       
 
@@ -101,13 +104,15 @@ public class Dbconnection {
     return user;
     }
 }*/
-        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+       /*  String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String pass = "alumnoPrueba1";
      
         String correo = "1911690k@umich.mx";
         String numero = "4434842118";
         Dbconnection dbConn = new Dbconnection(URL,user,pass);
+     
+
         User u = dbConn.getUser(correo);//busca por medio del email(si esta o no), 
         //declara una variable u de la clase User
         if(u.getId()==0){ 
@@ -120,7 +125,7 @@ public class Dbconnection {
 
              System.out.println(u.getId());// en caso de que exista imprime el username-id
             //ahora debemos buscar si tengo direccion o no
-            String query = "SELECT * FROM progra2.address a WHERE a.id_user = " + uid;
+            String query = "SELECT * FROM progra2.address a WHERE a.id_user = " + 1 + " AND a.street =" + "'Privada Jacarandas '" + " AND a.number = 109";
             System.out.println(query);
             ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
             Statement statement;
@@ -192,7 +197,7 @@ public class Dbconnection {
                             + "VALUES('" + user.getUsername() 
                             + "','chabelo', 'monster','"
                             + user.getName() 
-                            + "', '2023-10-20', 'pepitoalcachofa@chabelo.com')";*/
+                            + "', '2023-10-20', 'pepitoalcachofa@chabelo.com')";
           String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                             + "VALUES('" + "Anibal1"
                             + "','Zavala', 'Herrera','"
@@ -208,9 +213,13 @@ public class Dbconnection {
         }
        
     }
-
-    Dbconnection(String URL, String user, String pass){//cotructor de la conexion a la bse de datos
-         try {
+*/
+   public Dbconnection(){//cotructor de la conexion a la bse de datos
+    //  Dbconnection(String URL, String user, String pass){//cotructor de la conexion a la bse de datos
+    URL ="jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+    user ="alumno";
+    pass = "alumnoPrueba1";
+       try {
             conn = DriverManager.getConnection(URL, user, pass);
             
         } catch (SQLException e) {
@@ -220,42 +229,36 @@ public class Dbconnection {
     
    // Direccion direccion(int idUSer){}
 
-    
-   User getUser(String email){
-    User user = new User();
+    public ResultSet select(String q){
+       
+        System.out.println(q);
+        ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
+        Statement statement;
 
-      String query = "SELECT * FROM progra2.users u WHERE u.email='" + email + "'";
-      //user_name, first_lastname, second_lastname, name, birthday, email
-      System.out.println(query);
-              ResultSet rset;//conjunto de resultados/ para recibir la respuesta de la base de datos
-            Statement statement;
-
-              try{
+        try{
              
             statement = conn.createStatement();
-            rset = statement.executeQuery(query);
-
-            while(rset.next()){
-                System.out.println(rset.getString(1)//se muestra como la llave
-                + " " + rset.getString(2)
-                + " " + rset.getString(3)
-                + " " + rset.getString(4)
-                + " " + rset.getString(5)
-                + " " + rset.getString(6)//la tabla tiene 7 campos
-                + " " + rset.getString(7)
-                );
-                user.setId(Integer.parseInt(rset.getString(1)));
-                user.setName(rset.getString(5));
-                user.setUsername(rset.getString(2));
-            }
-          
-    }catch(SQLException e){
-        System.out.println("Error en la query");
-        user.setId(1);
+            statement.executeQuery(q);
+            return rset;
+        }
+        catch (SQLException e) {
+       
+            e.printStackTrace();
+         }
 
     }
-    
-    return user;
+    public void insertselect(String q){
+
+     try{
+            PreparedStatement preState = conn.prepareStatement(q);
+            preState.execute();
+            //return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+          //  return false;// si sale bien, se ejecuta y regresa el true, en caso contrario regresa falso
+        }
     }
+
 }
+
 
