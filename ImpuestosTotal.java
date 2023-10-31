@@ -1,4 +1,4 @@
-public class ImpuestoTotal {
+public class ImpuestosTotal {
     public static void main(String[] args) {
         double SalarioMensual = 50000;
         double GastoSuper = 12000;

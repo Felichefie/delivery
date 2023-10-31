@@ -55,7 +55,7 @@ public class ImpuestosIndividuales {
     public double calcularImpuestonomina() {
         double gastosT = GastoSuper + Cervezas + Coca + Cigarros + Gas;
         double ingresosFis = SalarioMensual - gastosT;
-        double impuestonomina = ingresoFis * 0.1; 
+        double impuestonomina = ingresosFis * 0.1; 
         return impuestonomina;
     }
 
@@ -64,12 +64,12 @@ public class ImpuestosIndividuales {
         return impuestoHotel;
     }
 
-    public double calculateISR() {
+    public double calcularISR() {
         double gastosT = GastoSuper + Cervezas+ Coca + Cigarros + Gas
                 + TicketAvion + Hotel + ComidaTij + Electricidad + Agua
                 + Internet + Celular + Suscripciones + Netflix + Salidas
                 + Renta + Auto + SeguroAuto;
-        double taxableIncome = SalarioMensual - ImpuestoT;
+        double taxableIncome = SalarioMensual - gastosT;
         double isr = taxableIncome * 0.25; 
         return isr;
     }
