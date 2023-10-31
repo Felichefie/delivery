@@ -1,17 +1,23 @@
 public class Producto {
     private String nombre;
     private double precio;
+    private int precios;
     private double tasaIVA;
     private double impuestoEspecial;
+    private double impuestoAdicional;
 
     
 
-    public Producto(String nombre, double precio, double tasaIVA, double impuestoAdicional){
+    public Producto(String nombre, double precio, double tasaIVA){
         this.nombre = nombre;
         this.precio = precio;
         this.tasaIVA = tasaIVA;
-        this.impuestoEspecial = impuestoEspecial;
-
+    }
+    
+    public Producto(String nombre, int precios, double impuestoEspecial){
+        this.nombre=nombre;
+        this.precio=precio;
+        this.impuestoEspecial=impuestoEspecial;
     }
 
     public String getNombre() {
