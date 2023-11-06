@@ -42,7 +42,7 @@ public class Dbconnection {
 
         if(a.getId() ==0 ){
             System.out.println("EL USUARIO NO TIENE DIRECCIONES :() ");
-            dbConn.InsertNewAddress(u);
+            dbConn.InsertnewUser(u);
         }else{
             System.out.println(a.getId());
             System.out.println(a.getStreet());
@@ -86,6 +86,12 @@ public class Dbconnection {
         }        
 
     }
+
+
+    public static Connection getConn(){
+        return conn;
+    }
+
 
     //OBTIONE UN NUEVO USUARIO
     UserExample getUser(String email, String phone ){
@@ -178,6 +184,40 @@ public class Dbconnection {
         }
 
         return address;
+    }
+
+    //REGRESA EL PASSWORD DEL USUARIO
+    Response LogAuth(String email, String password, Connection conn){
+        //res inicial status = false; user = -1; sesion = " ";
+        Response res = new Response();
+
+        String query = "SELECT u.password FROM progra2.users u WHERE u.email = '" + email + "'";
+        ResultSet rset;
+        Statement statement;
+        String passwordDb = " ";
+
+        try{
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+            
+            
+            while(rset.next()){
+                passwordDb = rset.getString(1);
+                    System.out.println(passwordDb);
+                
+            }
+            if(passwordDb == password){
+                res.setStatus(true);
+
+            }
+
+        }catch(SQLException e){    
+            System.out.print("Error en la query");
+            return res;
+            
+        }
+        return res;
+
     }
     
    
