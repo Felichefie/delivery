@@ -114,10 +114,11 @@ public class Dbconnection {
 
             while(rset.next()){
                 passwordDB = rset.getString(1);
-                System.out.println(passwordDB);
             };
+            System.out.println(passwordDB);
+            System.out.println(passwordLogin);
 
-            if(passwordDB == passwordLogin) {
+            if(passwordDB.equals(passwordLogin)){
                 res.setStatus(true);
                 res.setSession("test_session");
             }
