@@ -6,6 +6,15 @@ public class UserExample {
     private String name;
     private String userName;
     private String email;
+    private int phoneNumber;
+    private String first_lastname;
+    private String second_lastname;
+    private String birthday;
+    private String gender;
+    private String phone_number;
+    private String correo;
+    private int phone;
+
     public String getCorreo() {
       return correo;
     }
@@ -21,14 +30,7 @@ public class UserExample {
     public void setPhone(int phone) {
       this.phone = phone;
     }
-    private int phoneNumber;
-    private String first_lastname;
-    private String second_lastname;
-    private String birthday;
-    private String gender;
-    private String phone_number;
-    private String correo;
-    private int phone;
+    
 
     public UserExample(){
       userId = 0; 
@@ -56,6 +58,7 @@ public class UserExample {
     this.body = body;
   }
 
+ 
 
 
     public String getFirst_lastname() {

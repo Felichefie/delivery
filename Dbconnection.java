@@ -88,7 +88,7 @@ public class Dbconnection {
     }
 
 
-    public static Connection getConn(){
+    public Connection getConn(){
         return conn;
     }
 
@@ -192,6 +192,7 @@ public class Dbconnection {
         Response res = new Response();
 
         String query = "SELECT u.password FROM progra2.users u WHERE u.email = '" + email + "'";
+        System.out.println(query);
         ResultSet rset;
         Statement statement;
         String passwordDb = " ";
@@ -203,11 +204,15 @@ public class Dbconnection {
             
             while(rset.next()){
                 passwordDb = rset.getString(1);
-                    System.out.println(passwordDb);
+                System.out.println(passwordDb);
                 
             }
-            if(passwordDb == password){
+            System.out.println(passwordDb);
+            System.out.println(password);
+            
+            if(passwordDb.equals(password)){
                 res.setStatus(true);
+                res.setSesion("test_sesion");
 
             }
 
@@ -216,6 +221,7 @@ public class Dbconnection {
             return res;
             
         }
+       // return res;
         return res;
 
     }
