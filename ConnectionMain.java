@@ -1,6 +1,10 @@
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,9 +21,9 @@ public class ConnectionMain {
         System.out.print(resJson);
         serial.UserAdd(u);
         resJson = serial.lista_json();
-        System.out.println (resJson);
+        System.out.print(resJson);
 
-        User u1 = new User (1, 1, "Otro Usuario", "Cuerpo2");
+        User u1 = new User(1, 1, "Otro Usuario", "Cuerpo2");
         resJson = serial.serialUser(u1);
         serial.UserAdd(u1);
         System.out.println(resJson);
