@@ -58,6 +58,10 @@ public class Dbconnection {
         }
     }
 
+    public Connection getConn() {
+        return conn;
+    }
+
     boolean InsertNewAddress(UserExample user){
         
         String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
@@ -171,6 +175,40 @@ public class Dbconnection {
 
         }
         return address;
+    }
+
+    Response LogAuth(String email, String passwordLogin){
+        //res inicial status = false, idUser = -1, sesion = ""
+        Response res = new Response();
+
+        //Solo regresa el password del usuario
+        String query = "SELECT u.password FROM progra2.users u WHERE u.email ='" + email + "'";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+        String passwordDB = "";
+
+        try{
+
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                    passwordDB = rset.getString(1);
+                    System.out.println(rset.getString(1));
+            }
+
+            if(passwordLogin.equals(passwordDB)){
+                res.setStatus(true);
+                res.setSesion("test_session");
+            }
+            
+        }catch(SQLException e){   
+            System.out.print("Error en la query");
+        }
+
+        return res;
+
     }
 
     UserExample getUser(String email, int phone){
