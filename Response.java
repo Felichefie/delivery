@@ -8,6 +8,11 @@ public class Response {
         this.status = status;
         this.session = session; 
     }
+    Response(){
+        this.idUser = -1;
+        this.status = false;
+        this.session = ""; 
+    }
 
     public boolean isStatus() {
         return status;
