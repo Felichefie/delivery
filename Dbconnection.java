@@ -9,45 +9,16 @@ import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class Dbconnection{
 static Connection conn;
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String pass = "alumnoPrueba1";
 
-        String email = "felix.jimenez@umich.mx";
-        String num = "4431234567";
-
-
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
-        User u = dbConn.getUser("felix.jimenez@umich.mx");
-        
-        if(u.getId()==0){ 
-            System.out.println("No existe");
-            dbConn.insertnewUser(u);
-        }
-        else{ 
-            System.out.println(u.getId());
-            System.out.println(u.getUserName());
-        }
-
-        if(dbConn.adressExists(u.getId(), "Privada Jacarandas", 109)){
-            System.out.println("La direccion ya existeen la base de datos");
-        }
-        else{
-            System.out.println("La nueva direccion se puede subir");
-        }
-
-        try{
-            conn.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
     
-    }
-
-    boolean insertnewUser(User user){
-
+    boolean insertNewUser(User user){
+    
     String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                         + "VALUES('"+ user.getUserName() 
                         + "', 'Chabelo', 'Monster','" 
@@ -61,7 +32,10 @@ static Connection conn;
             e.printStackTrace();
             return false;
         }
-        
+     }
+
+    public static Connection getConn(){
+        return conn;
     }
 
     Dbconnection(String URL, String user, String pass){
@@ -109,18 +83,36 @@ static Connection conn;
             return user;
     }
 
-    boolean adressExists(int idUser, String street, int number){
-        String query = "SELECT * FROM progra2.adress a WHERE a.id_user = ? AND a.street = ? AND a.number = ?";
+    Response logAuth(String email, String password, Connection conn){
+             Response res = new Response();
+
+        String query = "SELECT u.password FROM progra2.users u WHERE u.email ='" + email + "'";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+        String passwordDB = "";
+
         try{
-            PreparedStatement preState = conn.prepareStatement(query);
-            preState.setInt(1, idUser);
-            preState.setString(2, street);
-            preState.setInt(3, number);
-            ResultSet resSet = preState.executeQuery();
-            return resSet.next();
-            } catch (SQLException e){
-                e.printStackTrace();
-                return false;
-            } 
+            statement = conn.createStatement(); 
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                passwordDB = rset.getString(1);
+                System.out.println(password);
+            };
+
+            if(password = passwordDB){
+                res.setStatus(true);
+            }
+            return res;
+
+
+        }catch(SQLException e){
+            System.out.println("Error en la querry");
+            return res;
+        }
+        return res;
     }
+
 }
+
