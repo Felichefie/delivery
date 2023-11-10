@@ -164,11 +164,6 @@ public class address {
             System.out.println(""+ "lat" + rset.getString(11));
            
 
-          
-           
-
-
-            
 
         }
 

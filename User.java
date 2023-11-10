@@ -19,8 +19,17 @@ public class User {
     private String created;//numero once de la tabla
     private String type_user;//2
     private address direccion;
+    private String password;
 
 
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getType_user() {
         return type_user;
@@ -136,6 +145,9 @@ public class User {
         //this.body = body;
     }*/
 
+    //public User(int i, int j, String string, String string2) {
+   // }
+
     public int getUserId() {
         return userId;
     }
@@ -151,6 +163,7 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+}
 
    /*  public String getTitle() {
         return title;
@@ -168,7 +181,7 @@ public class User {
         this.body = body;
     }
 */
-    public String cargar(String text, Dbconnection conn) {
+    /*public String cargar(String text, Dbconnection conn) {
      String query = "SELECT * FROM progra2.users u WHERE u.email='" + text + "' OR u.phone_number = '" + text + "'";
      ResultSet rset =  conn.select(query); 
      System.out.println(query);
@@ -247,7 +260,7 @@ public class User {
     }
      return n>0;
 }
-}
+}*/
 
 
     
