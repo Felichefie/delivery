@@ -56,14 +56,14 @@ public class Dbconnection{
         
         @Override
 
-        public void actionPerformed(ActionListener e) {
+        public void actionPerformed(ActionEvent e) {
 
             String input = inputText.getText();
             UserExample userResult = dbConn.getUser(input, input);
             if(userResult != null){
                 System.out.println("Usuario no ha sido encontrado");
                 System.out.println("ID" + userResult.getId());
-                System.out.println("nombre del usuario" + userResult.getUsername());
+                System.out.println("nombre del usuario" + userResult.getUserId());
                 Address UserAddress = dbConn.getAddress(idUser, street, number);
 
                 if(UserAddress != null){
@@ -77,48 +77,48 @@ public class Dbconnection{
     });
 
     JLabel id = new JLabel("ID:");
-    id.setBounds(10, 60, 100, 20);
+    id.setBounds(10, 30, 100, 20);
     JTextField idT = new JTextField("  ");
     idT.setBounds(250,60,200,20);
     ventana.add(id);
     ventana.add(idT);
 
-    JLabel user_names = new JLabel("USER NAME: ");
+    JLabel user_names = new JLabel("Nombre de usuario: ");
     user_names.setBounds(10, 85, 200, 20);
     JTextField user_nameT = new JTextField("  ");
     user_nameT.setBounds(250, 85, 200, 20);
     ventana.add(user_names);
     ventana.add(user_nameT);
 
-    JLabel first_lastName = new JLabel("FIRST LAST NAME: ");
+    JLabel first_lastName = new JLabel("Primer Apellido: ");
     first_lastName.setBounds(10, 110, 200, 20);
     JTextField first_lastNameT = new JTextField("  ");
     first_lastNameT.setBounds(250, 110, 200, 20);
     ventana.add(first_lastName);
     ventana.add(first_lastNameT);
 
-    JLabel second_lastName = new JLabel("SECOND LAST NAME: ");
+    JLabel second_lastName = new JLabel("Segundo Apellido: ");
     second_lastName.setBounds(10, 135, 200, 20);
     JTextField second_lastNameT = new JTextField("  ");
     second_lastNameT.setBounds(250, 135, 200, 20);
     ventana.add(second_lastName);
     ventana.add(second_lastNameT);
 
-    JLabel birthday = new JLabel("BIRTHDAY: ");
+    JLabel birthday = new JLabel("Cumpleaños: ");
     birthday.setBounds(10,160,200,20);
     JTextField birthdayT = new JTextField(" ");
     birthdayT.setBounds(250,160,200,20);
     ventana.add(birthday);
     ventana.add(birthdayT);
 
-    JLabel emails = new JLabel("EMAIL: ");
+    JLabel emails = new JLabel("Email: ");
     emails.setBounds(10,185,200,20);
     JTextField emailT = new JTextField(" ");
     emailT.setBounds(250,185,200,20);
     ventana.add(emails);
     ventana.add(emailT);
 
-    JLabel phones = new JLabel("PHONE NUMBER: ");
+    JLabel phones = new JLabel("Numero de Telefono: ");
     phones.setBounds(10,210,200,20);
     JTextField phoneT = new JTextField(" ");
     phoneT.setBounds(250,210,200,20);
@@ -138,19 +138,19 @@ public class Dbconnection{
 
     if (u.getId()== 0){
         System.out.println("No existe");
-        dbConn.insertnewUser (u);
+        dbConn.InsertnewUser (u);
     }else{
             System.out.println(u.getId());
-            System.out.println(u.getUsername());
+            System.out.println(u.getUserId());
         }
 
     if(a.getId() == 0){
             System.out.println("Este usurio no tiene direccion: ");
-            dbConn.insertNewDireccion(u);
+            dbConn.InsertNewAddress(u);
         }else{
             System.out.println(a.getId());
-            System.out.println(a.getcalle());
-            System.out.println(a.getnumero());
+            System.out.println(a.getStreet());
+            System.out.println(a.getNumber());
         }
         try {
             conn.close();
@@ -161,12 +161,12 @@ public class Dbconnection{
 
     boolean InsertnewUser (UserExample user){
         String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
-                        + "VALUES('"+ user.getUserName() +"','Pantaleon','Bedolla','"+ user.getName() +"','2023-10-20','"+ user.getEmail() + "' )";
+                        + "VALUES('"+ user.getUserId() +"','Pantaleon','Bedolla','"+ user.getName() +"','2023-10-20','"+ user.getEmail() + "' )";
                         PreparedStatement preState;
 
                         try {
                             PreparedStatement preStatement = conn.prepareStatement(queryInsert);
-                            preState.execute();
+                            preStatement.execute();
                             System.out.println("Se ha creado un nuevo usuario");
                             return true;
                             } catch (SQLException e) {
@@ -224,7 +224,7 @@ public class Dbconnection{
 
 Dbconnection(String URL, String user, String password){
     try{
-        conn = DriverManager.gerConnection(URL, user pass);
+        conn = DriverManager.getConnection(URL, user, password);
     } 
     catch (SQLException e) {
         e.printStackTrace();
@@ -234,7 +234,7 @@ Dbconnection(String URL, String user, String password){
 
 UserExample getUser(String email, String phone){
     UserExample user = new UserExample();
-    String query = " SELECT * FROM progra2.users u WHERE u.email = '" + email + "' OR u.phone_number ='" + numero + "'";
+    String query = " SELECT * FROM progra2.users u WHERE u.email = '" + email + "' OR u.phone_number ='" + phone + "'";
     Statement statement;
     ResultSet rset;
     
@@ -256,14 +256,14 @@ UserExample getUser(String email, String phone){
         );
 
         user.setId(Integer.parseInt(rset.getString(1)));
-        user.setUsername(rset.getString(2));
-        user.setFirts_lastname(rset.getString(3));
-        user.setSecond_lastname(rset.getString(4));
-        user.setName(rset.getString(5));
+        user.setName(rset.getString(2));
+        user.setUserName(rset.getString(3));
+        user.setFirst_lastname(rset.getString(4));
+        user.setSecond_lastname(rset.getString(5));
         user.setName(rset.getString(6));
         user.setEmail(rset.getString(7));
-        user.setGender(rset.getString(8));
-        user.setPhone_number(rset.getString(9));
+        user.setPhone_number(rset.getString(8));
+        user.setGender(rset.getString(9));
         
     }
 }
@@ -274,10 +274,10 @@ UserExample getUser(String email, String phone){
     return user;
 }
 
-Direccion getAddress (int idUser, String calle, int numero){
+Address getAddress (int idUser, String street, int number){
 
-    Direccion direc = new direc ();
-    String query = "SELECT * FROM progra2.address a WHERE a.id_User = " + idUser + "AND a.street = ' Nicolas Leon ' AND a.number = 109";
+    Address address = new Address ();
+    String query = "SELECT * FROM progra2.address a WHERE a.id_User = " + idUser + "AND a.street = ' Nicolas Leon ' AND a.number = 1986";
     System.out.println(query);
     ResultSet rset;
     Statement statement;
@@ -296,12 +296,15 @@ Direccion getAddress (int idUser, String calle, int numero){
         + " " + rset.getString(7)
         + " " + rset.getString(8)
         + " " + rset.getString(9)
+        + " " + rset.getString(10)
+        + " " + rset.getString(11)
+        + " " + rset.getString(12)
         );
 
         address.setId(Integer.parseInt(rset.getString(1)));
-        address.setIdUser(Integer.getString(2));
+        address.setIdUser(Integer.parseInt(rset.getString(2)));
         address.setStreet(rset.getString(3));
-        address.setNumber(Integer.getString(4));
+        address.setNumber(Integer.parseInt(rset.getString(4)));
         address.setNumber_two(rset.getString(5));
         address.setNeighborhood(rset.getString(6));
         address.setCity(rset.getString(7));
@@ -309,12 +312,16 @@ Direccion getAddress (int idUser, String calle, int numero){
         address.setCountry(rset.getString(9));
         address.setPostal_code(rset.getString(10));
         address.setGps_lat(rset.getString(11));
-        address.setGPs_lon(rset.getString(12));
+        address.setGps_lon(rset.getString(12));
     }
 }
 catch (Exception e){
     System.out.println("Error en query");
     address.setId(1);
 }
+    return address;
+}
+
+public void closeConnection() {
 }
 }

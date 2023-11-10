@@ -20,7 +20,7 @@ public class ConnectionMain {
         resJson = serial.serialUser(u);
         System.out.print(resJson);
         serial.UserAdd(u);
-        resJson = serial.lista_json();
+        resJson = serial.listaJson();
         System.out.print(resJson);
 
         User u1 = new User(1, 1, "Otro Usuario", "Cuerpo2");

@@ -1,22 +1,31 @@
 import java.util.List;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
 
 public class Serializar {
     private List <User> usersList;
-    private User user1, user2, user3;
+    //private User user1, user2, user3;
+    private Gson gson;
 
     /**
      * 
      */
     Serializar(){
-        gson = newGson();
-        usersList=new List<user>{}
+        gson = new Gson();
+        usersList=new ArrayList<User>();
     }
-    void userAdd (User userNew){
-        userList.add(userNew);
+    void UserAdd (User userNew){
+        usersList.add(userNew);
     }
 
+    String serialUser(User u){
+        String result;
+        result = gson.toJson(u);
+        return result;
+    }
     
-    String user (User u){
+    /*String user (User u){
         String res;
         res = gson.toJson(u);
         return res;
@@ -25,10 +34,12 @@ public class Serializar {
         String res;
         res=gson.toJson;
         return res;
-    }
-    String Lista_json(){
-        String res;
-        res=gson.toJson(usersList);
+    }/* */
+
+    String listaJson(){
+        String result;
+        result=gson.toJson(usersList);
+        return result;
 
     }
 }
