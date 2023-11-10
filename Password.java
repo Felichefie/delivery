@@ -83,5 +83,7 @@ public class Password {
         System.out.println("numeros: " +P.isNumcaseOk());
         System.out.println("caracteres especiales: " +P.isEspCharcaseOk());
         System.out.println("longitud: " +P.longit());
+    
+        
     }
 }
