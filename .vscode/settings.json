@@ -3,6 +3,6 @@
         "lib/**/*.jar",
         "gson-2.10.jar",
         "mysql-connector-j-8.1.0.jar",
-        "/home/alumno/Descargas/spring-security-core-6.1.4.jar"
+        "spring-security-crypto-5.7.3.jar"
     ]
 }
