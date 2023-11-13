@@ -5,7 +5,8 @@
         "mysql-connector-j-8.1.0/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar",
         "c:\\Users\\caosj\\OneDrive\\Escritorio\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar",
         "c:\\Users\\Isreael\\Desktop\\librarys visual\\gson-2.10.1.jar",
-        "c:\\Users\\Isreael\\Desktop\\librarys visual\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar"
+        "c:\\Users\\Isreael\\Desktop\\librarys visual\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar",
+        "c:\\Users\\caosj\\OneDrive\\Escritorio\\spring-security-crypto-6.1.5.jar"
     ],
     "java.debug.settings.onBuildFailureProceed": true
 }
