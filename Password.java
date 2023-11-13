@@ -1,4 +1,7 @@
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class Password {
     boolean longitud = false;
@@ -80,16 +83,34 @@ public class Password {
     }
 
     public static void main(String[] args) {
-        String pass = "343Industries";
-        Password p = new Password(pass);
-        System.out.println("Mayusculas: " + p.isUpCaseOk());
-        System.out.println("Minisculas: " + p.isLowCaseOk());
-        System.out.println("Numeros: " + p.isNumOk());
-        System.out.println("Tamaño: " + p.isSizeOk());
-        System.out.println("Carcater Especial: " + p.isEspOk());
+        String p = "343Industries";
+        Password userPass = new Password(p);
+        System.out.println("Mayusculas: " + userPass.isUpCaseOk());
+        System.out.println("Minisculas: " + userPass.isLowCaseOk());
+        System.out.println("Numeros: " + userPass.isNumOk());
+        System.out.println("Tamaño: " + userPass.isSizeOk());
+        System.out.println("Carcater Especial: " + userPass.isEspOk());
 
-        
+        String pwd_hash = BCrypt.hashpw(p, BCrypt.gensalt());
+        System.out.println(pwd_hash);
+
+        if(BCrypt.checkpw(p, pwd_hash)){
+            System.out.println("Coinciden las credenciales");
+        }else{
+            System.out.println("Las credenciales no coinciden");
+        }
+
+        String sessionTime = String.valueOf(System.currentTimeMillis()).substring(8, 13);
+        String sessionUUID = UUID.randomUUID().toString().substring(1, 10);
+        String session = sessionTime + sessionUUID;
+        System.out.println(session);
+
+        LocalDateTime nowDate = LocalDateTime.now();
+        LocalDateTime endTimeSession = nowDate.plusMinutes(20);
+        System.out.println(endTimeSession);
+        System.out.println(nowDate);
+
+
     }
-
 
 }
