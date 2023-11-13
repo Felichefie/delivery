@@ -38,7 +38,7 @@ public class Dbconnection {
                             System.out.println(queryInsert);
         try{
             PreparedStatement preState = conn.prepareStatement(queryInsert);
-          preState.execute();
+          //preState.execute();
             return true;
         }catch (SQLException e) {
             e.printStackTrace();
