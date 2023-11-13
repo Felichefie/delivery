@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/alumno/Descargas/spring-security-crypto-6.1.5.jar"
+    ]
+}

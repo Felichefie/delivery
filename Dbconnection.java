@@ -123,4 +123,35 @@ static Connection conn;
                 return false;
             } 
     }
-}
+
+    Response LogAuth(String email, String password){
+        //res inicial statys = false, user " -1, sesion = """
+        Response res = new Response();
+        //Solo regresa password 
+        String query = "SELECT u.password FROM progra2.users u WHERE u.email ='" + email + "'";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+        String passwordDb = "";
+        try{
+            statement = conn.createStatement(); 
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                password = rset.getString(1);
+                System.out.println(password);
+
+               
+            }
+            if(password == passwordDb){
+                res.setStatus(true);
+            }
+            return res;
+        }catch(SQLException e){
+            System.out.println("Error en la querry");
+            return res;
+        }
+    }
+        
+
+    }
