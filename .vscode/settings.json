@@ -2,6 +2,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "/home/elena/Descargas/gson-2.10.1.jar",
-        "mysql-connector-j-8.1.0.jar"
+        "mysql-connector-j-8.1.0.jar",
+        "/home/elena/Descargas/spring-security-crypto-5.7.3.jar"
     ]
 }
