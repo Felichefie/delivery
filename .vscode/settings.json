@@ -5,6 +5,7 @@
         ".vscode/gson-2.10.1.jar",
         "mysql-connector-j-8.1.0.jar",
         "/home/alumno/Descargas/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar",
-        ".vscode/mysql-connector-j-8.1.0.jar"
+        ".vscode/mysql-connector-j-8.1.0.jar",
+        "spring-security-crypto-6.1.5.jar"
     ]
 }

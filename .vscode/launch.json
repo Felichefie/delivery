@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Image",
+            "request": "launch",
+            "mainClass": "Image",
+            "projectName": "delivery_ce9fede5"
+        },
+        {
+            "type": "java",
+            "name": "DisplayImage",
+            "request": "launch",
+            "mainClass": "DisplayImage",
+            "projectName": "delivery_ce9fede5"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ConnectionMain",
+            "request": "launch",
+            "mainClass": "ConnectionMain",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
+            "name": "Database",
+            "request": "launch",
+            "mainClass": "Database",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
+            "name": "Dbconnection",
+            "request": "launch",
+            "mainClass": "Dbconnection",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "Login",
+            "projectName": "delivery_658aa4fd"
+        }
+    ]
+}
