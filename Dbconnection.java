@@ -4,6 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 public class Dbconnection {
     static Connection conn;
     public static void main(String[] args) {
@@ -38,7 +42,7 @@ public class Dbconnection {
                             System.out.println(queryInsert);
         try{
             PreparedStatement preState = conn.prepareStatement(queryInsert);
-          //preState.execute();
+          preState.execute();
             return true;
         }catch (SQLException e) {
             e.printStackTrace();
@@ -96,34 +100,77 @@ public class Dbconnection {
         Response res = new Response();
 
         // solo regresa el password del usuario
-        String query = "SELECT u.password FROM progra2.users u WHERE u.email='" + email + "'";
+        String query = "SELECT u.password, u.id FROM progra2.users u WHERE u.email='" + email + "'";
         System.out.println(query);
         ResultSet rset;
         Statement statement;
         String passwordDB = "";
-
+        String id_u = "";
         try{
             statement = conn.createStatement();
             rset = statement.executeQuery(query);
 
             while(rset.next()){
                 passwordDB = rset.getString(1);
+                id_u = rset.getString(2);
                 System.out.println(passwordDB);
             };
             //System.out.println("db " + passwordDB);
            // System.out.println("log" + passwordLogin);
 
            //el == no funciono para comparar las siguientes cadenas
-            if(passwordDB.equals(passwordLogin)) {
+            /*if(passwordDB.equals(passwordLogin)) {
               //  System.out.println("son iguales");
                 res.setStatus(true);
                 res.setSession("test_session");
             }else{
                 System.out.println("el password no coincide");
 
-            }
+            }*/
+
+           
+            System.out.println(passwordDB);
+            System.out.println(passwordLogin);
+
+
+      if(BCrypt.checkpw(passwordLogin, passwordDB)==true){
+        System.out.println("Coincide ");
+      String sessiontime = String.valueOf(System.currentTimeMillis()).substring(8,13);
+      String sessionuuid = UUID.randomUUID().toString().substring(1,10);
+      String session = sessiontime + sessionuuid;
+      System.out.println(session);
+      LocalDateTime nowdate = LocalDateTime.now();
+      System.out.println(nowdate);
+      LocalDateTime endtimesession = nowdate.plusMinutes(30);
+      System.out.println(endtimesession);
+
+      //aqui metemos la sesion a la tabla de labase de datos
+      //INSERT INTO sessions (id_user, session, timeout, created)
+      //VALUES('id_u','session','endtimesession','nowdate')
+      String queryInsert = "INSERT INTO progra2.sessions(id, id_user, session, timeout, created)"
+                            + " VALUES(4,'" + id_u
+                            + "','" + session
+                            + "', '" + endtimesession
+                            + "','" + nowdate
+                            + "')";
+
+                            System.out.println(queryInsert);
+        try{
+            PreparedStatement preState = conn.prepareStatement(queryInsert);
+          preState.execute();
+            
+        }catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error en la query Insert");
+           
+        }
+
+
+      }else{
+        System.out.println("No coincide ");
+      }
         }catch(SQLException e){
-            System.out.println("Error en la query");
+            System.out.println("Error en la query Select");
         }
         return res;
     }

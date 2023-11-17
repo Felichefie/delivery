@@ -1,6 +1,8 @@
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import com.mysql.cj.xdevapi.Statement;
 
 import javax.swing.JFrame;
@@ -37,11 +39,11 @@ public class guilogin {
         btn_dar_de_alta.setBounds(280, 360, 80, 20);
         l_password= new JLabel("Password");
         l_password.setBounds(20, 200, 180, 20);
-        txt_password = new JTextField("$2b$10$V8efW0/fbrJrX2d/YGXzr.AyYnme8g6xCOyHdURhFQw/I5BR4kWCO");
+        txt_password = new JTextField("Anibal1234,");
         txt_password.setBounds(250, 200, 180, 20);
         l_usuario = new JLabel("User");
         l_usuario.setBounds(20, 170, 180, 20);
-        txt_usuario = new JTextField("felix.jimenez@umich.mx");
+        txt_usuario = new JTextField("anibal1234@gmail.com");
         txt_usuario.setBounds(250, 170, 180, 20);
         l_autenticacion = new JLabel("No autenticado");
         l_autenticacion.setBounds(20, 230, 380, 20);
@@ -66,7 +68,7 @@ public class guilogin {
                 Dbconnection dbconnection = new Dbconnection("jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com", "alumno", "alumnoPrueba1");
                 Connection conn = dbconnection.getConn();
                 Response r = dbconnection.logAuth(txt_usuario.getText(),txt_password.getText() , conn);
-                System.out.println("contrasena " + txt_password.getText());
+                /*System.out.println("contrasena " + txt_password.getText());
                 System.out.println("usuario " + txt_usuario.getText());
 
 
@@ -87,7 +89,7 @@ public class guilogin {
                     conn.close();
                 }catch (SQLException q) {
                     q.printStackTrace();
-                }
+                }*/
 
             
            }});
@@ -95,6 +97,7 @@ public class guilogin {
             @Override
             public void actionPerformed(ActionEvent e){
             String t = txt_password.getText();
+            
                 //longitud>=8, mayusculas, minúsculas, número y caracter especial $,%&_#
                 if(t.length()<8){
                     l_autenticacion.setText(" el password no cumple con las longitud minima");
@@ -125,6 +128,9 @@ public class guilogin {
                     return;
                }
 
+               String psw_hash=BCrypt.hashpw(t, BCrypt.gensalt());
+               System.out.println(psw_hash);
+
               
 
 
@@ -138,7 +144,7 @@ public class guilogin {
                 u1.setFirst_lastname("Zavala");
                 u1.setSecond_lastname("Herrera");
                 u1.setBirthday("2023-06-17");
-                u1.setPassword(txt_password.getText());
+                u1.setPassword(psw_hash);
                 dbconnection.insertNewUser(u1);
 
                 try{

@@ -107,7 +107,7 @@ public class Password {
       System.out.println(session);
       LocalDateTime nowdate = LocalDateTime.now();
       System.out.println(nowdate);
-      LocalDateTime endtimesession = nowdate.plusMinutes(20);
+      LocalDateTime endtimesession = nowdate.plusMinutes(30);
       System.out.println(endtimesession);
 
 
