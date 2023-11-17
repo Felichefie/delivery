@@ -2,6 +2,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "/home/usuario/Escritorio/Progra 2/gson-2.10.1.jar",
-        "/home/usuario/Escritorio/Progra 2/mysql-connector-j-8.1.0.jar"
+        "/home/usuario/Escritorio/Progra 2/mysql-connector-j-8.1.0.jar",
+        "/home/usuario/Escritorio/Progra 2/spring-security-crypto-5.8.4.jar"
     ]
 }

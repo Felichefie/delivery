@@ -48,6 +48,10 @@ public class DBconnection {
         }
     }
 
+    public static Connection getConn(){
+        return conn;
+    }
+
     DBconnection(String URL, String user, String pass){
         try {
             conn = DriverManager.getConnection(URL, user, pass);
@@ -108,5 +112,35 @@ public class DBconnection {
 
         }
         return user;
+    }
+
+    Response logAuth(String email, String passwordLogin, Connection conn){
+        Response res = new Response();
+        //solo regresa el password del usuario
+        String query = "SELECT u.password FROM progra2.users u WHERE u.email='" + email + "'";
+        ResultSet rset;
+        Statement statement;
+        String passwordDB = "";
+        try{
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+                while(rset.next()){
+                    passwordDB =rset.getString(1);
+                    System.out.println(passwordLogin);
+                }
+
+                if (passwordLogin == passwordDB){
+                    res.setStatus(true);
+                    res.setSesion("test sesion");
+                }
+                //return res;
+
+        }catch(SQLException e){
+            System.out.println("error en la query");
+            return res;
+        }
+        return res;
+
     }
 }

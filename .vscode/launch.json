@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "login",
+            "request": "launch",
+            "mainClass": "login",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
+            "name": "Password",
+            "request": "launch",
+            "mainClass": "Password",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
             "name": "DBconnection",
             "request": "launch",
             "mainClass": "DBconnection",
