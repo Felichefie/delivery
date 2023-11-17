@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class LoginUI {
 
     private JFrame Jframe;
-    private JTextField txt_Usuario;
+    private JTextField txt_Usuario, txt_UsuarioRegistro;
     private JPasswordField txt_Contraseña, txt_ContraseñaRegistro;
 
     public LoginUI() {
@@ -60,7 +60,8 @@ public class LoginUI {
         JRegistro.setLayout(new GridLayout(3, 2, 5, 5));
         
         JRegistro.add(new JLabel("Usuario:"));
-        JRegistro.add(new JTextField());
+        txt_UsuarioRegistro = new JTextField();
+        JRegistro.add(txt_UsuarioRegistro);
         
         JRegistro.add(new JLabel("Contraseña:"));
         txt_ContraseñaRegistro = new JPasswordField();
@@ -74,6 +75,16 @@ public class LoginUI {
                 String contraseña = new String(password);
                 if (validarContraseña(password)) {
                     JOptionPane.showMessageDialog(null, "Contraseña válida: " + contraseña);
+
+                    char[] password2 = txt_ContraseñaRegistro.getPassword();
+                    String contraseña2 = new String(password2);
+
+                    String email = txt_UsuarioRegistro.getText();
+                    Login login = new Login(email, contraseña);
+                    if(login.registro(email, contraseña2)){
+                        System.out.println("Usuario registrado");
+                    }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Contraseña inválida : " + contraseña);
                 }

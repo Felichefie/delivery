@@ -4,6 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Dbconnection {
 
@@ -93,7 +98,7 @@ public class Dbconnection {
                 + user.getName() 
                 + "', '2023-10-20', '"
                 + user.getEmail() + "')";
-
+                
         PreparedStatement preState;
 
         try {
@@ -194,11 +199,18 @@ public class Dbconnection {
             rset = statement.executeQuery(query);
 
             while(rset.next()){
-                    passwordDB = rset.getString(1);
-                    System.out.println(rset.getString(1));
+                passwordDB = rset.getString(1);
+                System.out.println(rset.getString(1));
+            }
+            boolean passwordMatch = false;
+            System.out.println(passwordLogin);
+            try{
+                passwordMatch = BCrypt.checkpw(passwordLogin, passwordDB);
+            }catch(Exception e){
+                System.out.println("Error al comparar contraseñas");
             }
 
-            if(passwordLogin.equals(passwordDB)){
+            if(passwordMatch){
                 res.setStatus(true);
                 res.setSesion("test_session");
             }
@@ -208,6 +220,86 @@ public class Dbconnection {
         }
 
         return res;
+
+    }
+
+    boolean createSession(int id, String session, LocalDateTime date){
+
+        LocalDateTime endTimeSession = date.plusMinutes(30);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+
+        // Formatear la fecha y hora usando el formateador
+        String formattedDate = date.format(formatter);
+        String formattedEndDate = endTimeSession.format(formatter);
+        
+        String queryInsert = "INSERT INTO progra2.sessions(id_user, session, timeout, created)"
+                + "VALUES(" + id + ", '" + session + "', '" + formattedEndDate + "', '" + formattedDate + "')";
+        
+        PreparedStatement preState;
+
+        try {
+
+            preState = conn.prepareStatement(queryInsert);
+            preState.execute();
+            System.out.println("Sesion creada e insertada");
+            return true;
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error al crear sesion");
+            return false;
+
+        }
+            
+    }
+
+    boolean registerUser(String email, String pwd){
+
+        String queryInsert = "INSERT INTO progra2.users(email, password)"
+                + "VALUES('" + email
+                + "', '" + pwd + "')";
+
+        PreparedStatement preState;
+
+        try {
+
+            preState = conn.prepareStatement(queryInsert);
+            preState.execute();
+            System.out.println("Usuario registrado");
+            return true;
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error al insertar usuario");
+            return false;
+
+        }
+        
+    }
+
+    int getUserId(String email){
+        String query = "SELECT id FROM progra2.users u WHERE u.email ='" + email + "'" ;
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+        int id_user = 0;
+        try{
+
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                    System.out.println(rset.getString(1)
+                );
+                id_user = Integer.parseInt(rset.getString(1));
+            }
+        }catch(SQLException e){    
+            System.out.println("Error en la query del id");
+        }
+        return id_user;
 
     }
 
