@@ -5,8 +5,9 @@ public class User {
     private String body;
     private String userName;
     private String name;
+    private String password;
 
-    public User() {
+    public User(String string, String string2, String string3, String string4, String string5, String string6) {
         this.userId = 0;
         this.id = 0;
         this.title = "";
@@ -69,6 +70,27 @@ public class User {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return null;
+    }
+
+    public void setemail(String text) {
+    }
+
+    public void setFirst_lastname(String string) {
+    }
+
+    public void setBirthday(String string) {
     }
 
 }

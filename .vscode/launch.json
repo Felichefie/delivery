@@ -1,0 +1,91 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Imagen",
+            "request": "launch",
+            "mainClass": "Imagen.Imagen",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "Login",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Visualizar",
+            "request": "launch",
+            "mainClass": "Visualizar",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Password",
+            "request": "launch",
+            "mainClass": "Password",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "ConnectionMain",
+            "request": "launch",
+            "mainClass": "ConnectionMain",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Gui",
+            "request": "launch",
+            "mainClass": "Gui",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Dbconnection",
+            "request": "launch",
+            "mainClass": "Dbconnection",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ConnectionMain",
+            "request": "launch",
+            "mainClass": "ConnectionMain",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
+            "name": "Database",
+            "request": "launch",
+            "mainClass": "Database",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
+            "name": "Dbconnection",
+            "request": "launch",
+            "mainClass": "Dbconnection",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "Login",
+            "projectName": "delivery_658aa4fd"
+        }
+    ]
+}
