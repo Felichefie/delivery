@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 public class Password {
     boolean longitud = false;
     boolean may = false;
@@ -5,6 +11,7 @@ public class Password {
     boolean num = false;
     boolean especial = false;
     String pass;
+    
 
     Password(String pass){
         this.longitud = false;
@@ -77,11 +84,37 @@ public class Password {
     }
     public static void main(String[] args) {
         String pass = "Perla1#";
+        System.out.println(pass);
         Password p = new Password(pass);
-        System.out.println("MINUSCULAS" + p.isLowCaseOk());
-        System.out.println("MAYUSCULAS" + p.isUpCaseOk());
-        System.out.println("NUMEROS" + p.isNumberOk());
-        System.out.println("CARACTERES ESPECIALES" + p.isEspecialCaracter());
+        System.out.println("MINUSCULAS " + p.isLowCaseOk());
+        System.out.println("MAYUSCULAS " + p.isUpCaseOk());
+        System.out.println("NUMEROS " + p.isNumberOk());
+        System.out.println("CARACTERES ESPECIALES " + p.isEspecialCaracter());
+       // BcryptPasswordEncoder
+
+       String pwd_hash = BCrypt.hashpw(pass, BCrypt.gensalt());
+       System.out.println(pwd_hash);
+
+       if(BCrypt.checkpw(pass, pwd_hash)){
+        System.out.println("coincide");
+       }else{
+        System.out.println("no coincide");
+       }
+       
+       String sesiontime = String.valueOf(System.currentTimeMillis()).substring(8,13);
+       String sesionuuid = UUID.randomUUID().toString().substring(1,10);
+       String sesion = sesiontime + sesionuuid;
+
+
+       System.out.println(sesion);
+
+       LocalDateTime nowdate = LocalDateTime.now();
+
+       System.out.println(nowdate);
+
+       LocalDateTime endSesion = nowdate.plusMinutes(20);
+       
+       System.out.println(endSesion);
 
     }
 }

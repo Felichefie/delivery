@@ -8,7 +8,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,11 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import com.mysql.cj.jdbc.Driver;
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 
-public class login {
-    
+public class Login {
+
     public static void main(String[] args) {
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
@@ -28,115 +25,119 @@ public class login {
         String email = "felix.jimenez@umich.mx";
         String password = "Mony123?";
         createGUI();
-        System.out.println("LOGIN");
-        
-        //CONECTAR A LA BASE DE DATOS
-        Dbconnection dbconnection = new Dbconnection(URL, user, pass); 
+
+
+
+//CONECTAR A LA BASE DE DATOS
+        Dbconnection dbconnection = new Dbconnection(URL, user, pass);
         Connection conn = dbconnection.getConn();
-        Response r = dbconnection.LogAuth(email, password, conn);
+        Response r = dbconnection.LogAuth(email, password);
+
+
         if(r.isStatus() == true){
-            System.out.println("USUARIO ATENTIFICADO!");
-            System.out.println("SESION" + r.getSesion());
+            System.out.println("USUARIO  AUTENTIFICADO! ");
+            System.out.println("SESION " + r.getSesion());
+
         }else{
-            System.out.println("USUARIO NO AUTENTIFICADO");
-            System.out.println("SESION" + r.getSesion());
-        };       
-}
-    //CREA LA GUI
+
+            System.out.println("USUARIO NO AUTENTIFICADO ");
+            System.out.println("SESION " + r.getSesion());
+
+        };
+        
+    }
+
+
+    //CREATE GUI
     public static void createGUI(){
-    JFrame window = new JFrame("INICIO DE SESION O REGISTRO");
-    window.setSize(600, 600);
-    Color bluee = new Color(227,252,255);
-    Color blue1 = new Color(6,193,220);
-    window.getContentPane().setBackground(bluee);
-    window.setLayout(null); 
+        JFrame window = new JFrame("INICIO DE SESION O REGISTRO ");
+        window.setSize(600,600);
+        window.setVisible(true);
+        Color bluee = new Color(227,252,255);
+        window.getContentPane().setBackground(bluee);
+        window.setLayout(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//etiqueta
+        JLabel etiqueta1 = new JLabel("HAGA CLICK PARA INICIAR SESION REGISTRARSE");
+        etiqueta1.setBounds(30,50,400,100);
+//fuente
+        Font newE = new Font("Arial", Font.TYPE1_FONT, 16);
+        etiqueta1.setFont(newE);
+//botones
+        JButton InicioSesion = new JButton("iniciar sesion");
+        JButton registro = new JButton("Registrar");
+        InicioSesion.setBounds(130, 200, 200, 60);
+        registro.setBounds(340, 200, 200, 60);
+//anade
+        window.add(InicioSesion);
+        window.add(registro);
+        window.add(etiqueta1);
 
-    JLabel etiqueta1 = new JLabel("HAGA CLICK PARA INICIAR SESION REGISTRARSE");
-    etiqueta1.setBounds(30,50,400,100);
-    //etiqueta1.setForeground(blue1); COLOR
-    Font newE = new Font("Arial", Font.TYPE1_FONT, 16);
-    etiqueta1.setFont(newE);
+//escucha boton INICIO SESION
+        InicioSesion.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e ){
+                window.dispose();
+                showInicioSesion();
+            }
+        });
+//escucha al boton REGISTRO
+        registro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e ){
+                window.dispose();
+                showRegistro();
 
-    JButton login = new JButton("LOGIN");
-    JButton registro = new JButton("REGISTER");
-    login.setBounds(130, 200, 200, 60);
-    //login.setBackground(blue1);
-    registro.setBounds(340, 200, 200, 60);
-    //registro.setBackground(blue1);
+            }
+        });
+    }
 
-    window.setVisible(true);
-    window.add(login);
-    window.add(registro);
-    window.add(etiqueta1);
-    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-//ESCUCHA AL BOTON LOGIN 
-    login.addActionListener((ActionListener) new ActionListener() {
+//ventana INICION DE SESION
+        public static void showInicioSesion(){
+            JFrame InicioSesionFrame = new JFrame("INICIO DE SESION");
+            InicioSesionFrame.setSize(400, 400);
+            Color bluee = new Color(227,252,255);
+            InicioSesionFrame.getContentPane().setBackground(bluee);
+            InicioSesionFrame.setLayout(null); 
+
+            JButton cancelar = new JButton("Cancelar ");
+            JButton ingresar = new JButton("Ingresar");
+            JLabel Etiquetaemail = new JLabel("Email: ");
+            JLabel EtiquetaPassword = new JLabel("Password: ");
+            JTextField emailT = new JTextField();
+            JPasswordField passwordText = new JPasswordField(20);
+            
+
+            cancelar.setBounds(150,250,100,20);
+            ingresar.setBounds(240,250,100,20);
+            Etiquetaemail.setBounds(30,100,80,20);
+            EtiquetaPassword.setBounds(30, 130, 80, 20);
+            emailT.setBounds(120, 100, 200, 20);
+            passwordText.setBounds(120,130,200,25);
+
+            InicioSesionFrame.setVisible(true);
+            InicioSesionFrame.add(cancelar);
+            InicioSesionFrame.add(ingresar);
+            InicioSesionFrame.add(Etiquetaemail);
+            InicioSesionFrame.add(EtiquetaPassword);
+            InicioSesionFrame.add(emailT);
+            InicioSesionFrame.add(passwordText);
+
+//ESCUCHA AL BOTON CANCELAR
+    cancelar.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e){
-            window.dispose();
-            showLoginForm();
-           // String email = userna.getText();
-            //tring password = new String(passwordText.getPassword());
-        }
-    });
-
-//ESCUCHA AL BOTON DE REGISTRO
-    registro.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e){
-            window.dispose();
-            showRegisterForm();
-        }
-    });
-}
-
-// MUESTRA LA VENTANA DE INICIAR SESION
-public static void showLoginForm(){
-
-    JFrame loginFrame = new JFrame("INICIO DE SESION");
-    loginFrame.setSize(400, 400);
-    Color bluee = new Color(227,252,255);
-    loginFrame.getContentPane().setBackground(bluee);
-    loginFrame.setLayout(null); 
-    JButton cancel = new JButton("Cancel");
-    JButton ingresar = new JButton("Ingresar");
-    JLabel usern = new JLabel("Email: ");
-    JLabel passn = new JLabel("Password: ");
-    JTextField userna = new JTextField();
-    JPasswordField passwordText = new JPasswordField(20);
-    passwordText.setBounds(120,130,200,25);
-
-    cancel.setBounds(150,250,80,20);
-    ingresar.setBounds(240,250,80,20);
-    usern.setBounds(30,100,80,20);
-    passn.setBounds(30, 130, 80, 20);
-    userna.setBounds(120, 100, 200, 20);
-
-    loginFrame.setVisible(true);
-    loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    loginFrame.add(cancel);
-    loginFrame.add(ingresar);
-    loginFrame.add(usern);
-    loginFrame.add(passn);
-    loginFrame.add(userna);
-    loginFrame.add(passwordText);
-
-    //ESCUCHA AL BOTON CANCELAR
-    cancel.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e){
-            userna.setText(" ");
+            emailT.setText(" ");
             passwordText.setText(" ");
         }
         
     });
-
-    //INGRESAR
+//escucha al boton ingresar
     ingresar.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e){
-            String email = userna.getText();
+            String email = emailT.getText();
             String password = new String(passwordText.getPassword());
 
             //VALIDAR CONTRASENA
@@ -147,7 +148,7 @@ public static void showLoginForm(){
                     }else{
                         JOptionPane.showMessageDialog(null, "AUTENTICACION FALLIDA ");
                     }
-                } catch (HeadlessException | SQLException e1) {
+                } catch (HeadlessException e1) {
                    e1.printStackTrace();
                 }
             }else{
@@ -157,9 +158,9 @@ public static void showLoginForm(){
     });
 }
 
-//VENTANA DE REGISTRO
-public static void showRegisterForm(){
-    JFrame registerFrame = new JFrame("REGISTRO");
+//ventana de REGISTRO
+    public static void showRegistro(){
+        JFrame registerFrame = new JFrame("REGISTRO");
     registerFrame.setLayout(null);
     registerFrame.setSize(600,500);
     Color bluee = new Color(227,252,255);
@@ -224,50 +225,63 @@ public static void showRegisterForm(){
 
     registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     registerFrame.setVisible(true);
-}
 
-private static boolean authenticate(String email, String password) throws SQLException{
+
+
+
+    }
+
+
+
+
+
+
+//Autentifica contrasena
+    private static boolean authenticate(String email, String password){
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String USER = "alumno";
         String PASSWORD = "alumnoPrueba1";
         email = "felix.jimenez@umich.mx";
         password = "Mony123?";
+
+
         try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)){
-            String query = "SELECT * FROM progra2.users u WHERE u.email = ? AND u.password = ?";
+            String query =  "SELECT * FROM progra2.users u WHERE u.email = ? AND u.password = ?";
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(8, email);
                 preparedStatement.setString(11, password);
-
-
                 try(ResultSet resultSet = preparedStatement.executeQuery()){
-                    if(resultSet.next()){
+                    if(resultSet.next()){           
                     }else{
                     }
                 }
             }
-        }catch (SQLException e){
-            e.printStackTrace();
+            
+        } catch (Exception e) {
+           e.printStackTrace();
         }
     return false;
-}
-private static boolean validatePassword(String password){
-    //longitud>=8 mayusculas, minúsculas, número y caracter especial $,%&_#
-    if(password.length() < 8){
-        return false;
     }
-    if(!password.matches(".*[A-Z].*")){
-        return false;
+
+//Condiciones para la contrasena 
+    private static boolean validatePassword(String password){
+        //longitud>=8 mayusculas, minúsculas, número y caracter especial $,%&_#
+        if(password.length() < 8){
+            return false;
+        }
+        if(!password.matches(".*[A-Z].*")){
+            return false;
+        }
+        if (!password.matches(".*[a-z].*")) {
+            return false;
+        }
+        if (!password.matches(".*\\d.*")) {
+            return false;
+        }
+        if (!password.matches(".*[!@#$%^&*()-+=?].*")) {
+            return false;
+        }
+        return true;
     }
-    if (!password.matches(".*[a-z].*")) {
-        return false;
-    }
-    if (!password.matches(".*\\d.*")) {
-        return false;
-    }
-    if (!password.matches(".*[!@#$%^&*()-+=?].*")) {
-        return false;
-    }
-    return true;
-}
 
 }
