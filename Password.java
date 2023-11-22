@@ -96,9 +96,13 @@ public class Password {
        System.out.println(pwd_hash);
 
        if(BCrypt.checkpw(pass, pwd_hash)){
+
         System.out.println("coincide");
+
        }else{
+
         System.out.println("no coincide");
+        
        }
        
        String sesiontime = String.valueOf(System.currentTimeMillis()).substring(8,13);
