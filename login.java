@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-public class Login {
+public class login {
 
     private String emailGUI;
     private String passwordGUI;
@@ -48,7 +48,7 @@ public class Login {
         
     }
 //Constructror
-    Login(String emailUI, String passwordUI){
+    login(String emailUI, String passwordUI){
         this.emailGUI = emailUI;
         this.passwordGUI = passwordUI;
     }

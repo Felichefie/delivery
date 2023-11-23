@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//Login-Session
 public class LoginGUI {
 
     public static void main(String[] args) {
@@ -87,7 +87,7 @@ public class LoginGUI {
                     String contraseña2 = new String(password2);
 
                     String email = txt_UsuarioRegistro.getText();
-                    Login login = new Login(email, contraseña);
+                    login login = new login(email, contraseña);
                     if(login.registro(email, contraseña2)){
                         System.out.println("Usuario registrado");
                     }
@@ -138,7 +138,7 @@ public class LoginGUI {
                 char[] password = tPContraseña.getPassword();
                 String contraseña = new String(password);
                  
-                Login login = new Login(usuario, contraseña);
+                login login = new login(usuario, contraseña);
 
                 if(login.inicioSesion()){
                     JOptionPane.showMessageDialog(null, "Se ha iniciado sesion EXITOSAMENTE");
