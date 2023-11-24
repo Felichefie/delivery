@@ -22,7 +22,7 @@ public class LoginUI {
 
         JTabbedPane pestañas = new JTabbedPane();
         
-        // Panel de Inicio de Sesión
+        
         JPanel JLogin = new JPanel();
         JLogin.setLayout(new GridLayout(3, 2, 5, 5));
         
@@ -38,7 +38,7 @@ public class LoginUI {
         Btn_Login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aquí va la lógica de inicio de sesión
+                
                 String usuario = txt_Usuario.getText();
                 char[] password = txt_Contraseña.getPassword();
                 String contraseña = new String(password);
@@ -55,7 +55,7 @@ public class LoginUI {
         });
         JLogin.add(Btn_Login);
 
-        // Panel de Registro
+        
         JPanel JRegistro = new JPanel();
         JRegistro.setLayout(new GridLayout(3, 2, 5, 5));
         
@@ -70,7 +70,7 @@ public class LoginUI {
         JButton Btn_Registro = new JButton("Registrarse");
         Btn_Registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí va la lógica de registro
+                
                 char[] password = txt_ContraseñaRegistro.getPassword();
                 String contraseña = new String(password);
                 if (validarContraseña(password)) {

@@ -7,7 +7,7 @@ public class ConectionMain {
     public static void main(String[] args) {
         Conexion con = new Conexion("GET");
         String txtJson = con.sendGet();
-       // System.out.println(txtJson);
+       
 
         UserExample u = new UserExample(1, 0, "titulo", "Usuario 0");
         Serializar serial = new Serializar();

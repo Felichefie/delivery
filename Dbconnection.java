@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -60,6 +62,38 @@ public class Dbconnection {
             e.printStackTrace();
 
         }
+    }
+
+    public List<Producto> getProduct(){
+        List<Producto> listaProductos = new ArrayList<>();
+
+        String query = "SELECT id, price, image, description, stock FROM progra2.products";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+
+        try {
+            
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                int id = rset.getInt(1);
+                double price = rset.getDouble(2);
+                String image = rset.getString(3);
+                String desc = rset.getString(4);
+                int stock = rset.getInt(5);
+                
+
+                Producto producto = new Producto(id, price, image, desc, stock);
+                listaProductos.add(producto);
+            }
+                        
+        } catch (Exception e) {
+
+            System.out.println("Error en la query");
+        }
+        return listaProductos;
     }
 
     public Connection getConn() {
@@ -228,7 +262,7 @@ public class Dbconnection {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
-        // Formatear la fecha y hora usando el formateador
+        
         String formattedDate = date.format(formatter);
         String formattedEndDate = endTimeSession.format(formatter);
         

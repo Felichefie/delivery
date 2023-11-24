@@ -44,7 +44,7 @@ public class Conexion {
             while((line = br.readLine()) != null){
                 res += line;
             }
-           // System.out.println(res);
+           
         } catch (IOException e) {
             e.printStackTrace();
         }
