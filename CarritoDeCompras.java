@@ -35,16 +35,13 @@ public class CarritoDeCompras {
     carrito.getContentPane().setBackground(bluee);
     carrito.setLayout(null);
 
-    String imageScaled = Image.getScaledInstance(200,150, java.awt.Image.SCALE_SMOOTH);
-    JLabel label = new JLabel(new ImageIcon(imageScaled));
-    carrito.add(label);
-
+  
 
 //imagenes de productos
     ImageIcon producto1Icon = new ImageIcon("P1");
-    java.awt.Image Imagen1Escalada = producto1Icon.getImage().getScaledInstance(60, 100, Image.SCALE_SMOOTH);
-    ImageIcon Imagen1EscaladaIcon = new ImageIcon(Imagen1Escalada);
-    JLabel etiqueta1imagen = new JLabel(Imagen1EscaladaIcon);
+    //java.awt.Image Imagen1Escalada = producto1Icon.getImage().getScaledInstance(60, 100, Image.SCALE_SMOOTH);
+    //ImageIcon Imagen1EscaladaIcon = new ImageIcon(Imagen1Escalada);
+    //JLabel etiqueta1imagen = new JLabel(Imagen1EscaladaIcon);
 
     ImageIcon producto2Icon = new ImageIcon("P2");
     ImageIcon producto3Icon = new ImageIcon("p3");
@@ -187,7 +184,7 @@ public class CarritoDeCompras {
    carrito.add(aumentarProducto3Button);
    carrito.add(disminuirProducto3Button);
    //agrega imagenes
-   carrito.add(etiqueta1imagen);
+  // carrito.add(etiqueta1imagen);
 
     carrito.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     carrito.setVisible(true);
