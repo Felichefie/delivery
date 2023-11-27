@@ -6,45 +6,36 @@ import java.awt.event.ActionListener;
 public class TiendaSwing {
 
     private static final String[] IMAGE_NAMES = {
-        "delivery/Images/imagen1.png",
+        "delivery/imagenes/pechuga.jpg",
         "delivery/Images/imagen2.png",
         "delivery/Images/imagen3.png",
         "delivery/Images/imagen4.png",
         "delivery/Images/imagen5.png",
         "delivery/Images/imagen6.png",
         "delivery/Images/imagen7.png",
-        "delivery/Images/imagen8.png",
-        "delivery/Images/imagen9.png",
-        "delivery/Images/imagen10.png"
     };
 
     private static final String[] DESCRIPTIONS = {
-        "Descripción del producto 1",
-        "Descripción del producto 2",
-        "Descripción del producto 3",
-        "Descripción del producto 4",
-        "Descripción del producto 5",
-        "Descripción del producto 6",
-        "Descripción del producto 7",
-        "Descripción del producto 8",
-        "Descripción del producto 9",
-        "Descripción del producto 10"
+        "Pechuga de pollo",
+        "Pan integral",
+        "Proteina",
+        "Creatina",
+        "Omega 3",
+        "Straps",
+        "Pre-workout"
     };
 
     private static final double[] PRICES = {
-        200.0,
-        300.0,
-        400.0,
-        500.0,
-        600.0,
-        700.0,
-        800.0,
-        900.0,
-        1000.0,
-        1100.0
+        180,
+        65,
+        1500,
+        850,
+        620,
+        150,
+        480,
     };
 
-    private static final String[] STOCK_QUANTITIES = {
+  private static final String[] STOCK_QUANTITIES = {
         "50 unidades",
         "50 unidades",
         "50 unidades",
@@ -62,7 +53,7 @@ public class TiendaSwing {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Tienda de Productos");
+            JFrame frame = new JFrame("GYM STORE");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(800, 600);
 
@@ -89,7 +80,7 @@ public class TiendaSwing {
 
     private static JPanel createProductPanel(String imageName, String description, double price, String stockQuantity) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
-        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        productPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));
 
         ImageIcon imageIcon = new ImageIcon(imageName);
         JLabel labelImage = new JLabel(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
@@ -104,15 +95,15 @@ public class TiendaSwing {
         textAreaDescription.setLineWrap(true);
         textAreaDescription.setOpaque(false);
         textAreaDescription.setEditable(false);
-        textAreaDescription.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textAreaDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(textAreaDescription);
 
         JLabel labelStockQuantity = new JLabel("Cantidad en stock: " + stockQuantity);
-        labelStockQuantity.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelStockQuantity.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(labelStockQuantity);
 
-        JLabel labelPrice = new JLabel(String.format("$%.2f MXN", price));
-        labelPrice.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel labelPrice = new JLabel(String.format("$%.1f MXN", price));
+        labelPrice.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(labelPrice);
 
         final JTextField fieldQuantity = new JTextField("0", 3); 
@@ -140,8 +131,7 @@ public class TiendaSwing {
             }
         });
 
-        ImageIcon cartIcon = new ImageIcon("delivery/Images/carrito.png");
-        JButton buttonAddToCart = new JButton(new ImageIcon(cartIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        JButton buttonAddToCart = new JButton("Agregar");
         buttonAddToCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -153,7 +143,7 @@ public class TiendaSwing {
         detailsPanel.add(buttonAddToCart);
 
         JPanel controlPanel = new JPanel(new BorderLayout());
-        controlPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); 
+        controlPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2)); 
 
         //JButton buttonAdd = new JButton("+");
         //JButton buttonSubtract = new JButton("-");

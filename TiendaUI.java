@@ -95,7 +95,7 @@ public class TiendaUI {
     private static JLabel labelSubtotal;
 
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("Tienda de Productos");
+        JFrame frame = new JFrame("GYM STORE");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 
@@ -138,7 +138,7 @@ public class TiendaUI {
 
     private static JPanel createProductPanel(String imageName, String description, double price, int stockQuantity) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
-        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        productPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));
         
         ImageIcon imageIcon = createImageIcon(imageName);
         JLabel labelImage = new JLabel(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
@@ -153,15 +153,15 @@ public class TiendaUI {
         textAreaDescription.setLineWrap(true);
         textAreaDescription.setOpaque(false);
         textAreaDescription.setEditable(false);
-        textAreaDescription.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textAreaDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(textAreaDescription);
 
         JLabel labelStockQuantity = new JLabel("Cantidad en stock: " + stockQuantity);
-        labelStockQuantity.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelStockQuantity.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(labelStockQuantity);
 
         JLabel labelPrice = new JLabel(String.format("$%.2f MXN", price));
-        labelPrice.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelPrice.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(labelPrice);
 
         final JTextField fieldQuantity = new JTextField("0", 3); 
