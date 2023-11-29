@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TiendaUI {
     static String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
     static String user = "alumno";
@@ -100,7 +101,7 @@ public class TiendaUI {
         frame.setSize(800, 600);
 
         labelSubtotal = new JLabel("Subtotal: $0.00");
-        frame.add(labelSubtotal, BorderLayout.NORTH);
+        frame.add(labelSubtotal, BorderLayout.CENTER);
 
         frame.add(new JScrollPane(createMainPanel()));
         frame.setVisible(true);
@@ -121,7 +122,7 @@ public class TiendaUI {
 
     private static ImageIcon createImageIcon(String imagePath) {
         try {
-            if (imagePath.startsWith("http")) {
+            if (imagePath.startsWith("https")) {
                 
                 URL url = new URL(imagePath);
                 return new ImageIcon(url);
@@ -137,8 +138,8 @@ public class TiendaUI {
     }
 
     private static JPanel createProductPanel(String imageName, String description, double price, int stockQuantity) {
-        JPanel productPanel = new JPanel(new BorderLayout(10, 10));
-        productPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));
+        JPanel productPanel = new JPanel(new BorderLayout(0, 0));
+        productPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 0));
         
         ImageIcon imageIcon = createImageIcon(imageName);
         JLabel labelImage = new JLabel(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
@@ -146,7 +147,7 @@ public class TiendaUI {
 
         JPanel detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
-        detailsPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4)); 
+        detailsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); 
 
         JTextArea textAreaDescription = new JTextArea(description);
         textAreaDescription.setWrapStyleWord(true);
@@ -156,7 +157,7 @@ public class TiendaUI {
         textAreaDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(textAreaDescription);
 
-        JLabel labelStockQuantity = new JLabel("Cantidad en stock: " + stockQuantity);
+        JLabel labelStockQuantity = new JLabel("Stock: " + stockQuantity);
         labelStockQuantity.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(labelStockQuantity);
 
@@ -202,7 +203,7 @@ public class TiendaUI {
         detailsPanel.add(buttonAddToCart);
 
         JPanel controlPanel = new JPanel(new BorderLayout());
-        controlPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); 
+        controlPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0)); 
 
         //JButton buttonAdd = new JButton("+");
         //JButton buttonSubtract = new JButton("-");

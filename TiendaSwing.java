@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 public class TiendaSwing {
 
     private static final String[] IMAGE_NAMES = {
-        "delivery/imagenes/pechuga.jpg",
+        "https://gobeef.mx/cdn/shop/products/GoBeef_ProductShot_PechugaPollo_800x.png",
         "delivery/Images/imagen2.png",
         "delivery/Images/imagen3.png",
         "delivery/Images/imagen4.png",
         "delivery/Images/imagen5.png",
         "delivery/Images/imagen6.png",
-        "delivery/Images/imagen7.png",
+        "https://peruviannutrition.com/wp-content/uploads/2022/06/PSICHOTYC-GOLD.png",
     };
 
     private static final String[] DESCRIPTIONS = {
@@ -32,20 +32,17 @@ public class TiendaSwing {
         850,
         620,
         150,
-        480,
+        480
     };
 
   private static final String[] STOCK_QUANTITIES = {
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades",
-        "50 unidades"
+        "100 KG",
+        "29 unidades",
+        "16 unidades",
+        "65 unidades",
+        "49 unidades",
+        "37 pares",
+        "13 unidades",
     };
 
     private static double subtotal = 0.0;
@@ -80,7 +77,7 @@ public class TiendaSwing {
 
     private static JPanel createProductPanel(String imageName, String description, double price, String stockQuantity) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
-        productPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2));
+        productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         ImageIcon imageIcon = new ImageIcon(imageName);
         JLabel labelImage = new JLabel(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
@@ -98,7 +95,7 @@ public class TiendaSwing {
         textAreaDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(textAreaDescription);
 
-        JLabel labelStockQuantity = new JLabel("Cantidad en stock: " + stockQuantity);
+        JLabel labelStockQuantity = new JLabel("Stock: " + stockQuantity);
         labelStockQuantity.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(labelStockQuantity);
 
@@ -143,7 +140,7 @@ public class TiendaSwing {
         detailsPanel.add(buttonAddToCart);
 
         JPanel controlPanel = new JPanel(new BorderLayout());
-        controlPanel.setBorder(BorderFactory.createLineBorder(Color.PINK, 2)); 
+        controlPanel.setBorder(BorderFactory.createLineBorder(Color.yellow,0)); 
 
         //JButton buttonAdd = new JButton("+");
         //JButton buttonSubtract = new JButton("-");
