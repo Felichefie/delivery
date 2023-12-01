@@ -8,6 +8,34 @@
             "type": "java",
             "name": "Login",
             "request": "launch",
+            "mainClass": "Login",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "DBConexion",
+            "request": "launch",
+            "mainClass": "DBConexion",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Connection",
+            "request": "launch",
+            "mainClass": "Connection",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "DB_Users",
+            "request": "launch",
+            "mainClass": "DB_Users",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
             "mainClass": "Proyecto.Login",
             "projectName": "delivery_71371dbe"
         },
