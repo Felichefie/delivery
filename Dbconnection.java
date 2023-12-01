@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Dbconnection {
 
@@ -19,8 +20,8 @@ public class Dbconnection {
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String pass = "alumnoPrueba1";
-        String correo = "2001347h@umich.mx";
-        int phone = 443717394;
+        String correo = "562561@umich.mx";
+        int phone = 1234567890;
 
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
         Userexample u = dbConn.getUser(correo, phone);
@@ -63,6 +64,38 @@ public class Dbconnection {
         }
     }
 
+    public List<Producto> getProduct(){
+        List<Producto> listaProductos = new ArrayList<>();
+
+        String query = "SELECT id, price, image, description, stock FROM progra2.products";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+
+        try {
+            
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while(rset.next()){
+                int id = rset.getInt(1);
+                double price = rset.getDouble(2);
+                String image = rset.getString(3);
+                String desc = rset.getString(4);
+                int stock = rset.getInt(5);
+                
+
+                Producto producto = new Producto(id, price, image, desc, stock);
+                listaProductos.add(producto);
+            }
+                        
+        } catch (Exception e) {
+
+            System.out.println("Error en la query");
+        }
+        return listaProductos;
+    }
+
     public Connection getConn() {
         return conn;
     }
@@ -79,13 +112,13 @@ public class Dbconnection {
                 
                 preState = conn.prepareStatement(queryInsert);
                 preState.execute();
-                System.out.println("Direccion insertada correctamente");
+                System.out.println("Direccion insertada");
                 return true;
     
             } catch (SQLException e) {
     
                 e.printStackTrace();
-                System.out.println("fallo al agregar la direccion");
+                System.out.println("Error al insertar direccion");
                 return false;
             }
     }
@@ -94,9 +127,9 @@ public class Dbconnection {
 
         String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                 + "VALUES('" + user.getUserName()
-                + "', 'Cabezon', 'Monumento', '" 
+                + "', 'Chabelo', 'Monster', '" 
                 + user.getName() 
-                + "', '2023-11-10', '"
+                + "', '2023-10-20', '"
                 + user.getEmail() + "')";
                 
         PreparedStatement preState;
@@ -105,13 +138,13 @@ public class Dbconnection {
 
             preState = conn.prepareStatement(queryInsert);
             preState.execute();
-            System.out.println("Usuario agregado correctamente");
+            System.out.println("Usuario insertado");
             return true;
 
         } catch (SQLException e) {
 
             e.printStackTrace();
-            System.out.println("no se pudo agregar el usuario");
+            System.out.println("Error al insertar usuario");
             return false;
 
         }
@@ -175,7 +208,7 @@ public class Dbconnection {
             
         } catch (Exception e) {
 
-            System.out.println("fallo en la query");
+            System.out.println("Error en la query");
             address.setId(1);
 
         }
@@ -207,7 +240,7 @@ public class Dbconnection {
             try{
                 passwordMatch = BCrypt.checkpw(passwordLogin, passwordDB);
             }catch(Exception e){
-                System.out.println("fallo al comparar contraseñas");
+                System.out.println("Error al comparar contraseñas");
             }
 
             if(passwordMatch){
@@ -216,7 +249,7 @@ public class Dbconnection {
             }
             
         }catch(SQLException e){   
-            System.out.print("fallo en la query");
+            System.out.print("Error en la query");
         }
 
         return res;
@@ -229,7 +262,7 @@ public class Dbconnection {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
-        // Formatear la fecha y hora usando el formateador
+        
         String formattedDate = date.format(formatter);
         String formattedEndDate = endTimeSession.format(formatter);
         
@@ -242,13 +275,13 @@ public class Dbconnection {
 
             preState = conn.prepareStatement(queryInsert);
             preState.execute();
-            System.out.println("Sesion creada correctamente");
+            System.out.println("Sesion creada e insertada");
             return true;
 
         } catch (SQLException e) {
 
             e.printStackTrace();
-            System.out.println("Fallo al crear la sesion");
+            System.out.println("Error al crear sesion");
             return false;
 
         }
@@ -267,13 +300,13 @@ public class Dbconnection {
 
             preState = conn.prepareStatement(queryInsert);
             preState.execute();
-            System.out.println("Usuario  registrado correctamente");
+            System.out.println("Usuario registrado");
             return true;
 
         } catch (SQLException e) {
 
             e.printStackTrace();
-            System.out.println("fallo al insertar usuario");
+            System.out.println("Error al insertar usuario");
             return false;
 
         }
@@ -297,7 +330,7 @@ public class Dbconnection {
                 id_user = Integer.parseInt(rset.getString(1));
             }
         }catch(SQLException e){    
-            System.out.println("fallo en la query del id");
+            System.out.println("Error en la query del id");
         }
         return id_user;
 
@@ -338,7 +371,7 @@ public class Dbconnection {
 
             }
         }catch(SQLException e){    
-            System.out.print("fallo en la query");
+            System.out.print("Error en la query");
             user.setId(1);
         }
         return user;

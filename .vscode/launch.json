@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TiendaSwing",
+            "request": "launch",
+            "mainClass": "TiendaSwing",
+            "projectName": "delivery_24724b3c"
+        },
+        {
+            "type": "java",
+            "name": "Carrusel",
+            "request": "launch",
+            "mainClass": "Carrusel",
+            "projectName": "delivery_24724b3c"
+        },
+        {
+            "type": "java",
+            "name": "BotonConImagen",
+            "request": "launch",
+            "mainClass": "BotonConImagen",
+            "projectName": "delivery_24724b3c"
+        },
+        {
+            "type": "java",
             "name": "Login",
             "request": "launch",
             "mainClass": "Login",
