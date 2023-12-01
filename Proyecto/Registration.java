@@ -1,9 +1,15 @@
 package Proyecto;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,6 +20,11 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 public class Registration {
+
+    String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+    String user = "alumno";
+    String pass = "alumnoPrueba1";
+
     private JFrame frame;
     private JLabel label_username, label_nombre, label_primerApellido, label_segundoApellido,
             label_pass, label_fechaNacimiento, label_correoElectronico, label_genero, label_telefono,
@@ -93,8 +104,14 @@ public class Registration {
         // Contraseña
         label_pass = new JLabel("Contraseña");
         label_pass.setBounds(50, 430, 100, 30);
+        // Esto hará que se muestren asteriscos en lugar de puntos
         field_pass = new JPasswordField();
         field_pass.setBounds(200, 430, 150, 30);
+        field_pass.setEchoChar('*');
+        field_pass.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        field_pass.setBackground(Color.LIGHT_GRAY);
 
         // Boton registrar
         button_register = new JButton("Registrar");
@@ -103,14 +120,13 @@ public class Registration {
         // Agregar un ActionListener al botón
         button_register.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes implementar la lógica de registro
-                String userName = textField_username.getText();
-                String password = String.valueOf(field_pass.getPassword());
+                // Llama al método para insertar datos en la base de datos
+                InsertarEnDB();
 
                 // Cerrar la GUI de Registration
                 frame.dispose();
                 // Volver a abrir la GUI de Login
-                new Principal();
+                new Login();
             }
         });
 
@@ -162,5 +178,47 @@ public class Registration {
         container.add(button_cancel);
 
         frame.setVisible(true);
+
     }
+
+    private void InsertarEnDB() {
+        // Obtener los valores ingresados en la GUI
+        String tipoUsuario = (String) type_user.getSelectedItem();
+        String username = textField_username.getText();
+        String primerApellido = textField_primerApellido.getText();
+        String segundoApellido = textField_segundoApellido.getText();
+        String nombre = textField_nombre.getText();
+        Date fechaNacimiento = new Date(dateChooser_fechaNacimiento.getDate().getTime());
+        String correoElectronico = textField_correoElectronico.getText();
+        String genero = (String) comboBox_genero.getSelectedItem();
+        String telefono = textField_telefono.getText();
+        String password = String.valueOf(field_pass.getPassword());
+
+        // Preparar y ejecutar la consulta de inserción
+        String queryInsert = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(URL, user, pass);
+                PreparedStatement prepState = conn.prepareStatement(queryInsert)) {
+
+            prepState.setString(1, tipoUsuario);
+            prepState.setString(2, username);
+            prepState.setString(3, primerApellido);
+            prepState.setString(4, segundoApellido);
+            prepState.setString(5, nombre);
+            prepState.setDate(6, new java.sql.Date(fechaNacimiento.getTime()));
+            prepState.setString(7, correoElectronico);
+            prepState.setString(8, genero);
+            prepState.setString(9, telefono);
+            prepState.setString(10, password);
+            prepState.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
+
+            prepState.execute();
+            System.out.println("Datos insertados exitosamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

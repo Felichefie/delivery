@@ -1,9 +1,12 @@
 package Proyecto;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,41 +15,56 @@ import javax.swing.JTextField;
 
 public class Login {
     private JFrame frame;
-    private JLabel label_user;
+    private JLabel label_user, label_pass, etiqueta;
     private JTextField textField_user;
-    private JLabel label_pass;
-    private JPasswordField Field_pass;
-    private JButton button_login;
-    private JButton button_register; // Nuevo botón de registro
+    private JPasswordField field_pass;
+    private JButton button_login, button_register;
 
     public Login() {
         frame = new JFrame("GUI Login");
-        frame.setBounds(300, 90, 400, 200);
+        frame.setBounds(300, 90, 500, 370);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
         Container container = frame.getContentPane();
         container.setLayout(null);
 
-        label_user = new JLabel("Username");
-        label_user.setBounds(50, 30, 100, 30);
+        etiqueta = new JLabel("BIENVENIDO");
+        etiqueta.setBounds(150, 20, 200, 30);
+        etiqueta.setFont(new Font("sansserif", 1, 30));
+        etiqueta.setForeground(Color.DARK_GRAY);
+
+        label_user = new JLabel("Correo electronico");
+        label_user.setBounds(70, 80, 200, 30);
         textField_user = new JTextField();
-        textField_user.setBounds(150, 30, 150, 30);
+        textField_user.setBounds(230, 80, 200, 30);
+        textField_user.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        textField_user.setBackground(new Color(205, 220, 205));
+        textField_user.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        label_pass = new JLabel("Password");
-        label_pass.setBounds(50, 70, 100, 30);
+        label_pass = new JLabel("Contraseña");
+        label_pass.setBounds(70, 130, 200, 30);
 
-        // Esto hará que se muestren asteriscos en lugar de puntos
-        Field_pass = new JPasswordField();
-        Field_pass.setBounds(150, 70, 150, 30);
-        Field_pass.setEchoChar('*');
+        field_pass = new JPasswordField();
+        field_pass.setBounds(230, 130, 200, 30);
+        field_pass.setEchoChar('*');
+        field_pass.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        field_pass.setBackground(new Color(205, 220, 205));
+        field_pass.setFont(new Font("Arial", Font.PLAIN, 16));
 
         button_login = new JButton("Login");
-        button_login.setBounds(90, 110, 100, 30);
+        button_login.setBounds(50, 200, 150, 40);
+        button_login.setBackground(new Color(7, 164, 121));
+        button_login.setForeground(Color.WHITE);
 
-        // Nuevo botón de registro
-        button_register = new JButton("Register");
-        button_register.setBounds(230, 110, 100, 30);
+        button_register = new JButton("Registrarte");
+        button_register.setBounds(250, 200, 150, 40);
+        button_register.setBackground(new Color(7, 164, 121));
+        button_register.setForeground(Color.WHITE);
 
         button_register.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -60,8 +78,6 @@ public class Login {
         button_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Aquí puedes implementar la lógica de autenticación
-                String userName = textField_user.getText();
-                String password = String.valueOf(Field_pass.getPassword());
 
                 // Cerramos la GUI loguin
                 frame.dispose();
@@ -74,9 +90,10 @@ public class Login {
         container.add(label_user);
         container.add(textField_user);
         container.add(label_pass);
-        container.add(Field_pass);
+        container.add(field_pass);
         container.add(button_login);
         container.add(button_register);
+        container.add(etiqueta);
 
         frame.setVisible(true);
     }
