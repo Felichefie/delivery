@@ -14,7 +14,7 @@ public class LoginUI {
     }
 
     private void inicializarInterfaz() {
-        Jframe = new JFrame("Sistema de Autenticación");
+        Jframe = new JFrame("AUTENTICACIÓN/REGISTRO GYM STORE");
         Jframe.setBounds(100, 100, 400, 250);
         Jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Jframe.setLayout(new BorderLayout(0, 0));

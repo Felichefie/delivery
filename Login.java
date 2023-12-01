@@ -15,8 +15,8 @@ public class Login {
 
     public static void main(String[] args) {
 
-        String email = "felix.jimenez@umich.mx";
-        String password = "$2b$10$V8efW0/fbrJrX2d/YGXzr.AyYnme8g6xCOyHdURhFQw/I5BR4kWCO";
+        String email = "";
+        String password = "";
 
         System.out.println("Login:");
         
