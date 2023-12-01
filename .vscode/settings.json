@@ -3,6 +3,7 @@
         "lib/**/*.jar",
         "c:\\Users\\Isreael\\Desktop\\Bibliotecas progra\\spring-security-crypto-6.1.5.jar",
         "c:\\Users\\Isreael\\Desktop\\Bibliotecas progra\\gson-2.10.1.jar",
-        "c:\\Users\\Isreael\\Desktop\\Bibliotecas progra\\mysql-connector-j-8.1.0.jar"
+        "c:\\Users\\Isreael\\Desktop\\Bibliotecas progra\\mysql-connector-j-8.1.0.jar",
+        "c:\\Users\\Usuario\\Desktop\\spring-security-crypto-6.1.5.jar"
     ]
 }
