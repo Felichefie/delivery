@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "Proyecto.Login",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
             "name": "Carrusel",
             "request": "launch",
             "mainClass": "Carrusel",
