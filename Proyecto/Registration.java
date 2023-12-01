@@ -110,7 +110,7 @@ public class Registration {
                 // Cerrar la GUI de Registration
                 frame.dispose();
                 // Volver a abrir la GUI de Login
-                new Login();
+                new Principal();
             }
         });
 

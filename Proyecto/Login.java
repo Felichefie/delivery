@@ -42,11 +42,11 @@ public class Login {
         Field_pass.setEchoChar('*');
 
         button_login = new JButton("Login");
-        button_login.setBounds(50, 110, 100, 30);
+        button_login.setBounds(90, 110, 100, 30);
 
         // Nuevo botón de registro
         button_register = new JButton("Register");
-        button_register.setBounds(160, 110, 100, 30);
+        button_register.setBounds(230, 110, 100, 30);
 
         button_register.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -62,8 +62,14 @@ public class Login {
                 // Aquí puedes implementar la lógica de autenticación
                 String userName = textField_user.getText();
                 String password = String.valueOf(Field_pass.getPassword());
+
+                // Cerramos la GUI loguin
+                frame.dispose();
+                // Abrimos GUI principal
+                new Principal();
             }
         });
+
         // Agregar todos los elementos al contenedor
         container.add(label_user);
         container.add(textField_user);
