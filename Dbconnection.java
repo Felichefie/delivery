@@ -6,44 +6,66 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Dbconnection {
-    static Connection conn;
+    static Connection conexion;
 
     public static void main(String[] args) {
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
         String pass = "alumnoPrueba1";
 
-        Dbconnection dbConn = new Dbconnection(URL, user, pass);
-        User u = dbConn.getUser("");
+        Dbconnection conexion_db = new Dbconnection(URL, user, pass);
+        User u = conexion_db.getUser("freddy51@gmail.com");
         if (u.getId() == 0) {
             System.out.println("No existe");
-            dbConn.insertNewUser(u, "Newpassword123");
+            String nuevaContraseña = "Jamon857*";
+            conexion_db.insertNewUser(u, nuevaContraseña);
         } else {
             System.out.println(u.getId());
             System.out.println(u.getUserName());
         }
 
         try {
-            conn.close();
+            conexion.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     boolean insertNewUser(User user, String password) {
-        if (!validaPassword(password)) {
+        Password verificar = new Password(password);
+        verificar.setPass(password);
+
+        if (!verificar.isPasswordOk()) {
             System.out.println("Contraseña no válida. Por favor, cumple con las condiciones de la contraseña.");
+            // Agregar mensajes de impresión para depuración
+            System.out.println("Contraseña proporcionada: " + password);
+            System.out.println("Longitud de la contraseña: " + password.length());
+            System.out.println("Contiene mayúsculas: " + password.matches(".*[A-Z].*"));
+            System.out.println("Contiene minúsculas: " + password.matches(".*[a-z].*"));
+            System.out.println("Contiene números: " + password.matches(".*\\d.*"));
+            System.out.println("Contiene caracteres especiales: " + password.matches(".*[$%&_#*@].*"));
             return false;
         }
 
-        String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email, password)"
-                + "VALUES('Freddy', 'Pineda', 'Prado', 'Alfredo', '2003-05-01', 'freddy51@gmail.com', 'Quesadilla51*')";
+        String queryInsert = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
+                + " VALUES (1,Freddy,?,?,?,?,?,?,?,?,?)";
+
         try {
-            PreparedStatement preState = conn.prepareStatement(queryInsert);
-            preState.setString(1, user.getUserName());
-            preState.setString(2, user.getName());
-            preState.setString(3, user.getEmail());
-            preState.setString(4, password);
+            PreparedStatement preState = conexion.prepareStatement(queryInsert);
+
+            preState.setString(1, user.getType());
+            preState.setString(2, user.getUserName());
+            preState.setString(3, user.getFirstLastName());
+            preState.setString(4, user.getSecondLastName());
+            preState.setString(5, user.getName());
+            preState.setDate(6, user.getBirthday());
+            preState.setString(7, user.getEmail());
+            preState.setString(8, user.getGender());
+            preState.setString(9, user.getPhone());
+            preState.setString(10, password);
+            preState.setDate(11, user.getCreated());
+            preState.executeUpdate();
+
             preState.execute();
             System.out.println("Usuario insertado correctamente.");
             return true;
@@ -61,16 +83,16 @@ public class Dbconnection {
                 password.matches(".*[A-Z].*") &&
                 password.matches(".*[a-z].*") &&
                 password.matches(".*\\d.*") &&
-                password.matches(".*[$%&_#].*");
+                password.matches(".*[$%&_#*@].*");
     }
 
-    public Connection getConn() {
-        return conn;
+    public Connection getConexion() {
+        return conexion;
     }
 
     Dbconnection(String URL, String user, String pass) {
         try {
-            conn = DriverManager.getConnection(URL, user, pass);
+            conexion = DriverManager.getConnection(URL, user, pass);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +107,7 @@ public class Dbconnection {
         ResultSet rset;
         Statement statement;
         try {
-            statement = conn.createStatement();
+            statement = conexion.createStatement();
             rset = statement.executeQuery(query);
 
             while (rset.next()) {
@@ -114,7 +136,7 @@ public class Dbconnection {
         System.out.println(query);
         ResultSet rset;
         Statement statement;
-        String passwordDB = "";
+        String passwordDB = "audhj*585sa";
 
         try {
             statement = conn.createStatement();

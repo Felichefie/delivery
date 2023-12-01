@@ -22,13 +22,13 @@ public class Gui {
         f_login.setSize(600, 500);
         l_usuario = new JLabel("User");
         l_usuario.setBounds(20, 170, 180, 20);
-        txt_usuario = new JTextField("freddy51@gmail.com");
+        txt_usuario = new JTextField("");
         txt_usuario.setBounds(200, 170, 180, 20);
 
         l_password = new JLabel("Password");
         l_password.setBounds(20, 200, 180, 20);
         txt_password = new JTextField(
-                "uFtut72wEYwhms4Gwtjfr5ys9UyJRhAfhdDtzeDsEOy1jmSJMYQc8K/g8vPu2LBf+RgMmBQqDUK64w2T35aEgGI0ACmKeWjw/vuWJAWXxug");
+                "");
         txt_password.setBounds(200, 200, 180, 20);
 
         btn_buscar = new JButton("Buscar");
@@ -59,7 +59,7 @@ public class Gui {
                 Dbconnection dbconnection = new Dbconnection(
                         "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com", "alumno",
                         "alumnoPrueba1");
-                Connection conn = dbconnection.getConn();
+                Connection conn = dbconnection.getConexion();
                 Response r = dbconnection.logAuth(txt_usuario.getText(), txt_password.getText(), conn);
 
             }
@@ -68,47 +68,17 @@ public class Gui {
         btn_dar_de_alta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String t = txt_password.getText();
+                String password = txt_password.getText();
+                Password verificar = new Password(password);
 
-                // longitud>=8, mayusculas, minúsculas, número y caracter especial $,%&_#
-                if (t.length() < 8) {
-                    l_autenticacion.setText(" el password no cumple con las longitud minima");
-                    return;
-                }
-                int i;
-                boolean mayusculas = false;
-                boolean minúsculas = false, numeros = false, simbolos = false;// son banderas, y al terminar el for
-                                                                              // todas tienen que ser verdaderas sino no
-                                                                              // se cumple las politicas del password
-
-                for (i = 0; i < t.length(); i++) {
-                    if (t.charAt(i) >= 'A' && t.charAt(i) <= 'Z') {
-                        mayusculas = true;
-                    }
-                    if (t.charAt(i) >= 'a' && t.charAt(i) <= 'z') {
-                        minúsculas = true;
-                    }
-                    if (t.charAt(i) >= '0' && t.charAt(i) <= '9') {
-                        numeros = true;
-                    }
-                    if (t.charAt(i) == '$' || t.charAt(i) == ',' || t.charAt(i) == '%' || t.charAt(i) == '&'
-                            || t.charAt(i) == '_' || t.charAt(i) == '#' || t.charAt(i) == '*') {
-                        simbolos = true;
-                    }
-                }
-
-                if (!mayusculas && !minúsculas && !numeros && !simbolos) {
-                    l_autenticacion.setText("el password no cumple con los tipos de caracteres");
-                    return;
-                }
-
-                String psw_hash = BCrypt.hashpw(t, BCrypt.gensalt());
+                String psw_hash = BCrypt.hashpw(password, BCrypt.gensalt());
                 System.out.println(psw_hash);
 
                 Dbconnection dbconnection = new Dbconnection(
-                        "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com", "alumno",
+                        "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com",
+                        "alumno",
                         "alumnoPrueba1");
-                Connection conn = dbconnection.getConn();
+                Connection conn = dbconnection.getConexion();
                 User u1 = new User(0, 0, psw_hash, psw_hash);
                 u1.setemail(txt_usuario.getText());
                 u1.setUserName("Freddy");

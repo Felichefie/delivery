@@ -7,8 +7,8 @@ import java.sql.Statement;
 
 public class Visualizar {
     public static void main(String[] args) {
-        Connection conn;
-        ResultSet rset;
+        Connection conexion;
+        ResultSet resultado;
 
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
         String user = "alumno";
@@ -20,31 +20,31 @@ public class Visualizar {
         // gps_lon)";
 
         try {
-            conn = DriverManager.getConnection(URL, user, pass);
-            Statement statement = conn.createStatement();
-            rset = statement.executeQuery(query);
+            conexion = DriverManager.getConnection(URL, user, pass);
+            Statement statement = conexion.createStatement();
+            resultado = statement.executeQuery(query);
 
-            while (rset.next()) {
+            while (resultado.next()) {
                 // Columnas
-                System.out.println(rset.getInt(1) // id_user
-                        + " " + rset.getString(2) // type_user
-                        + " " + rset.getString(3) // user_name
-                        + " " + rset.getString(4) // first_lastname
-                        + " " + rset.getString(5) // second_lastname
-                        + " " + rset.getString(6) // name
-                        + " " + rset.getDate(7) // birthday
-                        + " " + rset.getString(8) // email
-                        + " " + rset.getString(9) // gender
-                        + " " + rset.getString(10)// phone_number
-                        + " " + rset.getString(11)// password
-                        + " " + rset.getDate(12) // created
+                System.out.println(resultado.getInt(1) // id_user
+                        + " " + resultado.getString(2) // type_user
+                        + " " + resultado.getString(3) // user_name
+                        + " " + resultado.getString(4) // first_lastname
+                        + " " + resultado.getString(5) // second_lastname
+                        + " " + resultado.getString(6) // name
+                        + " " + resultado.getDate(7) // birthday
+                        + " " + resultado.getString(8) // email
+                        + " " + resultado.getString(9) // gender
+                        + " " + resultado.getString(10)// phone_number
+                        + " " + resultado.getString(11)// password
+                        + " " + resultado.getDate(12) // created
                 );
             }
             // Escriben en la base de dato, como estan comentadas, solo lee
             // PreparedStatement prepState = conn.prepareStatement(queryInsert);
             // prepState.execute();
 
-            conn.close();
+            conexion.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

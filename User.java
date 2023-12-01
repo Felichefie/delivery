@@ -1,4 +1,7 @@
+import java.sql.Date;
+
 public class User {
+
     private int userId;
     private int id;
     private String title;
@@ -12,6 +15,10 @@ public class User {
         this.id = 0;
         this.title = "";
         this.body = "";
+        this.userName = "";
+        this.name = "";
+        this.password = "";
+
     }
 
     public User(int userId, int id, String title, String body) {
@@ -91,6 +98,34 @@ public class User {
     }
 
     public void setBirthday(String string) {
+    }
+
+    public String getFirstLastName() {
+        return null;
+    }
+
+    public Date getBirthday() {
+        return null;
+    }
+
+    public String getSecondLastName() {
+        return null;
+    }
+
+    public String getType() {
+        return null;
+    }
+
+    public String getGender() {
+        return null;
+    }
+
+    public String getPhone() {
+        return null;
+    }
+
+    public Date getCreated() {
+        return null;
     }
 
 }
