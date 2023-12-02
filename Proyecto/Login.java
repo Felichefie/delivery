@@ -31,7 +31,7 @@ public class Login {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Fondo.jpg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
@@ -90,6 +90,17 @@ public class Login {
         button_login.setForeground(Color.WHITE);
         button_login.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
 
+        button_login.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Aquí puedes implementar la lógica de autenticación
+
+                // Cerramos la GUI loguin
+                frame.dispose();
+                // Abrimos GUI principal
+                new Principal();
+            }
+        });
+
         button_register = new JButton("Registrarte");
         button_register.setBounds(280, 200, 150, 40);
         button_register.setBackground(new Color(7, 164, 121));
@@ -102,17 +113,6 @@ public class Login {
                 frame.dispose();
                 // Crear una nueva instancia de la GUI de registro
                 new Registration();
-            }
-        });
-
-        button_login.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Aquí puedes implementar la lógica de autenticación
-
-                // Cerramos la GUI loguin
-                frame.dispose();
-                // Abrimos GUI principal
-                new Principal();
             }
         });
 
