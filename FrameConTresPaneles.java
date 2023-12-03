@@ -12,7 +12,11 @@ public class FrameConTresPaneles{
         
 
 // Configuración del frame principal
-
+        JFrame frame = new JFrame("TIENDA!!");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+        frame.setLayout(null);
+        Color bluee = new Color(209, 219, 240); 
         
 
 // Creación de los paneles
