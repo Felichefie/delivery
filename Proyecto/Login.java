@@ -17,7 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login {
+public class Login extends JPanel {
+
     private JFrame frame;
     private JLabel label_user, label_pass, etiqueta;
     private JTextField textField_user;
@@ -25,6 +26,8 @@ public class Login {
     private JButton button_login, button_register;
 
     public Login() {
+        this.add(new JLabel("Login Panel"));
+
         frame = new JFrame("GUI Login");
         frame.setBounds(300, 90, 495, 370);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
