@@ -7,7 +7,7 @@ public class TiendaSwing {
 
     private static final String[] IMAGE_NAMES = {
         "https://gobeef.mx/cdn/shop/products/GoBeef_ProductShot_PechugaPollo_800x.png",
-        "delivery/Images/imagen2.png",
+        "delivery/Images/pan.jpg",
         "delivery/Images/imagen3.png",
         "delivery/Images/imagen4.png",
         "delivery/Images/imagen5.png",
