@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-//
 public class Login extends JPanel {
 
     private JFrame frame;
@@ -35,7 +34,7 @@ public class Login extends JPanel {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpeg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);

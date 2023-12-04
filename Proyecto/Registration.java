@@ -49,7 +49,7 @@ public class Registration {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpeg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
