@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginUI {
+public class LoginUI extends JFrame {
 
     private JFrame Jframe;
     private JTextField txt_Usuario, txt_UsuarioRegistro;
@@ -50,7 +50,11 @@ public class LoginUI {
                     JOptionPane.showMessageDialog(null, "Inicio de sesión fallido");
                 }
 
-            }
+            } 
+            // Aquí se crea una instancia de la otra ventana (TIENDASWING) y la hacemos visible
+             TiendaSwing tiendaSwing = new TiendaSwing();
+             tiendaSwing.setVisible(true);
+
         });
         JLogin.add(Btn_Login);
 

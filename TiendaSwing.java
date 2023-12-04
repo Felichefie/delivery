@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TiendaSwing {
+public class TiendaSwing extends JFrame {
 
     private static final String[] IMAGE_NAMES = {
         "https://gobeef.mx/cdn/shop/products/GoBeef_ProductShot_PechugaPollo_800x.png",
