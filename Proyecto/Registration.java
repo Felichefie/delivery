@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+//
 public class Registration {
 
     String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";

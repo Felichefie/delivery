@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class Principal {
     public static void main(String[] args) {
         // Crear un nuevo JFrame
-        JFrame frame = new JFrame("TabbedPane Example");
+        JFrame frame = new JFrame("Principal con pestañas");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Crear una instancia de Pestañas y agregarla al JFrame
