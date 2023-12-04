@@ -91,6 +91,8 @@ public class LoginUI {
         });
         JRegistro.add(Btn_Registro);
 
+        
+
         pestañas.addTab("Iniciar Sesión", JLogin);
         pestañas.addTab("Registrarse", JRegistro);
 
