@@ -23,7 +23,7 @@ public class Conexion {
     }
 
     String sendGet() {
-        int response;
+        int response; //Elena
         String res = "";
         try {
             response = connection.getResponseCode();
