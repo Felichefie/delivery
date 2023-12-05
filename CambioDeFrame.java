@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CambioDeFrame extends JFrame implements ActionListener {
+    private static final String contraseña = null;
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
-    private JButton botonTienda, botonUser;
+    private JButton botonTienda, botonUser, botonDir;
     private TiendaSwing tiendaPanel;
     private User userPanel;
+    private Dir dirPanel;
 
     public CambioDeFrame() {
         // Configuración del JFrame principal
@@ -21,23 +23,28 @@ public class CambioDeFrame extends JFrame implements ActionListener {
         panelPrincipal = new JPanel(cardLayout);
 
         // Creación de los paneles que se mostrarán
-        tiendaPanel = new TiendaSwing();
+        tiendaPanel = new TiendaSwing(contraseña);
         userPanel = new User();
+        dirPanel = new Dir();
 
         // Agregar los paneles al panel principal con un nombre identificador
-        panelPrincipal.add(tiendaPanel, "Tienda Panel");
+        panelPrincipal.add(tiendaPanel, "TiendaSwing");
         panelPrincipal.add(userPanel, "User Panel");
+        panelPrincipal.add(dirPanel, "Direccion");
 
         // Botones para cambiar entre paneles
-        botonTienda = new JButton("Panel 1");
+        botonTienda = new JButton("Tienda");
         botonTienda.addActionListener(this);
-        botonUser = new JButton("Panel 2");
+        botonUser = new JButton("Datos");
         botonUser.addActionListener(this);
+        botonDir = new JButton("Direccion");
+        botonDir.addActionListener(this);
 
         // Agregar botones al panel
         JPanel panelBotones = new JPanel();
         panelBotones.add(botonTienda);
         panelBotones.add(botonUser);
+        panelBotones.add(botonDir);
 
 
         // Agregar componentes al JFrame principal
@@ -54,6 +61,9 @@ public class CambioDeFrame extends JFrame implements ActionListener {
             // Mostrar el Panel de User al presionar el botón de User
             cardLayout.show(panelPrincipal, "User Panel");
         }
+         else if (e.getSource() == botonDir){
+            cardLayout.show(panelPrincipal, "Direccion");
+         }
     }
 
     public static void main(String[] args) {

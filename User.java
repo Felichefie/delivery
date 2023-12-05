@@ -174,12 +174,6 @@ public class User extends JPanel{
         int phone = Integer.parseInt(txt_phone.getText());
         return correo + phone;
     }
-     public void show() {
-        if(!isVisible()){
-        setVisible(true);
-    }
-}
-
     void close(){
     }
     

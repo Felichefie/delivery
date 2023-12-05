@@ -8,7 +8,10 @@ import java.net.URL;
 
 public class TiendaSwing extends JPanel {
 
-    public TiendaSwing() {
+    private String contraseña;
+
+    public TiendaSwing (String constraseña){
+        this.contraseña = contraseña;
         setLayout(new BorderLayout());
         createMainPanel();
     }
