@@ -52,8 +52,8 @@ public class LoginUI extends JFrame {
 
             } 
             // Aquí se crea una instancia de la otra ventana (TIENDASWING) y la hacemos visible
-             TiendaSwing tiendaSwing = new TiendaSwing();
-             tiendaSwing.setVisible(true);
+            // TiendaSwing tiendaSwing = new TiendaSwing();
+            // tiendaSwing.setVisible(true);
 
         });
         JLogin.add(Btn_Login);
