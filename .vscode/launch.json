@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Visualizar",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "DB_Users",
+            "request": "launch",
+            "mainClass": "Proyecto.DB_Users",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Registration",
+            "request": "launch",
+            "mainClass": "Proyecto.Registration",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Visu2",
+            "request": "launch",
+            "mainClass": "Proyecto.Visu2",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Principal",
+            "request": "launch",
+            "mainClass": "Proyecto.Principal",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "Proyecto.Login",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
             "name": "Principal",
             "request": "launch",
             "mainClass": "Proyecto.Principal",

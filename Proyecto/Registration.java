@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -49,7 +52,7 @@ public class Registration {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpeg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
@@ -214,16 +217,22 @@ public class Registration {
 
         // Agregar un ActionListener al botón
         button_register.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Llama al método para insertar datos en la base de datos
-                InsertarEnDB();
-
-                // Cerrar la GUI de Registration
-                frame.dispose();
-                // Volver a abrir la GUI de Login
-                new Principal();
-            }
-        });
+                public void actionPerformed(ActionEvent e) {
+                    // Llama al método para insertar datos en la base de datos
+                    InsertarEnDB();
+            
+                    // Cerrar la GUI de Registration
+                    frame.dispose();
+                    // Volver a abrir la GUI de Login
+                    //new Principal();
+                   JFrame principalFrame = new JFrame("Principal con pestañas");
+                    Pestañas pestañas = new Pestañas();
+                    principalFrame.add(pestañas);
+                    principalFrame.setBounds(280, 75, 800, 600);
+                    principalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    principalFrame.setVisible(true);
+                }
+            });
 
         // Boton de cancelar
         button_cancel = new JButton("Cancelar");
@@ -292,6 +301,8 @@ public class Registration {
         String genero = (String) comboBox_genero.getSelectedItem();
         String telefono = textField_telefono.getText();
         String password = String.valueOf(field_pass.getPassword());
+        //String password = String.valueOf(field_pass.getPassword());
+        String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
         // Preparar y ejecutar la consulta de inserción
         String queryInsert = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
@@ -309,15 +320,16 @@ public class Registration {
             prepState.setString(7, correoElectronico);
             prepState.setString(8, genero);
             prepState.setString(9, telefono);
-            prepState.setString(10, password);
+            prepState.setString(10, pwd_hash);
             prepState.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
 
             prepState.execute();
-            System.out.println("Datos insertados exitosamente.");
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+         catch (Exception e) {
+        e.printStackTrace();
     }
-
-}
+    
+}}

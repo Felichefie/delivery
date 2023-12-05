@@ -34,7 +34,7 @@ public class Login extends JPanel {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpeg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
