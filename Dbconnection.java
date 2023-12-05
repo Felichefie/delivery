@@ -306,16 +306,18 @@ public class Dbconnection {
 
     Userexample getUser(String email, int phone){
         Userexample user = new Userexample();
-        
-        String query = "SELECT * FROM progra2.users u WHERE u.email ='" + email + "' OR u.phone_number = '" + phone + "'";
-        System.out.println(query);
+    
+        String query = "SELECT * FROM progra2.users u WHERE u.email = ?  OR u.phone_number =  ? ";
         ResultSet rset;
-        Statement statement;
+        PreparedStatement preparedStatement;
 
         try{
 
-            statement = conn.createStatement();
-            rset = statement.executeQuery(query);
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            preparedStatement.setInt(2,phone);
+
+            rset = preparedStatement.executeQuery();
 
             while(rset.next()){
 
@@ -327,7 +329,7 @@ public class Dbconnection {
                     + " " + rset.getString(6)
                     + " " + rset.getString(7)
                     + " " + rset.getString(8)
-                    + " " + rset.getString(9)
+                    + " " + rset.getInt(9)
 
                 );
 
@@ -336,6 +338,14 @@ public class Dbconnection {
                 user.setUserName(rset.getString(2));
                 user.setEmail(rset.getString(7));
                 user.setPhoneNumber(Integer.parseInt(rset.getString(9)));
+                String phoneString =rset.getString(9);
+
+if (phoneString != null && !phoneString.isEmpty()) {
+    user.setPhoneNumber(Integer.parseInt(phoneString));
+} else {
+    // Si la cadena es nula o vacía, puedes establecer un valor predeterminado o dejarlo como está.
+     user.setPhoneNumber(0);
+}
 
             }
         }catch(SQLException e){    
@@ -353,6 +363,5 @@ public class Dbconnection {
     public void closeConnection() {
     }
 
-    
 }
 

@@ -53,5 +53,12 @@ public class Conexion {
         String res="";
 
         return res;
+
+    }
+    public static void main(String[] args) {
+            // Aquí puedes escribir código para probar tu clase Conexion
+            Conexion conexion = new Conexion(METHOD_HTTP_GET);
+            String response = conexion.sendGet();
+            System.out.println(response);
     }
 }
