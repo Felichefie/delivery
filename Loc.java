@@ -47,8 +47,8 @@ public class Loc {
         btn_register.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                double lat = Double.parseDouble(txt_lat.getText().toString());
-                double lon = Double.parseDouble(txt_lon.getText().toString());
+                double Gps_lat = Double.parseDouble(txt_lat.getText().toString());
+                double Gps_lon = Double.parseDouble(txt_lon.getText().toString());
                 JOptionPane.showMessageDialog(btn_register,"DATOS AGREGADOS DE MANERA CORRECTA!");
             }
         });

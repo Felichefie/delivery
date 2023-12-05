@@ -5,12 +5,13 @@ import java.awt.Font;
 import javax.swing.*;
 
 public class Dir {
-    private JLabel lbl_nom, lbl_street, lbl_number, lbl_number_two, lbl_neighborhood, lbl_city, lbl_state, 
-                   lbl_country, lbl_postal;
-    private JButton btn_cancel, btn_register, btn_ubicacion;
     private JFrame frm_User;
     private JTextField txt_street, txt_number, txt_number_two, txt_neighborhood, txt_city, txt_state, 
                        txt_country, txt_postal;
+    private JLabel lbl_nom, lbl_street, lbl_number, lbl_number_two, lbl_neighborhood, lbl_city, lbl_state, 
+                   lbl_country, lbl_postal;
+    private JButton btn_cancel, btn_register, btn_ubicacion;
+    private Loc loc;
 
     Dir() {
         frm_User = new JFrame();
@@ -91,6 +92,8 @@ public class Dir {
         frm_User.setLayout(null);
         frm_User.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        loc = new Loc();
+
         btn_register.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -101,7 +104,6 @@ public class Dir {
         btn_ubicacion.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                Loc loc = new Loc();
                 loc.show();
             }
         });
@@ -128,5 +130,11 @@ public class Dir {
 
     void show() {
         frm_User.setVisible(true);
+    }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Dir dir = new Dir();
+            dir.show();
+        });
     }
 }
