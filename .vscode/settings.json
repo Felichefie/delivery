@@ -4,6 +4,8 @@
         "gson-2.10.jar",
         "c:\\Users\\magon\\Downloads\\gson-2.10.1.jar",
         "c:\\Users\\magon\\Downloads\\mysql-connector-j-8.1.0.jar",
-       "c:\\Users\\magon\\Downloads\\spring-security-crypto-6.1.5.jar"
-    ]
+       "c:\\Users\\magon\\Downloads\\spring-security-crypto-6.1.5.jar",
+       "c:\\Users\\magon\\Downloads\\google-maps-services-java-2.2.0.tar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

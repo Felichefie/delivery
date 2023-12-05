@@ -1,8 +1,10 @@
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-
 import javax.swing.*;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.model.GeocodingResult;
 
 public class Dir {
     private JFrame frm_User;
@@ -104,7 +106,7 @@ public class Dir {
         btn_ubicacion.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                loc.show();
+                obtenerUbicacion();
             }
         });
 
@@ -130,6 +132,19 @@ public class Dir {
 
     void show() {
         frm_User.setVisible(true);
+    }
+
+    void obtenerUbicacion(){
+        String direccion = constructorDireccion();
+        String apiKey = "AIzaSyCfipoZKuLdyids56hnM86JEWuoDEgUBeg";
+        GeoApiContext contex = new GeoApiContext.Builder().apiKey(apiKey).build();
+
+        try {
+
+            GeocodingResult[] result = Geocoding
+
+        }
+
     }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
