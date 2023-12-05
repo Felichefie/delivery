@@ -65,4 +65,11 @@ public class Loc {
         frm_User.setVisible(true);
     }
 
+    public class Main {
+        public static void main(String[] args) {
+            Loc loc = new Loc();
+            loc.show();
+        }
+    }
+
 }

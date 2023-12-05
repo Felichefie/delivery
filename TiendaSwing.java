@@ -6,24 +6,11 @@ import java.awt.image.ImageFilter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TiendaSwing extends JFrame {
+public class TiendaSwing extends JPanel {
 
-    public TiendaSwing(String string) {
-    }
-
-    private void setPantallaCompleta(){
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        
-        if(gd.isFullScreenSupported()){
-            setUndecorated(true);
-            setResizable(false);
-            gd.setFullScreenWindow(this);
-        }
-        else {
-            setSize(800,600);
-            setLocationRelativeTo(null);
-        }
-
+    public TiendaSwing() {
+        setLayout(new BorderLayout());
+        createMainPanel();
     }
 
     private static final String[] IMAGE_URLS = {
@@ -35,6 +22,7 @@ public class TiendaSwing extends JFrame {
         "https://images-na.ssl-images-amazon.com/images/I/71UnD6gYfFL.jpg",
         "https://peruviannutrition.com/wp-content/uploads/2022/06/PSICHOTYC-GOLD.png"
     };
+
     private static ImageIcon loadImageFromURL(String imageUrl) {
     try {
         return new ImageIcon(new URL(imageUrl));
@@ -78,9 +66,9 @@ public class TiendaSwing extends JFrame {
     private static double subtotal = 0.0;
     private static JLabel labelSubtotal;
 
-    public static void main(String[] args) {
+    /*public static void createmain(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            TiendaSwing frame = new TiendaSwing("GYM STORE");
+            TiendaSwing frame = new TiendaSwing();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setPantallaCompleta();
 
@@ -93,9 +81,9 @@ public class TiendaSwing extends JFrame {
             
             frame.setVisible(true);
         });
-    }
+    }/* */
 
-    private static JPanel createMainPanel() {
+    private void createMainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
@@ -105,10 +93,10 @@ public class TiendaSwing extends JFrame {
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        return mainPanel;
+        add(mainPanel,BorderLayout.CENTER);
     }
 
-    private static JPanel createProductPanel(String imageUrl, String description, double price, String stockQuantity) {
+    private JPanel createProductPanel(String imageUrl, String description, double price, String stockQuantity) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
         productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 

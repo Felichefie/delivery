@@ -4,15 +4,14 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-public class User {
+public class User extends JPanel{
     private JLabel lbl_tipo, lbl_nom, lbl_userName, lbl_first, lbl_second, lbl_name, lbl_birth, lbl_email, lbl_phone;
     private JButton btn_cancel, btn_register, btn_direccion, btn_buscar;
-    private JFrame frm_User;
     private JTextField txt_userName, txt_first, txt_second, txt_name, txt_birth, txt_email, txt_phone;
     private Dbconnection dbConn;
 
     User() {
-        frm_User = new JFrame();
+        setLayout(null);
 
 
         btn_cancel = new JButton("CANCEL");
@@ -68,32 +67,27 @@ public class User {
         txt_phone.setBounds(140, 470, 250, 25);
 
 
-        frm_User.add(lbl_tipo);
-        frm_User.add(lbl_nom);
-        frm_User.add(lbl_userName);
-        frm_User.add(lbl_first);
-        frm_User.add(lbl_second);
-        frm_User.add(lbl_name);
-        frm_User.add(lbl_birth);
-        frm_User.add(lbl_email);
-        frm_User.add(lbl_phone);
-        frm_User.add(txt_userName);
-        frm_User.add(txt_first);
-        frm_User.add(txt_second);
-        frm_User.add(txt_name);
-        frm_User.add(txt_birth);
-        frm_User.add(txt_email);
-        frm_User.add(txt_phone);
-        frm_User.add(btn_register);
-        frm_User.add(btn_cancel);
-        frm_User.add(btn_direccion);
-        frm_User.add(btn_buscar);
-       
-                
-        frm_User.setSize(400, 700);
-        frm_User.setLayout(null);
-        frm_User.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        add(lbl_tipo);
+        add(lbl_nom);
+        add(lbl_userName);
+        add(lbl_first);
+        add(lbl_second);
+        add(lbl_name);
+        add(lbl_birth);
+        add(lbl_email);
+        add(lbl_phone);
+        add(txt_userName);
+        add(txt_first);
+        add(txt_second);
+        add(txt_name);
+        add(txt_birth);
+        add(txt_email);
+        add(txt_phone);
+        add(btn_register);
+        add(btn_cancel);
+        add(btn_direccion);
+        add(btn_buscar);
+    
         btn_buscar.addActionListener(new ActionListener() {
            
             public void actionPerformed(ActionEvent e) {
@@ -180,10 +174,11 @@ public class User {
         int phone = Integer.parseInt(txt_phone.getText());
         return correo + phone;
     }
-    
-    void show() {
-        frm_User.setVisible(true);
+     public void show() {
+        if(!isVisible()){
+        setVisible(true);
     }
+}
 
     void close(){
     }
