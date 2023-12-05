@@ -98,10 +98,10 @@ public class User {
            
             public void actionPerformed(ActionEvent e) {
 
-                String Email = txt_email.getText().toString();
-                String Phone = txt_phone.getText().toString();
+                String Email = txt_email.getText();
+                int Phone = Integer.parseInt(txt_phone.getText());
 
-                Usuario u = dbConn.getUser(Email, Phone);
+                Userexample u = dbConn.getUser(Email, Phone);
         
                 if(u.getId() == 0){
                     JOptionPane.showMessageDialog(btn_buscar,"DATOS DE USUARIO INGRESADOS NO LOCALIZADOS.");

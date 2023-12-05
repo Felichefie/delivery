@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +24,7 @@ public class Dbconnection {
         int phone = 1234567890;
 
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
-        UserExample u = dbConn.getUser(correo, phone);
+        Userexample u = dbConn.getUser(correo, phone);
         Address a = dbConn.getAddress(u.getId());
 
         if(u.getId() == 0){
@@ -67,7 +68,7 @@ public class Dbconnection {
         return conn;
     }
 
-    boolean InsertNewAddress(UserExample user){
+    boolean InsertNewAddress(Userexample user){
         
         String queryInsert = "INSERT INTO progra2.address(id_user, street, number, number_two, neighborhood, city, state, country, postal_code, gps_lat, gps_lon)"
                 + "VALUES(" + user.getId() + ", 'Calle' , 5000, '' , 'Colonia' , 'Morelia' , 'Michoacan' , 'Mexico' , '58000' , 19.7008 , 1.2)";
@@ -90,7 +91,7 @@ public class Dbconnection {
             }
     }
 
-    boolean InsertNewUser(UserExample user){
+    boolean InsertNewUser(Userexample user){
 
         String queryInsert = "INSERT INTO progra2.users(user_name, first_lastname, second_lastname, name, birthday, email)"
                 + "VALUES('" + user.getUserName()
@@ -303,8 +304,8 @@ public class Dbconnection {
 
     }
 
-    UserExample getUser(String email, int phone){
-        UserExample user = new UserExample();
+    Userexample getUser(String email, int phone){
+        Userexample user = new Userexample();
         
         String query = "SELECT * FROM progra2.users u WHERE u.email ='" + email + "' OR u.phone_number = '" + phone + "'";
         System.out.println(query);
@@ -345,5 +346,13 @@ public class Dbconnection {
 
     }
 
+    public List<Producto> getProduct() {
+        return null;
+    }
+
+    public void closeConnection() {
+    }
+
     
 }
+

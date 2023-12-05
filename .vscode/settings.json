@@ -1,8 +1,9 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\Hp\\Downloads\\gson-2.10.1.jar",
-        "c:\\Users\\Hp\\Downloads\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar",
-        "c:\\Users\\Hp\\Downloads\\spring-security-crypto-6.1.5.jar"
+        "gson-2.10.jar",
+        "c:\\Users\\magon\\Downloads\\gson-2.10.1.jar",
+        "c:\\Users\\magon\\Downloads\\mysql-connector-j-8.1.0.jar",
+       "c:\\Users\\magon\\Downloads\\spring-security-crypto-6.1.5.jar"
     ]
 }

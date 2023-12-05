@@ -2,27 +2,57 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageFilter;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class TiendaSwing extends JFrame {
 
-    private static final String[] IMAGE_NAMES = {
+    public TiendaSwing(String string) {
+    }
+
+    private void setPantallaCompleta(){
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        
+        if(gd.isFullScreenSupported()){
+            setUndecorated(true);
+            setResizable(false);
+            gd.setFullScreenWindow(this);
+        }
+        else {
+            setSize(800,600);
+            setLocationRelativeTo(null);
+        }
+
+    }
+
+    private static final String[] IMAGE_URLS = {
         "https://gobeef.mx/cdn/shop/products/GoBeef_ProductShot_PechugaPollo_800x.png",
-        "delivery/Images/pan.jpg",
-        "delivery/Images/imagen3.png",
-        "delivery/Images/imagen4.png",
-        "delivery/Images/imagen5.png",
-        "delivery/Images/imagen6.png",
-        "https://peruviannutrition.com/wp-content/uploads/2022/06/PSICHOTYC-GOLD.png",
+        "https://notitotal.com/wp-content/uploads/2020/06/panintegralfinaalfinaaal.jpg",
+        "https://th.bing.com/th/id/OIP.-Q622cEzXpYluF_jk7F_bwHaHa?rs=1&pid=ImgDetMain",
+        "https://http2.mlstatic.com/D_NQ_NP_2X_803237-MLA48551207726_122021-F.jpg",
+        "https://i5.walmartimages.com/asr/3268d77a-4b14-46a1-9eff-78709e4eb02d.df3e1a4ac9ed37823f9889bc2a95d4bf.jpeg",
+        "https://images-na.ssl-images-amazon.com/images/I/71UnD6gYfFL.jpg",
+        "https://peruviannutrition.com/wp-content/uploads/2022/06/PSICHOTYC-GOLD.png"
     };
+    private static ImageIcon loadImageFromURL(String imageUrl) {
+    try {
+        return new ImageIcon(new URL(imageUrl));
+    } catch (MalformedURLException e) {
+        System.err.println("Error al cargar la imagen desde la URL: " + imageUrl);
+        e.printStackTrace();
+        return null;
+    }
+}
 
     private static final String[] DESCRIPTIONS = {
-        "Pechuga de pollo",
-        "Pan integral",
-        "Proteina",
-        "Creatina",
-        "Omega 3",
-        "Straps",
-        "Pre-workout"
+        "Pechuga de pollo: 100% carne magra y saludable.",
+        "Pan integral: Rico en fibra y nutrientes esenciales.",
+        "Proteina: Suplemento para el desarrollo muscular.",
+        "Creatina: Mejora el rendimiento en actividades físicas intensas.",
+        "Omega 3: Ácidos grasos esenciales para la salud cardiovascular.",
+        "Straps: Accesorio para levantamiento de pesas.",
+        "Pre-workout: Suplemento para mejorar el rendimiento antes del entrenamiento."
     };
 
     private static final double[] PRICES = {
@@ -50,14 +80,17 @@ public class TiendaSwing extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("GYM STORE");
+            TiendaSwing frame = new TiendaSwing("GYM STORE");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(800, 600);
+            frame.setPantallaCompleta();
+
 
             labelSubtotal = new JLabel("Subtotal: $0.00");
             frame.add(labelSubtotal, BorderLayout.NORTH);
 
-            frame.add(new JScrollPane(createMainPanel()));
+            JScrollPane scrollPane =  new JScrollPane (createMainPanel());
+            frame.add(scrollPane);
+            
             frame.setVisible(true);
         });
     }
@@ -66,8 +99,8 @@ public class TiendaSwing extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        for (int i = 0; i < IMAGE_NAMES.length; i++) {
-            JPanel productPanel = createProductPanel(IMAGE_NAMES[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i]);
+        for (int i = 0; i < IMAGE_URLS.length; i++) {
+            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i]);
             mainPanel.add(productPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
@@ -75,11 +108,15 @@ public class TiendaSwing extends JFrame {
         return mainPanel;
     }
 
-    private static JPanel createProductPanel(String imageName, String description, double price, String stockQuantity) {
+    private static JPanel createProductPanel(String imageUrl, String description, double price, String stockQuantity) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
         productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
-        ImageIcon imageIcon = new ImageIcon(imageName);
+        ImageIcon imageIcon = loadImageFromURL(imageUrl);
+        if (imageIcon != null ) {
+            JLabel labelImage = new JLabel(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+            productPanel.add(labelImage, BorderLayout.WEST);
+        }
         JLabel labelImage = new JLabel(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
         productPanel.add(labelImage, BorderLayout.WEST);
 
@@ -95,17 +132,22 @@ public class TiendaSwing extends JFrame {
         textAreaDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsPanel.add(textAreaDescription);
 
+        JPanel quantityAndPricePanel = new JPanel();
+        quantityAndPricePanel.setLayout(new BoxLayout(quantityAndPricePanel, BoxLayout.X_AXIS));
+
         JLabel labelStockQuantity = new JLabel("Stock: " + stockQuantity);
         labelStockQuantity.setAlignmentX(Component.CENTER_ALIGNMENT);
-        detailsPanel.add(labelStockQuantity);
+        quantityAndPricePanel.add(labelStockQuantity);
 
         JLabel labelPrice = new JLabel(String.format("$%.1f MXN", price));
         labelPrice.setAlignmentX(Component.CENTER_ALIGNMENT);
-        detailsPanel.add(labelPrice);
+        quantityAndPricePanel.add(labelPrice);
+
+        detailsPanel.add(quantityAndPricePanel);
 
         final JTextField fieldQuantity = new JTextField("0", 3); 
         fieldQuantity.setHorizontalAlignment(JTextField.CENTER);
-
+//BOTON DE AUMENTAR LA CANTIDAD
         JButton buttonAdd = new JButton("+");
         buttonAdd.addActionListener(new ActionListener() {
             @Override
@@ -115,7 +157,7 @@ public class TiendaSwing extends JFrame {
                 fieldQuantity.setText(String.valueOf(quantity));
             }
         });
-
+//BOTON DE DISMINUIR LA CANTIDAD 
         JButton buttonSubtract = new JButton("-");
         buttonSubtract.addActionListener(new ActionListener() {
             @Override
@@ -127,7 +169,7 @@ public class TiendaSwing extends JFrame {
                 }
             }
         });
-
+//BOTOTN DE AGREGAR AL SUBTOTAL
         JButton buttonAddToCart = new JButton("Agregar");
         buttonAddToCart.addActionListener(new ActionListener() {
             @Override
@@ -139,7 +181,8 @@ public class TiendaSwing extends JFrame {
         });
         detailsPanel.add(buttonAddToCart);
 
-        JPanel controlPanel = new JPanel(new BorderLayout());
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
         controlPanel.setBorder(BorderFactory.createLineBorder(Color.yellow,0)); 
 
         //JButton buttonAdd = new JButton("+");
@@ -148,6 +191,7 @@ public class TiendaSwing extends JFrame {
         JPanel buttonsPanel = new JPanel(new GridLayout(2, 1));
         buttonsPanel.add(buttonAdd);
         buttonsPanel.add(buttonSubtract);
+        controlPanel.add(buttonAddToCart);
 
         JPanel quantityPanel = new JPanel(new FlowLayout());
         quantityPanel.add(buttonsPanel);

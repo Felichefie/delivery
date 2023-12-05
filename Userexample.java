@@ -1,4 +1,4 @@
-public class UserExample {
+public class Userexample {
     
     private int userId;
     private int id;
@@ -9,14 +9,14 @@ public class UserExample {
     private String email;
     private int phoneNumber;
 
-    public UserExample(){
+    public Userexample(){
         userId = 0;
         id = 0;
         title = "";
         body = "";
     }
 
-    public UserExample(int userId, int id, String title, String body){
+    public Userexample(int userId, int id, String title, String body){
         this.userId = userId;
         this.id = id;
         this.title = title;
@@ -86,5 +86,21 @@ public class UserExample {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getFirst_lastname() {
+        return null;
+    }
+
+    public String getSecond_lastname() {
+        return null;
+    }
+
+    public String getBirthday() {
+        return null;
+    }
+
+    public String getPhone_number() {
+        return null;
     }
 }

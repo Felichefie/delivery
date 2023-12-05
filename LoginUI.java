@@ -46,14 +46,14 @@ public class LoginUI extends JFrame {
 
                 if(login.inicioSesion()){
                     JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                    TiendaSwing tiendaSwing = new TiendaSwing(contraseña);
+                    tiendaSwing.setVisible(true);
+
                 }else{
                     JOptionPane.showMessageDialog(null, "Inicio de sesión fallido");
                 }
-
             } 
             // Aquí se crea una instancia de la otra ventana (TIENDASWING) y la hacemos visible
-             TiendaSwing tiendaSwing = new TiendaSwing();
-             tiendaSwing.setVisible(true);
 
         });
         JLogin.add(Btn_Login);
@@ -131,4 +131,9 @@ public class LoginUI extends JFrame {
         return true;
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new LoginUI();
+        });
+    }
 }
