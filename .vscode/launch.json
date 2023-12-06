@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Sessions",
+            "request": "launch",
+            "mainClass": "Proyecto.Sessions",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Visualizar_sessions",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar_sessions",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
             "name": "Visualizar",
             "request": "launch",
             "mainClass": "Proyecto.Visualizar",
