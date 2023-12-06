@@ -31,10 +31,10 @@ public class Conexion {
         }
     }
     String sendGet(){
-        int response;
+        int Response;
         String res = "";
         try {
-            response = connection.getResponseCode();
+            Response = connection.getResponseCode();
             //System.out.println(response);
 
             BufferedReader br = new BufferedReader(
@@ -58,7 +58,7 @@ public class Conexion {
     public static void main(String[] args) {
             // Aquí puedes escribir código para probar tu clase Conexion
             Conexion conexion = new Conexion(METHOD_HTTP_GET);
-            String response = conexion.sendGet();
-            System.out.println(response);
+            String Response = conexion.sendGet();
+            System.out.println(Response);
     }
 }

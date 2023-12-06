@@ -7,10 +7,11 @@ public class CambioDeFrame extends JFrame implements ActionListener {
     private static final String contraseña = null;
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
-    private JButton botonTienda, botonUser, botonDir;
+    private JButton botonTienda, botonUser, botonDir, botonPagar;
     private TiendaSwing tiendaPanel;
     private User userPanel;
     private Dir dirPanel;
+    private Pago pagoVentana;
 
     public CambioDeFrame() {
         // Configuración del JFrame principal
@@ -39,17 +40,23 @@ public class CambioDeFrame extends JFrame implements ActionListener {
         botonUser.addActionListener(this);
         botonDir = new JButton("Direccion");
         botonDir.addActionListener(this);
+        botonPagar = new JButton("Pagar");
+        botonPagar.addActionListener(this);
 
         // Agregar botones al panel
         JPanel panelBotones = new JPanel();
         panelBotones.add(botonTienda);
         panelBotones.add(botonUser);
         panelBotones.add(botonDir);
+        panelBotones.add(botonPagar);
 
 
         // Agregar componentes al JFrame principal
         add(panelBotones, BorderLayout.NORTH);
         add(panelPrincipal, BorderLayout.CENTER);
+
+        pagoVentana = new Pago(tiendaPanel);
+        tiendaPanel.setPagoVentana(pagoVentana);
     }
 
     @Override
@@ -63,6 +70,9 @@ public class CambioDeFrame extends JFrame implements ActionListener {
         }
          else if (e.getSource() == botonDir){
             cardLayout.show(panelPrincipal, "Direccion");
+         }
+         else if (e.getSource() == botonPagar){
+            pagoVentana.setVisible(true);
          }
     }
 

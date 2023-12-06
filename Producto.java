@@ -4,6 +4,15 @@ public class Producto {
     private String img;
     private String desc;
     private int stock;
+    private int Subtotal;
+
+    public int getSubtotal() {
+        return Subtotal;
+    }
+
+    public void setSubtotal(int subtotal) {
+        Subtotal = subtotal;
+    }
 
     Producto(){
         this.id = 0;

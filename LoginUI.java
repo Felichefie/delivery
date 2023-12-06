@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.sql.SQLException;
+import java.util.UUID;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class LoginUI extends JFrame {
 
@@ -46,8 +51,10 @@ public class LoginUI extends JFrame {
 
                 if(login.inicioSesion()){
                     JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                    TiendaSwing tiendaSwing = new TiendaSwing(contraseña);
-                    tiendaSwing.setVisible(true);
+                    Jframe.dispose();
+                    
+                    CambioDeFrame cambioDeFrame = new CambioDeFrame();
+                    cambioDeFrame.setVisible(true);
 
                 }else{
                     JOptionPane.showMessageDialog(null, "Inicio de sesión fallido");

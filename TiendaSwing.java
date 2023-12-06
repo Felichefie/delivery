@@ -9,12 +9,15 @@ import java.net.URL;
 public class TiendaSwing extends JPanel {
 
     private String contraseña;
+    private Pago pagoVentana;
+
 
     public TiendaSwing (String constraseña){
         this.contraseña = contraseña;
         setLayout(new BorderLayout());
         createMainPanel();
     }
+    
 
     private static final String[] IMAGE_URLS = {
         "https://gobeef.mx/cdn/shop/products/GoBeef_ProductShot_PechugaPollo_800x.png",
@@ -67,7 +70,10 @@ public class TiendaSwing extends JPanel {
     };
 
     private static double subtotal = 0.0;
-    private static JLabel labelSubtotal;
+    private static JLabel labelSubtotal = new JLabel("Subtotal:");
+    public double getSubtotal(){
+        return subtotal;
+    }
 
     /*public static void createmain(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -98,6 +104,7 @@ public class TiendaSwing extends JPanel {
 
         add(mainPanel,BorderLayout.CENTER);
     }
+    
 
     private JPanel createProductPanel(String imageUrl, String description, double price, String stockQuantity) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
@@ -168,7 +175,9 @@ public class TiendaSwing extends JPanel {
                 int quantity = Integer.parseInt(fieldQuantity.getText());
                 subtotal += price * quantity;
                 labelSubtotal.setText("Subtotal: $" + String.format("%.2f", subtotal));
+                actualizarSubtotalEnPago(subtotal);
             }
+
         });
         detailsPanel.add(buttonAddToCart);
 
@@ -193,6 +202,16 @@ public class TiendaSwing extends JPanel {
         productPanel.add(detailsPanel, BorderLayout.CENTER);
         productPanel.add(controlPanel, BorderLayout.EAST);
 
+        
+
         return productPanel;
+    }
+    public void setPagoVentana(Pago pagoVentana) {
+        this.pagoVentana = pagoVentana;
+    }
+    public void actualizarSubtotalEnPago (double nuevoSubtotal){
+        if(pagoVentana!= null){
+            pagoVentana.actualizarSubtotalEnPago(nuevoSubtotal);
+        }
     }
 }
