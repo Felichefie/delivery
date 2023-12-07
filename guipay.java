@@ -23,7 +23,7 @@ public class guipay {
         Dbconnection dbconnection = new Dbconnection("jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com", "alumno", "alumnoPrueba1");
         Connection conn = dbconnection.getConn();
         
-        String query = "SELECT type FROM progra2.type_pay";
+        String query = "SELECT type FROM progra2.type_pay WHERE id_user=112 AND id>10";
         System.out.println(query);
         ResultSet rset;
         Statement statement;
