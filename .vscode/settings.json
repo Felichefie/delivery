@@ -1,5 +1,5 @@
 {
-    "editor.inlineSuggest.showToolbar": "onHover",
+    "editor.inlineSuggest.showToolbar": "always",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "mysql-connector-j-8.1.0.jar",
