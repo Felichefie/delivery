@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -23,12 +24,12 @@ public class guipay {
         Dbconnection dbconnection = new Dbconnection("jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com", "alumno", "alumnoPrueba1");
         Connection conn = dbconnection.getConn();
         
-        String query = "SELECT type FROM progra2.type_pay WHERE id_user=112 AND id>10";
+        String query = "SELECT type,id,account_number,clabe FROM progra2.type_pay WHERE id_user=112 AND id>10";
         System.out.println(query);
         ResultSet rset;
         Statement statement;
 
-        JComboBox<String> c_comBox = new JComboBox<String>();
+        JComboBox<Object> c_comBox = new JComboBox<Object>();
         try{
                     
             statement = conn.createStatement();
@@ -36,7 +37,10 @@ public class guipay {
             
             while(rset.next()){
                 
-                c_comBox.addItem(rset.getString(1));
+                item_pago i = new item_pago(Integer.parseInt(rset.getString(2)), rset.getString(1), rset.getString(3), rset.getString(4));
+                //public item_pago(int id, String type, String account_number, String clabe) {
+
+                c_comBox.addItem(i);
             
         }
     }
@@ -61,10 +65,10 @@ public class guipay {
         double d = car.getSubtotal();
         JFrame frame = new JFrame("Metodo");
         JComboBox c_combBox = getpaymetodos();
-        c_combBox.setBounds(100,100,100,100);
+        c_combBox.setBounds(100,100,300,50);
         
         JButton btn_pagar = new JButton();
-        btn_pagar.setBounds(100,200,100,100);
+        btn_pagar.setBounds(100,200,100,40);
         btn_pagar.setText("Pagar");
         btn_pagar.addActionListener(new ActionListener() {
             @Override
@@ -94,6 +98,7 @@ public class guipay {
         frame.setSize(600,600);
         frame.setLayout(null);
         frame.setVisible( true );
+        
     }
 
 }
