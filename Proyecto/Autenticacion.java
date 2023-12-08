@@ -59,13 +59,7 @@ public class Autenticacion {
                                             System.out.println(timeout);
                                             System.out.println(tiempoActual);
                                             // Abrir la ventana Principal si la autenticación fue exitosa
-                                            //new Principal();
-                                            JFrame principalFrame = new JFrame("Principal con pestañas");
-                                            Pestañas pestañas = new Pestañas();
-                                            principalFrame.add(pestañas);
-                                            principalFrame.setBounds(280, 75, 800, 600);
-                                            principalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                            principalFrame.setVisible(true);
+                                            new Principal();
                                         } else {
                                             // La sesión ha expirado, mostrar mensaje
                                             mensaje = "Tu sesión ha expirado, regístrate nuevamente";
@@ -76,7 +70,7 @@ public class Autenticacion {
                                     }
                                     
                                 } else {
-                                    mensaje = "Usuario no registrado en la tabla sessions";
+                                    mensaje = "Usuario no registrado";
                                 }
                             }
                         }

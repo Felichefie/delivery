@@ -230,13 +230,7 @@ public class Registration {
                     // Cerrar la GUI de Registration
                     frame.dispose();
                     // Volver a abrir la GUI de Login
-                    //new Principal();
-                   JFrame principalFrame = new JFrame("Principal con pestañas");
-                    Pestañas pestañas = new Pestañas();
-                    principalFrame.add(pestañas);
-                    principalFrame.setBounds(280, 75, 800, 600);
-                    principalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    principalFrame.setVisible(true);
+                    new Principal();
                 }
             });
 
@@ -311,7 +305,7 @@ public class Registration {
         String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
         LocalDateTime nowDate = LocalDateTime.now();
-        LocalDateTime endTimeSession = nowDate.plusMinutes(5);
+        LocalDateTime endTimeSession = nowDate.plusMinutes(30);
 
         String queryInsertUser = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
         + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

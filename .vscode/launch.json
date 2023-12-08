@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Visualizar_products",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar_products",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Visualizar_purchase",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar_purchase",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "guipay",
+            "request": "launch",
+            "mainClass": "Proyecto.guipay",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "ventana_chica",
+            "request": "launch",
+            "mainClass": "Proyecto.ventana_chica",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
             "name": "Autenticacion",
             "request": "launch",
             "mainClass": "Proyecto.Autenticacion",
