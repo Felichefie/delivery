@@ -1,25 +1,31 @@
 import javax.swing.*;
+
+import com.google.gson.annotations.JsonAdapter;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageFilter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TiendaSwing extends JPanel {
+
+public class TiendaPanel extends JPanel {
 
     private String contraseña;
     private Pago pagoVentana;
+    private JTextField[] quantityFields;
+    private int index;
 
 
-    public TiendaSwing (String constraseña){
-        this.contraseña = contraseña;
+
+    public TiendaPanel (String constraseña){
+        this.contraseña = constraseña;
         setLayout(new BorderLayout());
         createMainPanel();
     }
     
 
-    private static final String[] IMAGE_URLS = {
+    static final String[] IMAGE_URLS = {
         "https://gobeef.mx/cdn/shop/products/GoBeef_ProductShot_PechugaPollo_800x.png",
         "https://notitotal.com/wp-content/uploads/2020/06/panintegralfinaalfinaaal.jpg",
         "https://th.bing.com/th/id/OIP.-Q622cEzXpYluF_jk7F_bwHaHa?rs=1&pid=ImgDetMain",
@@ -39,7 +45,7 @@ public class TiendaSwing extends JPanel {
     }
 }
 
-    private static final String[] DESCRIPTIONS = {
+     static final String[] DESCRIPTIONS = {
         "Pechuga de pollo: 100% carne magra y saludable.",
         "Pan integral: Rico en fibra y nutrientes esenciales.",
         "Proteina: Suplemento para el desarrollo muscular.",
@@ -77,7 +83,7 @@ public class TiendaSwing extends JPanel {
 
     /*public static void createmain(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            TiendaSwing frame = new TiendaSwing();
+            CarritoTienda frame = new CarritoTienda();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setPantallaCompleta();
 
@@ -96,13 +102,32 @@ public class TiendaSwing extends JPanel {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
+        quantityFields = new JTextField[IMAGE_URLS.length];
+
         for (int i = 0; i < IMAGE_URLS.length; i++) {
             JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i]);
             mainPanel.add(productPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        add(mainPanel,BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        if (mainPanel.getPreferredSize().width > getWidth()){
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        }
+        setLayout(new BorderLayout());
+        add(Box.createVerticalGlue(), BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+        add(Box.createVerticalGlue(), BorderLayout.SOUTH);
+        quantityFields = new JTextField[IMAGE_URLS.length];
+
+        for(int i = 0; i < IMAGE_URLS.length; i++) {
+            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i]);
+            mainPanel.add(productPanel);
+            mainPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        }   
     }
     
 
@@ -144,7 +169,7 @@ public class TiendaSwing extends JPanel {
         detailsPanel.add(quantityAndPricePanel);
 
         final JTextField fieldQuantity = new JTextField("0", 3); 
-        fieldQuantity.setHorizontalAlignment(JTextField.CENTER);
+        quantityFields[index] = fieldQuantity;
 //BOTON DE AUMENTAR LA CANTIDAD
         JButton buttonAdd = new JButton("+");
         buttonAdd.addActionListener(new ActionListener() {
@@ -209,9 +234,14 @@ public class TiendaSwing extends JPanel {
     public void setPagoVentana(Pago pagoVentana) {
         this.pagoVentana = pagoVentana;
     }
+
     public void actualizarSubtotalEnPago (double nuevoSubtotal){
         if(pagoVentana!= null){
             pagoVentana.actualizarSubtotalEnPago(nuevoSubtotal);
         }
     }
+    public String getCantidadProducto(int index){
+        return quantityFields[index].getText();
+    }
+
 }

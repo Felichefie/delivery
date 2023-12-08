@@ -53,7 +53,7 @@ public class LoginUI extends JFrame {
                     JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
                     Jframe.dispose();
                     
-                    CambioDeFrame cambioDeFrame = new CambioDeFrame();
+                    Menu cambioDeFrame = new Menu();
                     cambioDeFrame.setVisible(true);
 
                 }else{

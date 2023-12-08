@@ -3,19 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CambioDeFrame extends JFrame implements ActionListener {
+public class Menu extends JFrame implements ActionListener {
     private static final String contraseña = null;
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
     private JButton botonTienda, botonUser, botonDir, botonPagar;
-    private TiendaSwing tiendaPanel;
+    private TiendaPanel carritoPanel;
     private User userPanel;
     private Dir dirPanel;
     private Pago pagoVentana;
 
-    public CambioDeFrame() {
+    public Menu() {
         // Configuración del JFrame principal
-        setTitle("Ejemplo de Cambio de Frame");
+        setTitle("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 200);
 
@@ -24,12 +24,12 @@ public class CambioDeFrame extends JFrame implements ActionListener {
         panelPrincipal = new JPanel(cardLayout);
 
         // Creación de los paneles que se mostrarán
-        tiendaPanel = new TiendaSwing(contraseña);
+        carritoPanel = new TiendaPanel(contraseña);
         userPanel = new User();
         dirPanel = new Dir();
 
         // Agregar los paneles al panel principal con un nombre identificador
-        panelPrincipal.add(tiendaPanel, "TiendaSwing");
+        panelPrincipal.add(carritoPanel, "CarritoTienda");
         panelPrincipal.add(userPanel, "User Panel");
         panelPrincipal.add(dirPanel, "Direccion");
 
@@ -55,15 +55,15 @@ public class CambioDeFrame extends JFrame implements ActionListener {
         add(panelBotones, BorderLayout.NORTH);
         add(panelPrincipal, BorderLayout.CENTER);
 
-        pagoVentana = new Pago(tiendaPanel);
-        tiendaPanel.setPagoVentana(pagoVentana);
+        pagoVentana = new Pago(carritoPanel);
+        carritoPanel.setPagoVentana(pagoVentana);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonTienda) {
             // Mostrar el Panel 1 al presionar el botón 1
-            cardLayout.show(panelPrincipal, "TiendaSwing");
+            cardLayout.show(panelPrincipal, "CarritoTienda");
         } else if (e.getSource() == botonUser) {
             // Mostrar el Panel de User al presionar el botón de User
             cardLayout.show(panelPrincipal, "User Panel");
@@ -78,7 +78,7 @@ public class CambioDeFrame extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            CambioDeFrame ventana = new CambioDeFrame();
+            Menu ventana = new Menu();
             ventana.setVisible(true);
         });
     }

@@ -7,10 +7,11 @@ public class Pago extends JFrame {
 
     private JLabel lblSubtotal;
     private JButton btnRealizarPago;
-    private TiendaSwing tiendaSwing;
+    private TiendaPanel tiendaSwing;
     private JComboBox<String> cmbMetodoPago;
+    private JTextArea txtProductos;
 
-    public Pago(TiendaSwing tiendaSwing) {
+    public Pago(TiendaPanel tiendaSwing) {
         this.tiendaSwing = tiendaSwing;
 
         // Configuración del JFrame de Pago
@@ -26,9 +27,15 @@ public class Pago extends JFrame {
         String[] opcionesPago = {"Efectivo","Tarjeta de Debito","Tarjeta de Credito"};
         cmbMetodoPago = new JComboBox<>(opcionesPago);
 
+        txtProductos = new JTextArea();
+        txtProductos.setEditable(false);
+        txtProductos.setLineWrap(true);
+        txtProductos.setWrapStyleWord(true);
+
         // Agregar componentes al panel
         JPanel panel = new JPanel(new GridLayout(2, 1));
         panel.add(lblSubtotal);
+        panel.add(new JScrollPane(txtProductos));
         panel.add(cmbMetodoPago);
         panel.add(btnRealizarPago);
 
@@ -49,9 +56,23 @@ public class Pago extends JFrame {
     }
 
     private void realizarPago() {
+        StringBuilder productos = new StringBuilder("Productos: \n");
+        for (int i = 0; i < tiendaSwing.IMAGE_URLS.length; i++) {
+            int cantidad = Integer.parseInt(tiendaSwing.getCantidadProducto(i));
+            if (cantidad > 0) {
+                productos.append(tiendaSwing.DESCRIPTIONS[i])
+                .append(" - Cantidad:")
+                .append(cantidad)
+                .append("\n");
+            }
+
+        }
+        
+        txtProductos.setText(productos.toString());
+        
+        
         // Aquí iría la lógica para procesar el pago
         double subtotal = tiendaSwing.getSubtotal();
-
         String metodoPago = (String) cmbMetodoPago.getSelectedItem();
 
 
@@ -66,7 +87,7 @@ public class Pago extends JFrame {
         // Ejemplo de uso
         SwingUtilities.invokeLater(() -> {
             // Supongamos que ya tienes una instancia de TiendaSwing
-            TiendaSwing tiendaSwing = new TiendaSwing("contraseña");
+            TiendaPanel tiendaSwing = new TiendaPanel("contraseña");
             double subtotal = tiendaSwing.getSubtotal();
             System.out.println("Subtotal: $"+ String.format("%.2f", subtotal));
             // Crear la ventana de Pago y mostrarla
