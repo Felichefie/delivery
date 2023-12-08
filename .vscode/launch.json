@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Autenticacion",
+            "request": "launch",
+            "mainClass": "Proyecto.Autenticacion",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
             "name": "Sessions",
             "request": "launch",
             "mainClass": "Proyecto.Sessions",

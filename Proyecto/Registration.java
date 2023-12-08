@@ -344,8 +344,8 @@ public class Registration {
         if (generatedKeys.next()) {
                 userId = generatedKeys.getInt(1);
         }
-        String sessionTime = String.valueOf(System.currentTimeMillis()).substring(8,13);
-        String sessionUUID = UUID.randomUUID().toString().substring(1,10);
+        String sessionTime = String.valueOf(System.currentTimeMillis()).substring(8, 13);
+        String sessionUUID = UUID.randomUUID().toString().substring(1, 10);
         String session = sessionTime + sessionUUID;
 
         prepStateSession.setInt(1, userId); // id_user

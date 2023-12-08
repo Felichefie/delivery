@@ -21,7 +21,7 @@ public class Login extends JPanel {
 
     private JFrame frame;
     private JLabel label_user, label_pass, etiqueta;
-    private JTextField textField_user;
+    JTextField textField_user;
     private JPasswordField field_pass;
     private JButton button_login, button_register;
 
@@ -95,14 +95,23 @@ public class Login extends JPanel {
 
         button_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes implementar la lógica de autenticación
-
+                String correoElectronico = textField_user.getText();
+                String contraseña = String.valueOf(field_pass.getPassword ());
+                Autenticacion autenticacion = new Autenticacion(correoElectronico, contraseña);
+        
+                // Obtén y muestra el mensaje devuelto por Autenticacion
+                String mensajeResultado = autenticacion.autenticar();
+                
                 // Cerramos la GUI loguin
                 frame.dispose();
-                // Abrimos GUI principal
-                new Principal();
+        
+                // Abrimos GUI principal solo si la autenticación fue exitosa (puedes ajustar esto según tus necesidades)
+                if (mensajeResultado.startsWith("ID del usuario encontrado")) {
+                    new Principal();
+                }
             }
         });
+        
 
         button_register = new JButton("Registrarte");
         button_register.setBounds(280, 200, 150, 40);
