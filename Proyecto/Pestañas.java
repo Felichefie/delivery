@@ -2,6 +2,7 @@ package Proyecto;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -113,16 +114,26 @@ public class Pestañas extends JTabbedPane {
                             + ", Description: " + description + ", Stock: " + stock
                             + ", Size X: " + sizeX + ", Size Y: " + sizeY
                             + ", Size Z: " + sizeZ;
-                    // Agrega el producto al carrito
-                    carrito.add(productInfo);
 
-                    // Crea un JPanel para el producto y añádelo al panel del carrito
-                    JPanel productPanelInLambda = createProductPanel(productInfo);
-                    carritoPanel.add(productPanelInLambda);
+                    // Obtiene la cantidad del producto que se quiere agregar al carrito
+                    int fieldQuantityValue = Integer.parseInt(fieldQuantity.getText());
+                    if (fieldQuantityValue > 0) {
+                        // Agrega el producto al carrito fieldQuantityValue veces
+                        for (int i = 0; i < fieldQuantityValue; i++) {
+                            carrito.add(productInfo);
+                        }
 
-                    // Actualiza la pestaña Carrito
-                    carritoPanel.revalidate();
-                    carritoPanel.repaint();
+                        // Aquí debes obtener la cantidad del producto en el carrito
+                        int quantity = getQuantity(productInfo);
+
+                        // Crea un JPanel para el producto y añádelo al panel del carrito
+                        JPanel productPanelInLambda = createProductPanel(productInfo, quantity);
+                        carritoPanel.add(productPanelInLambda);
+
+                        // Actualiza la pestaña Carrito
+                        carritoPanel.revalidate();
+                        carritoPanel.repaint();
+                    }
                 });
 
                 // Agregar el botón al panel de control
@@ -176,23 +187,31 @@ public class Pestañas extends JTabbedPane {
 
         // Luego, puedes agregar productos a carrito y iterar sobre ellos:
         for (String product : carrito) {
-            // Crea un JPanel para el producto y añádelo al panel del carrito
-            JPanel productPanel = createProductPanel(product);
+            // Aquí debes obtener la cantidad del producto en el carrito
+            int quantity = getQuantity(product);
+            JPanel productPanel = createProductPanel(product, quantity);
             carritoPanel.add(productPanel);
         }
         addTab("Pestaña Carrito", carritoPanel);
 
     }
 
-    // This method should be here, directly inside the class body
     public void updateCarrito() {
         // Limpia el panel del carrito
         carritoPanel.removeAll();
 
+        // Configura el layout del panel del carrito
+        int rowCount = (int) Math.ceil(carrito.size() / 3.0); // Ajusta el número 3 según el número de columnas que
+                                                              // desees
+        carritoPanel.setLayout(new GridLayout(rowCount, 2)); // Ajusta el número 3 según el número de columnas que
+                                                             // desees
+
         // Luego, puedes agregar productos a carrito y iterar sobre ellos:
         for (String product : carrito) {
-            // Crea un JPanel para el producto y añádelo al panel del carrito
-            JPanel productPanel = createProductPanel(product);
+            // Aquí, necesitarías determinar la cantidad de alguna manera
+            int quantity = getQuantity(product);
+
+            JPanel productPanel = createProductPanel(product, quantity);
             carritoPanel.add(productPanel);
         }
 
@@ -201,18 +220,61 @@ public class Pestañas extends JTabbedPane {
         carritoPanel.repaint();
     }
 
-    private JPanel createProductPanel(String productInfo) {
-        // Crear un JPanel para el producto
-        JPanel productPanel = new JPanel(new BorderLayout());
+    private JPanel createProductPanel(String productInfo, int quantity) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        panel.setBackground(Color.LIGHT_GRAY);
 
-        // Crear un JLabel para la información del producto
-        JLabel productLabel = new JLabel(productInfo);
-        productLabel.setForeground(Color.BLACK); // Establecer el color del texto a negro
+        JLabel label = new JLabel(productInfo);
+        panel.add(label);
 
-        // Agregar la información del producto al panel del producto
-        productPanel.add(productLabel, BorderLayout.NORTH);
+        // Crear un panel para los botones
+        JPanel buttonsPanel = new JPanel(new GridLayout(2, 1));
+        JButton plusButton = new JButton("+");
+        JButton minusButton = new JButton("-");
+        buttonsPanel.add(plusButton);
+        buttonsPanel.add(minusButton);
 
-        return productPanel;
+        // Crear un panel para la cantidad
+        JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        quantityPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Establecer un borde vacío para el
+                                                                                  // espaciado
+        quantityPanel.setBackground(Color.WHITE); // Establecer un color de fondo
+        quantityPanel.add(buttonsPanel);
+
+        final int[] quantityArray = { quantity };
+        JTextField quantityField = new JTextField(String.valueOf(quantityArray[0]));
+        Dimension preferredSize = quantityField.getPreferredSize();
+        preferredSize.width = preferredSize.width * 3; // Ajusta esto al tamaño que prefieras
+        quantityField.setPreferredSize(preferredSize);
+        quantityField.setMaximumSize(new Dimension(Integer.MAX_VALUE, quantityField.getPreferredSize().height));
+        quantityPanel.add(quantityField);
+
+        plusButton.addActionListener(e -> {
+            quantityArray[0]++;
+            quantityField.setText(String.valueOf(quantityArray[0]));
+        });
+
+        minusButton.addActionListener(e -> {
+            if (quantityArray[0] > 0) {
+                quantityArray[0]--;
+                quantityField.setText(String.valueOf(quantityArray[0]));
+            }
+        });
+
+        panel.add(quantityPanel);
+
+        return panel;
     }
 
+    private int getQuantity(String product) {
+        int count = 0;
+        for (String item : carrito) {
+            if (item.equals(product)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
