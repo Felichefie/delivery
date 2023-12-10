@@ -134,13 +134,7 @@ public class TiendaPanel extends JPanel {
         add(Box.createVerticalGlue(), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         add(Box.createVerticalGlue(), BorderLayout.SOUTH);
-        quantityFields = new JTextField[IMAGE_URLS.length];
-
-        for(int i = 0; i < IMAGE_URLS.length; i++) {
-            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i], STOCK_DESCRIPTIONS[i]);
-            mainPanel.add(productPanel);
-            mainPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        }   
+        quantityFields = new JTextField[IMAGE_URLS.length];  
     }
     
 
