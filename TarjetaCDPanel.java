@@ -1,16 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TarjetaCDPanel extends JPanel {
 
     private JTextField Titular;
     private JTextField Banco;
-    private JTextField Tipo;
+    private JComboBox <String> Tipo;
     private JTextField NumeroTarjeta;
     private JTextField FechaVencimiento;
+    private JButton validar;
 
     public TarjetaCDPanel(){
-        setLayout(new GridLayout(5,2));
+        setLayout(new GridLayout(6,2));
 
         add (new JLabel("Titular:"));
         Titular = new JTextField();
@@ -21,7 +24,8 @@ public class TarjetaCDPanel extends JPanel {
         add(Banco);
 
         add (new JLabel("Credito/Debito:"));
-        Tipo = new JTextField();
+        String [] tipos = {"Credito","Debito"};
+        Tipo = new JComboBox<>(tipos);
         add(Tipo);
 
         add (new JLabel("Numero de Tarjeta:"));
@@ -31,6 +35,25 @@ public class TarjetaCDPanel extends JPanel {
         add (new JLabel("Fecha de Vencimiento"));
         FechaVencimiento = new JTextField();
         add(FechaVencimiento);
+
+        validar = new JButton("Validar");
+        validar.addActionListener(new ActionListener() {
+            @Override 
+            public void actionPerformed(ActionEvent e) {
+                String titular = Titular.getText();
+                String banco = Banco.getText();
+                String numeroTarjeta = NumeroTarjeta.getText();
+
+                if (titular.isEmpty() || banco.isEmpty() || numeroTarjeta.length() !=16 ){
+                    JOptionPane.showMessageDialog(null, "Porfavor, introduce los datos correctamente.");
+                }
+                else
+                {JOptionPane.showMessageDialog(null, "Los datos son validos.");
+            }
+                }
+            
+        });
+        add(validar);
 
     }
     public String getTitular() {
@@ -42,7 +65,7 @@ public class TarjetaCDPanel extends JPanel {
     }
 
     public String getTipo() {
-        return Tipo.getText();
+        return (String) Tipo.getSelectedItem();
     }
 
     public String getNumeroTarjeta() {
@@ -53,5 +76,20 @@ public class TarjetaCDPanel extends JPanel {
         return FechaVencimiento.getText();
     }
 
-    
+    public static void  main (String [] args) {
+        TarjetaCDPanel tarjetaPanel = new TarjetaCDPanel();
+
+        JPanel mainPanel = new JPanel();
+
+        mainPanel.add(tarjetaPanel);
+
+        JFrame frame = new JFrame ("Tajerta de Credito/Debito");
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.getContentPane().add(mainPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
 }

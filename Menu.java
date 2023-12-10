@@ -82,11 +82,10 @@ public class Menu extends JFrame implements ActionListener {
             cardLayout.show(panelPrincipal, "TarjetaPanel");
         }
          else if (e.getSource() == botonTarjetas) {
-            cardLayout.show(panelPrincipal, "TarjetasCD");
+            cardLayout.show(panelPrincipal, "TarjetaCDPanel");
          }
-
          else if (e.getSource() == botonDir){
-            cardLayout.show(panelPrincipal, "Direccion");
+            cardLayout.show(panelPrincipal, "Dir");
          }
          else if (e.getSource() == botonPagar){
             pagoVentana.setVisible(true);
