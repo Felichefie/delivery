@@ -13,7 +13,7 @@ public class TarjetaCDPanel extends JPanel {
     private JButton validar;
 
     public TarjetaCDPanel(){
-        setLayout(new GridLayout(6,2));
+        setLayout(new GridLayout(7,2));
 
         add (new JLabel("Titular:"));
         Titular = new JTextField();
@@ -77,7 +77,8 @@ public class TarjetaCDPanel extends JPanel {
     }
 
     public static void  main (String [] args) {
-        TarjetaCDPanel tarjetaPanel = new TarjetaCDPanel();
+
+        TarjetaCDPanel  tarjetaPanel = new TarjetaCDPanel();
 
         JPanel mainPanel = new JPanel();
 

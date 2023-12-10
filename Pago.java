@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +23,7 @@ public class Pago extends JFrame {
         // Inicialización de componentes
         lblSubtotal = new JLabel("Subtotal: $" + tiendaSwing.getSubtotal());
         btnRealizarPago = new JButton("Realizar Pago");
-
-        // Agregamos el Metodo de pago
-        String[] opcionesPago = {"Efectivo","Tarjeta de Debito","Tarjeta de Credito"};
+        String [] opcionesPago = {"Efectivo", "Tarjeta de Debito", "Tarjeta de Credito"};
         cmbMetodoPago = new JComboBox<>(opcionesPago);
 
         txtProductos = new JTextArea();
@@ -55,29 +54,12 @@ public class Pago extends JFrame {
         lblSubtotal.setText("Subtotal:  $"+ String.format("%.2f",nuevoSubtotal));
     }
 
-    private void realizarPago() {
-        StringBuilder productos = new StringBuilder("Productos: \n");
-        for (int i = 0; i < tiendaSwing.IMAGE_URLS.length; i++) {
-            int cantidad = Integer.parseInt(tiendaSwing.getCantidadProducto(i));
-            if (cantidad > 0) {
-                productos.append(tiendaSwing.DESCRIPTIONS[i])
-                .append(" - Cantidad:")
-                .append(cantidad)
-                .append("\n");
-            }
-
-        }
+    public void realizarPago() {
         
-        txtProductos.setText(productos.toString());
-        
-        
-        // Aquí iría la lógica para procesar el pago
         double subtotal = tiendaSwing.getSubtotal();
         String metodoPago = (String) cmbMetodoPago.getSelectedItem();
 
-
         JOptionPane.showMessageDialog(this, "Pago realizado por un monto de $" + subtotal + "con"+ metodoPago);
-        // Otros pasos relacionados con el pago...
 
         // Cerrar la ventana de Pago
         dispose();
@@ -90,9 +72,7 @@ public class Pago extends JFrame {
             TiendaPanel tiendaSwing = new TiendaPanel("contraseña");
             double subtotal = tiendaSwing.getSubtotal();
             System.out.println("Subtotal: $"+ String.format("%.2f", subtotal));
-            // Crear la ventana de Pago y mostrarla
-            Pago pagoVentana = new Pago(tiendaSwing);
-            
+            Pago pagoVentana = new Pago (tiendaSwing);
             pagoVentana.setVisible(true);
             tiendaSwing.setPagoVentana(pagoVentana);
         });
@@ -103,4 +83,5 @@ public class Pago extends JFrame {
         lblSubtotal.setText("Subtotal: $" + String.format("%.2f",nuevoSubtotal));
         });
     }
+
 }

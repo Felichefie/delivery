@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Menu extends JFrame implements ActionListener {
     private static final String contraseña = null;
@@ -14,6 +16,7 @@ public class Menu extends JFrame implements ActionListener {
     private Dir dirPanel;
     private Pago pagoVentana;
     private TarjetaCDPanel metodoPanel;
+    private String [] ordenPaneles = {"Tienda Panel", "TarjetaPanel","TarjetaCDPanel", "Dir"};
 
     public Menu() {
         // Configuración del JFrame principal
@@ -34,7 +37,7 @@ public class Menu extends JFrame implements ActionListener {
         // Agregar los paneles al panel principal con un nombre identificador
         panelPrincipal.add(tiendaPanel, "TiendaPanel");
         panelPrincipal.add(tarjetaPanel, "TarjetaPanel");
-        panelPrincipal.add(dirPanel, "Direccion");
+        panelPrincipal.add(dirPanel, "Dir");
         panelPrincipal.add(metodoPanel, "TarjetaCDPanel");
 
         // Botones para cambiar entre paneles
@@ -70,6 +73,14 @@ public class Menu extends JFrame implements ActionListener {
 
         pagoVentana = new Pago(tiendaPanel);
         tiendaPanel.setPagoVentana(pagoVentana);
+
+        pagoVentana.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing (WindowEvent e) {
+            JOptionPane.showMessageDialog(Menu.this, "Compra cancelada");
+            pagoVentana.dispose();
+            }
+        });
     }
 
     @Override
@@ -91,8 +102,8 @@ public class Menu extends JFrame implements ActionListener {
             pagoVentana.setVisible(true);
          }
          else if (e.getSource() == botonSiguiente) {
-            if (currentIndex < panelPrincipal.getComponentCount() -1){
-                cardLayout.show(panelPrincipal, panelPrincipal.getComponent(++currentIndex).getName());
+            if (currentIndex < ordenPaneles.length -1){
+                cardLayout.show(panelPrincipal, ordenPaneles[++currentIndex]);
             }
 
          }

@@ -5,7 +5,7 @@ import java.awt.Font;
 import javax.swing.*;
 
 public class Loc {
-    private JLabel lbl_nom, lbl_lat, lbl_lon;
+    private JLabel lbl_lat, lbl_lon;
     private JButton btn_cancel, btn_register;
     private JFrame frm_User;
     private JTextField txt_lat, txt_lon;
@@ -18,8 +18,6 @@ public class Loc {
         btn_register = new JButton("ACCEPT");
         btn_register.setBounds(200, 200, 100, 50);
 
-        lbl_nom = new JLabel("Hernandez Marin Maria Itzel.");
-        lbl_nom.setBounds(70,0,300,30);
         lbl_lon = new JLabel("LONGITUDE:");
         lbl_lon.setBounds(70,20,300,30);
         lbl_lon.setFont(new Font("Impact", Font.PLAIN, 14));
@@ -33,7 +31,6 @@ public class Loc {
         txt_lat.setBounds(70, 120, 250, 25);
 
         frm_User.add(lbl_lon);
-        frm_User.add(lbl_nom);
         frm_User.add(btn_register);
         frm_User.add(btn_cancel);
         frm_User.add(lbl_lat);
