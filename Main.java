@@ -10,7 +10,7 @@ public class Main {
 
         Dbconnection dbConn = new Dbconnection(URL, user, pass);
 
-        User interfaz = new User();
+        TarjetaPanel interfaz = new TarjetaPanel();
         interfaz.setDbConn(dbConn);
         interfaz.show();
 

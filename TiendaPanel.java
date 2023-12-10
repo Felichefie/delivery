@@ -65,14 +65,27 @@ public class TiendaPanel extends JPanel {
         480
     };
 
-  private static final String[] STOCK_QUANTITIES = {
-        "100 KG",
-        "29 unidades",
-        "16 unidades",
-        "65 unidades",
-        "49 unidades",
-        "37 pares",
-        "13 unidades",
+  private static final int [] STOCK_QUANTITIES = {
+        100,
+        29 ,
+        16 ,
+        65 ,
+        49 ,
+        37 ,
+        13,
+    };
+
+    private static final String [] STOCK_DESCRIPTIONS ={
+
+        "Kilogramos",
+        "Unidades",
+        "Unidades",
+        "Unidades",
+        "Unidades",
+        "Unidades",
+        "Pares",
+        "Unidades",
+
     };
 
     private static double subtotal = 0.0;
@@ -105,7 +118,7 @@ public class TiendaPanel extends JPanel {
         quantityFields = new JTextField[IMAGE_URLS.length];
 
         for (int i = 0; i < IMAGE_URLS.length; i++) {
-            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i]);
+            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i],STOCK_DESCRIPTIONS[i]);
             mainPanel.add(productPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
@@ -124,14 +137,14 @@ public class TiendaPanel extends JPanel {
         quantityFields = new JTextField[IMAGE_URLS.length];
 
         for(int i = 0; i < IMAGE_URLS.length; i++) {
-            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i]);
+            JPanel productPanel = createProductPanel(IMAGE_URLS[i], DESCRIPTIONS[i], PRICES[i], STOCK_QUANTITIES[i], STOCK_DESCRIPTIONS[i]);
             mainPanel.add(productPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0,10)));
         }   
     }
     
 
-    private JPanel createProductPanel(String imageUrl, String description, double price, String stockQuantity) {
+    private JPanel createProductPanel(String imageUrl, String description, double price, int stockQuantity, String stockDescripcion) {
         JPanel productPanel = new JPanel(new BorderLayout(10, 10));
         productPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
@@ -161,6 +174,10 @@ public class TiendaPanel extends JPanel {
         JLabel labelStockQuantity = new JLabel("Stock: " + stockQuantity);
         labelStockQuantity.setAlignmentX(Component.CENTER_ALIGNMENT);
         quantityAndPricePanel.add(labelStockQuantity);
+
+        JLabel labelStockDescripcion = new JLabel(" " + stockDescripcion);
+        labelStockDescripcion.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quantityAndPricePanel.add(labelStockDescripcion);
 
         JLabel labelPrice = new JLabel(String.format("$%.1f MXN", price));
         labelPrice.setAlignmentX(Component.CENTER_ALIGNMENT);

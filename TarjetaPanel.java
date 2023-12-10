@@ -4,13 +4,13 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-public class User extends JPanel{
+public class TarjetaPanel extends JPanel{
     private JLabel lbl_tipo, lbl_nom, lbl_userName, lbl_first, lbl_second, lbl_name, lbl_birth, lbl_email, lbl_phone;
-    private JButton btn_cancel, btn_register, btn_direccion, btn_buscar;
+    private JButton btn_cancel, btn_register, btn_buscar;
     private JTextField txt_userName, txt_first, txt_second, txt_name, txt_birth, txt_email, txt_phone;
     private Dbconnection dbConn;
 
-    User() {
+    TarjetaPanel() {
         setLayout(null);
 
 
@@ -18,8 +18,6 @@ public class User extends JPanel{
         btn_cancel.setBounds(10, 600, 100, 50);
         btn_register = new JButton("ACCEPT");
         btn_register.setBounds(145, 600, 100, 50);
-        btn_direccion = new JButton("ADDRESS");
-        btn_direccion.setBounds(275, 600, 100, 50);
         btn_buscar = new JButton("SEARCH");
         btn_buscar.setBounds(400, 600, 100, 50);
 
@@ -85,7 +83,6 @@ public class User extends JPanel{
         add(txt_phone);
         add(btn_register);
         add(btn_cancel);
-        add(btn_direccion);
         add(btn_buscar);
     
         btn_buscar.addActionListener(new ActionListener() {
@@ -156,13 +153,6 @@ public class User extends JPanel{
             }
         });
 
-        btn_direccion.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                Dir dir = new Dir();
-                dir.show();
-            }
-        });
     }
 
     public void setDbConn(Dbconnection dbConn) {

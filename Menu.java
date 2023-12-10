@@ -7,11 +7,13 @@ public class Menu extends JFrame implements ActionListener {
     private static final String contraseña = null;
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
-    private JButton botonTienda, botonUser, botonDir, botonPagar;
-    private TiendaPanel carritoPanel;
-    private User userPanel;
+    private JButton botonTienda, botonTarjeta, botonTarjetas,botonDir, botonPagar, botonSiguiente;
+    private int currentIndex = 0;
+    private TiendaPanel tiendaPanel;
+    private TarjetaPanel tarjetaPanel;
     private Dir dirPanel;
     private Pago pagoVentana;
+    private TarjetaCDPanel metodoPanel;
 
     public Menu() {
         // Configuración del JFrame principal
@@ -24,55 +26,76 @@ public class Menu extends JFrame implements ActionListener {
         panelPrincipal = new JPanel(cardLayout);
 
         // Creación de los paneles que se mostrarán
-        carritoPanel = new TiendaPanel(contraseña);
-        userPanel = new User();
+        tiendaPanel = new TiendaPanel(contraseña);
+        tarjetaPanel = new TarjetaPanel();
         dirPanel = new Dir();
+        metodoPanel = new TarjetaCDPanel();
 
         // Agregar los paneles al panel principal con un nombre identificador
-        panelPrincipal.add(carritoPanel, "CarritoTienda");
-        panelPrincipal.add(userPanel, "User Panel");
+        panelPrincipal.add(tiendaPanel, "TiendaPanel");
+        panelPrincipal.add(tarjetaPanel, "TarjetaPanel");
         panelPrincipal.add(dirPanel, "Direccion");
+        panelPrincipal.add(metodoPanel, "TarjetaCDPanel");
 
         // Botones para cambiar entre paneles
         botonTienda = new JButton("Tienda");
         botonTienda.addActionListener(this);
-        botonUser = new JButton("Datos");
-        botonUser.addActionListener(this);
+        botonTarjeta = new JButton("Tarjeta");
+        botonTarjeta.addActionListener(this);
+        botonTarjetas = new JButton("Tarjetas");
+        botonTarjetas.addActionListener(this);
         botonDir = new JButton("Direccion");
         botonDir.addActionListener(this);
         botonPagar = new JButton("Pagar");
         botonPagar.addActionListener(this);
+        botonSiguiente = new JButton("Siguiente");
+        botonSiguiente.addActionListener(this);
+        botonSiguiente.setVisible(true);
+        
+
 
         // Agregar botones al panel
         JPanel panelBotones = new JPanel();
         panelBotones.add(botonTienda);
-        panelBotones.add(botonUser);
+        panelBotones.add(botonTarjeta);
+        panelBotones.add(botonTarjetas);
         panelBotones.add(botonDir);
         panelBotones.add(botonPagar);
+        panelBotones.add(botonSiguiente);
 
 
         // Agregar componentes al JFrame principal
         add(panelBotones, BorderLayout.NORTH);
         add(panelPrincipal, BorderLayout.CENTER);
 
-        pagoVentana = new Pago(carritoPanel);
-        carritoPanel.setPagoVentana(pagoVentana);
+        pagoVentana = new Pago(tiendaPanel);
+        tiendaPanel.setPagoVentana(pagoVentana);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonTienda) {
             // Mostrar el Panel 1 al presionar el botón 1
-            cardLayout.show(panelPrincipal, "CarritoTienda");
-        } else if (e.getSource() == botonUser) {
+            cardLayout.show(panelPrincipal, "TiendaPanel");
+        } else if (e.getSource() == botonTarjeta) {
             // Mostrar el Panel de User al presionar el botón de User
-            cardLayout.show(panelPrincipal, "User Panel");
+            cardLayout.show(panelPrincipal, "TarjetaPanel");
         }
+         else if (e.getSource() == botonTarjetas) {
+            cardLayout.show(panelPrincipal, "TarjetasCD");
+         }
+
          else if (e.getSource() == botonDir){
             cardLayout.show(panelPrincipal, "Direccion");
          }
          else if (e.getSource() == botonPagar){
             pagoVentana.setVisible(true);
+         }
+         else if (e.getSource() == botonSiguiente) {
+            if (currentIndex < panelPrincipal.getComponentCount() -1){
+                cardLayout.show(panelPrincipal, panelPrincipal.getComponent(++currentIndex).getName());
+            }
+
          }
     }
 
