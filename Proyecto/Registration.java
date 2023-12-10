@@ -10,7 +10,13 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -21,6 +27,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -221,7 +229,8 @@ public class Registration {
                 // Cerrar la GUI de Registration
                 frame.dispose();
                 // Volver a abrir la GUI de Login
-                new Principal();
+                // new Principal();
+                new Principal().mostrar();
             }
         });
 
@@ -292,32 +301,66 @@ public class Registration {
         String genero = (String) comboBox_genero.getSelectedItem();
         String telefono = textField_telefono.getText();
         String password = String.valueOf(field_pass.getPassword());
+        // String password = String.valueOf(field_pass.getPassword());
+        String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        // Preparar y ejecutar la consulta de inserción
-        String queryInsert = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
+        LocalDateTime nowDate = LocalDateTime.now();
+        LocalDateTime endTimeSession = nowDate.plusMinutes(5);
+
+        String queryInsertUser = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+        String queryInsertSession = "INSERT INTO progra2.sessions(id_user, session, timeout, created) VALUES (?, ?, ?, ?)";
+
         try (Connection conn = DriverManager.getConnection(URL, user, pass);
-                PreparedStatement prepState = conn.prepareStatement(queryInsert)) {
+                PreparedStatement prepStateUser = conn.prepareStatement(queryInsertUser,
+                        Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement prepStateSession = conn.prepareStatement(queryInsertSession)) {
 
-            prepState.setString(1, tipoUsuario);
-            prepState.setString(2, username);
-            prepState.setString(3, primerApellido);
-            prepState.setString(4, segundoApellido);
-            prepState.setString(5, nombre);
-            prepState.setDate(6, new java.sql.Date(fechaNacimiento.getTime()));
-            prepState.setString(7, correoElectronico);
-            prepState.setString(8, genero);
-            prepState.setString(9, telefono);
-            prepState.setString(10, password);
-            prepState.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
+            conn.setAutoCommit(false);
 
-            prepState.execute();
-            System.out.println("Datos insertados exitosamente.");
+            prepStateUser.setString(1, tipoUsuario);
+            prepStateUser.setString(2, username);
+            prepStateUser.setString(3, primerApellido);
+            prepStateUser.setString(4, segundoApellido);
+            prepStateUser.setString(5, nombre);
+            prepStateUser.setDate(6, new java.sql.Date(fechaNacimiento.getTime()));
+            prepStateUser.setString(7, correoElectronico);
+            prepStateUser.setString(8, genero);
+            prepStateUser.setString(9, telefono);
+            prepStateUser.setString(10, pwd_hash);
+            prepStateUser.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
 
-        } catch (Exception e) {
+            prepStateUser.executeUpdate();
+
+            // Recupera ID del usuario generado
+            ResultSet generatedKeys = prepStateUser.getGeneratedKeys();
+            int userId = -1;
+            if (generatedKeys.next()) {
+                userId = generatedKeys.getInt(1);
+            }
+            String sessionTime = String.valueOf(System.currentTimeMillis()).substring(8, 13);
+            String sessionUUID = UUID.randomUUID().toString().substring(1, 10);
+            String session = sessionTime + sessionUUID;
+
+            prepStateSession.setInt(1, userId); // id_user
+            prepStateSession.setString(2, session); // session
+            Timestamp timeoutTimestamp = Timestamp.valueOf(endTimeSession);
+            Timestamp createdTimestamp = Timestamp.valueOf(nowDate);
+            prepStateSession.setTimestamp(3, timeoutTimestamp); // timeout
+            prepStateSession.setTimestamp(4, createdTimestamp); // created
+
+            prepStateSession.executeUpdate();
+
+            conn.commit();
+            System.out.println("Usuario y session ingresado correctamente");
+
+            conn.setAutoCommit(true);
+
+        } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
-
 }
