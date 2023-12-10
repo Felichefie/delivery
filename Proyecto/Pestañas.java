@@ -205,13 +205,30 @@ public class Pestañas extends JTabbedPane {
     public void updateCarrito() {
         // Limpia el panel del carrito
         carritoPanel.removeAll();
+        carritoPanel.setLayout(new BorderLayout()); // Establecer el layout a BorderLayout
 
-        // Añade los productos en el carrito al panel del carrito
+        // Crear un nuevo panel para los productos
+        JPanel productosPanel = new JPanel();
+        productosPanel.setLayout(new BoxLayout(productosPanel, BoxLayout.Y_AXIS));
+
+        // Añade los productos en el carrito al panel de productos
         for (Producto producto : carrito) {
-            // Crea un panel para el producto y añádelo al panel del carrito
+            // Crea un panel para el producto y añádelo al panel de productos
             JPanel productPanel = createProductPanel(producto);
-            carritoPanel.add(productPanel);
+            productPanel.setPreferredSize(new Dimension(productosPanel.getWidth(), 100)); // Establecer el tamaño del
+                                                                                          // panel del producto
+            productosPanel.add(productPanel);
         }
+
+        // Agregar el panel de productos al panel del carrito
+        carritoPanel.add(productosPanel, BorderLayout.CENTER);
+
+        // Crear un botón para pagar
+        JButton pagarButton = new JButton("PAGAR");
+        pagarButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24)); // Establecer la fuente y el tamaño del
+                                                                                 // texto
+        pagarButton.setPreferredSize(new Dimension(carritoPanel.getWidth(), 65)); // Establecer el tamaño del botón
+        carritoPanel.add(pagarButton, BorderLayout.SOUTH); // Añadir el botón al panel del carrito
 
         // Actualiza la pestaña "Carrito"
         carritoPanel.revalidate();
@@ -229,11 +246,8 @@ public class Pestañas extends JTabbedPane {
         // Crear un JPanel para el producto
         JPanel productPanel = new JPanel(new BorderLayout());
 
-        // Obtener el ancho de la ventana
-        int windowWidth = this.getWidth();
-
         // Establecer el tamaño preferido del panel del producto
-        productPanel.setPreferredSize(new Dimension(windowWidth, 200)); // Ajusta estos valores según tus necesidades
+        productPanel.setPreferredSize(new Dimension(300, 150)); // Ajusta estos valores según tus necesidades
 
         // Crear un JPanel para la descripción del producto
         JPanel descriptionPanel = new JPanel();
@@ -247,7 +261,7 @@ public class Pestañas extends JTabbedPane {
         String imagePath = producto.getImagePath();
         System.out.println("Image path: " + imagePath);
         ImageIcon imageIcon = new ImageIcon(
-                new ImageIcon(imagePath).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                new ImageIcon(imagePath).getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
         JLabel imageLabel = new JLabel(imageIcon);
         productPanel.add(imageLabel, BorderLayout.WEST); // Añadir la imagen al panel del producto
 
@@ -306,7 +320,6 @@ public class Pestañas extends JTabbedPane {
         buttonPanel.setBackground(Color.WHITE);
 
         // Crear un JPanel para cada botón y el campo de cantidad con un FlowLayout
-        // centrado
         JPanel agregarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel quitarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
