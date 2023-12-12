@@ -45,7 +45,7 @@ public class TarjetaCDPanel extends JPanel {
                 String numeroTarjeta = NumeroTarjeta.getText();
 
                 if (titular.isEmpty() || banco.isEmpty() || numeroTarjeta.length() !=16 ){
-                    JOptionPane.showMessageDialog(null, "Porfavor, introduce los datos correctamente.");
+                    JOptionPane.showMessageDialog(null, "Por favor, introduce los datos correctamente.");
                 }
                 else
                 {JOptionPane.showMessageDialog(null, "Los datos son validos.");
