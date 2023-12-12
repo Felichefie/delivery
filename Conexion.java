@@ -9,13 +9,27 @@ public class Conexion {
     //private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts/1";
     private static final String URL_GET = "https://jsonplaceholder.typicode.com/posts";
     private static final String URL_PUT = "https://jsonplaceholder.typicode.com/posts/1";
+    
+    // MAPS
+    //https://maps.googleapis.com/maps/api/distancematrix/json?destinations=New%20York%20City%2C%20NY&origins=Washington%2C%20DC&key=YOUR_API_KEY
+    private static final String MAPS_GET = "https://maps.googleapis.com/maps/api/distancematrix/json";
+
+    // coloquen su propia API key, esta está incompleta !!!!!
+    private static final String API_KEY_MAP_STRING = "AIza";
+
+    String origin = "New%20York%20City%20NY";
+    String destination = "Washington%20DC";
+    String URL_MAPS_GET =  MAPS_GET + "?destinations=" + destination + "&origins=" + origin + "&key=" + API_KEY_MAP_STRING;
+    
     private static final String METHOD_HTTP_GET = "GET";
     private static final String METHOD_HTTP_PUT = "PUT";
     HttpURLConnection connection;
     Conexion(String type){
+        System.out.println(URL_MAPS_GET);    
         try {
             if(type==METHOD_HTTP_GET){
-                URL object_url = new URL(URL_GET);
+                URL object_url = new URL(URL_MAPS_GET);
+                //URL object_url = new URL(URL);
                 connection = (HttpURLConnection) object_url.openConnection();
                 connection.setRequestMethod(METHOD_HTTP_GET);
             }

@@ -1,4 +1,10 @@
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Password {
     boolean longitud = false;
@@ -84,5 +90,35 @@ public class Password {
         System.out.println("caracter especial: " + userPass.isSpecialCharacterOk());
         System.out.println("mayusculas: " + userPass.isUpcaseOk());
 
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String pwd_hash = passwordEncoder.encode(p);
+        System.out.println(pwd_hash);
+
+        String pw_hash = BCrypt.hashpw(p, BCrypt.gensalt(10));
+        System.out.println(pw_hash);
+
+        if (BCrypt.checkpw(p, pw_hash) == true){
+            System.out.println("It matches");
+        } else {
+            System.out.println("It does not match");
+        }
+
+        SecureRandom sr = new SecureRandom();
+        Base64.Encoder encoder64 = Base64.getUrlEncoder();
+        byte[] randomBytes = new byte[24];
+        sr.nextBytes(randomBytes);
+        String token = encoder64.encodeToString(randomBytes);
+        System.out.println(token);
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        System.out.println(dateTime);
+
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = dateTime.format(myFormatObj);
+        System.out.println(formattedDate);
+
+        LocalDateTime  expirationDate = dateTime.plusMinutes(987);
+        formattedDate = expirationDate.format(myFormatObj);
+        System.out.println(formattedDate);
     }
 }

@@ -5,33 +5,13 @@ import com.google.gson.reflect.TypeToken;
 
 public class ConnectionMain {
     public static void main(String[] args) {
-        /*Conexion con = new Conexion();
-        String txtJson=con.sendGet();*/
-        //System.out.println(txtJson);
-<<<<<<< HEAD
-
-        User u=new User(1, 0, "titulo texto", "usuario 0");
-        String resJson;
-        Serializar serial=new Serializar();
-        resJson=serial.user(u);
-        System.out.println(resJson);
-        serial.userAdd(u);
-        resJson=serial.lista_json();
-        System.out.println(resJson);
-        User u2=new User(2, 1, "titulo texto 2", "usuario 1");
-        serial.userAdd(u2);
-        resJson=serial.lista_json();
-        System.out.println(resJson);
+        Conexion con = new Conexion("GET");
+        String txtJson=con.sendGet();
 
 
-        /*Gson gson = new Gson();
-        List<Userexample> lista = gson.fromJson(txtJson, List.class);
-        System.out.println("numero de registros: " + lista.size());
-
-        for(Userexample user :lista){
-            System.out.println(user.getId());
-        }*/
-=======
+        System.out.println(txtJson);
+        
+        /*
         Gson gson = new Gson();
         // List<Userexample> lista = gson.fromJson(txtJson, List.class);
         Type type = new TypeToken<List<Userexample>>() {}.getType(); 
@@ -40,7 +20,44 @@ public class ConnectionMain {
 
         for(Userexample user : lista){
             System.out.println(user.getUserId());
-        }        
->>>>>>> 5162b9bc68ea26683cb9c71d4df10a41dbf8e2c4
+        }*/       
     }
 }
+
+
+// tipo de JSON de MAPS, de este hay que construir el objeto para poder
+// leer los datos
+/*
+ {
+   "destination_addresses" : 
+   [
+      "Washington D. C., Distrito de Columbia, EE. UU."
+   ],
+   "origin_addresses" : 
+   [
+      "Nueva York, EE. UU."
+   ],
+   "rows" : 
+   [
+      {
+         "elements" : 
+         [
+            {
+               "distance" : 
+               {
+                  "text" : "364 km",
+                  "value" : 363636
+               },
+               "duration" : 
+               {
+                  "text" : "3 h 51 min",
+                  "value" : 13864
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}
+ */
