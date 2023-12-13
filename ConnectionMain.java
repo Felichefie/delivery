@@ -11,7 +11,7 @@ public class ConnectionMain {
 
         System.out.println(txtJson);
         
-        /*
+        /* 
         Gson gson = new Gson();
         // List<Userexample> lista = gson.fromJson(txtJson, List.class);
         Type type = new TypeToken<List<Userexample>>() {}.getType(); 

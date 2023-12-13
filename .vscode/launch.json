@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Auth",
+            "request": "launch",
+            "mainClass": "Auth",
+            "projectName": "delivery_658aa4fd"
+        },
+        {
+            "type": "java",
             "name": "Password",
             "request": "launch",
             "mainClass": "Password",

@@ -7,20 +7,20 @@ import java.sql.Statement;
 
 public class Dbconnection {
     static Connection conn;
+    static String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+    static String user = "alumno";
+    static String pass = "alumnoPrueba1";
     public static void main(String[] args) {
-        
-        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
-        String user = "alumno";
-        String pass = "alumnoPrueba1";
-        
+
+
         Dbconnection dbConn = new Dbconnection(URL,user,pass);
         User u = dbConn.getUser("felix.jimenez@umich.mx");
-        if(u.getId()==0){ 
+        if(u.getUserId()==0){ 
             System.out.println("No existe");
             dbConn.insertNewUser(u);
         }
         else {
-            System.out.println(u.getId());
+            System.out.println(u.getUserId());
             System.out.println(u.getUserName());
         }
 
@@ -62,15 +62,11 @@ public class Dbconnection {
         }
     }
 
-    /*Direccion direccion(int idUser){
-
-    }*/
-
     User getUser(String email){
         User user = new User();
         
-        String query = "SELECT * FROM progra2.users u WHERE u.email='" + email + "'";
-        System.out.println(query);
+        String query = "SELECT * FROM progra2.users u WHERE u.email='" + email + "'" + " LIMIT 1";
+        //System.out.println(query);
         ResultSet rset;
         Statement statement;
         try{
@@ -78,21 +74,22 @@ public class Dbconnection {
             rset = statement.executeQuery(query);
 
             while(rset.next()){
-                System.out.println(rset.getString(1)
-                + " " + rset.getString(2)
-                + " " + rset.getString(3)
-                + " " + rset.getString(4)
-                + " " + rset.getString(5)
-                + " " + rset.getString(6)
-                + " " + rset.getString(7)
-                );
-                user.setId(Integer.parseInt(rset.getString(1)));
-                user.setName(rset.getString(5));
-                user.setUserName(rset.getString(2));
+                user.setUserId(Integer.parseInt(rset.getString(1)));
+                user.setTypeUser(rset.getString(2));
+                user.setUserName(rset.getString(3));
+                user.setFirstLastname(rset.getString(4));
+                user.setSecondLastname(rset.getString(5));
+                user.setName(rset.getString(6));
+                user.setBirthday(rset.getString(7));
+                user.setEmail(rset.getString(8));
+                user.setGender(rset.getString(9));
+                user.setPhoneNumber(rset.getString(10));
+                user.setPassword(rset.getString(11));
+                user.setCreated(rset.getString(12));
             }
         }catch(SQLException e){
             System.out.println("Error en la query");
-            user.setId(1);
+            user.setUserId(1);
         }
         return user;
     }
@@ -126,5 +123,56 @@ public class Dbconnection {
             System.out.println("Error en la query");
         }
         return res;
+    }
+
+    boolean deleteToken(int userId){
+        // DELETE current session
+        String queryDelete = "DELETE FROM progra2.sessions s WHERE s.id_user = ? LIMIT 1;";
+        //System.out.println(queryDelete);
+        try{
+            PreparedStatement preState = conn.prepareStatement(queryDelete);
+            preState.setInt(1, userId);
+            preState.execute();
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    boolean updateToken(int userId, String token, String expiration){
+        // INSERT current session
+        String queryInsert = "INSERT INTO progra2.sessions(id_user, session, timeout) "
+                            + "VALUES(" + userId + ",'" + token + "','" + expiration + "');";
+        // System.out.println(queryInsert);
+        try{
+            PreparedStatement preState = conn.prepareStatement(queryInsert);
+            preState.execute();
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    Token getToken(int idUser){
+        Token t = new Token();
+        String query = "SELECT s.session, s.timeout FROM progra2.sessions s WHERE s.id_user=" + idUser + " LIMIT 1;";
+        //System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+        try{
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+            while(rset.next()){
+                System.out.println(rset.getString(1)
+                + " " + rset.getString(2));
+                t.setToken(rset.getString(1));
+                t.setExpiration(rset.getString(2));
+            }
+        }catch(SQLException e){
+            System.out.println("Error en la query" + query);
+        }
+        return t;
     }
 }
