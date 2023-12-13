@@ -22,7 +22,13 @@ public class Menu extends JFrame implements ActionListener {
         // Configuración del JFrame principal
         setTitle("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 200);
+        setSize(1000, 400);
+
+        //Centramos la ventana en la pantalla
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x, y);
 
         // Inicialización del CardLayout y del panel principal
         cardLayout = new CardLayout();

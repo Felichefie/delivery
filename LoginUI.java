@@ -17,11 +17,10 @@ public class LoginUI extends JFrame {
     public LoginUI() {
         inicializarInterfaz();
     }
+    
 
     private void inicializarInterfaz() {
         Jframe = new JFrame("AUTENTICACIÓN/REGISTRO GYM STORE");
-        Jframe.setBounds(100, 100, 400, 250);
-        Jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Jframe.setLayout(new BorderLayout(0, 0));
 
         JTabbedPane pestañas = new JTabbedPane();
@@ -109,7 +108,17 @@ public class LoginUI extends JFrame {
 
         Jframe.add(pestañas, BorderLayout.CENTER);
 
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x, y);
+
+
+        Jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Jframe.setSize(400,250);
         Jframe.setVisible(true);
+
+        
     }
 
     private boolean validarContraseña(char[] contraseña) {
@@ -137,6 +146,8 @@ public class LoginUI extends JFrame {
         
         return true;
     }
+
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
