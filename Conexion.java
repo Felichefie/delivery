@@ -16,16 +16,26 @@ public class Conexion {
     // coloquen su propia API key, esta está incompleta !!!!!
     private static final String API_KEY_MAP_STRING = "AIzaSyCIJxbs3HWrKXxClHVhD-2lmbScrWeJYQU";
 
-    String origin = "Vancouver%20BC%7CSeattle"; 
+    String origin = "Morelia,%20Mexico";
+    //"Vancouver%20BC%7CSeattle"; 
     //"New%20York%20City%20NY";
-    String destination = "San%20Francisco%7CVictoria%20BC";
+    String destination = "Uruapan,%20Mexico";
+    //"San%20Francisco%7CVictoria%20BC";
     //"Washington%20DC";
-    String URL_MAPS_GET =  MAPS_GET + "?destinations=" + destination + "&origins=" + origin + "&key=" + API_KEY_MAP_STRING;
+    String URL_MAPS_GET ;//=  MAPS_GET + "?destinations=" + this.destino + "&origins=" + this.origen + "&key=" + API_KEY_MAP_STRING;
 
     private static final String METHOD_HTTP_GET = "GET";
     private static final String METHOD_HTTP_PUT = "PUT";
     HttpURLConnection connection;
-    Conexion(String type){
+
+    String origen,destino;
+    Conexion(String type, String origen, String destino){
+        this.origen = origen;
+        this.destino = destino;
+        URL_MAPS_GET =  MAPS_GET + "?destinations=" + this.destino + "&origins=" + this.origen + "&key=" + API_KEY_MAP_STRING;
+        System.out.println(this.destino);
+        System.out.println(this.origen);
+
         System.out.println(URL_MAPS_GET);    
         try {
             if(type==METHOD_HTTP_GET){

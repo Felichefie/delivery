@@ -9,11 +9,12 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.mysql.cj.xdevapi.JsonString;
 
-
+//poner constructor que reciba origen y destino y se lo pase al constructor de conexcion
 
 public class ConnectionMain {
-    public static void main(String[] args) {
-        Conexion con = new Conexion("GET");
+    public ConnectionMain(String origen, String destino) {
+        Conexion con = new Conexion("GET",origen,destino);
+       
         String txtJson=con.sendGet();
 
 
