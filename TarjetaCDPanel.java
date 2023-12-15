@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 public class TarjetaCDPanel extends JPanel {
 
     private JTextField Titular;
-    private JTextField Banco;
+    private JComboBox <String> Banco;
     private JComboBox <String> Tipo;
     private JTextField NumeroTarjeta;
-    private JTextField FechaVencimiento;
     private JButton validar;
+    private JComboBox <String> Fechas;
 
     public TarjetaCDPanel(){
         setLayout(new GridLayout(7,2));
@@ -20,7 +20,8 @@ public class TarjetaCDPanel extends JPanel {
         add(Titular);
 
         add (new JLabel("Banco:"));
-        Banco = new JTextField();
+        String [] bancos = {"BBVA", "HSBC", "Santander", "Banco Azteca", "Banamex", "Banorte", "Scotiabank", "Banregio", "Banco del Bajio", "Banco Inbursa", "Banco Mifel", "Banco Famsa", "Banco Afirme", "Banco Compartamos", "Banco Multiva", "Banco Ve por Mas", "Banco Forjadores", "Banco Ahorro Famsa", "Banco Autofin", "Banco Base", "Banco Monex", "Banco Bancrea", "Banco Actinver", "Banco Bansefi", "Banco Inmobiliario Mexicano", "Banco Inmobiliario Mexicano", "Banco Regional de Monterrey", "Banco Sabadell", "Banco S3", "Banco Wal-Mart de Mexico", "Banco Ahorro Walmart", "Banco Ahorro"};
+        Banco = new JComboBox<>(bancos);
         add(Banco);
 
         add (new JLabel("Credito/Debito:"));
@@ -33,15 +34,16 @@ public class TarjetaCDPanel extends JPanel {
         add(NumeroTarjeta);
 
         add (new JLabel("Fecha de Vencimiento"));
-        FechaVencimiento = new JTextField();
-        add(FechaVencimiento);
+        String [] fechas = {"01/21","02/21","03/21","04/21","05/21","06/21","07/21","08/21","09/21","10/21","11/21","12/21"};
+        Fechas = new JComboBox<>(fechas);
+        add(Fechas);
 
         validar = new JButton("Validar");
         validar.addActionListener(new ActionListener() {
             @Override 
             public void actionPerformed(ActionEvent e) {
                 String titular = Titular.getText();
-                String banco = Banco.getText();
+                String banco = Banco.getSelectedItem().toString();
                 String numeroTarjeta = NumeroTarjeta.getText();
 
                 if (titular.isEmpty() || banco.isEmpty() || numeroTarjeta.length() !=16 ){
@@ -61,7 +63,7 @@ public class TarjetaCDPanel extends JPanel {
     }
 
     public String getBanco() {
-        return Banco.getText();
+        return (String) Banco.getSelectedItem();
     }
 
     public String getTipo() {
@@ -72,8 +74,8 @@ public class TarjetaCDPanel extends JPanel {
         return NumeroTarjeta.getText();
     }
 
-    public String getFechaVencimiento() {
-        return FechaVencimiento.getText();
+    public String getFecha() {
+        return (String) Fechas.getSelectedItem();
     }
 
     public static void  main (String [] args) {
