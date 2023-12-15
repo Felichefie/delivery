@@ -34,7 +34,7 @@ public class TarjetaCDPanel extends JPanel {
         add(NumeroTarjeta);
 
         add (new JLabel("Fecha de Vencimiento"));
-        String [] fechas = {"01/21","02/21","03/21","04/21","05/21","06/21","07/21","08/21","09/21","10/21","11/21","12/21"};
+        String [] fechas = {"01/23","02/23","03/23","04/23","05/23","06/23","07/23","08/23","09/23","10/23","11/23","12/23"};
         Fechas = new JComboBox<>(fechas);
         add(Fechas);
 
@@ -46,7 +46,7 @@ public class TarjetaCDPanel extends JPanel {
                 String banco = Banco.getSelectedItem().toString();
                 String numeroTarjeta = NumeroTarjeta.getText();
 
-                if (titular.isEmpty() || banco.isEmpty() || numeroTarjeta.length() !=16 ){
+                if (titular.isEmpty() || banco.isEmpty() || numeroTarjeta.length() !=16 || !numeroTarjeta.matches("[0-9]+")){
                     JOptionPane.showMessageDialog(null, "Por favor, introduce los datos correctamente.");
                 }
                 else
