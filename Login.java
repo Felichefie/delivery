@@ -1,7 +1,5 @@
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -24,15 +22,6 @@ public class Login {
         Dbconnection dbconnection = new Dbconnection(URL, user, pass);
 
         Connection conn = dbconnection.getConn();
-        Response r = dbconnection.LogAuth(email, password);
-
-        if(r.isStatus()){
-            System.out.println("Usuario Autenticado");
-            System.out.println("Id: " + r.getIdUser());
-            System.out.println("Sesion: " + r.getSesion());
-        }else{
-            System.out.println("Usuario no Autenticado");
-        }
 
         try {
             conn.close();
@@ -51,30 +40,6 @@ public class Login {
     Login(String emailUI, String passwordUI){
         this.emailUI = emailUI;
         this.passwordUI = passwordUI;
-    }
-
-    public boolean inicioSesion(){
-        Dbconnection dbconnection = new Dbconnection(URL, user, pass);
-        Response r = dbconnection.LogAuth(emailUI, passwordUI);
-        if(r.isStatus()){
-            
-
-            String sessionTime = String.valueOf(System.currentTimeMillis()).substring(8, 13);
-            String sessionUUID = UUID.randomUUID().toString().substring(1, 10);
-            String session = sessionTime + sessionUUID;
-            System.out.println(session);
-
-            LocalDateTime nowDate = LocalDateTime.now();
-            System.out.println(nowDate);
-
-            if(dbconnection.createSession(dbconnection.getUserId(emailUI), session, nowDate)){
-                return true;    
-            }
-            return false;
-            
-        }else{
-            return false;
-        }
     }
 
     public boolean registro(String email, String pwd){

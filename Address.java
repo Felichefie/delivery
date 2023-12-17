@@ -5,9 +5,6 @@ public class Address{
     private int number;
     private String number_two;
     private String neighborhood;
-    private String city;
-    private String state;
-    private String country;
     private String postal_code;
     private String gps_lat;
     private String gps_lon;
@@ -20,38 +17,18 @@ public class Address{
         number = 0;
         number_two = "";
         neighborhood = "";
-        city = "";
-        state = "";
-        country = "";
         postal_code = "";
         gps_lat = "";
         gps_lon = "";
 
     }
 
-    Address(int id, int idUser, String street, int number, String number_two, String neighborhood, String city, String state, String country, String postal_code, String gps_lat, String gps_lon){
-        
-        this.id = id;
-        this.idUser = idUser;
-        this.street = street;
-        this.number = number;
-        this.number_two = number_two;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.postal_code = postal_code;
-        this.gps_lat = gps_lat;
-        this.gps_lon = gps_lon;
-
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int getIdUser() {
@@ -94,30 +71,6 @@ public class Address{
         this.neighborhood = neighborhood;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getPostal_code() {
         return postal_code;
     }
@@ -141,5 +94,8 @@ public class Address{
     public void setGps_lon(String gps_lon) {
         this.gps_lon = gps_lon;
     }
+
     
+
+       
 }

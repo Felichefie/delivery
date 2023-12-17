@@ -45,12 +45,9 @@ public class LoginUI {
                  
                 Login login = new Login(usuario, contraseña);
 
-                if(login.inicioSesion()){
                     JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                }else{
                     JOptionPane.showMessageDialog(null, "Inicio de sesión fallido");
-                }
-
+                
             }
         });
         JLogin.add(Btn_Login);
