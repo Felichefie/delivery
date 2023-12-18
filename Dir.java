@@ -6,9 +6,9 @@ import javax.swing.*;
 public class Dir extends JPanel{
     private JTextField txt_street, txt_number, 
                        txt_number_two, txt_neighborhood, 
-                       txt_city, txt_country, txt_postal;
+                       txt_city, txt_postal;
     private JButton btn_cancel, btn_register, btn_ubicacion, btn_calcular;
-    public JComboBox<String> cmb_state;
+    public JComboBox<String> cmb_state , cmb_country;
     private Loc loc;
     public void mostrar(String street, int number, String number_two, String neighborhood,
                         String city, String state, String country, String postal_code){
@@ -18,7 +18,7 @@ public class Dir extends JPanel{
                             txt_neighborhood.setText(neighborhood);
                             txt_city.setText(city);
                             cmb_state.setSelectedItem(state);
-                            txt_country.setText(country);
+                            cmb_country.setSelectedItem(country);
                             txt_postal.setText(postal_code);    
                         }
 
@@ -62,9 +62,10 @@ public class Dir extends JPanel{
         cmb_state = new JComboBox<>(estados);
         add(cmb_state);
 
-        add ( new JLabel("PAIS:"));
-        txt_country = new JTextField();
-        add(txt_country);
+            add ( new JLabel("PAIS:"));
+        String[] paises = {"Mexico"};
+        cmb_country = new JComboBox<>(paises);
+        add(cmb_country);
 
         add ( new JLabel("CODIGO POSTAL:"));
         txt_postal = new JTextField();
@@ -101,7 +102,94 @@ public class Dir extends JPanel{
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria de 3 a 2 Dias Aprox");
                 }
                 else if("Baja California".equals(selectedState)) {
-                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 6 o 9 Dias ");
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 8 o 9 Dias ");
+                }
+                else if ("Baja California Sur".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 8-9 Dias");
+                }
+                else if ("Campeche".equals (selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 7-8 Dias");
+                }
+                else if ("Chiapas".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 7-8 Dias");
+                }
+                else if ("Chihuahua".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 8-9 Dias");
+                }
+                else if ("Coahuila de Zaragoza".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 8-9 Dias");
+                }
+                else if ("Colima".equals (selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
+                }
+                else if ("Durango".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 6-7 Dias");
+                }
+                else if ("Estado de Mexico".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
+                }
+                else if ("Guanajuato".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
+                }
+                else if ("Guerrero".equals (selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
+                }
+                else if ("Hidalgo".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 4-5 Dias");
+                }
+                else if ("Jalisco".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
+                }
+                else if ("Michoacan de Ocampo".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 1-2 Dias");
+                }
+                else if ("Morelos".equals (selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 3-4 Dias");
+                }
+                else if ("Nayarit".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 3-4 Dias");
+                }
+                else if ("Nuevo León".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 8-9 Dias");
+                }
+                else if ("Oaxaca".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 5-6 Dias");
+                }
+                else if ("Puebla".equals (selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 4-5 Dias");
+                }
+                else if ("Querétaro".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
+                }
+                else if ("Quintana Roo".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 7-8 Dias");
+                }
+                else if ("San Luis Potosí".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 4-5 Dias");
+                }
+                else if ("Sinaloa".equals (selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 6-7 Dias");
+                }
+                else if ("Sonora".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 8-9 Dias");
+                }
+                else if ("Tabasco".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 6-7 Dias");
+                }
+                else if ("Tamaulipas".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 9-10 Dias");
+                }
+                else if ("Tlaxcala".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 3-4 Dias");
+                }
+                else if ("Veracruz de Ignacio de la Llave".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 5-6 Dias");
+                }
+                else if ("Yucatan".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 7-8 Dias");
+                }
+                else if ("Zacatecas".equals(selectedState)){
+                    JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 4-5 Dias");
                 }
                 else {
                     JOptionPane.showMessageDialog(btn_calcular, "Estado no seleccionado");
