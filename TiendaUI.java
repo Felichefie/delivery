@@ -13,7 +13,7 @@ public class TiendaUI {
     static String user = "alumno";
     static String pass = "alumnoPrueba1";
     static Dbconnection conn = new Dbconnection(URL, user, pass);
-    static List<Producto> productos = conn.getProduct();
+    static List<Productos> productos = conn.getProduct();
     
     TiendaUI(){
         ImageNames();
@@ -31,7 +31,7 @@ public class TiendaUI {
         
         List<String> imageNamesList = new ArrayList<>();
         
-        for (Producto producto : productos) {
+        for (Productos producto : productos) {
             String image = producto.getImg();
             imageNamesList.add(image);
         }
@@ -44,7 +44,7 @@ public class TiendaUI {
         
         List<String> descriptionsList = new ArrayList<>();
         
-        for (Producto producto : productos) {
+        for (Productos producto : productos) {
             String description = producto.getDesc();
             descriptionsList.add(description);
         }
@@ -61,7 +61,7 @@ public class TiendaUI {
 
             
             
-            for (Producto producto : productos) {
+            for (Productos producto : productos) {
                 double price = producto.getPrice();
                 pricesList.add(price);
             }
@@ -80,7 +80,7 @@ public class TiendaUI {
     try {
         
         
-        for (Producto producto : productos) {
+        for (Productos producto : productos) {
             int stockQuantity = producto.getStock();
             stockQuantitiesList.add(stockQuantity);
         }

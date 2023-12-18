@@ -356,7 +356,7 @@ if (phoneString != null && !phoneString.isEmpty()) {
 
     }
 
-    public List<Producto> getProduct() {
+    public List<Productos> getProduct() {
         return null;
     }
 

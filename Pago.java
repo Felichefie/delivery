@@ -10,7 +10,7 @@ public class Pago extends JFrame {
     private JButton btnRealizarPago;
     private TiendaPanel tiendaSwing;
     private JComboBox<String> cmbMetodoPago;
-    private JTextArea txtProductos;
+    private JTextArea txtProductosSeleccionados;
 
     public Pago(TiendaPanel tiendaSwing) {
         this.tiendaSwing = tiendaSwing;
@@ -26,15 +26,15 @@ public class Pago extends JFrame {
         String [] opcionesPago = {"Efectivo", "Tarjeta de Debito", "Tarjeta de Credito"};
         cmbMetodoPago = new JComboBox<>(opcionesPago);
 
-        txtProductos = new JTextArea();
-        txtProductos.setEditable(false);
-        txtProductos.setLineWrap(true);
-        txtProductos.setWrapStyleWord(true);
+        txtProductosSeleccionados = new JTextArea();
+        txtProductosSeleccionados.setEditable(false);
+        txtProductosSeleccionados.setLineWrap(true);
+        txtProductosSeleccionados.setWrapStyleWord(true);
 
         // Agregar componentes al panel
         JPanel panel = new JPanel(new GridLayout(2, 1));
         panel.add(lblSubtotal);
-        panel.add(new JScrollPane(txtProductos));
+        panel.add(new JScrollPane(txtProductosSeleccionados));
         panel.add(cmbMetodoPago);
         panel.add(btnRealizarPago);
 
@@ -60,7 +60,7 @@ public class Pago extends JFrame {
         String metodoPago = (String) cmbMetodoPago.getSelectedItem();
 
         JOptionPane.showMessageDialog(this, "Pago realizado por un monto de $" + subtotal + "con"+ metodoPago);
-
+        actualizarListaProductosSeleccionados();
         // Cerrar la ventana de Pago
         dispose();
     }
@@ -83,5 +83,12 @@ public class Pago extends JFrame {
         lblSubtotal.setText("Subtotal: $" + String.format("%.2f",nuevoSubtotal));
         });
     }
-
+    private void actualizarListaProductosSeleccionados() {
+        StringBuilder productosTexto = new StringBuilder("Productos seleccionados:\n");
+            for (Productos producto : tiendaSwing.getProductosSeleccionados()) {
+                productosTexto.append(producto.getDescription()).append("\n");
+            }
+          txtProductosSeleccionados.setText(productosTexto.toString());  
+        }
+        
 }
