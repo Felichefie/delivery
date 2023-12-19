@@ -13,9 +13,6 @@ public class TiendaPanel extends JPanel {
     private Pago pagoVentana;
     private JTextField[] quantityFields;
     private int index;
-    private List<Productos> productos = Productos.getProductos();
-    private List<Productos> productosSeleccionados;
-
     private static double subtotal = 0.0;
     private static JLabel labelSubtotal = new JLabel("Subtotal:");
     
@@ -23,12 +20,7 @@ public class TiendaPanel extends JPanel {
         this.contraseña = constraseña;
         setLayout(new BorderLayout());
         createMainPanel();
-        productosSeleccionados = new ArrayList<>();
     }   
-
-    public List<Productos> getProductosSeleccionados(){
-        return productosSeleccionados;
-    }
    
     public double getSubtotal(){
         return subtotal;
@@ -133,9 +125,6 @@ public class TiendaPanel extends JPanel {
                 subtotal += price * quantity;
                 labelSubtotal.setText("Subtotal: $" + String.format("%.2f", subtotal));
                 actualizarSubtotalEnPago(subtotal);
-                Productos productoActual = productos.get(index);
-                productosSeleccionados.add(productoActual);
-                actualizarListaProductosSeleccionados();
             }
 
         });
@@ -171,26 +160,6 @@ public class TiendaPanel extends JPanel {
     public void actualizarSubtotalEnPago (double nuevoSubtotal){
         if(pagoVentana!= null){
             pagoVentana.actualizarSubtotalEnPago(nuevoSubtotal);
-        }
-    }
-    public void actualizarListaProductosSeleccionados(){
-        productosSeleccionados.clear();
-
-        if (quantityFields != null&& quantityFields.length == productos.size()){
-            for (int i = 0; i < productos.size(); i++){
-                JTextField field = quantityFields[i];
-                if (field != null){
-                    int cantidad = Integer.parseInt(field.getText());
-                    if (cantidad > 0){
-                        Productos productoActual = productos.get(i);
-                        productosSeleccionados.add(productoActual);
-                    }
-                } else {
-                    System.out.println("El campo quantityFields[" + i + "] es null");
-                }
-            }
-        } else {
-            System.out.println("El arreglo quantityFields es null o no tiene el mismo tamaño que el arreglo de productos");
         }
     }
 

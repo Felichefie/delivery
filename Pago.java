@@ -16,7 +16,7 @@ public class Pago extends JFrame {
 
         // Configuración del JFrame de Pago
         setTitle("Proceso de Pago");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 200);
 
         // Inicialización de componentes
