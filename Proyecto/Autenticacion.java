@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class Autenticacion {
@@ -47,18 +46,18 @@ public class Autenticacion {
                                     if (BCrypt.checkpw(password, contraseñaHash)) {
                                         // Si las contraseñas coinciden
                                         Timestamp timeout = sessionResultSet.getTimestamp("timeout");
-                                    
+
                                         // Obtener el tiempo actual en milisegundos y convertirlo a Timestamp
                                         long tiempoActualMillis = System.currentTimeMillis();
                                         Timestamp tiempoActual = new Timestamp(tiempoActualMillis);
-                                    
+
                                         if (timeout.after(tiempoActual)) {
                                             // Autenticación exitosa y la sesión no ha expirado
                                             mensaje = "Autenticación exitosa";
                                             System.out.println(timeout);
                                             System.out.println(tiempoActual);
-                                            // Abrir la ventana Principal si la autenticación fue exitosa
-                                            new Principal();
+
+
                                         } else {
                                             // La sesión ha expirado, mostrar mensaje
                                             mensaje = "Tu sesión ha expirado, regístrate nuevamente";
@@ -67,7 +66,7 @@ public class Autenticacion {
                                         // Contraseñas no coinciden
                                         mensaje = "Contraseña incorrecta";
                                     }
-                                    
+
                                 } else {
                                     mensaje = "Usuario no registrado";
                                 }

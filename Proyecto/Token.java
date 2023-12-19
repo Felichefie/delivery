@@ -1,14 +1,7 @@
 package Proyecto;
 
 public class Token {
-    private String token;
-    private String expiration;
-
-    public Token(String token, String expiration) {
-        this.token = token;
-        this.expiration = expiration;
-    }
-
+    String token;
     public String getToken() {
         return token;
     }
@@ -24,4 +17,16 @@ public class Token {
     public void setExpiration(String expiration) {
         this.expiration = expiration;
     }
+
+    String expiration;
+
+    Token(String token, String expiration){
+        this.token = token;
+        this.expiration = expiration;
+    }
+     Token(){
+        this.token = "";
+        this.expiration = "";
+    }
 }
+
