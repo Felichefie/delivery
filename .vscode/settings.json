@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\100129936\\Downloads\\spring-security-crypto-6.1.5.jar",
+        "c:\\Users\\100129936\\Downloads\\mysql-connector-j-8.1.0.jar"
+    ]
+}

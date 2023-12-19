@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class login {
+public class loginP {
 
     public static void login() {
         JFrame inicio = new JFrame("LOGIN");
