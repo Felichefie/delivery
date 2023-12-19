@@ -366,5 +366,4 @@ public class Pestañas extends JTabbedPane {
         revalidate();
         repaint();
     }
-
 }
