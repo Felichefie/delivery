@@ -5,6 +5,9 @@
         "mysql-connector-j-8.1.0.jar",
         "/Users/felix/Downloads/spring-security-crypto-6.1.5.jar",
         "/Users/felix/Downloads/commons-logging-1.2.jar",
-        "gson-2.10.1-1.jar"
+        "gson-2.10.1-1.jar",
+        "Proyecto/jcalendar-1.4.jar",
+        "Proyecto/mysql-connector-j-8.1.0.jar",
+        "Proyecto/spring-security-crypto-5.7.3.jar"
     ]
 }

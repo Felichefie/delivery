@@ -9,6 +9,20 @@
             "name": "Auth",
             "request": "launch",
             "mainClass": "Auth",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "ConnectionMain",
+            "request": "launch",
+            "mainClass": "ConnectionMain",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Auth",
+            "request": "launch",
+            "mainClass": "Auth",
             "projectName": "delivery_658aa4fd"
         },
         {
