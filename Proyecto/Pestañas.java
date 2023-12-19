@@ -6,17 +6,22 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -249,16 +254,26 @@ public class Pestañas extends JTabbedPane {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        // Crea un ImageIcon con la imagen del producto
+        String imagePath = producto.getImagePath();
+        try {
+            Image image = ImageIO.read(new URL(imagePath));
+            ImageIcon imageIcon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JLabel imageLabel = new JLabel(imageIcon);
+            panel.add(imageLabel);
+        } catch (IOException e) {
+            System.out.println("No se puede leer la imagen: " + imagePath);
+            e.printStackTrace();
+        }
+
         JLabel descripcionLabel = new JLabel("Descripción: " + producto.getDescription());
         JLabel precioLabel = new JLabel("Precio: $" + producto.getPrice());
         JLabel cantidadLabel = new JLabel("Cantidad: " + producto.getQuantity());
-        JLabel totalLabel = new JLabel("Total: $" + (producto.getPrice() * producto.getQuantity())); // Nueva etiqueta
-                                                                                                     // para el total
 
+        // Agrega las etiquetas al panel
         panel.add(descripcionLabel);
         panel.add(precioLabel);
         panel.add(cantidadLabel);
-        panel.add(totalLabel); // Agregar la nueva etiqueta al panel
 
         return panel;
     }
