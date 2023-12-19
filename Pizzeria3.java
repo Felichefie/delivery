@@ -7,8 +7,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -56,7 +54,6 @@ public class Pizzeria3 {
         "Cantidad Disponible: 33",
         "Cantidad Disponible: 63"
     };
-
     private static double subtotal = 0.0;
     private static JLabel labelSubTotal;
         public static void main(String[] args) {
@@ -79,8 +76,6 @@ public class Pizzeria3 {
         });
         
     }
-
-
 //METODO PARA CREAR EL PANEL PRINCIPAL
     private static JPanel createPrincipalPanel(){
         JPanel PrincipalPanel = new JPanel();
@@ -144,7 +139,7 @@ public class Pizzeria3 {
         JButton AgregarAlCarrito = new JButton("Agregar al carrito");
         AgregarAlCarrito.setForeground(Color.white);
         AgregarAlCarrito.setBackground(new Color(229,97,84));
-        //AgregarAlCarrito.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
+
 
         ImageIcon carrito1 = new ImageIcon("89145264e2267d52e7460787cb6793b3.jpg");
         int cAncho = 30;
@@ -223,4 +218,3 @@ public class Pizzeria3 {
     }
 
 }
-

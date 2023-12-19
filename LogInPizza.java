@@ -15,10 +15,9 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 public class LogInPizza {
-   
     public static void LogInPizza(){
         JFrame lp = new JFrame("LOGIN");
-        lp.setSize(1000,600);
+        lp.setSize(800,600);
         lp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         lp.setLocationRelativeTo(lp);
         lp.setLayout(new BorderLayout());
@@ -73,7 +72,7 @@ public class LogInPizza {
         lp.add(LabelFonde);
         
         JPanel panelPrincipal = new JPanel();
-        Color ye1 = new Color(254,185,67);
+        Color ye1 = new Color(255,216,0);
         panelPrincipal.setBackground(ye1);
         panelPrincipal.setBounds(10, 10, 960, 530);
 
