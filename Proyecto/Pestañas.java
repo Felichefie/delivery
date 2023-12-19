@@ -6,22 +6,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -250,35 +245,8 @@ public class Pestañas extends JTabbedPane {
         }
     }
 
-    private JPanel crearPanelProducto(Producto producto) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // Crea un ImageIcon con la imagen del producto
-        String imagePath = producto.getImagePath();
-        try {
-            Image image = ImageIO.read(new URL(imagePath));
-            ImageIcon imageIcon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            JLabel imageLabel = new JLabel(imageIcon);
-            panel.add(imageLabel);
-        } catch (IOException e) {
-            System.out.println("No se puede leer la imagen: " + imagePath);
-            e.printStackTrace();
-        }
-
-        JLabel descripcionLabel = new JLabel("Descripción: " + producto.getDescription());
-        JLabel precioLabel = new JLabel("Precio: $" + producto.getPrice());
-        JLabel cantidadLabel = new JLabel("Cantidad: " + producto.getQuantity());
-
-        // Agrega las etiquetas al panel
-        panel.add(descripcionLabel);
-        panel.add(precioLabel);
-        panel.add(cantidadLabel);
-
-        return panel;
-    }
-
     int subtotal = 0; // Variable para el subtotal, inicializada en $0
+    JLabel subtotalValueLabel;
 
     private void cargarCarrito() {
         // Crear un botón para pagar
@@ -295,8 +263,17 @@ public class Pestañas extends JTabbedPane {
         subtotalLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
 
         // Crear una etiqueta para mostrar el valor del subtotal
-        JLabel subtotalValueLabel = new JLabel("$" + subtotal);
+        subtotalValueLabel = new JLabel("$" + subtotal);
         subtotalValueLabel.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 22));
+        subtotalValueLabel.setOpaque(true); // Necesario para que el color de fondo sea visible
+        subtotalValueLabel.setBackground(new Color(0, 255, 90)); // Establece el color de fondo en azul
+        subtotalValueLabel.setForeground(Color.BLACK); // Establece el color del texto en blanco para que sea visible en
+                                                       // el fondo azul
+
+        // Agrega un borde del mismo color que el fondo para hacer que el fondo parezca
+        // más grande
+        int borderSize = 10; // Ajusta este valor según tus necesidades
+        subtotalValueLabel.setBorder(BorderFactory.createEmptyBorder(borderSize, borderSize, borderSize, borderSize));
 
         // Crear un nuevo JPanel con BorderLayout para el subtotal
         JPanel subtotalPanel = new JPanel(new BorderLayout());
@@ -325,6 +302,128 @@ public class Pestañas extends JTabbedPane {
 
         // Añadir el panel del botón al panel del carrito
         carritoPanel.add(buttonPanel);
+    }
+
+    private JPanel crearPanelProducto(Producto producto) {
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS)); // Cambia a BoxLayout.X_AXIS
+
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+
+        // Crea un VisualizarImagen con la imagen del producto
+        String imagePath = producto.getImagePath();
+        VisualizarImagen imagePanel = new VisualizarImagen(imagePath);
+        infoPanel.add(imagePanel);
+
+        JLabel descripcionLabel = new JLabel(producto.getDescription());
+        descripcionLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        descripcionLabel.setForeground(new Color(0, 45, 255));
+
+        JLabel precioLabel = new JLabel("Precio: $" + producto.getPrice());
+        precioLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        precioLabel.setForeground(Color.BLACK);
+
+        JLabel cantidadLabel = new JLabel("Cantidad: " + producto.getQuantity());
+        cantidadLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        cantidadLabel.setForeground(Color.BLACK);
+
+        // Calcula el total del producto y crea una etiqueta para él
+        double totalProducto = producto.getPrice() * producto.getQuantity();
+        JLabel totalProductoLabel = new JLabel("Total: $" + totalProducto);
+        totalProductoLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        totalProductoLabel.setForeground(Color.BLACK);
+
+        // Agrega las etiquetas al panel de información
+        infoPanel.add(descripcionLabel);
+        infoPanel.add(precioLabel);
+        infoPanel.add(cantidadLabel);
+        infoPanel.add(totalProductoLabel); // Agrega la etiqueta del total del producto al panel
+
+        // Crea los botones "+" y "-" y el campo de texto de la cantidad
+        JButton buttonAgregar = new JButton("+");
+        JButton buttonQuitar = new JButton("-");
+
+        // Ajusta el tamaño de los botones
+        Dimension buttonSize = new Dimension(60, 60); // Ajusta estos valores según tus necesidades
+        buttonAgregar.setMinimumSize(buttonSize);
+        buttonAgregar.setMaximumSize(buttonSize);
+        buttonAgregar.setSize(buttonSize);
+
+        buttonQuitar.setMinimumSize(buttonSize);
+        buttonQuitar.setMaximumSize(buttonSize);
+        buttonQuitar.setSize(buttonSize);
+
+        JTextField cantidadTextField = new JTextField(String.valueOf(producto.getQuantity()));
+        cantidadTextField.setColumns(4); // Ajusta el tamaño del campo de texto según tus necesidades
+
+        // Ajusta el tamaño máximo y mínimo del campo de texto
+        Dimension textFieldSize = new Dimension(50, 25); // Ajusta estos valores según tus necesidades
+        cantidadTextField.setMaximumSize(textFieldSize);
+        cantidadTextField.setMinimumSize(textFieldSize);
+
+        // Crea un panel para los botones y el campo de texto de la cantidad
+        JPanel cantidadPanel = new JPanel();
+        cantidadPanel.setLayout(new BoxLayout(cantidadPanel, BoxLayout.X_AXIS));
+
+        // Agrega un ActionListener a los botones
+        buttonAgregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Código para incrementar la cantidad
+                int cantidad = Integer.parseInt(cantidadTextField.getText());
+                cantidad++;
+                cantidadTextField.setText(String.valueOf(cantidad));
+
+                // Actualiza la etiqueta de cantidad
+                cantidadLabel.setText("Cantidad: " + cantidad);
+
+                // Actualiza el subtotal
+                subtotal += producto.getPrice(); // Asume que "producto" es el producto actual
+
+                // Verifica si subtotalValueLabel es null antes de usarlo
+                if (subtotalValueLabel == null) {
+                    subtotalValueLabel = new JLabel();
+                }
+                subtotalValueLabel.setText("$" + subtotal); // Actualiza la etiqueta del subtotal
+            }
+        });
+
+        buttonQuitar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Código para decrementar la cantidad
+                int cantidad = Integer.parseInt(cantidadTextField.getText());
+                if (cantidad > 0) {
+                    cantidad--;
+                    cantidadTextField.setText(String.valueOf(cantidad));
+
+                    // Actualiza la etiqueta de cantidad
+                    cantidadLabel.setText("Cantidad: " + cantidad);
+
+                    // Actualiza el subtotal
+                    subtotal -= producto.getPrice(); // Asume que "producto" es el producto actual
+                    if (subtotal < 0)
+                        subtotal = 0; // Asegura que el subtotal no sea negativo
+                    subtotalValueLabel.setText("$" + subtotal); // Actualiza la etiqueta del subtotal
+                }
+            }
+        });
+
+        // Agrega los botones y el campo de texto al panel de la cantidad
+        cantidadPanel.add(buttonQuitar);
+        cantidadPanel.add(Box.createHorizontalStrut(6)); // Agrega espacio entre los botones
+        cantidadPanel.add(cantidadTextField);
+        cantidadPanel.add(Box.createHorizontalStrut(6)); // Agrega espacio entre los botones
+        cantidadPanel.add(buttonAgregar);
+
+        // Agrega el panel de información y el panel de la cantidad al panel principal
+        panel.add(infoPanel);
+        panel.add(Box.createHorizontalGlue()); // Agrega un Box.Filler
+        panel.add(cantidadPanel); // Agrega el panel de la cantidad al panel
+
+        return panel;
     }
 
     private void actualizarCarrito() {
