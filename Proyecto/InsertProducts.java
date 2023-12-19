@@ -52,13 +52,13 @@ public class InsertProducts {
 
         // Crear los detalles del producto
         java.sql.Date created = java.sql.Date.valueOf("2022-01-01");
-        String description = "Cigarros Marlboro rojo:";
-        String image = "https://grupoelvalor.com/wp-content/uploads/2018/12/marlboro-14.png";
-        double price = 75;
-        double size_x = 2;
-        double size_y = 10;
-        double size_z = 4;
-        int stock = 148;
+        String description = "Pastel de Chocolate";
+        String image = "https://www.burgerking.com.mx/wp-media-folder-bk-mex//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/3/pay-herseys-1.png";
+        double price = 17;
+        double size_x = 25;
+        double size_y = 15;
+        double size_z = 10;
+        int stock = 14;
 
         // Insertar el producto
         inserter.insertProduct(created, description, image, price, size_x, size_y, size_z, stock);

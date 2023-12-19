@@ -16,7 +16,7 @@ public class Principal {
         frame.add(pestañas);
 
         // Configurar el tamaño del JFrame y hacerlo visible
-        frame.setBounds(280, 75, 800, 600);
+        frame.setBounds(250, 20, 800, 640);
         frame.setVisible(true);
     }
 

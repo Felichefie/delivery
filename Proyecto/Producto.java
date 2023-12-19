@@ -11,10 +11,10 @@ public class Producto {
     private int quantity;
 
     public Producto(String description, double price, int productStock, double sizeX, double sizeY, double sizeZ,
-            String imagePath) {
+            String imagePath, int quantity) {
         this.description = description;
         this.price = price;
-        this.stock = stock;
+        this.stock = productStock;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.sizeZ = sizeZ;

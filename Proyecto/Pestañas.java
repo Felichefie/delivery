@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -19,8 +21,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +33,8 @@ public class Pestañas extends JTabbedPane {
     Dbconnection dbConnection;
     JPanel productos; // Cambiado a un campo de la clase
     JPanel carritoPanel; // Cambiado a un campo de la clase
+    private List<JPanel> productosEnCarrito = new ArrayList<>();
+    private List<Producto> listaDeProductos = new ArrayList<>();
 
     public Pestañas(Dbconnection dbConnection) {
         this.dbConnection = dbConnection;
@@ -82,7 +88,7 @@ public class Pestañas extends JTabbedPane {
                 productoPanel.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Color.BLACK, 2),
                         BorderFactory.createEmptyBorder(4, 4, 4, 4))); // Reduce el borde vacío a 5 píxeles
-                productoPanel.setBackground(new Color(60, 255, 50, 80)); // Más rojo y más transparente
+                productoPanel.setBackground(new Color(60, 255, 50, 90)); // Más rojo y más transparente
 
                 VisualizarImagen visualizarImagen = new VisualizarImagen(image);
                 JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -97,7 +103,7 @@ public class Pestañas extends JTabbedPane {
                 // Crea las etiquetas con la fuente, el tamaño y el color deseados
                 JLabel descriptionLabel = new JLabel(description);
                 descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 22));
-                descriptionLabel.setForeground(new Color(60, 60, 255));
+                descriptionLabel.setForeground(new Color(0, 45, 255));
 
                 JLabel priceLabel = new JLabel("Precio: " + price);
                 priceLabel.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -192,8 +198,18 @@ public class Pestañas extends JTabbedPane {
                 });
 
                 ButtonCarrito.addActionListener(e -> {
-                    textField_cantidad.setText("0");
+                    int cantidad = Integer.parseInt(textField_cantidad.getText());
+                    if (cantidad > 0) {
+                        // Create a new Producto with the description and quantity
+                        Producto producto = new Producto(description, price, cantidad, size_x, size_y, size_z, image,
+                                cantidad);
+                        // Add the new Producto to the list
+                        listaDeProductos.add(producto);
 
+                        // Update the cart
+                        actualizarCarrito();
+                    }
+                    textField_cantidad.setText("0");
                 });
 
                 // Configura los botones y el campo de texto
@@ -229,6 +245,26 @@ public class Pestañas extends JTabbedPane {
         }
     }
 
+    private JPanel crearPanelProducto(Producto producto) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel descripcionLabel = new JLabel("Descripción: " + producto.getDescription());
+        JLabel precioLabel = new JLabel("Precio: $" + producto.getPrice());
+        JLabel cantidadLabel = new JLabel("Cantidad: " + producto.getQuantity());
+        JLabel totalLabel = new JLabel("Total: $" + (producto.getPrice() * producto.getQuantity())); // Nueva etiqueta
+                                                                                                     // para el total
+
+        panel.add(descripcionLabel);
+        panel.add(precioLabel);
+        panel.add(cantidadLabel);
+        panel.add(totalLabel); // Agregar la nueva etiqueta al panel
+
+        return panel;
+    }
+
+    int subtotal = 0; // Variable para el subtotal, inicializada en $0
+
     private void cargarCarrito() {
         // Crear un botón para pagar
         JButton pagarButton = new JButton("PAGAR");
@@ -239,16 +275,81 @@ public class Pestañas extends JTabbedPane {
                                                                                  // texto
         pagarButton.setPreferredSize(new Dimension(400, 45)); // Establecer el tamaño preferido del botón
 
-        // Crear un nuevo JPanel con BorderLayout para contener el botón
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.add(pagarButton, BorderLayout.SOUTH);
+        // Crear una etiqueta para el título "SUBTOTAL"
+        JLabel subtotalLabel = new JLabel("SUBTOTAL");
+        subtotalLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+
+        // Crear una etiqueta para mostrar el valor del subtotal
+        JLabel subtotalValueLabel = new JLabel("$" + subtotal);
+        subtotalValueLabel.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 22));
+
+        // Crear un nuevo JPanel con BorderLayout para el subtotal
+        JPanel subtotalPanel = new JPanel(new BorderLayout());
+        subtotalPanel.add(Box.createVerticalStrut(20), BorderLayout.NORTH); // Agrega espacio vertical antes de la
+                                                                            // etiqueta subtotal
+        subtotalPanel.add(subtotalLabel, BorderLayout.WEST);
+        subtotalPanel.add(Box.createHorizontalStrut(10), BorderLayout.CENTER); // Espacio entre el título y el valor del
+                                                                               // subtotal
+        subtotalPanel.add(subtotalValueLabel, BorderLayout.EAST);
+
+        // Agregar un borde vacío para actuar como un margen
+        subtotalPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0)); // 10 pixels de margen a la izquierda
+
+        // Crear un nuevo JPanel con BorderLayout para contener el botón y el
+        // subtotalPanel
+        JPanel buttonAndSubtotalPanel = new JPanel(new BorderLayout());
+        buttonAndSubtotalPanel.add(pagarButton, BorderLayout.WEST); // Coloca el botón a la izquierda
+        buttonAndSubtotalPanel.add(Box.createHorizontalStrut(50), BorderLayout.CENTER); // Agrega espacio horizontal
+                                                                                        // entre el botón y el
+                                                                                        // subtotalPanel
+        buttonAndSubtotalPanel.add(subtotalPanel, BorderLayout.EAST); // Coloca el subtotalPanel a la derecha
+
+        // Crear un nuevo JPanel con FlowLayout alineado a la izquierda
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.add(buttonAndSubtotalPanel);
 
         // Añadir el panel del botón al panel del carrito
         carritoPanel.add(buttonPanel);
     }
 
-    private void updateCarrito() {
+    private void actualizarCarrito() {
+        // Borra todos los productos actuales en el carritoPanel
+        carritoPanel.removeAll();
+        carritoPanel.setLayout(new BoxLayout(carritoPanel, BoxLayout.Y_AXIS));
 
+        // Inicializa el subtotal a 0 al principio de cada actualización
+        subtotal = 0;
+
+        // Agrega los productos actuales al carritoPanel
+        for (Producto producto : listaDeProductos) {
+            JPanel productoEnCarrito = crearPanelProducto(producto);
+            productoEnCarrito.setMaximumSize(new Dimension(850, 600));
+            productoEnCarrito.setPreferredSize(new Dimension(400, 263));
+            productoEnCarrito.setMinimumSize(new Dimension(400, 50));
+            productoEnCarrito.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(Color.BLACK, 2),
+                    BorderFactory.createEmptyBorder(4, 4, 4, 4)));
+            carritoPanel.add(productoEnCarrito); // Agrega el producto al carritoPanel
+
+            // Suma el total del producto al subtotal
+            subtotal += producto.getPrice() * producto.getQuantity();
+
+            // Añade un separador entre productos
+            JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
+            separator.setPreferredSize(new Dimension(400, 10)); // Ajusta el tamaño del separador según tus necesidades
+            carritoPanel.add(separator);
+        }
+
+        // Elimina el último separador agregado al final
+        if (carritoPanel.getComponentCount() > 0) {
+            carritoPanel.remove(carritoPanel.getComponentCount() - 1);
+        }
+        // Añade el botón de pagar
+        cargarCarrito();
+
+        // Actualiza la interfaz gráfica
+        revalidate();
+        repaint();
     }
 
 }
