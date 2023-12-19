@@ -125,7 +125,7 @@ public class Dir extends JPanel{
                 else if ("Durango".equals(selectedState)){
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 6-7 Dias");
                 }
-                else if ("Estado de Mexico".equals(selectedState)){
+                else if ("Estado de México".equals(selectedState)){
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
                 }
                 else if ("Guanajuato".equals(selectedState)){
@@ -140,7 +140,7 @@ public class Dir extends JPanel{
                 else if ("Jalisco".equals(selectedState)){
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 2-3 Dias");
                 }
-                else if ("Michoacan de Ocampo".equals(selectedState)){
+                else if ("Michoacán de Ocampo".equals(selectedState)){
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 1-2 Dias");
                 }
                 else if ("Morelos".equals (selectedState)){
@@ -185,7 +185,7 @@ public class Dir extends JPanel{
                 else if ("Veracruz de Ignacio de la Llave".equals(selectedState)){
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 5-6 Dias");
                 }
-                else if ("Yucatan".equals(selectedState)){
+                else if ("Yucatán".equals(selectedState)){
                     JOptionPane.showMessageDialog(btn_calcular, "Su paquete llegaria en 7-8 Dias");
                 }
                 else if ("Zacatecas".equals(selectedState)){
