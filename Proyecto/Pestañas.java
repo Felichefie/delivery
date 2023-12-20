@@ -55,6 +55,7 @@ public class Pestañas extends JTabbedPane {
         addTab("Pestaña Perfil", perfil);
 
         // Pestaña Carrito
+
         carritoPanel = new JPanel(new GridLayout(0, 1)); // GridLayout con una única columna
         carritoPanel.setLayout(new BoxLayout(carritoPanel, BoxLayout.Y_AXIS));
         carritoPanel.setBorder(new EmptyBorder(0, 10, 0, 10)); // Ajusta los márgenes según tus necesidades
@@ -245,10 +246,21 @@ public class Pestañas extends JTabbedPane {
         }
     }
 
-    int subtotal = 0; // Variable para el subtotal, inicializada en $0
+    double subtotal = 0;
+    double iva = 0;
+    double total = 0;
     JLabel subtotalValueLabel;
 
     private void cargarCarrito() {
+
+        Iva i = new Iva(subtotal);
+        iva = iva + i.getimpuesto();
+        subtotal = subtotal + i.getbase();
+        total = total + subtotal + iva;
+
+        JLabel l_iva = new JLabel("IVA " + String.valueOf(iva));
+        JLabel l_total = new JLabel("Total " + String.valueOf(total));
+
         // Crear un botón para pagar
         JButton pagarButton = new JButton("PAGAR");
         pagarButton.setBackground(new Color(7, 164, 121));
@@ -257,6 +269,10 @@ public class Pestañas extends JTabbedPane {
         pagarButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24)); // Establecer la fuente y el tamaño del
                                                                                  // texto
         pagarButton.setPreferredSize(new Dimension(400, 45)); // Establecer el tamaño preferido del botón
+
+        pagarButton.addActionListener(e -> {
+            Guipay pago = new Guipay();
+        });
 
         // Crear una etiqueta para el título "SUBTOTAL"
         JLabel subtotalLabel = new JLabel("SUBTOTAL");
@@ -299,6 +315,8 @@ public class Pestañas extends JTabbedPane {
         // Crear un nuevo JPanel con FlowLayout alineado a la izquierda
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonPanel.add(buttonAndSubtotalPanel);
+        buttonAndSubtotalPanel.add(subtotalLabel.add(l_iva));
+        buttonAndSubtotalPanel.add(subtotalLabel.add(l_total));
 
         // Añadir el panel del botón al panel del carrito
         carritoPanel.add(buttonPanel);
