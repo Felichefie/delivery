@@ -48,4 +48,7 @@ public class Principal extends JFrame {
         // Crear una instancia de la clase Principal (que extiende JFrame)
         Principal principalFrame = new Principal();
     }
+
+    public void mostrar() {
+    }
 }

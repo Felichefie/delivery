@@ -16,11 +16,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.UUID;
-
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -31,6 +26,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -59,7 +56,7 @@ public class Registration {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpeg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
@@ -224,16 +221,17 @@ public class Registration {
 
         // Agregar un ActionListener al botón
         button_register.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    // Llama al método para insertar datos en la base de datos
-                    InsertarEnDB();
-            
-                    // Cerrar la GUI de Registration
-                    frame.dispose();
-                    // Volver a abrir la GUI de Login
-                    new Principal();
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                // Llama al método para insertar datos en la base de datos
+                InsertarEnDB();
+
+                // Cerrar la GUI de Registration
+                frame.dispose();
+                // Volver a abrir la GUI de Login
+                // new Principal();
+                new Principal().mostrar();
+            }
+        });
 
         // Boton de cancelar
         button_cancel = new JButton("Cancelar");
@@ -304,21 +302,22 @@ public class Registration {
             String telefono = textField_telefono.getText();
             String password = String.valueOf(field_pass.getPassword());
             String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
-    
+
             // Crear token y fecha de expiración
             String token = Auth.calculateToken();
-            String expiration = Auth.calculateExpiration(10);
-    
+            String expiration = Auth.calculateExpiration(1);
+
             String queryInsertUser = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+
             String queryInsertSession = "INSERT INTO progra2.sessions(id_user, session, timeout, created) VALUES (?, ?, ?, ?)";
-    
-            try (PreparedStatement prepStateUser = conn.prepareStatement(queryInsertUser, Statement.RETURN_GENERATED_KEYS);
-                 PreparedStatement prepStateSession = conn.prepareStatement(queryInsertSession)) {
-    
+
+            try (PreparedStatement prepStateUser = conn.prepareStatement(queryInsertUser,
+                    Statement.RETURN_GENERATED_KEYS);
+                    PreparedStatement prepStateSession = conn.prepareStatement(queryInsertSession)) {
+
                 conn.setAutoCommit(false);
-    
+
                 prepStateUser.setString(1, tipoUsuario);
                 prepStateUser.setString(2, username);
                 prepStateUser.setString(3, primerApellido);
@@ -330,35 +329,33 @@ public class Registration {
                 prepStateUser.setString(9, telefono);
                 prepStateUser.setString(10, pwd_hash);
                 prepStateUser.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
-    
+
                 prepStateUser.executeUpdate();
-    
+
                 // Recupera ID del usuario generado
                 ResultSet generatedKeys = prepStateUser.getGeneratedKeys();
                 int userId = -1;
                 if (generatedKeys.next()) {
                     userId = generatedKeys.getInt(1);
                 }
-    
+
                 prepStateSession.setInt(1, userId); // id_user
                 prepStateSession.setString(2, token); // session
                 prepStateSession.setTimestamp(3, Timestamp.valueOf(expiration)); // timeout
                 prepStateSession.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now())); // created
-    
+
                 prepStateSession.executeUpdate();
-    
+
                 conn.commit();
                 System.out.println("Usuario y sesión ingresados correctamente");
-    
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 conn.rollback();
             }
-    
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
 }
- 

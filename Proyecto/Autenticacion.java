@@ -26,7 +26,8 @@ public class Autenticacion {
         String pass = "alumnoPrueba1";
 
         try (Connection connection = DriverManager.getConnection(URL, user, pass)) {
-            // Preparar la consulta SQL para obtener el ID y la contraseña del usuario por correo
+            // Preparar la consulta SQL para obtener el ID y la contraseña del usuario por
+            // correo
             String query = "SELECT id, password FROM progra2.users WHERE email = ? ORDER BY id DESC LIMIT 1";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, correoElectronico);
@@ -37,7 +38,8 @@ public class Autenticacion {
                         int idUsuario = resultSet.getInt("id");
                         String contraseñaHash = resultSet.getString("password");
 
-                        // Consultar la tabla sessions para verificar la existencia del ID y obtener el timeout
+                        // Consultar la tabla sessions para verificar la existencia del ID y obtener el
+                        // timeout
                         String sessionQuery = "SELECT timeout FROM progra2.sessions WHERE id_user = ?";
                         try (PreparedStatement sessionStatement = connection.prepareStatement(sessionQuery)) {
                             sessionStatement.setInt(1, idUsuario);
@@ -56,7 +58,6 @@ public class Autenticacion {
                                             mensaje = "Autenticación exitosa";
                                             System.out.println(timeout);
                                             System.out.println(tiempoActual);
-
 
                                         } else {
                                             // La sesión ha expirado, mostrar mensaje

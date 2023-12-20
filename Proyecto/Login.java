@@ -19,9 +19,13 @@ import javax.swing.JTextField;
 
 public class Login extends JPanel {
 
+    String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+    String user = "alumno";
+    String pass = "alumnoPrueba1";
+
     private JFrame frame;
-    private JLabel label_user, label_pass, etiqueta;
-    JTextField textField_user;
+    private JLabel label_correoElectronico, label_pass, etiqueta;
+    private JTextField textField_correoElectronico;
     private JPasswordField field_pass;
     private JButton button_login, button_register;
 
@@ -34,7 +38,7 @@ public class Login extends JPanel {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Login_Fondo.jpeg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
@@ -60,18 +64,18 @@ public class Login extends JPanel {
         etiqueta.setFont(new Font("sansserif", 1, 30));
         etiqueta.setForeground(new Color(10, 10, 10));
 
-        label_user = new JLabel("Correo electronico");
-        label_user.setBounds(70, 80, 200, 30);
-        label_user.setFont(new Font("Segoe UI Semibold", 1, 14));
-        label_user.setForeground(Color.BLACK);
+        label_correoElectronico = new JLabel("Correo electronico");
+        label_correoElectronico.setBounds(70, 80, 200, 30);
+        label_correoElectronico.setFont(new Font("Segoe UI Semibold", 1, 14));
+        label_correoElectronico.setForeground(Color.BLACK);
 
-        textField_user = new JTextField();
-        textField_user.setBounds(230, 80, 200, 30);
-        textField_user.setBorder(BorderFactory.createCompoundBorder(
+        textField_correoElectronico = new JTextField();
+        textField_correoElectronico.setBounds(230, 80, 200, 30);
+        textField_correoElectronico.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.BLACK, 1),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        textField_user.setBackground(new Color(205, 220, 205));
-        textField_user.setFont(new Font("Arial", Font.PLAIN, 16));
+        textField_correoElectronico.setBackground(new Color(205, 220, 205));
+        textField_correoElectronico.setFont(new Font("Arial", Font.PLAIN, 16));
 
         label_pass = new JLabel("Contraseña");
         label_pass.setBounds(70, 130, 200, 30);
@@ -95,23 +99,14 @@ public class Login extends JPanel {
 
         button_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String correoElectronico = textField_user.getText();
-                String contraseña = String.valueOf(field_pass.getPassword ());
-                Autenticacion autenticacion = new Autenticacion(correoElectronico, contraseña);
-        
-                // Obtén y muestra el mensaje devuelto por Autenticacion
-                String mensajeResultado = autenticacion.autenticar();
-                
+                // Aquí puedes implementar la lógica de autenticación
+                Acceso();
                 // Cerramos la GUI loguin
                 frame.dispose();
-        
-                // Abrimos GUI principal solo si la autenticación fue exitosa (puedes ajustar esto según tus necesidades)
-                if (mensajeResultado.startsWith("ID del usuario encontrado")) {
-                    new Principal();
-                }
+                // Abrimos GUI principal
+                new Principal().mostrar();
             }
         });
-        
 
         button_register = new JButton("Registrarte");
         button_register.setBounds(280, 200, 150, 40);
@@ -129,8 +124,8 @@ public class Login extends JPanel {
         });
 
         // Agregar todos los elementos al contenedor
-        container.add(label_user);
-        container.add(textField_user);
+        container.add(label_correoElectronico);
+        container.add(textField_correoElectronico);
         container.add(label_pass);
         container.add(field_pass);
         container.add(button_login);
@@ -138,6 +133,10 @@ public class Login extends JPanel {
         container.add(etiqueta);
 
         frame.setVisible(true);
+    }
+
+    public void Acceso() {
+
     }
 
     public static void main(String[] args) {
