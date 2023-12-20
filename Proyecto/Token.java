@@ -2,6 +2,7 @@ package Proyecto;
 
 public class Token {
     String token;
+
     public String getToken() {
         return token;
     }
@@ -20,13 +21,13 @@ public class Token {
 
     String expiration;
 
-    Token(String token, String expiration){
+    Token(String token, String expiration) {
         this.token = token;
         this.expiration = expiration;
     }
-     Token(){
+
+    Token() {
         this.token = "";
         this.expiration = "";
     }
 }
-
