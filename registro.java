@@ -3,6 +3,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class registro {
 
@@ -49,28 +50,45 @@ public class registro {
         inicio.add(panelInicioSesion);
 
 
-        JPanel panelFormulario = new JPanel(new GridLayout(8, 2, 5, 5));
+        JPanel panelFormulario = new JPanel(new GridLayout(11, 2, 5, 5));
         panelFormulario.setBackground(Color.WHITE); 
+
+        JLabel labelUserName = new JLabel("Nombre de usuario:");
+        labelUserName.setForeground(Color.BLACK);
+        JTextField campoUserName = new JTextField();
 
         JLabel labelNombre = new JLabel("Nombre:");
         labelNombre.setForeground(Color.BLACK);
         JTextField campoNombre = new JTextField();
 
-        JLabel labelCorreo = new JLabel("Correo:");
+        JLabel labelPrimerApellido = new JLabel("Primer apellido:");
+        labelPrimerApellido.setForeground(Color.BLACK);
+        JTextField campoPrimerApellido = new JTextField();     
+
+        JLabel labelSegundoApellido = new JLabel("Segundo apellido:");
+        labelSegundoApellido.setForeground(Color.BLACK);
+        JTextField campoSegundoApellido = new JTextField();  
+
+        JLabel labelFechaNacimiento = new JLabel("Fecha de Nacimiento:");
+        labelFechaNacimiento.setForeground(Color.BLACK);
+        SpinnerDateModel dateModel = new SpinnerDateModel();
+        JSpinner dateSpinner = new JSpinner(dateModel);
+        dateSpinner.setEditor(new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy"));
+        dateSpinner.setValue(new Date());
+
+        JLabel labelCorreo = new JLabel("Email:");
         labelCorreo.setForeground(Color.BLACK);
         JTextField campoCorreo = new JTextField();
-
-        JLabel labelDireccion = new JLabel("Dirección:");
-        labelDireccion.setForeground(Color.BLACK);
-        JTextField campoDireccion = new JTextField();
 
         JLabel labelTelefono = new JLabel("Teléfono:");
         labelTelefono.setForeground(Color.BLACK);
         JTextField campoTelefono = new JTextField();
 
-        JLabel labelUsuario = new JLabel("Usuario:");
-        labelUsuario.setForeground(Color.BLACK);
-        JTextField campoUsuario = new JTextField();
+        JLabel labelGenero = new JLabel("Género:");
+        labelGenero.setForeground(Color.BLACK);
+        String[] opcionesGenero = {"Hombre", "Mujer"};
+        JComboBox<String> comboGenero = new JComboBox<>(opcionesGenero);
+
 
         JLabel labelContraseña = new JLabel("Clave:");
         labelContraseña.setForeground(Color.BLACK);
@@ -84,16 +102,22 @@ public class registro {
         btnRegistrar.setForeground(Color.BLACK);
         btnRegistrar.setBackground(b);
 
+        panelFormulario.add(labelUserName);
+        panelFormulario.add(campoUserName);
         panelFormulario.add(labelNombre);
         panelFormulario.add(campoNombre);
+        panelFormulario.add(labelPrimerApellido);
+        panelFormulario.add(campoPrimerApellido);
+        panelFormulario.add(labelSegundoApellido);
+        panelFormulario.add(campoSegundoApellido);
+        panelFormulario.add(labelFechaNacimiento);
+        panelFormulario.add(dateSpinner);
         panelFormulario.add(labelCorreo);
         panelFormulario.add(campoCorreo);
-        panelFormulario.add(labelDireccion);
-        panelFormulario.add(campoDireccion);
         panelFormulario.add(labelTelefono);
         panelFormulario.add(campoTelefono);
-        panelFormulario.add(labelUsuario);
-        panelFormulario.add(campoUsuario);
+        panelFormulario.add(labelGenero);
+        panelFormulario.add(comboGenero);
         panelFormulario.add(labelContraseña);
         panelFormulario.add(campoContraseña);
         panelFormulario.add(labelRepetirContraseña);
@@ -106,7 +130,7 @@ public class registro {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JOptionPane.showMessageDialog(inicio, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(inicio, "Introduce tu direccion", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
