@@ -23,10 +23,12 @@ static ArrayList<String> a;
         JTextField txt_destino = new JTextField("Uruapan,Mexico");
         JLabel l_datos = new JLabel("Tiempo y Distancia del Pedido");
         JLabel l_recomendacion = new JLabel("Favor de solamente ingresar comas; sin acentos,espacio o ñ");
+        JLabel l_distancia = new JLabel("Distancia");
+        JLabel l_tiempo = new JLabel("Tiempo");
+        JTextField txt_tiempo = new JTextField();
+        JTextField txt_distancia = new JTextField();
+        //JTextArea t_info = new JTextArea(2,1);
 
-        /*JTextField txt_tiempo = new JTextField();
-        JTextField txt_distancia = new JTextField();*/
-        JTextArea t_info = new JTextArea();
         JButton btn_calcular = new JButton("Calcular");
         JButton btn_cancelar = new JButton("Cancelar");
 
@@ -38,23 +40,25 @@ static ArrayList<String> a;
         btn_calcular.setBounds(20, 260, 100, 30);
         btn_cancelar.setBounds(150, 260, 100, 30);
         l_datos.setBounds(20, 300, 400, 30);
+        l_distancia.setBounds(20,340,100,30);
+        txt_distancia.setBounds(20,380,100,30);
+        l_tiempo.setBounds(20,420,100,30);
+        txt_tiempo.setBounds(20,460,100,30);
 
-        t_info.setBounds(20, 340, 300, 100);
+
+
+        //t_info.setBounds(20, 340, 300, 100);
 
         btn_calcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 ConnectionMain c = new ConnectionMain(txt_origen.getText(),txt_destino.getText());
-                c.geta();
-                
-                /*for (String s: a) {
-                    System.out.println(s);
-                    t_info.setText(s);
-                }*/
-                for(int i=0; i < c.geta().size(); i++){
-                System.out.println(c.geta().get(i));
-                t_info.setText(c.geta().get(i));                  
-                }
+                c.gettime();
+                c.getd();
+
+                txt_distancia.setText(c.getd());
+                txt_tiempo.setText(c.gettime());
+
                
                 
             }
@@ -68,7 +72,7 @@ static ArrayList<String> a;
         });
 
         /*txt_tiempo.setBounds(20, 260, 100, 30);
-        txt_distancia.setBounds(20, 340, 100, 30);*/
+         txt_distancia.setBounds(20, 340, 100, 30);*/
 
 
         frame.add(l_destino);
@@ -76,12 +80,14 @@ static ArrayList<String> a;
         frame.add(l_datos);
         frame.add(l_recomendacion);
         frame.add(txt_destino);
-       // frame.add(txt_distancia);
-       // frame.add(txt_tiempo);
+        frame.add(txt_distancia);
+        frame.add(txt_tiempo);
         frame.add(txt_origen);
         frame.add(btn_calcular);
         frame.add(btn_cancelar);
-        frame.add(t_info);
+        frame.add(l_distancia);
+        frame.add(l_tiempo);
+        //frame.add(t_info);
 
 
 

@@ -13,7 +13,9 @@ import com.mysql.cj.xdevapi.JsonString;
 
 
 public class ConnectionMain {
-   ArrayList<String> a = new ArrayList<String>();
+   //ArrayList<String> a = new ArrayList<String>();
+   String d;
+   String time;
 
   
     public ConnectionMain(String origen, String destino) {
@@ -55,19 +57,11 @@ public class ConnectionMain {
              JsonElement j = dist.get("distance");
              JsonObject k = j.getAsJsonObject();
              JsonElement l = k.get("text");
-            // System.out.println(l);
-                a.add(l.getAsString());
-
+               d = l.getAsString();
              JsonElement j1 = dist.get("duration");
              JsonObject k1 = j1.getAsJsonObject();
              JsonElement l1 = k1.get("text");
-             //System.out.println(l1);
-               a.add(l1.getAsString());
-
-            
-               
-               
-
+               time = l1.getAsString();
             }
          
           
@@ -77,8 +71,12 @@ public class ConnectionMain {
 
     }
  
- public ArrayList<String> geta() {
-      return a;
+
+  public String getd(){
+   return d;
+  }
+  public String gettime(){
+   return time;
   }
   
  
@@ -86,40 +84,3 @@ public class ConnectionMain {
 }
      
 
-
-// tipo de JSON de MAPS, de este hay que construir el objeto para poder
-// leer los datos
-/*
- {
-   "destination_addresses" : 
-   [
-      "Washington D. C., Distrito de Columbia, EE. UU."
-   ],
-   "origin_addresses" : 
-   [
-      "Nueva York, EE. UU."
-   ],
-   "rows" : 
-   [
-      {
-         "elements" : 
-         [
-            {
-               "distance" : 
-               {
-                  "text" : "364 km",
-                  "value" : 363636
-               },
-               "duration" : 
-               {
-                  "text" : "3 h 51 min",
-                  "value" : 13864
-               },
-               "status" : "OK"
-            }
-         ]
-      }
-   ],
-   "status" : "OK"
-}
- */
