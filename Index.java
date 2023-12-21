@@ -1,3 +1,13 @@
+/*Integrantes:
+ * Arturo Ruiz Garcia
+ * Diana
+ * Perla Paola
+ * Fransisco Duran
+ */
+
+
+
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
