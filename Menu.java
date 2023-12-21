@@ -74,15 +74,29 @@ public class Menu {
             STOCK = Logica.getStockQuantities();
             JFrame f = new JFrame("Pizzeria");
             Font fon = new Font("TimesRoman", Font.PLAIN, 16);
-            f.setIconImage(new ImageIcon("img/iconos/logo.png").getImage()); 
+            f.setIconImage(new ImageIcon("img/iconos/logo.png").getImage());
             f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            f.setSize(800,600);
+            f.setSize(800, 600);
 
             labelSubTotal = new JLabel("EL SUBTOTAL ES: $0.00");
             labelSubTotal.setFont(fon);
             f.add(labelSubTotal, BorderLayout.NORTH);
 
-            f.add(new JScrollPane(createPrincipalPanel()));
+            JPanel principalPanel = createPrincipalPanel();
+            f.add(new JScrollPane(principalPanel), BorderLayout.CENTER);
+
+            JButton procederAPagoButton = new JButton("Proceder a Pago");
+            procederAPagoButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Proceder a Pago");
+                }
+            });
+
+            JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            botonesPanel.add(procederAPagoButton);
+
+            f.add(botonesPanel, BorderLayout.SOUTH);
 
             f.setLocationRelativeTo(null);
             f.setVisible(true);
@@ -90,20 +104,20 @@ public class Menu {
     }
 
 
-    private static JPanel createPrincipalPanel(){
-        JPanel PrincipalPanel = new JPanel();
-        PrincipalPanel.setLayout(new BoxLayout(PrincipalPanel, BoxLayout.Y_AXIS));
-     
-        for(int i = 0; i < IMAGENES.length; i++){
-            JPanel PanelProductos = createPanel(IMAGENES[i], DESCRIPCION[i], PRECIO[i], STOCK[i]);
-            Color b = new Color(255,216,0);
-            PrincipalPanel.setBackground(b);
-            PrincipalPanel.setFont(new Font("Arial", Font.PLAIN,14));
-            PrincipalPanel.add(PanelProductos);
-            PrincipalPanel.add(Box.createRigidArea(new Dimension(0,10)));
+    private static JPanel createPrincipalPanel() {
+        JPanel principalPanel = new JPanel();
+        principalPanel.setLayout(new BoxLayout(principalPanel, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < IMAGENES.length; i++) {
+            JPanel panelProductos = createPanel(IMAGENES[i], DESCRIPCION[i], PRECIO[i], STOCK[i]);
+            Color b = new Color(255, 216, 0);
+            principalPanel.setBackground(b);
+            principalPanel.setFont(new Font("Arial", Font.PLAIN, 14));
+            principalPanel.add(panelProductos);
+            principalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        return PrincipalPanel;
+        return principalPanel;
     }
 
     private static ImageIcon createImageIcon(String imagePath) {
