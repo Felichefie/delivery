@@ -1,8 +1,8 @@
 /*Integrantes:
  * Arturo Ruiz Garcia
- * Diana
- * Perla Paola
- * Fransisco Duran
+ * Diana Lizet Martinez Perez
+ * Perla Paola Pantaleon Bedolla
+ * Francisco Javier Duran Enriquez
  */
 
 
