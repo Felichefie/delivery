@@ -41,17 +41,16 @@ public class registro {
             }
         });
         btnAtras.setPreferredSize(new Dimension(80, 30));
-        panelSuperior.add(btnAtras, BorderLayout.WEST); 
+        panelSuperior.add(btnAtras, BorderLayout.WEST);
 
         JPanel panelInicioSesion = new JPanel(new BorderLayout());
-        panelInicioSesion.setBackground(Color.WHITE); 
-        panelInicioSesion.setBounds(50, 100, 300, 300);
-        panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2)); 
+        panelInicioSesion.setBackground(Color.WHITE);
+        panelInicioSesion.setBounds(50, 100, 350, 350);
+        panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2));
         inicio.add(panelInicioSesion);
 
-
-        JPanel panelFormulario = new JPanel(new GridLayout(11, 2, 5, 5));
-        panelFormulario.setBackground(Color.WHITE); 
+        JPanel panelFormulario = new JPanel(new GridLayout(11, 3, 5, 5)); 
+        panelFormulario.setBackground(Color.WHITE);
 
         JLabel labelUserName = new JLabel("Nombre de usuario:");
         labelUserName.setForeground(Color.BLACK);
@@ -63,11 +62,11 @@ public class registro {
 
         JLabel labelPrimerApellido = new JLabel("Primer apellido:");
         labelPrimerApellido.setForeground(Color.BLACK);
-        JTextField campoPrimerApellido = new JTextField();     
+        JTextField campoPrimerApellido = new JTextField();
 
         JLabel labelSegundoApellido = new JLabel("Segundo apellido:");
         labelSegundoApellido.setForeground(Color.BLACK);
-        JTextField campoSegundoApellido = new JTextField();  
+        JTextField campoSegundoApellido = new JTextField();
 
         JLabel labelFechaNacimiento = new JLabel("Fecha de Nacimiento:");
         labelFechaNacimiento.setForeground(Color.BLACK);
@@ -89,7 +88,6 @@ public class registro {
         String[] opcionesGenero = {"Hombre", "Mujer"};
         JComboBox<String> comboGenero = new JComboBox<>(opcionesGenero);
 
-
         JLabel labelContraseña = new JLabel("Clave:");
         labelContraseña.setForeground(Color.BLACK);
         JPasswordField campoContraseña = new JPasswordField();
@@ -98,9 +96,13 @@ public class registro {
         labelRepetirContraseña.setForeground(Color.BLACK);
         JPasswordField campoRepetirContraseña = new JPasswordField();
 
-        JButton btnRegistrar = new JButton("Registrar");
-        btnRegistrar.setForeground(Color.BLACK);
-        btnRegistrar.setBackground(b);
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.setForeground(Color.BLACK);
+        btnAceptar.setBackground(b);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setForeground(Color.BLACK);
+        btnCancelar.setBackground(b);
 
         panelFormulario.add(labelUserName);
         panelFormulario.add(campoUserName);
@@ -122,15 +124,22 @@ public class registro {
         panelFormulario.add(campoContraseña);
         panelFormulario.add(labelRepetirContraseña);
         panelFormulario.add(campoRepetirContraseña);
-        panelFormulario.add(btnRegistrar);
+        panelFormulario.add(btnCancelar);
+        panelFormulario.add(btnAceptar);
 
         panelInicioSesion.add(panelFormulario, BorderLayout.CENTER);
 
-        btnRegistrar.addActionListener(new ActionListener() {
+        btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(inicio, "¡Registrado con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
-                JOptionPane.showMessageDialog(inicio, "Introduce tu direccion", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicio.dispose();
             }
         });
 
