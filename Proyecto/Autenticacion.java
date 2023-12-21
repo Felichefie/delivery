@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -16,10 +17,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 public class Autenticacion {
     private String correoElectronico;
     private String password;
+    private JFrame loginFrame;
 
-    public Autenticacion(String correoElectronico, String password) {
+    public Autenticacion(String correoElectronico, String password, JFrame loginFrame) {
         this.correoElectronico = correoElectronico;
         this.password = password;
+        this.loginFrame = loginFrame; // Almacenar la referencia a la ventana de Login
     }
 
     public String autenticar() {
@@ -79,17 +82,21 @@ public class Autenticacion {
                                     } else {
                                         // Contraseñas no coinciden
                                         mensaje = "Contraseña incorrecta";
-                                        new GuiErrores(mensaje).setVisible(true);
+                                        // loginFrame.dispose(); // Cerrar la ventana de Login
+                                        // new GuiErrores(mensaje).setVisible(true);
+
                                     }
                                 } else {
                                     mensaje = "Usuario no registrado";
-                                    new GuiErrores(mensaje).setVisible(true);
+                                    // loginFrame.dispose(); // Cerrar la ventana de Login
+                                    // new GuiErrores(mensaje).setVisible(true);
                                 }
                             }
                         }
                     } else {
                         mensaje = "Correo electrónico no encontrado";
-                        new GuiErrores(mensaje).setVisible(true);
+                        // loginFrame.dispose(); // Cerrar la ventana de Login
+                        // new GuiErrores(mensaje).setVisible(true);
                     }
                 }
             }

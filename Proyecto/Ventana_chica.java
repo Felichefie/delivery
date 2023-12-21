@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class Ventana_chica {
+public class ventana_chica {
     public static void main(String[] args) {
         JFrame ventana3;
         ventana3 = new JFrame("Ventana Chica");

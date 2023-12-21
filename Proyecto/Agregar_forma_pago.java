@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -49,10 +51,12 @@ public class Agregar_forma_pago {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("agregando tipo de pagos a la base de datos");
-                Dbconnection dbConnection = new Dbconnection();
-                Connection conn = dbConnection.getConn();
+                Dbconnection dbconnection = new Dbconnection();
+                Connection conn = dbconnection.getConn();
 
                 String query = "INSERT INTO progra2.type_pay (id_user, type, account_number, clabe)";
+                ResultSet rset;
+                Statement statement;
 
                 if (c_comBox.getSelectedItem().equals("credit_card")
                         || c_comBox.getSelectedItem().equals("debit_card")) {
@@ -63,7 +67,9 @@ public class Agregar_forma_pago {
                             + "' )";
 
                     System.out.println(query);
-                } else if (c_comBox.getSelectedItem().equals("Efective")) {
+                }
+
+                else if (c_comBox.getSelectedItem().equals("Efective")) {
 
                     query = "INSERT INTO progra2.type_pay (id_user, type)" +
                             " VALUES (112, 'Efective')";
@@ -85,10 +91,10 @@ public class Agregar_forma_pago {
                 } catch (SQLException q) {
                     q.printStackTrace();
                     System.out.println("Error en la query Insert");
+
                 }
             }
         });
-
         btn_cancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,5 +112,7 @@ public class Agregar_forma_pago {
         metods.setLayout(null);
         metods.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         metods.setVisible(true);
+
     }
+
 }

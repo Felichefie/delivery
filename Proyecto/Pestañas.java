@@ -8,10 +8,17 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -33,6 +40,7 @@ public class Pestañas extends JTabbedPane {
     Dbconnection dbConnection;
     JPanel productos; // Cambiado a un campo de la clase
     JPanel carritoPanel; // Cambiado a un campo de la clase
+    JPanel perfil; // Define perfil como un atributo de la clase
     private List<JPanel> productosEnCarrito = new ArrayList<>();
     private List<Producto> listaDeProductos = new ArrayList<>();
 
@@ -51,8 +59,18 @@ public class Pestañas extends JTabbedPane {
         cargarProductos();
 
         // Pestaña Perfil
-        JPanel perfil = new JPanel();
-        addTab("Pestaña Perfil", perfil);
+        perfil = new JPanel();
+        perfil.setLayout(new BoxLayout(perfil, BoxLayout.Y_AXIS)); // Asegúrate de que el layout de tu panel soporte el
+                                                                   // desplazamiento
+
+        // Crea un JScrollPane y añade tu JPanel a él
+        JScrollPane scrollperfil = new JScrollPane(perfil);
+        scrollperfil.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); // Habilita siempre la barra de
+                                                                                        // desplazamiento vertical
+
+        addTab("Pestaña Perfil", scrollperfil); // Añade el JScrollPane a la pestaña en lugar del JPanel
+        ObtenerId_user();
+        informacion();
 
         // Pestaña Carrito
         carritoPanel = new JPanel(new GridLayout(0, 1)); // GridLayout con una única columna
@@ -493,4 +511,145 @@ public class Pestañas extends JTabbedPane {
         revalidate();
         repaint();
     }
+
+    private int ObtenerId_user() {
+        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+        String user = "alumno";
+        String pass = "alumnoPrueba1";
+
+        String token = ""; // Inicializar el token como una cadena vacía
+
+        // Leer el token desde el archivo token.txt
+        try (BufferedReader br = new BufferedReader(new FileReader("token.txt"))) {
+            String line = br.readLine();
+            if (line != null) {
+                String[] columns = line.split(","); // Cambia la coma por el delimitador que estés utilizando
+                token = columns[0];
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String query = "SELECT id_user FROM progra2.sessions WHERE session = ?";
+
+        int userId = -1; // Valor predeterminado en caso de que no se encuentre ninguna sesión con ese
+                         // token
+
+        try {
+            Connection connection = DriverManager.getConnection(URL, user, pass);
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, token); // Establecer el valor del parámetro antes de ejecutar la consulta
+            ResultSet resultado = statement.executeQuery();
+
+            if (resultado.next()) {
+                userId = resultado.getInt(1);
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return userId;
+    }
+
+    public void informacion() {
+        int userId = ObtenerId_user();
+
+        // Obtener toda la información del usuario
+        String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+        String user = "alumno";
+        String pass = "alumnoPrueba1";
+        String query = "SELECT * FROM progra2.users WHERE id = ?"; // 'users'
+
+        try {
+            Connection connection = DriverManager.getConnection(URL, user, pass);
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userId); // Establecer el valor del parámetro antes de ejecutar la consulta
+            ResultSet resultado = statement.executeQuery();
+
+            // Crear un JPanel para agregar las etiquetas
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Agregar un borde al panel
+
+            // Crear una fuente para las etiquetas
+            Font font = new Font("Arial", Font.BOLD, 20);
+
+            if (resultado.next()) {
+                // Imprimir toda la información del usuario
+                Date fechaNacimiento = resultado.getDate("birthday");
+                String correoElectronico = resultado.getString("email");
+                String primerApellido = resultado.getString("first_lastname");
+                String genero = resultado.getString("gender");
+                String nombre = resultado.getString("name");
+                String telefono = resultado.getString("phone_number");
+                String segundoApellido = resultado.getString("second_lastname");
+                String tipoUsuario = resultado.getString("type_user");
+                String user_name = resultado.getString("user_name");
+
+                // Crear las etiquetas, darles formato y agregarlas al panel
+                JLabel labelTipoUsuario = new JLabel("Tipo de Usuario: " + tipoUsuario);
+                labelTipoUsuario.setFont(font);
+                panel.add(labelTipoUsuario);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelNombreUsuario = new JLabel("Nombre de Usuario: " + user_name);
+                labelNombreUsuario.setFont(font);
+                panel.add(labelNombreUsuario);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelPrimerApellido = new JLabel("Primer Apellido: " + primerApellido);
+                labelPrimerApellido.setFont(font);
+                panel.add(labelPrimerApellido);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelSegundoApellido = new JLabel("Segundo Apellido: " + segundoApellido);
+                labelSegundoApellido.setFont(font);
+                panel.add(labelSegundoApellido);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelNombre = new JLabel("Nombre: " + nombre);
+                labelNombre.setFont(font);
+                panel.add(labelNombre);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelFechaNacimiento = new JLabel("Fecha de Nacimiento: " + fechaNacimiento);
+                labelFechaNacimiento.setFont(font);
+                panel.add(labelFechaNacimiento);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelCorreoElectronicoTexto = new JLabel("Correo Electrónico: ");
+                labelCorreoElectronicoTexto.setFont(font);
+                panel.add(labelCorreoElectronicoTexto);
+
+                JLabel labelCorreoElectronico = new JLabel(correoElectronico);
+                labelCorreoElectronico.setFont(font);
+                labelCorreoElectronico.setForeground(Color.BLUE);
+                panel.add(labelCorreoElectronico);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelGenero = new JLabel("Género: " + genero);
+                labelGenero.setFont(font);
+                panel.add(labelGenero);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JLabel labelTelefono = new JLabel("Teléfono: " + telefono);
+                labelTelefono.setFont(font);
+                panel.add(labelTelefono);
+                panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+            }
+
+            // Agregar el panel a la pestaña de carrito
+            perfil.add(panel);
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

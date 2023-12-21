@@ -106,7 +106,7 @@ public class Login extends JPanel {
                 // Aquí lógica de autenticación
                 String correoElectronico = textField_correoElectronico.getText();
                 String contraseña = String.valueOf(field_pass.getPassword());
-                Autenticacion autenticacion = new Autenticacion(correoElectronico, contraseña);
+                Autenticacion autenticacion = new Autenticacion(correoElectronico, contraseña, frame);
                 // Obtener y mostrar el mensaje devuelto por Autenticacion
                 String mensajeResultado = autenticacion.autenticar();
 

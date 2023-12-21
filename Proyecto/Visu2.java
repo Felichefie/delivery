@@ -15,7 +15,7 @@ public class Visu2 {
         String user = "alumno";
         String pass = "alumnoPrueba1";
 
-        int idUser = 154; // El id que quieres imprimir
+        int idUser = 218; // El id que quieres imprimir
         String query = "SELECT * FROM progra2.users WHERE id = " + idUser;
         String queryMaxId = "SELECT MAX(id) FROM progra2.users";
 

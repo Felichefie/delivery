@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Visu2",
+            "request": "launch",
+            "mainClass": "Proyecto.Visu2",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Visualizar",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Visualizar_sessiones",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar_sessiones",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "VisualizarTablaProducts",
+            "request": "launch",
+            "mainClass": "Proyecto.VisualizarTablaProducts",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Pagar",
+            "request": "launch",
+            "mainClass": "Proyecto.Pagar",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
+            "name": "Ventana_chica",
+            "request": "launch",
+            "mainClass": "Proyecto.Ventana_chica",
+            "projectName": "delivery_a22260f1"
+        },
+        {
+            "type": "java",
             "name": "Principal",
             "request": "launch",
             "mainClass": "Proyecto.Principal",
