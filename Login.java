@@ -86,7 +86,7 @@ public class Login {
                 char[] password = campoContraseña.getPassword();
                 String contraseña = new String(password);
 
-                if(Main.inicio(usuario, contraseña)){
+                if(Logica.inicio(usuario, contraseña)){
 
                     JOptionPane.showMessageDialog(inicio, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     Menu.crearInterfaz();

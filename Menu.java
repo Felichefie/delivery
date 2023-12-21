@@ -68,10 +68,10 @@ public class Menu {
 
     public static void crearInterfaz() {
         SwingUtilities.invokeLater(() -> {
-            IMAGENES = Main.getImageNames();
-            DESCRIPCION = Main.getDescriptions();
-            PRECIO = Main.getPrices();
-            STOCK = Main.getStockQuantities();
+            IMAGENES = Logica.getImageNames();
+            DESCRIPCION = Logica.getDescriptions();
+            PRECIO = Logica.getPrices();
+            STOCK = Logica.getStockQuantities();
             JFrame f = new JFrame("Pizzeria");
             Font fon = new Font("TimesRoman", Font.PLAIN, 16);
             f.setIconImage(new ImageIcon("img/iconos/logo.png").getImage()); 

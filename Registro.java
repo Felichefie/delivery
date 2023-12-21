@@ -153,7 +153,7 @@ public class Registro {
                 }
                 else if(contraseña.equals(contraseña2)){
                     user.setPass(contraseña);
-                    if(Main.registro(user)){
+                    if(Logica.registro(user)){
                     JOptionPane.showMessageDialog(inicio, "¡Registrado con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     inicio.dispose();
                     }else{
