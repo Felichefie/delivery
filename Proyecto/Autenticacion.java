@@ -1,11 +1,15 @@
 package Proyecto;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
+import javax.swing.JOptionPane;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -58,29 +62,45 @@ public class Autenticacion {
                                             mensaje = "Autenticación exitosa";
                                             System.out.println(timeout);
                                             System.out.println(tiempoActual);
-
                                         } else {
-                                            // La sesión ha expirado, mostrar mensaje
-                                            mensaje = "Tu sesión ha expirado, regístrate nuevamente";
+                                            String token = Auth.calculateToken();
+                                            String expiration = Auth.calculateExpiration(10);
+                                            //Escribir en token.txt
+                                            try (FileWriter writer = new FileWriter("token.txt")) {
+                                                writer.write(token + "," + expiration);
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            CrearSession nuevo = new CrearSession();
+                                            nuevo.crearSesion(connection, idUsuario, token, expiration);
+                                            mensaje = "Autenticación exitosa";
                                         }
                                     } else {
                                         // Contraseñas no coinciden
                                         mensaje = "Contraseña incorrecta";
+                                        new GuiErrores(mensaje).setVisible(true);
                                     }
-
                                 } else {
                                     mensaje = "Usuario no registrado";
+                                    new GuiErrores(mensaje).setVisible(true);
                                 }
                             }
                         }
                     } else {
                         mensaje = "Correo electrónico no encontrado";
+                        new GuiErrores(mensaje).setVisible(true);
                     }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            mensaje = "Error al conectar con la base de datos";
+
+            // Mostrar un mensaje de error al usuario
+            String mensajeError = "Error al conectar con la base de datos";
+            JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+
+            mensaje = "Error de autenticación"; // Actualizar el mensaje para no entrar en el if
         }
 
         System.out.println(mensaje);

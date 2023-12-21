@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,9 +25,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import Proyecto.VerifyPwd;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -56,7 +60,7 @@ public class Registration {
         frame.setResizable(false);
 
         // Cargar la imagen de fondo
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpeg"));
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("Registration_Fondo.jpg"));
         Image image = imageIcon.getImage();
         // Escalar la imagen
         Image scaledImage = image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
@@ -225,11 +229,10 @@ public class Registration {
                 // Llama al método para insertar datos en la base de datos
                 InsertarEnDB();
 
-                // Cerrar la GUI de Registration
-                frame.dispose();
                 // Volver a abrir la GUI de Login
-                // new Principal();
-                new Principal().mostrar();
+                //new Principal().mostrar();
+                //frame.dispose(); // cierro la gui del registro despues para no quedarme sin ninguna ventana si es
+                                 // que la de principal tarda un poco en cargar
             }
         });
 
@@ -301,11 +304,22 @@ public class Registration {
             String genero = (String) comboBox_genero.getSelectedItem();
             String telefono = textField_telefono.getText();
             String password = String.valueOf(field_pass.getPassword());
-            String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
+            VerifyPwd verificador = new VerifyPwd(password);
 
+            String resultado = verificador.verificarContrasena();
+
+            if (resultado == password) {
+                // Contraseña válida
+                String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
+            
             // Crear token y fecha de expiración
             String token = Auth.calculateToken();
-            String expiration = Auth.calculateExpiration(1);
+            String expiration = Auth.calculateExpiration(10);
+            try (FileWriter writer = new FileWriter("token.txt")) {
+                writer.write(token + "," + expiration);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             String queryInsertUser = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -347,15 +361,30 @@ public class Registration {
                 prepStateSession.executeUpdate();
 
                 conn.commit();
+                CrearSession session = new CrearSession();
+                session.crearSesion(conn, userId, token, expiration);
+                // Contraseña segura
                 System.out.println("Usuario y sesión ingresados correctamente");
+                frame.dispose();
+                Principal principal = new Principal();
+                principal.mostrar();
 
             } catch (SQLException e) {
                 e.printStackTrace();
                 conn.rollback();
             }
+            } else {
+                // Mostrar los errores encontrados
+                JOptionPane.showMessageDialog(null, resultado, "Error", JOptionPane.ERROR_MESSAGE);
+                frame.dispose();
+                // Crear una nueva instancia de la GUI de registro
+                new Registration();
+             }
+             
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

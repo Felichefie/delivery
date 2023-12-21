@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Visualizar",
+            "request": "launch",
+            "mainClass": "Visualizar",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "Visualizar_sessiones",
+            "request": "launch",
+            "mainClass": "Proyecto.Visualizar_sessiones",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
+            "name": "VisualizarTablaProducts",
+            "request": "launch",
+            "mainClass": "Proyecto.VisualizarTablaProducts",
+            "projectName": "delivery_71371dbe"
+        },
+        {
+            "type": "java",
             "name": "Visualizar_products",
             "request": "launch",
             "mainClass": "Proyecto.Visualizar_products",
