@@ -1,56 +1,64 @@
-import java.math.BigDecimal;
-
 public class Pizza {
-    
-    private Integer id;
-    private String nombre;
-    private BigDecimal precio;
+    private int id;
+    private double price;
+    private String img;
+    private String desc;
+    private int stock;
 
-    public Pizza() {
+    Pizza(){
+        this.id = 0;
+        this.price = 0.0;
+        this.img = "";
+        this.desc = "";
+        this.stock = 0;
     }
-    
-    /**
-     * Constructor sin atributos referenciales de la clase Pizza.
-     * @param nombre
-     * @param precio 
-     */
-    public Pizza(String nombre, BigDecimal precio) {
-        this.nombre = nombre;
-        this.precio = precio;
+
+    Pizza(int id, double price, String img, String desc, int stock){
+        this.id = id;
+        this.price = price;
+        this.img = img;
+        this.desc = desc;
+        this.stock = stock;
     }
-    
-    /**
-     * Constructor con todos los atributos de la clase Pizza.
-     * @param nombre
-     * @param precio
-     */
-    
-    public Integer getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public double getPrice() {
+        return price;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public BigDecimal getPrecio() {
-        return precio;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Pizza \n - Nombre: ").append(nombre).append("\n - Precio: $ ").append(precio);
-        return sb.toString();}
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
 }

@@ -97,6 +97,14 @@ public class Index {
             }
         });
 
+        btnRegistro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Llamar a la función Registro() al hacer clic en el botón
+                Registro.registro();
+            }
+        });
+
         ImageIcon imageFondo = new ImageIcon("img/background/BackgroundInicio.jpg");
         JLabel labelFondo = new JLabel(imageFondo);
         inicio.add(labelFondo, BorderLayout.CENTER);

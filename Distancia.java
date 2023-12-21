@@ -1,25 +1,35 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
-public class Conexion {
-        
+public class Distancia {
+    
+    private Address address;
+
     private static final String MAPS_GET = "https://maps.googleapis.com/maps/api/distancematrix/json";
 
     // coloquen su propia API key, esta está incompleta !!!!!
     private static final String API_KEY_MAP_STRING = "AIzaSyCIJxbs3HWrKXxClHVhD-2lmbScrWeJYQU";
-
-    String origin = "Morelia,MX";
-    String destination = "Durango,MX";
-    String URL_MAPS_GET =  MAPS_GET + "?destinations=" + destination + "&origins=" + origin + "&key=" + API_KEY_MAP_STRING;
-
     
     private static final String METHOD_HTTP_GET = "GET";
     HttpURLConnection connection;
-    Conexion(String type){
+
+    Distancia(String type, Address address){
+        this.address = address;
+        String origin = "";
+        String destination = "";
+        try{
+            origin = URLEncoder.encode("Universidad Michoacana de San Nicolás de Hidalgo Avenida Francisco J. Múgica,Morelia,MX", "UTF-8");
+            destination = URLEncoder.encode(address.getNumber() + " " + address.getStreet() + ",Morelia,MX", "UTF-8");
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+        String URL_MAPS_GET =  MAPS_GET + "?destinations=" + destination + "&origins=" + origin + "&key=" + API_KEY_MAP_STRING;
         System.out.println(URL_MAPS_GET);    
         try {
             if(type==METHOD_HTTP_GET){

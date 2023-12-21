@@ -57,8 +57,8 @@ public class Login {
         JLabel labelContraseña = new JLabel("Clave:");
         labelContraseña.setForeground(Color.BLACK); 
         JPasswordField campoContraseña = new JPasswordField();
-        JButton btnOlvidarContraseña = new JButton("¿Clave olvidada?");
-        btnOlvidarContraseña.setForeground(Color.BLACK); 
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setForeground(Color.BLACK); 
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.setForeground(Color.BLACK);
 
@@ -66,10 +66,18 @@ public class Login {
         panelFormulario.add(campoUsuario);
         panelFormulario.add(labelContraseña);
         panelFormulario.add(campoContraseña);
-        panelFormulario.add(btnOlvidarContraseña);
+        panelFormulario.add(btnCancelar);
         panelFormulario.add(btnAceptar);
 
         panelInicioSesion.add(panelFormulario, BorderLayout.CENTER);
+
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                campoUsuario.setText("");
+                campoContraseña.setText("");
+            }
+        });
 
         btnAceptar.addActionListener(new ActionListener() {
             @Override
@@ -96,13 +104,5 @@ public class Login {
         inicio.add(labelFondo);
 
         inicio.setVisible(true);
-    }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                login();
-            }
-        });
     }
 }

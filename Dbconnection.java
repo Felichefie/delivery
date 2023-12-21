@@ -14,8 +14,8 @@ public class Dbconnection {
     static Connection conn = null;
 
     
-    public List<Producto> getProduct(){
-        List<Producto> listaProductos = new ArrayList<>();
+    public List<Pizza> getProduct(){
+        List<Pizza> listaProductos = new ArrayList<>();
 
         String query = "SELECT id, price, image, description, stock FROM progra2.products WHERE id IN (13, 14, 15);";
        // System.out.println(query);
@@ -35,7 +35,7 @@ public class Dbconnection {
                 int stock = rset.getInt(5);
                 
 
-                Producto producto = new Producto(id, price, image, desc, stock);
+                Pizza producto = new Pizza(id, price, image, desc, stock);
                 listaProductos.add(producto);
             }
                         

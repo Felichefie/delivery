@@ -9,13 +9,13 @@ public class Main {
     static String user = "alumno";
     static String passw = "alumnoPrueba1";
     static Dbconnection dbconn = new Dbconnection(URL, user, passw);
-    static List<Producto> productos = dbconn.getProduct();
+    static List<Pizza> productos = dbconn.getProduct();
 
     public static String[] getImageNames() {
         
         List<String> imageNamesList = new ArrayList<>();
         
-        for (Producto producto : productos) {
+        for (Pizza producto : productos) {
             String image = producto.getImg();
             imageNamesList.add(image);
         }
@@ -27,7 +27,7 @@ public class Main {
         
         List<String> descriptionsList = new ArrayList<>();
         
-        for (Producto producto : productos) {
+        for (Pizza producto : productos) {
             String description = producto.getDesc();
             descriptionsList.add(description);
         }
@@ -40,7 +40,7 @@ public class Main {
         
         List<Double> pricesList = new ArrayList<>();
             
-        for (Producto producto : productos) {
+        for (Pizza producto : productos) {
             double price = producto.getPrice();
             pricesList.add(price);
         }
@@ -52,7 +52,7 @@ public class Main {
        
         List<String> stockQuantitiesList = new ArrayList<>();
         
-        for (Producto producto : productos) {
+        for (Pizza producto : productos) {
             int stockQuantity = producto.getStock();
             // Agregar "Cantidad Disponible: " seguido del stock al resultado
             stockQuantitiesList.add("Cantidad Disponible: " + stockQuantity);
@@ -72,9 +72,19 @@ public class Main {
 
     }
 
-    public static boolean registro(String name, String ape1, String ape2, String email, String pass, String userName, String tel){
+    public static boolean registro(Users user){
 
-        if(dbconn.registerUser(name, ape1, ape2, email, pass, userName, tel)){
+        String name = user.getName();
+        String ape1 = user.getApe1();
+        String ape2 = user.getApe2();
+        String email = user.getEmail();
+        String pass = user.getPass();
+        String userName = user.getUserName();
+        String tel = user.getTel();
+
+        String pwd_hash = BCrypt.hashpw(pass, BCrypt.gensalt());
+
+        if(dbconn.registerUser(name, ape1, ape2, email, pwd_hash, userName, tel)){
             return true;
         }else{
             return false;
