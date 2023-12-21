@@ -7,6 +7,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -99,12 +103,19 @@ public class Login extends JPanel {
 
         button_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes implementar la lógica de autenticación
-                Acceso();
-                // Cerramos la GUI loguin
-                frame.dispose();
-                // Abrimos GUI principal
-                new Principal().mostrar();
+                // Aquí lógica de autenticación
+                String correoElectronico = textField_correoElectronico.getText();
+                String contraseña = String.valueOf(field_pass.getPassword());
+                Autenticacion autenticacion = new Autenticacion(correoElectronico, contraseña);
+                // Obtener y mostrar el mensaje devuelto por Autenticacion
+                String mensajeResultado = autenticacion.autenticar();
+
+                if (mensajeResultado.startsWith("Autenticación exitosa")) {
+                    Principal principal = new Principal();
+                    principal.mostrar();
+                    frame.dispose();
+
+                }
             }
         });
 
@@ -135,11 +146,31 @@ public class Login extends JPanel {
         frame.setVisible(true);
     }
 
-    public void Acceso() {
-
-    }
-
     public static void main(String[] args) {
-        new Login();
+        // lee token y hora de expiracion
+        try (BufferedReader reader = new BufferedReader(new FileReader("token.txt"))) {
+            String[] datos = reader.readLine().split(",");
+            String token = datos[0];
+            String expiration = datos[1];
+            Timestamp expiracionTimestamp = Timestamp.valueOf(expiration);
+
+            // Obtener el tiempo actual en milisegundos y convertirlo a Timestamp
+            long tiempoActualMillis = System.currentTimeMillis();
+            Timestamp tiempoActual = new Timestamp(tiempoActualMillis);
+
+            // Si la fecha de expiración no ha pasado
+            if (expiracionTimestamp.after(tiempoActual)) {
+
+                // El usuario está autenticado
+                Principal principal = new Principal();
+                principal.mostrar();
+            } else {
+
+                // La sesión ha expirado, tienen que hacer login de nuevo
+                new Login();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

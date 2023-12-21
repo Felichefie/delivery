@@ -55,7 +55,6 @@ public class Pestañas extends JTabbedPane {
         addTab("Pestaña Perfil", perfil);
 
         // Pestaña Carrito
-
         carritoPanel = new JPanel(new GridLayout(0, 1)); // GridLayout con una única columna
         carritoPanel.setLayout(new BoxLayout(carritoPanel, BoxLayout.Y_AXIS));
         carritoPanel.setBorder(new EmptyBorder(0, 10, 0, 10)); // Ajusta los márgenes según tus necesidades
@@ -73,7 +72,7 @@ public class Pestañas extends JTabbedPane {
         try {
             Connection conexion = dbConnection.getConn();
             Statement stmt = conexion.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM progra2.products WHERE id >= 10");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM progra2.products WHERE id >= 10 && id <=12");
 
             while (rs.next()) {
                 String description = rs.getString("description");
@@ -246,80 +245,64 @@ public class Pestañas extends JTabbedPane {
         }
     }
 
-    double subtotal = 0;
-    double iva = 0;
-    double total = 0;
+    // Variables inicializadas en $0
+    float subtotal = 0;
+    float iva = 0;
+    float total = 0;
     JLabel subtotalValueLabel;
+    JLabel l_iva;
+    JLabel l_total;
+    double totalProducto;
 
     private void cargarCarrito() {
 
         Iva i = new Iva(subtotal);
         iva = iva + i.getimpuesto();
-        subtotal = subtotal + i.getbase();
-        total = total + subtotal + iva;
+        total = subtotal + iva;
 
-        JLabel l_iva = new JLabel("IVA " + String.valueOf(iva));
-        JLabel l_total = new JLabel("Total " + String.valueOf(total));
+        l_iva = new JLabel("IVA " + String.valueOf(iva));
 
-        // Crear un botón para pagar
+        l_total = new JLabel("TOTAL $" + String.valueOf(total));
+        l_total.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24)); // Changed to BOLD
+        l_total.setOpaque(true);
+        l_total.setBackground(new Color(0, 255, 100));
+        l_total.setForeground(Color.BLACK);
+        int borderSize = 10;
+        l_total.setBorder(BorderFactory.createEmptyBorder(borderSize, borderSize, borderSize, borderSize));
+
+        JPanel totalPanel = new JPanel(new GridLayout(2, 1));
+        totalPanel.add(l_total);
+
         JButton pagarButton = new JButton("PAGAR");
         pagarButton.setBackground(new Color(7, 164, 121));
         pagarButton.setForeground(Color.WHITE);
         pagarButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
-        pagarButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24)); // Establecer la fuente y el tamaño del
-                                                                                 // texto
-        pagarButton.setPreferredSize(new Dimension(400, 45)); // Establecer el tamaño preferido del botón
+        pagarButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
+        pagarButton.setPreferredSize(new Dimension(400, 65));
 
-        pagarButton.addActionListener(e -> {
-            Guipay pago = new Guipay();
-        });
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.add(pagarButton);
 
-        // Crear una etiqueta para el título "SUBTOTAL"
         JLabel subtotalLabel = new JLabel("SUBTOTAL");
-        subtotalLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+        subtotalLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-        // Crear una etiqueta para mostrar el valor del subtotal
         subtotalValueLabel = new JLabel("$" + subtotal);
-        subtotalValueLabel.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 22));
-        subtotalValueLabel.setOpaque(true); // Necesario para que el color de fondo sea visible
-        subtotalValueLabel.setBackground(new Color(0, 255, 90)); // Establece el color de fondo en azul
-        subtotalValueLabel.setForeground(Color.BLACK); // Establece el color del texto en blanco para que sea visible en
-                                                       // el fondo azul
+        subtotalValueLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20)); // Changed to BOLD
+        subtotalValueLabel.setOpaque(true);
 
-        // Agrega un borde del mismo color que el fondo para hacer que el fondo parezca
-        // más grande
-        int borderSize = 10; // Ajusta este valor según tus necesidades
-        subtotalValueLabel.setBorder(BorderFactory.createEmptyBorder(borderSize, borderSize, borderSize, borderSize));
-
-        // Crear un nuevo JPanel con BorderLayout para el subtotal
         JPanel subtotalPanel = new JPanel(new BorderLayout());
-        subtotalPanel.add(Box.createVerticalStrut(20), BorderLayout.NORTH); // Agrega espacio vertical antes de la
-                                                                            // etiqueta subtotal
+        subtotalPanel.add(Box.createVerticalStrut(20), BorderLayout.NORTH);
         subtotalPanel.add(subtotalLabel, BorderLayout.WEST);
-        subtotalPanel.add(Box.createHorizontalStrut(10), BorderLayout.CENTER); // Espacio entre el título y el valor del
-                                                                               // subtotal
+        subtotalPanel.add(Box.createHorizontalStrut(10), BorderLayout.CENTER);
         subtotalPanel.add(subtotalValueLabel, BorderLayout.EAST);
+        subtotalPanel.add(totalPanel, BorderLayout.SOUTH);
+        subtotalPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 
-        // Agregar un borde vacío para actuar como un margen
-        subtotalPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0)); // 10 pixels de margen a la izquierda
+        JPanel buttonAndSubtotalPanel = new JPanel(new FlowLayout());
+        buttonAndSubtotalPanel.add(buttonPanel);
+        buttonAndSubtotalPanel.add(subtotalPanel);
 
-        // Crear un nuevo JPanel con BorderLayout para contener el botón y el
-        // subtotalPanel
-        JPanel buttonAndSubtotalPanel = new JPanel(new BorderLayout());
-        buttonAndSubtotalPanel.add(pagarButton, BorderLayout.WEST); // Coloca el botón a la izquierda
-        buttonAndSubtotalPanel.add(Box.createHorizontalStrut(50), BorderLayout.CENTER); // Agrega espacio horizontal
-                                                                                        // entre el botón y el
-                                                                                        // subtotalPanel
-        buttonAndSubtotalPanel.add(subtotalPanel, BorderLayout.EAST); // Coloca el subtotalPanel a la derecha
-
-        // Crear un nuevo JPanel con FlowLayout alineado a la izquierda
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        buttonPanel.add(buttonAndSubtotalPanel);
-        buttonAndSubtotalPanel.add(subtotalLabel.add(l_iva));
-        buttonAndSubtotalPanel.add(subtotalLabel.add(l_total));
-
-        // Añadir el panel del botón al panel del carrito
-        carritoPanel.add(buttonPanel);
+        carritoPanel.add(buttonAndSubtotalPanel);
     }
 
     private JPanel crearPanelProducto(Producto producto) {
@@ -348,7 +331,7 @@ public class Pestañas extends JTabbedPane {
         cantidadLabel.setForeground(Color.BLACK);
 
         // Calcula el total del producto y crea una etiqueta para él
-        double totalProducto = producto.getPrice() * producto.getQuantity();
+        totalProducto = producto.getPrice() * producto.getQuantity();
         JLabel totalProductoLabel = new JLabel("Total: $" + totalProducto);
         totalProductoLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         totalProductoLabel.setForeground(Color.BLACK);
@@ -405,6 +388,19 @@ public class Pestañas extends JTabbedPane {
                     subtotalValueLabel = new JLabel();
                 }
                 subtotalValueLabel.setText("$" + subtotal); // Actualiza la etiqueta del subtotal
+
+                // Actualiza el total del producto
+                totalProducto = producto.getPrice() * cantidad;
+                totalProductoLabel.setText("Total: $" + totalProducto); // Actualiza la etiqueta del total del producto
+
+                // Actualiza el total
+                Iva i = new Iva(subtotal);
+                iva = i.getimpuesto();
+                total = subtotal + iva;
+
+                // Actualiza las etiquetas
+                l_iva.setText("IVA " + String.valueOf(iva));
+                l_total.setText("TOTAL " + String.valueOf(total));
             }
         });
 
@@ -425,6 +421,20 @@ public class Pestañas extends JTabbedPane {
                     if (subtotal < 0)
                         subtotal = 0; // Asegura que el subtotal no sea negativo
                     subtotalValueLabel.setText("$" + subtotal); // Actualiza la etiqueta del subtotal
+
+                    // Actualiza el total del producto
+                    totalProducto = producto.getPrice() * cantidad;
+                    totalProductoLabel.setText("Total: $" + totalProducto); // Actualiza la etiqueta del total del
+                                                                            // producto
+
+                    // Actualiza el total
+                    Iva i = new Iva(subtotal);
+                    iva = i.getimpuesto();
+                    total = subtotal + iva;
+                    // Actualiza las etiquetas
+                    l_iva.setText("IVA " + String.valueOf(iva));
+                    l_total.setText("TOTAL " + String.valueOf(total));
+
                 }
             }
         });

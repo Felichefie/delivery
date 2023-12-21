@@ -1,21 +1,21 @@
 package Proyecto;
 
 public class Iva {
-    private double base;
-    private double impuesto;
+    private float base;
+    private float impuesto;
 
-    public Iva(double b) {
+    public Iva(float b) {
         this.base = b; // constructor para calcular el impuesto
 
         this.impuesto = b * 16 / 100;
 
     }
 
-    public double getimpuesto() { // metodo o funcion de la clase para regresar el impuesto
+    public float getimpuesto() { // metodo o funcion de la clase para regresar el impuesto
         return this.impuesto;
     }
 
-    public double getbase() { // metodo o funcion de la clase para regresar la base;
+    public float getbase() { // metodo o funcion de la clase para regresar la base;
         return this.base;
     }
 

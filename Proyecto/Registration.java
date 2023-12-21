@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,6 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -301,61 +304,86 @@ public class Registration {
             String genero = (String) comboBox_genero.getSelectedItem();
             String telefono = textField_telefono.getText();
             String password = String.valueOf(field_pass.getPassword());
-            String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
+            VerifyPwd verificador = new VerifyPwd(password);
 
-            // Crear token y fecha de expiración
-            String token = Auth.calculateToken();
-            String expiration = Auth.calculateExpiration(1);
+            String resultado = verificador.verificarContrasena();
 
-            String queryInsertUser = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            if (resultado == password) {
+                // Contraseña válida
+                String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
-            String queryInsertSession = "INSERT INTO progra2.sessions(id_user, session, timeout, created) VALUES (?, ?, ?, ?)";
-
-            try (PreparedStatement prepStateUser = conn.prepareStatement(queryInsertUser,
-                    Statement.RETURN_GENERATED_KEYS);
-                    PreparedStatement prepStateSession = conn.prepareStatement(queryInsertSession)) {
-
-                conn.setAutoCommit(false);
-
-                prepStateUser.setString(1, tipoUsuario);
-                prepStateUser.setString(2, username);
-                prepStateUser.setString(3, primerApellido);
-                prepStateUser.setString(4, segundoApellido);
-                prepStateUser.setString(5, nombre);
-                prepStateUser.setDate(6, new java.sql.Date(fechaNacimiento.getTime()));
-                prepStateUser.setString(7, correoElectronico);
-                prepStateUser.setString(8, genero);
-                prepStateUser.setString(9, telefono);
-                prepStateUser.setString(10, pwd_hash);
-                prepStateUser.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
-
-                prepStateUser.executeUpdate();
-
-                // Recupera ID del usuario generado
-                ResultSet generatedKeys = prepStateUser.getGeneratedKeys();
-                int userId = -1;
-                if (generatedKeys.next()) {
-                    userId = generatedKeys.getInt(1);
+                // Crear token y fecha de expiración
+                String token = Auth.calculateToken();
+                String expiration = Auth.calculateExpiration(10);
+                try (FileWriter writer = new FileWriter("token.txt")) {
+                    writer.write(token + "," + expiration);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                prepStateSession.setInt(1, userId); // id_user
-                prepStateSession.setString(2, token); // session
-                prepStateSession.setTimestamp(3, Timestamp.valueOf(expiration)); // timeout
-                prepStateSession.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now())); // created
+                String queryInsertUser = "INSERT INTO progra2.users(type_user, user_name, first_lastname, second_lastname, name, birthday, email, gender, phone_number, password, created)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                prepStateSession.executeUpdate();
+                String queryInsertSession = "INSERT INTO progra2.sessions(id_user, session, timeout, created) VALUES (?, ?, ?, ?)";
 
-                conn.commit();
-                System.out.println("Usuario y sesión ingresados correctamente");
+                try (PreparedStatement prepStateUser = conn.prepareStatement(queryInsertUser,
+                        Statement.RETURN_GENERATED_KEYS);
+                        PreparedStatement prepStateSession = conn.prepareStatement(queryInsertSession)) {
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-                conn.rollback();
+                    conn.setAutoCommit(false);
+
+                    prepStateUser.setString(1, tipoUsuario);
+                    prepStateUser.setString(2, username);
+                    prepStateUser.setString(3, primerApellido);
+                    prepStateUser.setString(4, segundoApellido);
+                    prepStateUser.setString(5, nombre);
+                    prepStateUser.setDate(6, new java.sql.Date(fechaNacimiento.getTime()));
+                    prepStateUser.setString(7, correoElectronico);
+                    prepStateUser.setString(8, genero);
+                    prepStateUser.setString(9, telefono);
+                    prepStateUser.setString(10, pwd_hash);
+                    prepStateUser.setDate(11, new java.sql.Date(System.currentTimeMillis())); // created
+
+                    prepStateUser.executeUpdate();
+
+                    // Recupera ID del usuario generado
+                    ResultSet generatedKeys = prepStateUser.getGeneratedKeys();
+                    int userId = -1;
+                    if (generatedKeys.next()) {
+                        userId = generatedKeys.getInt(1);
+                    }
+
+                    prepStateSession.setInt(1, userId); // id_user
+                    prepStateSession.setString(2, token); // session
+                    prepStateSession.setTimestamp(3, Timestamp.valueOf(expiration)); // timeout
+                    prepStateSession.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now())); // created
+
+                    prepStateSession.executeUpdate();
+
+                    conn.commit();
+                    CrearSession session = new CrearSession();
+                    session.crearSesion(conn, userId, token, expiration);
+                    // Contraseña segura
+                    System.out.println("Usuario y sesión ingresados correctamente");
+                    frame.dispose();
+                    Principal principal = new Principal();
+                    principal.mostrar();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    conn.rollback();
+                }
+            } else {
+                // Mostrar los errores encontrados
+                JOptionPane.showMessageDialog(null, resultado, "Error", JOptionPane.ERROR_MESSAGE);
+                frame.dispose();
+                // Crear una nueva instancia de la GUI de registro
+                new Registration();
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }
