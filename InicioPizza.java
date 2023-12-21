@@ -1,3 +1,4 @@
+//INDICE
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +15,7 @@ public class InicioPizza {
 
 
     public static void InicioPizza(){
-         //FRAME
+
         JFrame inicio = new JFrame("INICIO");
         inicio.setSize(800,600);
         inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,7 +25,20 @@ public class InicioPizza {
         inicio.setResizable(false);
         inicio.setLocationRelativeTo(null);
         
-        //ETIQUETA
+
+        ImageIcon IconoOriginal = new ImageIcon("a1c404bea49c0143058bc4dd9da79d33.jpg");
+        int ancho1 = 100;
+        int alto1 = 100;
+        ImageIcon iconoEscalado = new ImageIcon(IconoOriginal.getImage().getScaledInstance(alto1, ancho1, java.awt.Image.SCALE_SMOOTH));
+        JLabel LabelIcono = new JLabel(iconoEscalado);
+        LabelIcono.setBounds(10,5,ancho1,alto1);
+        inicio.add(LabelIcono);
+
+
+
+
+
+        //ETIQUETAS
         Font newFont = new Font("Monospaced", Font.BOLD, 20);
         JLabel label1 = new JLabel("            BIENVENIDO");
         label1.setFont(newFont);
@@ -72,7 +86,7 @@ public class InicioPizza {
         //PANEL INICIO
         JPanel panelInicio = new JPanel(new FlowLayout());
         panelInicio.setOpaque(false);
-        panelInicio.setBounds(50,70,240,100);
+        panelInicio.setBounds(50,130,240,100);
         inicio.add(panelInicio);
 
         //BOTONES
@@ -87,19 +101,9 @@ public class InicioPizza {
         panelInicio.add(btnInicio);
         panelInicio.add(btnRegistro);
 
-
-
-
         ImageIcon imageFondo = new ImageIcon("robinson.jpg");
         JLabel labelFondo = new JLabel(imageFondo);
         inicio.add(labelFondo);
-
-        
-
-
-       
-
-
         inicio.setVisible(true);
     }
     public static void main(String[] args) {
