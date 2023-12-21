@@ -33,4 +33,4 @@ public class GuiErrores extends JFrame {
         add(mensajeLabel);
         add(volverButton);
     }
-}
+}// a

@@ -67,4 +67,4 @@ public class ConnectionMain {
   public String gettime() {
     return time;
   }
-}
+}// a

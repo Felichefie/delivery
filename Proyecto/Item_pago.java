@@ -42,4 +42,4 @@ public class Item_pago { // esta clase sirve para construir los items del combob
             return "Desconocido";
         }
     }
-}
+}//

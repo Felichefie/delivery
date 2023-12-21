@@ -15,13 +15,4 @@ public class Principal {
         frame.setBounds(250, 20, 800, 640);
         frame.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Principal principal = new Principal();
-                principal.mostrar();
-            }
-        });
-    }
 }

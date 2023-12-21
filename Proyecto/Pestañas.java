@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +27,9 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -41,10 +45,13 @@ public class Pestañas extends JTabbedPane {
     JPanel productos; // Cambiado a un campo de la clase
     JPanel carritoPanel; // Cambiado a un campo de la clase
     JPanel perfil; // Define perfil como un atributo de la clase
-    private List<JPanel> productosEnCarrito = new ArrayList<>();
+    private List<Producto> productosEnCarrito = new ArrayList<>();
     private List<Producto> listaDeProductos = new ArrayList<>();
+    JComboBox c_comBox;
+    private Guidistancia g1;
 
     public Pestañas(Dbconnection dbConnection) {
+
         this.dbConnection = dbConnection;
 
         // Pestaña Productos
@@ -271,8 +278,10 @@ public class Pestañas extends JTabbedPane {
     JLabel l_iva;
     JLabel l_total;
     double totalProducto;
+    static int metodo_pago = 0;
 
     private void cargarCarrito() {
+        JComboBox c_comBox = getpaymetodos();
 
         Iva i = new Iva(subtotal);
         iva = iva + i.getimpuesto();
@@ -298,6 +307,19 @@ public class Pestañas extends JTabbedPane {
         pagarButton.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
         pagarButton.setPreferredSize(new Dimension(400, 65));
 
+        pagarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (listaDeProductos.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No hay productos");
+                } else {
+                    Guidistancia g1 = new Guidistancia();
+                }
+            }
+        });
+
+        carritoPanel.setLayout(new BoxLayout(carritoPanel, BoxLayout.PAGE_AXIS)); // Set layout to BoxLayout
+
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(pagarButton);
 
@@ -309,18 +331,23 @@ public class Pestañas extends JTabbedPane {
         subtotalValueLabel.setOpaque(true);
 
         JPanel subtotalPanel = new JPanel(new BorderLayout());
-        subtotalPanel.add(Box.createVerticalStrut(20), BorderLayout.NORTH);
+        subtotalPanel.add(Box.createVerticalStrut(10), BorderLayout.NORTH);
         subtotalPanel.add(subtotalLabel, BorderLayout.WEST);
         subtotalPanel.add(Box.createHorizontalStrut(10), BorderLayout.CENTER);
         subtotalPanel.add(subtotalValueLabel, BorderLayout.EAST);
         subtotalPanel.add(totalPanel, BorderLayout.SOUTH);
         subtotalPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 
+        JPanel comboBoxPanel = new JPanel(new FlowLayout());
+        comboBoxPanel.add(c_comBox);
+
         JPanel buttonAndSubtotalPanel = new JPanel(new FlowLayout());
         buttonAndSubtotalPanel.add(buttonPanel);
         buttonAndSubtotalPanel.add(subtotalPanel);
 
         carritoPanel.add(buttonAndSubtotalPanel);
+        carritoPanel.add(Box.createVerticalStrut(100)); // Add vertical space
+        carritoPanel.add(comboBoxPanel); // Add comboBoxPanel here
     }
 
     private JPanel crearPanelProducto(Producto producto) {
@@ -472,7 +499,7 @@ public class Pestañas extends JTabbedPane {
         return panel;
     }
 
-    private void actualizarCarrito() {
+    public void actualizarCarrito() {
         // Borra todos los productos actuales en el carritoPanel
         carritoPanel.removeAll();
         carritoPanel.setLayout(new BoxLayout(carritoPanel, BoxLayout.Y_AXIS));
@@ -510,6 +537,44 @@ public class Pestañas extends JTabbedPane {
         // Actualiza la interfaz gráfica
         revalidate();
         repaint();
+    }
+
+    public static JComboBox getpaymetodos() {
+        Dbconnection dbConnection = new Dbconnection();
+        Connection conn = dbConnection.getConn();
+
+        String query = "SELECT type,id,account_number,clabe FROM progra2.type_pay WHERE id_user=112 AND id>10";
+        System.out.println(query);
+        ResultSet rset;
+        Statement statement;
+
+        JComboBox<Object> c_comBox = new JComboBox<Object>();
+        try {
+
+            statement = conn.createStatement();
+            rset = statement.executeQuery(query);
+
+            while (rset.next()) {
+
+                Item_pago i = new Item_pago(Integer.parseInt(rset.getString(2)), rset.getString(1), rset.getString(3),
+                        rset.getString(4));
+                // public item_pago(int id, String type, String account_number, String clabe) {
+
+                c_comBox.addItem(i);
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en la query");
+
+        }
+
+        c_comBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                metodo_pago = c_comBox.getSelectedIndex();
+            }
+        });
+        return c_comBox;
     }
 
     private int ObtenerId_user() {
@@ -640,6 +705,16 @@ public class Pestañas extends JTabbedPane {
                 labelTelefono.setFont(font);
                 panel.add(labelTelefono);
                 panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio
+
+                JButton met = new JButton("Metodo de pago");
+                panel.add(met);
+
+                met.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Agregar_forma_pago a = new Agregar_forma_pago();
+                    }
+                });
             }
 
             // Agregar el panel a la pestaña de carrito
@@ -650,6 +725,11 @@ public class Pestañas extends JTabbedPane {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void limpiar() {
+        listaDeProductos.clear();
+        // Además, podrías realizar otras tareas de limpieza si es necesario
     }
 
 }

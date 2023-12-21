@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -111,10 +112,14 @@ public class Login extends JPanel {
                 String mensajeResultado = autenticacion.autenticar();
 
                 if (mensajeResultado.startsWith("Autenticación exitosa")) {
+                    JOptionPane.showMessageDialog(frame, "Autenticación exitosa", "Información",
+                            JOptionPane.INFORMATION_MESSAGE); // Mostrar mensaje de éxito
                     Principal principal = new Principal();
                     principal.mostrar();
                     frame.dispose();
-
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Correo o contraseña inválida", "Error",
+                            JOptionPane.ERROR_MESSAGE); // Mostrar mensaje de error
                 }
             }
         });

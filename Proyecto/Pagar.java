@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 public class Pagar {
 
-    public static void main(String[] args) {
+    public void mostrarVentanaPago() {
 
         double subtotal = 0;
         double iva = 0;

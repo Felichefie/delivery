@@ -4,7 +4,10 @@
     "c:\\Users\\alfre\\Downloads\\gson-2.10.1.jar",
     "c:\\Users\\alfre\\Downloads\\mysql-connector-j-8.1.0.jar",
     "c:\\Users\\alfre\\Downloads\\spring-security-crypto-6.1.5.jar",
-    "c:\\Users\\alfre\\Downloads\\jcalendar-1.4.jar"
+    "c:\\Users\\alfre\\Downloads\\jcalendar-1.4.jar",
+    "Proyecto/jcalendar-1.4.jar",
+    "Proyecto/mysql-connector-j-8.1.0.jar",
+    "Proyecto/spring-security-crypto-5.7.3.jar"
   ],
   "commentTranslate.hover.enabled": true,
 }

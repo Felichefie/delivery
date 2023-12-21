@@ -75,14 +75,7 @@ public class Guipay {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("metodo de pago " + metodo_pago);
                 System.out.println("total a pagar " + d);
-                /*
-                 * if(metodo_pago==0){
-                 * JOptionPane.showMessageDialog(null, "Seleccione un metodo de pago");
-                 * }
-                 * else{
-                 * JOptionPane.showMessageDialog(null, "Pagado con exito");
-                 * }
-                 */
+
             }
         });
 
