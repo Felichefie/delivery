@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -89,7 +90,12 @@ public class Menu {
             procederAPagoButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Proceder a Pago");
+                    if(subtotal != 0.0){
+                        MetodoPago.metodoPago();
+                        f.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(f, "No hay productos en el carrito", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             });
 
