@@ -8,11 +8,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Dimension;
 
-public class index {
+public class Index {
 
-    public static void InicioPizza() {
+    public static void inicioPizza() {
         JFrame inicio = new JFrame("INICIO");
         inicio.setSize(800, 600);
         inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +89,14 @@ public class index {
         panelInicio.add(btnInicio);
         panelInicio.add(btnRegistro);
 
+        btnInicio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Llamar a la función Login() al hacer clic en el botón
+                Login.login();
+            }
+        });
+
         ImageIcon imageFondo = new ImageIcon("img/background/BackgroundInicio.jpg");
         JLabel labelFondo = new JLabel(imageFondo);
         inicio.add(labelFondo, BorderLayout.CENTER);
@@ -95,6 +105,6 @@ public class index {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> InicioPizza());
+        SwingUtilities.invokeLater(() -> inicioPizza());
     }
 }

@@ -43,7 +43,7 @@ public class LoginUI {
                 char[] password = txt_Contraseña.getPassword();
                 String contraseña = new String(password);
                  
-                Login login = new Login(usuario, contraseña);
+                LoginO login = new LoginO(usuario, contraseña);
 
                     JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
                     JOptionPane.showMessageDialog(null, "Inicio de sesión fallido");
@@ -77,7 +77,7 @@ public class LoginUI {
                     String contraseña2 = new String(password2);
 
                     String email = txt_UsuarioRegistro.getText();
-                    Login login = new Login(email, contraseña);
+                    LoginO login = new LoginO(email, contraseña);
                     if(login.registro(email, contraseña2)){
                         System.out.println("Usuario registrado");
                     }

@@ -14,12 +14,12 @@ public class TiendaUI {
     static Dbconnection conn = new Dbconnection(URL, user, pass);
     static List<Producto> productos = conn.getProduct();
     
-    TiendaUI(){
+    /*TiendaUI(){
         ImageNames();
         Descriptions();
         Prices();
         StockQuantities();
-    }
+    }*/
     
     String[] IMAGE_NAMES;
     String[] DESCRIPTIONS;

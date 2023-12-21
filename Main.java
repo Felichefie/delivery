@@ -1,6 +1,87 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class Main {
+
+    static String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
+    static String user = "alumno";
+    static String passw = "alumnoPrueba1";
+    static Dbconnection dbconn = new Dbconnection(URL, user, passw);
+    static List<Producto> productos = dbconn.getProduct();
+
+    public static String[] getImageNames() {
+        
+        List<String> imageNamesList = new ArrayList<>();
+        
+        for (Producto producto : productos) {
+            String image = producto.getImg();
+            imageNamesList.add(image);
+        }
+        
+        return imageNamesList.toArray(new String[0]);
+    }
+
+    public static String[] getDescriptions() {
+        
+        List<String> descriptionsList = new ArrayList<>();
+        
+        for (Producto producto : productos) {
+            String description = producto.getDesc();
+            descriptionsList.add(description);
+        }
+
+        
+        return descriptionsList.toArray(new String[0]);
+    }
+
+    public static double[] getPrices() {
+        
+        List<Double> pricesList = new ArrayList<>();
+            
+        for (Producto producto : productos) {
+            double price = producto.getPrice();
+            pricesList.add(price);
+        }
+            
+        return pricesList.stream().mapToDouble(Double::doubleValue).toArray();
+    }
+
+    static public String[] getStockQuantities() {
+       
+        List<String> stockQuantitiesList = new ArrayList<>();
+        
+        for (Producto producto : productos) {
+            int stockQuantity = producto.getStock();
+            // Agregar "Cantidad Disponible: " seguido del stock al resultado
+            stockQuantitiesList.add("Cantidad Disponible: " + stockQuantity);
+        }
+
+        return stockQuantitiesList.toArray(new String[0]);
+    
+    }
+
+    public static boolean inicio(String userName, String pass){
+
+        if(dbconn.LogAuth(userName, pass)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public static boolean registro(String name, String ape1, String ape2, String email, String pass, String userName, String tel){
+
+        if(dbconn.registerUser(name, ape1, ape2, email, pass, userName, tel)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     public static void main(String[] args) {
 
         String URL = "jdbc:mysql://clase-progra2.cii6bjvpag5z.us-east-2.rds.amazonaws.com";
@@ -9,12 +90,19 @@ public class Main {
 
         Dbconnection dbconn = new Dbconnection(URL, user, pass);
 
-        String userName = "1903458g@umich.mx";
+        String userName = "JUANPL";
+
+        String name = "Juan";
+        String ape1 = "Perez";
+        String ape2 = "Lopez";
+        String email = "";
         String password = "12345678";
+        String user2 = "JuanPL";
+        String tel = "1234567890";
 
         String pwd_hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        dbconn.registerUser(userName,pwd_hash);
+        dbconn.registerUser(name, ape1, ape2, email, pwd_hash, user2, tel);
 
         if(dbconn.LogAuth(userName, password)){
             System.out.println("Incio de sesion exitoso");

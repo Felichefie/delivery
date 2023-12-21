@@ -17,7 +17,7 @@ public class Dbconnection {
     public List<Producto> getProduct(){
         List<Producto> listaProductos = new ArrayList<>();
 
-        String query = "SELECT id, price, image, description, stock FROM progra2.products";
+        String query = "SELECT id, price, image, description, stock FROM progra2.products WHERE id IN (13, 14, 15);";
        // System.out.println(query);
         ResultSet rset;
         Statement statement;
@@ -127,8 +127,8 @@ public class Dbconnection {
         }
     }
 
-    boolean LogAuth(String email, String passwordLogin){
-        String query = "SELECT u.password FROM progra2.users u WHERE u.email ='" + email + "'";
+    boolean LogAuth(String user, String passwordLogin){
+        String query = "SELECT u.password FROM progra2.users u WHERE u.user_name ='" + user + "'";
         
         ResultSet rset;
         Statement statement;
@@ -164,16 +164,14 @@ public class Dbconnection {
 
     }
 
-    boolean registerUser(String email, String pwd){
+    boolean registerUser(String name, String ape1, String ape2, String email, String pwd, String user, String tel){
 
-        String queryInsert = "INSERT INTO progra2.users(email, password)"
-                + "VALUES('" + email
-                + "', '" + pwd + "')";
+        String queryInsert = "INSERT INTO progra2.users (user_name, first_lastname, second_lastname, name, email, phone_number, password) " 
+        + "VALUES('"+ user +"' , '"+ ape1 +"' , '"+ ape2 +"' , '"+ name +"' , '"+ email +"' , '"+ tel +"' , '"+ pwd +"')";
 
         PreparedStatement preState;
 
-        if(searchUser(email)){
-            System.out.println("Usuario ya registrado");
+        if(searchUser(user)){
             return false;
         }
 
@@ -194,8 +192,8 @@ public class Dbconnection {
         
     }
 
-    boolean searchUser(String email){
-        String query = "SELECT u.email FROM progra2.users u WHERE u.email ='" + email + "'";
+    boolean searchUser(String user){
+        String query = "SELECT u.email FROM progra2.users u WHERE u.user_name ='" + user + "'";
         ResultSet rset;
         Statement statement;
         

@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,9 +22,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class menu {
+public class Menu {
     
-    private static final String[] IMAGENES = {
+
+    static String[] IMAGENES;
+    static String[] DESCRIPCION;
+    static double[] PRECIO;
+    static String[] STOCK;
+    
+    /*private static final String[] IMAGENES = {
         "img/pizzas/PizzaMole.jpg",
         "img/pizzas/Quesadillas.jpg",
         "img/pizzas/EspecialHalloween.jpg",
@@ -29,39 +38,44 @@ public class menu {
         "img/pizzas/Chilaquiles.jpg",
         "img/pizzas/Mexicana.jpeg"
 
-    };
-    private static final String[] DESCRIPCION= {
+    };*/
+    /*private static final String[] DESCRIPCION= {
         "Pizza de Mole",
         "NO es una pizza, son quesadillas",
         "Pizza Especial Halloween",
         "Pizza de asada",
         "Pizza de chilaquiles",
         "Pizza MEXICANA"
-    };
-    private static final double[] PRECIO = {
+    };*/
+    /*private static final double[] PRECIO = {
         200,
         230,
         370,
         416,
         240,
         320
-    };
-    private static final String[] STOCK = {
+    };*/
+    /*private static final String[] STOCK = {
         "Cantidad Disponible: 40",
         "Cantidad Disponible: 10",
         "Cantidad Disponible: 15",
         "Cantidad Disponible: 34",
         "Cantidad Disponible: 33",
         "Cantidad Disponible: 63"
-    };
+    };*/
     private static double subtotal = 0.0;
     private static JLabel labelSubTotal;
-        public static void main(String[] args) {
-        SwingUtilities.invokeLater(() ->{
+
+    public static void crearInterfaz() {
+        SwingUtilities.invokeLater(() -> {
+            IMAGENES = Main.getImageNames();
+            DESCRIPCION = Main.getDescriptions();
+            PRECIO = Main.getPrices();
+            STOCK = Main.getStockQuantities();
             JFrame f = new JFrame("Pizzeria");
             Font fon = new Font("TimesRoman", Font.PLAIN, 16);
-           f.setIconImage(new ImageIcon("img/iconos/logo.png").getImage()); 
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setIconImage(new ImageIcon("img/iconos/logo.png").getImage()); 
+            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             f.setSize(800,600);
 
             labelSubTotal = new JLabel("EL SUBTOTAL ES: $0.00");
@@ -73,8 +87,9 @@ public class menu {
             f.setLocationRelativeTo(null);
             f.setVisible(true);
         });
-        
     }
+
+
     private static JPanel createPrincipalPanel(){
         JPanel PrincipalPanel = new JPanel();
         PrincipalPanel.setLayout(new BoxLayout(PrincipalPanel, BoxLayout.Y_AXIS));
@@ -91,14 +106,29 @@ public class menu {
         return PrincipalPanel;
     }
 
-
+    private static ImageIcon createImageIcon(String imagePath) {
+        try {
+            if (imagePath.startsWith("http")) {
+                
+                URL url = new URL(imagePath);
+                return new ImageIcon(url);
+            } else {
+                
+                return new ImageIcon(imagePath);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            
+            return null;
+        }
+    }
 
     private static JPanel createPanel(String imagenes, String descripcion, double precio, String stock) {
         JPanel productoPanel = new JPanel(new BorderLayout(10,10));
-        Color b = new Color(255,216,0);
+        //Color b = new Color(255,216,0);
         productoPanel.setBackground(new Color(255, 216, 0));
 
-        ImageIcon iamgeIcon = new ImageIcon(imagenes);
+        ImageIcon iamgeIcon = createImageIcon(imagenes);
         JLabel labelImage = new JLabel(new ImageIcon(iamgeIcon.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
         productoPanel.add(labelImage,BorderLayout.WEST);
 
@@ -146,7 +176,7 @@ public class menu {
             public void actionPerformed(ActionEvent e ){
                 int Cantidades = Integer.parseInt(Cantidad.getText());
                 subtotal += precio * Cantidades;
-                Cantidades++;
+                Cantidades = 0;
                 Cantidad.setText(String.valueOf(Cantidades));
                 labelSubTotal.setText("Subtotal: $" + String.format("%.2f", subtotal) );
             }
