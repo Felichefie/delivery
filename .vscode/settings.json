@@ -3,6 +3,10 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "mysql-connector-j-8.1.0.jar",
-        "gson-2.10.1.jar"
+        "gson-2.10.1.jar",
+        "/home/hyundi/Downloads/spring-security-crypto-6.1.5.jar",
+        "/home/hyundi/Downloads/mysql-connector-j-8.1.0.jar",
+        "/home/hyundi/Downloads/jcalendar-1.4.jar",
+        "/home/hyundi/Downloads/gson-2.10.1.jar"
     ]
 }
