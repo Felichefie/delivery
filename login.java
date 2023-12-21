@@ -48,7 +48,7 @@ public class login {
         panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2));
         inicio.add(panelInicioSesion);
 
-        JPanel panelFormulario = new JPanel(new GridLayout(3, 3, 5, 5)); // Cambié el número de columnas a 3
+        JPanel panelFormulario = new JPanel(new GridLayout(3, 3, 5, 5));
         panelFormulario.setBackground(Color.WHITE);
 
         JLabel labelUsuario = new JLabel("Usuario:");
