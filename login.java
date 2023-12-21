@@ -36,37 +36,40 @@ public class login {
         btnAtras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inicio.dispose(); 
+                inicio.dispose();
             }
         });
         btnAtras.setPreferredSize(new Dimension(80, 30));
-        panelSuperior.add(btnAtras, BorderLayout.WEST); 
+        panelSuperior.add(btnAtras, BorderLayout.WEST);
 
         JPanel panelInicioSesion = new JPanel(new BorderLayout());
         panelInicioSesion.setBackground(Color.WHITE);
         panelInicioSesion.setBounds(50, 100, 300, 100);
-        panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2)); 
+        panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2));
         inicio.add(panelInicioSesion);
 
-        JPanel panelFormulario = new JPanel(new GridLayout(3, 2, 5, 5));
+        JPanel panelFormulario = new JPanel(new GridLayout(3, 3, 5, 5)); // Cambié el número de columnas a 3
         panelFormulario.setBackground(Color.WHITE);
 
         JLabel labelUsuario = new JLabel("Usuario:");
-        labelUsuario.setForeground(Color.BLACK); 
+        labelUsuario.setForeground(Color.BLACK);
         JTextField campoUsuario = new JTextField();
+
         JLabel labelContraseña = new JLabel("Clave:");
-        labelContraseña.setForeground(Color.BLACK); 
+        labelContraseña.setForeground(Color.BLACK);
         JPasswordField campoContraseña = new JPasswordField();
-        JButton btnOlvidarContraseña = new JButton("¿Clave olvidada?");
-        btnOlvidarContraseña.setForeground(Color.BLACK); 
+
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.setForeground(Color.BLACK);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setForeground(Color.BLACK);
 
         panelFormulario.add(labelUsuario);
         panelFormulario.add(campoUsuario);
         panelFormulario.add(labelContraseña);
         panelFormulario.add(campoContraseña);
-        panelFormulario.add(btnOlvidarContraseña);
+        panelFormulario.add(btnCancelar);
         panelFormulario.add(btnAceptar);
 
         panelInicioSesion.add(panelFormulario, BorderLayout.CENTER);
@@ -75,6 +78,13 @@ public class login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(inicio, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicio.dispose();
             }
         });
 
