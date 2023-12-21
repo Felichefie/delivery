@@ -47,7 +47,7 @@ public class metodopago {
         panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2));
         inicio.add(panelInicioSesion);
 
-        JPanel panelFormulario = new JPanel(new GridLayout(3, 2, 5, 5)); // Cambié el número de filas a 3
+        JPanel panelFormulario = new JPanel(new GridLayout(3, 2, 5, 5));
         panelFormulario.setBackground(Color.WHITE);
 
         JLabel labelMetodoPago = new JLabel("Seleccione Método de Pago:");
@@ -81,13 +81,13 @@ public class metodopago {
         panelFormulario.add(labelNumCuenta);
         panelFormulario.add(campoNumCuenta);
 
-        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Nuevo panel para los botones
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT)); 
         panelBotones.setBackground(Color.WHITE);
         panelBotones.add(btnCancelar);
         panelBotones.add(btnPagar);
 
         panelInicioSesion.add(panelFormulario, BorderLayout.CENTER);
-        panelInicioSesion.add(panelBotones, BorderLayout.SOUTH); // Agregado el panel de botones en la parte inferior
+        panelInicioSesion.add(panelBotones, BorderLayout.SOUTH); 
 
         comboMetodoPago.addItemListener(new ItemListener() {
             @Override
