@@ -48,7 +48,7 @@ public class direccion {
         panelInicioSesion.setBorder(new LineBorder(Color.BLACK, 2));
         inicio.add(panelInicioSesion);
 
-        JPanel panelFormulario = new JPanel(new GridLayout(6, 3, 5, 5)); // Cambié el número de columnas a 3
+        JPanel panelFormulario = new JPanel(new GridLayout(6, 3, 5, 5));
         panelFormulario.setBackground(Color.WHITE);
 
         JLabel labelCalle = new JLabel("Calle:");
