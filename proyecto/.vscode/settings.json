@@ -1,0 +1,20 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "librerias/mysql-connector-j-8.1.0.jar",
+        "c:\\Users\\ocana\\Downloads\\gson-2.10.1.jar",
+        "librerias/aws-mysql-jdbc-1.1.10.jar",
+        "librerias/spring-security-core-6.1.4.jar",
+        "librerias/spring-security-crypto-6.1.5.jar",
+        "librerias/jlayer-1.0.1.jar",
+        "librerias/javafx-swing.jar",
+        "librerias/lib/javafx.base.jar",
+        "librerias/lib/javafx.controls.jar",
+        "librerias/lib/javafx.fxml.jar",
+        "librerias/lib/javafx.graphics.jar",
+        "librerias/lib/javafx.media.jar",
+        "librerias/lib/javafx.swing.jar",
+        "librerias/lib/javafx.web.jar",
+        "librerias/lib/javafx-swt.jar"
+    ]
+}
