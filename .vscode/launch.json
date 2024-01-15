@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Radiofonico",
+            "request": "launch",
+            "mainClass": "Extra.Radiofonico",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
             "name": "BalanceoParentesis",
             "request": "launch",
             "mainClass": "Extra.BalanceoParentesis",
