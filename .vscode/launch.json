@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BalanceoParentesis",
+            "request": "launch",
+            "mainClass": "Extra.BalanceoParentesis",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
+            "name": "JuegoLudico",
+            "request": "launch",
+            "mainClass": "Extra.JuegoLudico",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
+            "name": "RadioDecoding",
+            "request": "launch",
+            "mainClass": "Extra.RadioDecoding",
+            "projectName": "delivery_adad310c"
+        },
+        {
+            "type": "java",
             "name": "evaluacion1",
             "request": "launch",
             "mainClass": "evaluacion1",
